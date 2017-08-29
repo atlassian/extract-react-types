@@ -92,9 +92,7 @@ function extractReactTypes(code /*: string */, typeSystem /*: 'flow' | 'typescri
     console.log(err);
   }
 
-  console.log(JSON.stringify(convert(file.path), null, 2));
+  return convert(file.path);
 };
-
-extractReactTypes('class Component extends React.Component<{ foo: boolean, bar: number }> {}', 'flow');
 
 module.exports = extractReactTypes;
