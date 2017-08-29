@@ -5,10 +5,18 @@ const extractReactTypes = require('./');
 const stripIndent = require('strip-indent');
 
 const TESTS = [{
-  name: 'one',
+  name: 'boolean',
   typeSystem: 'flow',
   code: `
     class Component extends React.Component<{ foo: boolean }> {
+      // ...
+    }
+  `
+}, {
+  name: 'string',
+  typeSystem: 'flow',
+  code: `
+    class Component extends React.Component<{ foo: string }> {
       // ...
     }
   `

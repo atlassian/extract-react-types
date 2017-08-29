@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`one 1`] = `
+exports[`boolean 1`] = `
 Object {
   "classes": Array [
     Object {
@@ -11,6 +11,26 @@ Object {
           "kind": "property",
           "value": Object {
             "kind": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`string 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "string",
           },
         },
       ],

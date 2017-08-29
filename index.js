@@ -62,6 +62,10 @@ converters.NumberTypeAnnotation = path => {
   return { kind: 'number' };
 };
 
+converters.StringTypeAnnotation = path => {
+  return { kind: 'string' };
+};
+
 function convert(path) {
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
