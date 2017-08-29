@@ -136,6 +136,25 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'flow no React component',
+  typeSystem: 'flow',
+  code: `
+    class FooComponent extends Bar<{ foo?: number }> {
+    }
+  `
+}, {
+  name: 'flow different React component',
+  typeSystem: 'flow',
+  code: `
+    import {Component} from 'react';
+
+    class FooComponent extends Component<{ foo?: number }> {
+    }
+
+    class BarComponent extends React.Component<{ foo?: number }> {
+    }
+  `
+}, {
   name: 'ts boolean',
   typeSystem: 'typescript',
   code: `
@@ -165,10 +184,106 @@ const TESTS = [{
   code: `
     interface ComponentProps {
       foo: string;
+      bar: number;
     }
 
-    class Component extends React.Component<{foo: { hector: string }, bar: number}> {
+    class Component extends React.Component<ComponentProps> {
       // ...
+    }
+  `
+}, {
+  name: 'ts function',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: (string, boolean) => number}> {
+      // ...
+    }
+  `
+}, {
+  name: 'ts array',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: Array<number>}> {
+      // ...
+    }
+  `
+}, {
+  name: 'ts union',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: number | string}> {
+      // ...
+    }
+  `
+}, {
+  name: 'ts any',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: any}> {
+      // ...
+    }
+  `
+}, {
+  name: 'ts literals',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: '25' | 30}> {
+      
+    }
+  `
+}, {
+  name: 'ts optional',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo?: string}> {
+      
+    }
+  `
+}, {
+  name: 'ts void',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: void}> {
+      
+    }
+  `
+}, {
+  name: 'ts no react component',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends Foo<{foo: void}> {
+      
+    }
+  `
+}, {
+  name: 'ts different React components',
+  typeSystem: 'typescript',
+  code: `
+    import {Component} from 'react';
+
+    class FooComponent extends Component<{foo: void}> {
+      
+    }
+
+    class BarComponent extends React.Component<{foo: void}> {
+      
+    }
+  `
+}, {
+  name: 'ts tuple',
+  typeSystem: 'typescript',
+  code: `
+    class Component extends React.Component<{foo: [string, number]}> {
+      
+    }
+  `
+}, {
+  name: 'ts enum',
+  typeSystem: 'typescript',
+  code: `
+    enum Color {Red, Green, Blue};
+    class Component extends React.Component<{foo: Color}> {
+      
     }
   `
 }];

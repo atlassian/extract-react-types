@@ -21,6 +21,8 @@ converters.Program = path => {
 
   path.traverse({
     ClassDeclaration(path) {
+      if (!isReactComponentClass(path)) return;
+
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
 
@@ -140,17 +142,22 @@ converters.TSBooleanKeyword = path => {
   return {kind: 'boolean'};
 }
 
-converters.TSPropertySignature = path => {
+converters.TSVoidKeyword = path => {
+  return {kind: 'void'};
 }
+
+// converters.TSPropertySignature = path => {
+// }
 
 converters.TSTypeLiteral = path => {
   let result = {};
 
   result.kind = 'object';
+  // TODO: find object key
+  // result.key = '';
   result.props = [];
 
   let properties = path.get('members');
-
   properties.forEach(memberPath => {
     result.props.push(convert(memberPath.get('typeAnnotation').get('typeAnnotation')));
   });
@@ -158,8 +165,50 @@ converters.TSTypeLiteral = path => {
   return result;
 };
 
-converters.TSTypeReference = path => {
+converters.TSLiteralType = path => {
+  return {kind: 'literal', value: path.literal.value}
 }
+
+converters.TSTypeReference = path => {
+  const typeParameters = path.node.typeParameters ? path.node.typeParameters.params.map(convert) : undefined;
+  return {
+    kind: path.node.typeName.name,
+    typeParameters
+  }
+};
+
+converters.TSUnionType = path => {
+  const types = (path.types || path.node.types).map(convert);
+  const result = {
+    kind: 'union',
+    types
+  };
+
+  return result;
+};
+
+converters.TSAnyKeyword = path => {
+  return {kind: 'any'};
+}
+
+converters.TSTupleType = path => {
+  const types = path.node.elementTypes.map(convert);
+  return {
+    kind: 'tuple',
+    types
+  }
+}
+
+converters.TSFunctionType = path => {
+  const parameters = path.node.parameters.map(p => ({kind: p.name}));
+  const returnType = convert(path.node.typeAnnotation.typeAnnotation);
+
+  return {
+    kind: 'function',
+    returnType,
+    parameters
+  };
+};
 
 function convert(path) {
   let converter = converters[path.type];

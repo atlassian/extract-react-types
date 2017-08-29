@@ -98,6 +98,38 @@ Object {
 }
 `;
 
+exports[`flow different React component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow function 1`] = `
 Object {
   "classes": Array [
@@ -169,6 +201,13 @@ Object {
       ],
     },
   ],
+  "kind": "program",
+}
+`;
+
+exports[`flow no React component 1`] = `
+Object {
+  "classes": Array [],
   "kind": "program",
 }
 `;
@@ -349,6 +388,43 @@ Object {
 }
 `;
 
+exports[`ts any 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "any",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts array 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "Array",
+          "typeParameters": Array [
+            Object {
+              "kind": "number",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts boolean 1`] = `
 Object {
   "classes": Array [
@@ -365,26 +441,115 @@ Object {
 }
 `;
 
-exports[`ts interface 1`] = `
+exports[`ts different React components 1`] = `
 Object {
   "classes": Array [
     Object {
       "kind": "object",
       "props": Array [
         Object {
-          "kind": "object",
-          "props": Array [
-            Object {
-              "kind": "string",
-            },
-          ],
+          "kind": "void",
         },
+      ],
+    },
+    Object {
+      "kind": "object",
+      "props": Array [
         Object {
-          "kind": "number",
+          "kind": "void",
         },
       ],
     },
   ],
+  "kind": "program",
+}
+`;
+
+exports[`ts enum 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "Color",
+          "typeParameters": undefined,
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts function 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "function",
+          "parameters": Array [
+            Object {
+              "kind": "string",
+            },
+            Object {
+              "kind": "boolean",
+            },
+          ],
+          "returnType": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts interface 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "ComponentProps",
+      "typeParameters": undefined,
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts literals 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "union",
+          "types": Array [
+            Object {
+              "kind": "literal",
+              "value": "25",
+            },
+            Object {
+              "kind": "literal",
+              "value": 30,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts no react component 1`] = `
+Object {
+  "classes": Array [],
   "kind": "program",
 }
 `;
@@ -416,6 +581,22 @@ Object {
 }
 `;
 
+exports[`ts optional 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "string",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts string 1`] = `
 Object {
   "classes": Array [
@@ -424,6 +605,70 @@ Object {
       "props": Array [
         Object {
           "kind": "string",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts tuple 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "tuple",
+          "types": Array [
+            Object {
+              "kind": "string",
+            },
+            Object {
+              "kind": "number",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts union 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "union",
+          "types": Array [
+            Object {
+              "kind": "number",
+            },
+            Object {
+              "kind": "string",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts void 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "void",
         },
       ],
     },
