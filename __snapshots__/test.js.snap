@@ -1,6 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`boolean 1`] = `
+exports[`flow any 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "age",
+          "kind": "property",
+          "value": Object {
+            "kind": "any",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow array 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "Array",
+            "typeParameters": Array [
+              Object {
+                "kind": "boolean",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow array union 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "Array",
+            "typeParameters": Array [
+              Object {
+                "kind": "union",
+                "types": Array [
+                  Object {
+                    "kind": "boolean",
+                  },
+                  Object {
+                    "kind": "number",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow boolean 1`] = `
 Object {
   "classes": Array [
     Object {
@@ -20,7 +98,122 @@ Object {
 }
 `;
 
-exports[`string 1`] = `
+exports[`flow function 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "function",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow generic class 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "A",
+      "typeParameters": null,
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow maybe 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "arguments": Object {
+              "kind": "string",
+            },
+            "kind": "nullable",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow mixed 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "age",
+          "kind": "property",
+          "value": Object {
+            "kind": "mixed",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow number 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow optional 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow string 1`] = `
 Object {
   "classes": Array [
     Object {
@@ -32,6 +225,205 @@ Object {
           "value": Object {
             "kind": "string",
           },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "ComponentProps",
+      "typeParameters": null,
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow type 2`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "intersection",
+            "types": Array [
+              Object {
+                "kind": "number",
+              },
+              Object {
+                "kind": "string",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow union 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "boolean",
+              },
+              Object {
+                "kind": "number",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow union literals 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "age",
+          "kind": "property",
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "stringLiteral",
+              },
+              Object {
+                "kind": "numberLiteral",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow void 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "void",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts boolean 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "boolean",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts interface 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "object",
+          "props": Array [
+            Object {
+              "kind": "string",
+            },
+          ],
+        },
+        Object {
+          "kind": "number",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts object 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "object",
+          "props": Array [
+            Object {
+              "kind": "string",
+            },
+          ],
+        },
+        Object {
+          "kind": "number",
+        },
+        Object {
+          "kind": "boolean",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts string 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "string",
         },
       ],
     },

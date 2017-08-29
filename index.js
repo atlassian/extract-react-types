@@ -54,21 +54,117 @@ converters.ObjectTypeProperty = path => {
   return result;
 };
 
+converters.UnionTypeAnnotation = path => {
+  const types = (path.types || path.node.types).map(convert);
+  const result = {
+    kind: 'union',
+    types
+  };
+
+  return result;
+};
+
+converters.GenericTypeAnnotation = path => {
+  const typeParameters = path.node.typeParameters ? path.node.typeParameters.params.map(type => {
+    return convert(type);
+  }) : null;
+  let result = {
+    kind: path.node.id.name,
+    typeParameters
+  };
+
+  return result;
+}
+
+converters.IntersectionTypeAnnotation = path => {
+  const types = path.node.types.map(convert);
+
+  return { 
+    kind: 'intersection',
+    types
+  };
+};
+
+converters.VoidTypeAnnotation = path => {
+  return { kind: 'void' };
+};
+
 converters.BooleanTypeAnnotation = path => {
   return { kind: 'boolean' };
 };
 
+converters.StringLiteralTypeAnnotation = path => {
+  return { kind: 'stringLiteral'};
+}
+
+converters.NumberLiteralTypeAnnotation = path => {
+  return { kind: 'numberLiteral'};
+}
+
+converters.MixedTypeAnnotation = path => {
+  return { kind: 'mixed'};
+}
+
+converters.AnyTypeAnnotation = path => {
+  return { kind: 'any'};
+}
+
 converters.NumberTypeAnnotation = path => {
   return { kind: 'number' };
+};
+
+converters.FunctionTypeAnnotation = path => {
+  return { kind: 'function' };
 };
 
 converters.StringTypeAnnotation = path => {
   return { kind: 'string' };
 };
 
+converters.NullableTypeAnnotation = path => {
+  return {
+    kind: 'nullable',
+    arguments: convert(path.get('typeAnnotation'))
+  };
+}
+
+converters.TSStringKeyword = path => {
+  return {kind: 'string'};
+}
+
+converters.TSNumberKeyword = path => {
+  return {kind: 'number'};
+}
+
+converters.TSBooleanKeyword = path => {
+  return {kind: 'boolean'};
+}
+
+converters.TSPropertySignature = path => {
+}
+
+converters.TSTypeLiteral = path => {
+  let result = {};
+
+  result.kind = 'object';
+  result.props = [];
+
+  let properties = path.get('members');
+
+  properties.forEach(memberPath => {
+    result.props.push(convert(memberPath.get('typeAnnotation').get('typeAnnotation')));
+  });
+
+  return result;
+};
+
+converters.TSTypeReference = path => {
+}
+
 function convert(path) {
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
+
   return converter(path);
 }
 
@@ -95,7 +191,6 @@ function extractReactTypes(code /*: string */, typeSystem /*: 'flow' | 'typescri
   } catch (err) {
     console.log(err);
   }
-
   return convert(file.path);
 };
 
