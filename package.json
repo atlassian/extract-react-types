@@ -1,0 +1,26 @@
+{
+  "name": "extract-react-types",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "James Kyle <me@thejameskyle.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "babel-core": "^7.0.0-alpha.19",
+    "babel-errors": "^1.1.1",
+    "babel-file": "^1.0.2",
+    "babel-file-loader": "^1.0.3",
+    "babel-flow-identifiers": "^1.1.2",
+    "babel-flow-scope": "^1.2.0",
+    "babel-identifiers": "^1.0.0",
+    "babel-react-components": "^1.0.1",
+    "babylon": "^7.0.0-beta.22",
+    "babylon-options": "^1.1.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.53.1",
+    "jest": "^20.0.4"
+  }
+}
