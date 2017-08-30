@@ -1,7 +1,6 @@
 // @flow
 'use strict';
 
-const {BabelError, prettyError, buildCodeFrameError} = require('babel-errors');
 const createBabelFile = require('babel-file');
 const {loadImportSync} = require('babel-file-loader');
 const {isFlowIdentifier} = require('babel-flow-identifiers');
@@ -81,7 +80,7 @@ converters.GenericTypeAnnotation = path => {
 converters.IntersectionTypeAnnotation = path => {
   const types = path.node.types.map(convert);
 
-  return { 
+  return {
     kind: 'intersection',
     types
   };
