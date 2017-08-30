@@ -101,7 +101,7 @@ const TESTS = [{
       bar: boolean
     };
     class Component extends React.Component<ComponentProps> {
-      
+
     }
   `
 }, {
@@ -109,7 +109,7 @@ const TESTS = [{
   typeSystem: 'flow',
   code: `
     class Component extends React.Component<{foo: number & string}> {
-      
+
     }
   `
 }, {
@@ -159,7 +159,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{ foo: boolean }> {
-      
+
     }
   `
 }, {
@@ -167,7 +167,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{ foo: string }> {
-      
+
     }
   `
 }, {
@@ -175,7 +175,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {
-      
+
     }
   `
 }, {
@@ -228,7 +228,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{foo: '25' | 30}> {
-      
+
     }
   `
 }, {
@@ -236,7 +236,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{foo?: string}> {
-      
+
     }
   `
 }, {
@@ -244,7 +244,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{foo: void}> {
-      
+
     }
   `
 }, {
@@ -252,7 +252,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends Foo<{foo: void}> {
-      
+
     }
   `
 }, {
@@ -262,11 +262,11 @@ const TESTS = [{
     import {Component} from 'react';
 
     class FooComponent extends Component<{foo: void}> {
-      
+
     }
 
     class BarComponent extends React.Component<{foo: void}> {
-      
+
     }
   `
 }, {
@@ -274,7 +274,7 @@ const TESTS = [{
   typeSystem: 'typescript',
   code: `
     class Component extends React.Component<{foo: [string, number]}> {
-      
+
     }
   `
 }, {
@@ -283,13 +283,23 @@ const TESTS = [{
   code: `
     enum Color {Red, Green, Blue};
     class Component extends React.Component<{foo: Color}> {
-      
+
     }
   `
 }];
 
 for (let testCase of TESTS) {
-  test(testCase.name, () => {
+  let testFn;
+
+  if (testCase.only) {
+    testFn = test.only;
+  } else if (testCase.skip) {
+    testFn = test.skip;
+  } else {
+    testFn = test;
+  }
+
+  testFn(testCase.name, () => {
     let code = stripIndent(testCase.code);
     let result = extractReactTypes(code, testCase.typeSystem);
     expect(result).toMatchSnapshot();
