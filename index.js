@@ -4,6 +4,7 @@
 const createBabelFile = require('babel-file');
 const {loadImportSync} = require('babel-file-loader');
 const {isFlowIdentifier} = require('babel-flow-identifiers');
+const {findFlowBinding} = require('babel-flow-scope');
 const {getIdentifierKind} = require('babel-identifiers');
 const {isReactComponentClass} = require('babel-react-components');
 const createBabylonOptions = require('babylon-options');
@@ -66,16 +67,28 @@ converters.UnionTypeAnnotation = path => {
 };
 
 converters.GenericTypeAnnotation = path => {
-  const typeParameters = path.node.typeParameters ? path.node.typeParameters.params.map(type => {
-    return convert(type);
-  }) : null;
-  let result = {
-    kind: path.node.id.name,
-    typeParameters
-  };
-
-  return result;
+  return convert(path.get('id'));
 }
+
+converters.Identifier = path => {
+  let kind = getIdentifierKind(path);
+
+  if (kind === 'reference') {
+    let bindingPath;
+
+    if (isFlowIdentifier(path)) {
+      bindingPath = findFlowBinding(path, path.node.name).path.parentPath;
+    } else {
+      bindingPath = path.scope.getBinding(path.node.name);
+    }
+
+    return convert(bindingPath);
+  }
+};
+
+converters.TypeAlias = path => {
+  return convert(path.get('right'));
+};
 
 converters.IntersectionTypeAnnotation = path => {
   const types = path.node.types.map(convert);
@@ -169,11 +182,7 @@ converters.TSLiteralType = path => {
 }
 
 converters.TSTypeReference = path => {
-  const typeParameters = path.node.typeParameters ? path.node.typeParameters.params.map(convert) : undefined;
-  return {
-    kind: path.node.typeName.name,
-    typeParameters
-  }
+  return convert(path.get('typeName'));
 };
 
 converters.TSUnionType = path => {

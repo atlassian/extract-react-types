@@ -276,8 +276,23 @@ exports[`flow type 1`] = `
 Object {
   "classes": Array [
     Object {
-      "kind": "ComponentProps",
-      "typeParameters": null,
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "value": Object {
+            "kind": "number",
+          },
+        },
+        Object {
+          "key": "bar",
+          "kind": "property",
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
     },
   ],
   "kind": "program",
