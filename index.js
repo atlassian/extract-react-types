@@ -22,7 +22,7 @@ converters.Program = path => {
   path.traverse({
     ClassDeclaration(path) {
       if (!isReactComponentClass(path)) return;
-
+      debugger
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
 
@@ -67,6 +67,8 @@ converters.UnionTypeAnnotation = path => {
 };
 
 converters.GenericTypeAnnotation = path => {
+  console.log(path.scope)
+  debugger
   const typeParameters = path.node.typeParameters ? path.node.typeParameters.params.map(type => {
     return convert(type);
   }) : null;
@@ -240,6 +242,7 @@ function extractReactTypes(code /*: string */, typeSystem /*: 'flow' | 'typescri
   } catch (err) {
     console.log(err);
   }
+
   return convert(file.path);
 };
 
