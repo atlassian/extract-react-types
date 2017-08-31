@@ -29,14 +29,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
-          "value": Object {
-            "kind": "Array",
-            "typeParameters": Array [
-              Object {
-                "kind": "boolean",
-              },
-            ],
-          },
+          "value": undefined,
         },
       ],
     },
@@ -54,22 +47,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
-          "value": Object {
-            "kind": "Array",
-            "typeParameters": Array [
-              Object {
-                "kind": "union",
-                "types": Array [
-                  Object {
-                    "kind": "boolean",
-                  },
-                  Object {
-                    "kind": "number",
-                  },
-                ],
-              },
-            ],
-          },
+          "value": undefined,
         },
       ],
     },
@@ -153,10 +131,7 @@ Object {
 exports[`flow generic class 1`] = `
 Object {
   "classes": Array [
-    Object {
-      "kind": "A",
-      "typeParameters": null,
-    },
+    undefined,
   ],
   "kind": "program",
 }
@@ -327,6 +302,24 @@ Object {
 }
 `;
 
+exports[`flow type identifier 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "children",
+          "kind": "property",
+          "value": undefined,
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow union 1`] = `
 Object {
   "classes": Array [
@@ -369,6 +362,7 @@ Object {
             "types": Array [
               Object {
                 "kind": "stringLiteral",
+                "value": "25",
               },
               Object {
                 "kind": "numberLiteral",
@@ -425,14 +419,7 @@ Object {
     Object {
       "kind": "object",
       "props": Array [
-        Object {
-          "kind": "Array",
-          "typeParameters": Array [
-            Object {
-              "kind": "number",
-            },
-          ],
-        },
+        undefined,
       ],
     },
   ],
@@ -486,10 +473,7 @@ Object {
     Object {
       "kind": "object",
       "props": Array [
-        Object {
-          "kind": "Color",
-          "typeParameters": undefined,
-        },
+        undefined,
       ],
     },
   ],
@@ -527,10 +511,7 @@ Object {
 exports[`ts interface 1`] = `
 Object {
   "classes": Array [
-    Object {
-      "kind": "ComponentProps",
-      "typeParameters": undefined,
-    },
+    undefined,
   ],
   "kind": "program",
 }

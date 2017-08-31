@@ -53,6 +53,8 @@ converters.ObjectTypeProperty = path => {
   result.kind = 'property';
   result.key = path.get('key').node.name;
   result.value = convert(path.get('value'));
+  result.optional = path.node.optional;
+
   return result;
 };
 
@@ -82,7 +84,7 @@ converters.Identifier = path => {
       bindingPath = path.scope.getBinding(path.node.name);
     }
 
-    return convert(bindingPath);
+    return bindingPath && convert(bindingPath);
   }
 };
 
@@ -99,6 +101,10 @@ converters.IntersectionTypeAnnotation = path => {
   };
 };
 
+converters.QualifiedTypeIdentifier = path => {
+  return convert(path.get('id'));
+};
+
 converters.VoidTypeAnnotation = path => {
   return { kind: 'void' };
 };
@@ -108,7 +114,7 @@ converters.BooleanTypeAnnotation = path => {
 };
 
 converters.StringLiteralTypeAnnotation = path => {
-  return { kind: 'stringLiteral'};
+  return { kind: 'stringLiteral', value: path.extra.rawValue};
 }
 
 converters.NumberLiteralTypeAnnotation = path => {

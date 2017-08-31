@@ -105,6 +105,20 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'flow type identifier',
+  typeSystem: 'flow',
+  code: `
+    import * as React from 'react';
+
+    type Props = {
+      children: React.Node,
+    };
+
+    class Component extends React.Component<Props> {
+
+    }
+  `
+}, {
   name: 'flow type',
   typeSystem: 'flow',
   code: `
