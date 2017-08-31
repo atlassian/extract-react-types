@@ -15,7 +15,7 @@
     "babel-flow-identifiers": "^1.1.2",
     "babel-flow-scope": "^1.2.0",
     "babel-identifiers": "^1.0.0",
-    "babel-react-components": "^1.0.1",
+    "babel-react-components": "^1.1.0",
     "babylon": "^7.0.0-beta.22",
     "babylon-options": "^1.1.2"
   },
