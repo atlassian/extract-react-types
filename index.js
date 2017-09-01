@@ -54,7 +54,6 @@ converters.ObjectTypeProperty = path => {
   result.key = path.get('key').node.name;
   result.value = convert(path.get('value'));
   result.optional = path.node.optional;
-
   return result;
 };
 
@@ -133,8 +132,19 @@ converters.NumberTypeAnnotation = path => {
   return { kind: 'number' };
 };
 
+converters.FunctionTypeParam = path => {
+  return convert(path.typeAnnotation);
+};
+
 converters.FunctionTypeAnnotation = path => {
-  return { kind: 'function' };
+  const parameters = path.node.params.map(convert);
+  const returnType = convert(path.node.returnType);
+
+  return {
+    parameters,
+    returnType,
+    kind: 'function'
+  };
 };
 
 converters.StringTypeAnnotation = path => {

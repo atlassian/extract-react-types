@@ -9,6 +9,7 @@ Object {
         Object {
           "key": "age",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "any",
           },
@@ -29,6 +30,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": undefined,
         },
       ],
@@ -47,6 +49,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": undefined,
         },
       ],
@@ -65,6 +68,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "boolean",
           },
@@ -85,6 +89,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": true,
           "value": Object {
             "kind": "number",
           },
@@ -97,6 +102,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": true,
           "value": Object {
             "kind": "number",
           },
@@ -117,9 +123,101 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "string",
+              },
+              Object {
+                "kind": "number",
+              },
+            ],
+            "returnType": Object {
+              "kind": "string",
+            },
           },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function named params 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "string",
+              },
+              Object {
+                "kind": "number",
+              },
+            ],
+            "returnType": Object {
+              "kind": "void",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function return type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "number",
+              },
+            ],
+            "returnType": Object {
+              "kind": "void",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "optional": false,
+          "value": undefined,
         },
       ],
     },
@@ -146,6 +244,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "arguments": Object {
               "kind": "string",
@@ -169,6 +268,7 @@ Object {
         Object {
           "key": "age",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "mixed",
           },
@@ -196,6 +296,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "number",
           },
@@ -216,6 +317,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": true,
           "value": Object {
             "kind": "number",
           },
@@ -236,6 +338,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "string",
           },
@@ -256,6 +359,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "number",
           },
@@ -263,6 +367,7 @@ Object {
         Object {
           "key": "bar",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "boolean",
           },
@@ -283,6 +388,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "intersection",
             "types": Array [
@@ -311,6 +417,7 @@ Object {
         Object {
           "key": "children",
           "kind": "property",
+          "optional": false,
           "value": undefined,
         },
       ],
@@ -329,6 +436,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "union",
             "types": Array [
@@ -357,6 +465,7 @@ Object {
         Object {
           "key": "age",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "union",
             "types": Array [
@@ -386,6 +495,7 @@ Object {
         Object {
           "key": "foo",
           "kind": "property",
+          "optional": false,
           "value": Object {
             "kind": "void",
           },
