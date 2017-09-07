@@ -78,7 +78,9 @@ converters.Identifier = path => {
     let bindingPath;
 
     if (isFlowIdentifier(path)) {
-      bindingPath = findFlowBinding(path, path.node.name).path.parentPath;
+      let flowBinding = findFlowBinding(path, path.node.name);
+      if (!flowBinding) throw new Error;
+      bindingPath = flowBinding.path.parentPath;
     } else {
       bindingPath = path.scope.getBinding(path.node.name);
     }
