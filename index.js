@@ -58,13 +58,8 @@ converters.ObjectTypeProperty = path => {
 };
 
 converters.UnionTypeAnnotation = path => {
-  const types = (path.types || path.node.types).map(convert);
-  const result = {
-    kind: 'union',
-    types
-  };
-
-  return result;
+  const types = path.get('types').map(p => convert(p));
+  return { kind: 'union', types };
 };
 
 converters.GenericTypeAnnotation = path => {
@@ -96,10 +91,7 @@ converters.TypeAlias = path => {
 converters.IntersectionTypeAnnotation = path => {
   const types = path.node.types.map(convert);
 
-  return {
-    kind: 'intersection',
-    types
-  };
+  return { kind: 'intersection', types };
 };
 
 converters.QualifiedTypeIdentifier = path => {
@@ -115,19 +107,19 @@ converters.BooleanTypeAnnotation = path => {
 };
 
 converters.StringLiteralTypeAnnotation = path => {
-  return { kind: 'stringLiteral', value: path.extra.rawValue};
+  return { kind: 'stringLiteral', value: path.node.value };
 }
 
 converters.NumberLiteralTypeAnnotation = path => {
-  return { kind: 'numberLiteral'};
+  return { kind: 'numberLiteral' };
 }
 
 converters.MixedTypeAnnotation = path => {
-  return { kind: 'mixed'};
+  return { kind: 'mixed' };
 }
 
 converters.AnyTypeAnnotation = path => {
-  return { kind: 'any'};
+  return { kind: 'any' };
 }
 
 converters.NumberTypeAnnotation = path => {
@@ -156,28 +148,28 @@ converters.StringTypeAnnotation = path => {
 converters.NullableTypeAnnotation = path => {
   return {
     kind: 'nullable',
-    arguments: convert(path.get('typeAnnotation'))
+    arguments: convert(path.get('typeAnnotation')),
   };
-}
+};
 
 converters.TSStringKeyword = path => {
-  return {kind: 'string'};
-}
+  return { kind: 'string' };
+};
 
 converters.TSNumberKeyword = path => {
-  return {kind: 'number'};
-}
+  return { kind: 'number' };
+};
 
 converters.TSBooleanKeyword = path => {
-  return {kind: 'boolean'};
-}
+  return { kind: 'boolean' };
+};
 
 converters.TSVoidKeyword = path => {
-  return {kind: 'void'};
-}
+  return { kind: 'void' };
+};
 
 // converters.TSPropertySignature = path => {
-// }
+// };
 
 converters.TSTypeLiteral = path => {
   let result = {};
@@ -188,6 +180,7 @@ converters.TSTypeLiteral = path => {
   result.props = [];
 
   let properties = path.get('members');
+
   properties.forEach(memberPath => {
     result.props.push(convert(memberPath.get('typeAnnotation').get('typeAnnotation')));
   });
@@ -196,7 +189,10 @@ converters.TSTypeLiteral = path => {
 };
 
 converters.TSLiteralType = path => {
-  return {kind: 'literal', value: path.literal.value}
+  return {
+    kind: 'literal',
+    value: path.node.literal.value,
+  };
 }
 
 converters.TSTypeReference = path => {
@@ -204,42 +200,33 @@ converters.TSTypeReference = path => {
 };
 
 converters.TSUnionType = path => {
-  const types = (path.types || path.node.types).map(convert);
-  const result = {
-    kind: 'union',
-    types
-  };
-
-  return result;
+  const types = path.get('types').map(p => convert(p));
+  return { kind: 'union', types };
 };
 
 converters.TSAnyKeyword = path => {
-  return {kind: 'any'};
-}
+  return { kind: 'any' };
+};
 
 converters.TSTupleType = path => {
-  const types = path.node.elementTypes.map(convert);
-  return {
-    kind: 'tuple',
-    types
-  }
-}
+  const types = path.get('elementTypes').map(p => convert(p));
+  return { kind: 'tuple', types };
+};
 
 converters.TSFunctionType = path => {
-  const parameters = path.node.parameters.map(p => ({kind: p.name}));
-  const returnType = convert(path.node.typeAnnotation.typeAnnotation);
+  const parameters = path.get('parameters').map(p => convert(p));
+  const returnType = convert(path.get('typeAnnotation').get('typeAnnotation'));
 
   return {
     kind: 'function',
     returnType,
-    parameters
+    parameters,
   };
 };
 
 function convert(path) {
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
-
   return converter(path);
 }
 

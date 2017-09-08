@@ -600,12 +600,8 @@ Object {
         Object {
           "kind": "function",
           "parameters": Array [
-            Object {
-              "kind": "string",
-            },
-            Object {
-              "kind": "boolean",
-            },
+            undefined,
+            undefined,
           ],
           "returnType": Object {
             "kind": "number",
