@@ -235,6 +235,30 @@ Object {
 }
 `;
 
+exports[`flow import { type } 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "children",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "importKind": "type",
+            "kind": "import",
+            "moduleSpecifier": "react",
+            "name": "Node",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow maybe 1`] = `
 Object {
   "classes": Array [

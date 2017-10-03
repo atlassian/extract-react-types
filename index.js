@@ -90,7 +90,6 @@ converters.TypeAlias = path => {
 
 converters.IntersectionTypeAnnotation = path => {
   const types = path.node.types.map(convert);
-
   return { kind: 'intersection', types };
 };
 
@@ -223,6 +222,19 @@ converters.TSFunctionType = path => {
     parameters,
   };
 };
+
+converters.ImportSpecifier = path => {
+  let importKind = path.node.importKind || path.parent.importKind || 'value';
+  let moduleSpecifier = path.parent.source.value;
+  let name = path.node.imported.name;
+
+  return {
+    kind: 'import',
+    importKind,
+    name,
+    moduleSpecifier,
+  };
+}
 
 function convert(path) {
   let converter = converters[path.type];

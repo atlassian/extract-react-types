@@ -193,6 +193,20 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'flow import { type }',
+  typeSystem: 'flow',
+  code: `
+    import React, { type Node } from 'react';
+
+    type Props = {
+      children: Node,
+    };
+
+    class Component extends React.Component<Props> {
+
+    }
+  `
+}, {
   name: 'ts boolean',
   typeSystem: 'typescript',
   code: `
