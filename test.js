@@ -159,6 +159,15 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'flow exported type alias reference',
+  typeSystem: 'flow',
+  code: `
+    export type Foo = boolean;
+    class Component extends React.Component<{ foo: Foo }> {
+
+    }
+  `
+}, {
   name: 'flow type',
   typeSystem: 'flow',
   code: `
