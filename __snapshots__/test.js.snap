@@ -226,6 +226,77 @@ Object {
 }
 `;
 
+exports[`flow function unnamed params 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "string",
+              },
+              Object {
+                "kind": "number",
+              },
+            ],
+            "returnType": Object {
+              "kind": "void",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function unnamed params w/ object 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "foo",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "object",
+                "props": Array [
+                  Object {
+                    "key": "prop",
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+            ],
+            "returnType": Object {
+              "kind": "void",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow generic class 1`] = `
 Object {
   "classes": Array [

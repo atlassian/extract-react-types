@@ -126,12 +126,12 @@ converters.NumberTypeAnnotation = path => {
 };
 
 converters.FunctionTypeParam = path => {
-  return convert(path.typeAnnotation);
+  return convert(path.get('typeAnnotation'));
 };
 
 converters.FunctionTypeAnnotation = path => {
-  const parameters = path.node.params.map(convert);
-  const returnType = convert(path.node.returnType);
+  const parameters = path.get('params').map(p => convert(p));
+  const returnType = convert(path.get('returnType'));
 
   return {
     parameters,

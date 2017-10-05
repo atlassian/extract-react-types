@@ -45,6 +45,22 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'flow function unnamed params',
+  typeSystem: 'flow',
+  code: `
+    class Component extends React.Component<{ foo: (string, number) => void }> {
+      // ...
+    }
+  `
+}, {
+  name: 'flow function unnamed params w/ object',
+  typeSystem: 'flow',
+  code: `
+    class Component extends React.Component<{ foo: ({ prop: string }) => void }> {
+      // ...
+    }
+  `
+}, {
   name: 'flow function return type',
   typeSystem: 'flow',
   code: `
