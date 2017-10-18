@@ -1,6 +1,6 @@
 {
   "name": "extract-react-types",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "index.js",
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "MIT",
