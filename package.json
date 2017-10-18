@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "babel-core": "^7.0.0-alpha.19",
+    "babel-core": "7.0.0-alpha.19",
     "babel-errors": "^1.1.1",
     "babel-file": "^1.0.2",
     "babel-file-loader": "^1.0.3",
