@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`comments 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "description": "* Comment
+  * asdf
+      asdf
+  
+Comment2",
+          "key": "foo",
+          "kind": "property",
+          "leadingComments": Array [
+            Object {
+              "end": 54,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 4,
+                  "line": 6,
+                },
+                "start": Position {
+                  "column": 2,
+                  "line": 3,
+                },
+              },
+              "start": 18,
+              "type": "CommentBlock",
+              "value": "* Comment
+  * asdf
+      asdf
+  ",
+            },
+            Object {
+              "end": 68,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 13,
+                  "line": 7,
+                },
+                "start": Position {
+                  "column": 2,
+                  "line": 7,
+                },
+              },
+              "start": 57,
+              "type": "CommentLine",
+              "value": " Comment2",
+            },
+          ],
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow any 1`] = `
 Object {
   "classes": Array [

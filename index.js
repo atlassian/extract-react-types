@@ -10,6 +10,7 @@ const {isReactComponentClass} = require('babel-react-components');
 const createBabylonOptions = require('babylon-options');
 const babylon = require('babylon');
 const babel = require('babel-core');
+const stripIndent = require('strip-indent');
 
 const converters = {};
 
@@ -236,10 +237,37 @@ converters.ImportSpecifier = path => {
   };
 }
 
+function attachCommentProperty(source, dest, name) {
+  if (source[name]) {
+    if (!dest[name]) dest[name] = [];
+    dest[name] = dest[name].concat(source[name]);
+  }
+}
+
+function attachComments(source, dest) {
+  attachCommentProperty(source, dest, 'leadingComments');
+  attachCommentProperty(source, dest, 'trailingComments');
+  attachCommentProperty(source, dest, 'innerComments');
+
+  if (dest.leadingComments) {
+    dest.description = dest.leadingComments.map(comment => {
+      if (comment.type === 'CommentLine') {
+        return comment.value.trimLeft();
+      } else {
+        return stripIndent(comment.value).split('\n').map(commentLine => (
+          commentLine
+        )).join('\n')
+      }
+    }).join('\n')
+  }
+}
+
 function convert(path) {
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
-  return converter(path);
+  let result = converter(path);
+  attachComments(path.node, result);
+  return result;
 }
 
 function extractReactTypes(code /*: string */, typeSystem /*: 'flow' | 'typescript' */) {
