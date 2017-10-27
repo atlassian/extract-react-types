@@ -363,6 +363,23 @@ const TESTS = [{
 
     }
   `
+}, {
+  only: true,
+  name: 'comments',
+  typeSystem: 'flow',
+  code: `
+    type Props = {
+      /** Comment
+      * asdf
+          asdf
+      */
+      // Comment2
+      foo: boolean,
+    };
+    class Component extends React.Component<Props> {
+
+    }
+  `
 }];
 
 for (let testCase of TESTS) {
