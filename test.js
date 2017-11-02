@@ -168,7 +168,7 @@ const TESTS = [{
     }
   `
 }, {
-  name: 'flow type',
+  name: 'flow intersection',
   typeSystem: 'flow',
   code: `
     class Component extends React.Component<{foo: number & string}> {
@@ -364,15 +364,13 @@ const TESTS = [{
     }
   `
 }, {
-  only: true,
   name: 'comments',
   typeSystem: 'flow',
   code: `
     type Props = {
-      /** Comment
-      * asdf
-          asdf
-      */
+      /**
+       * Comment1
+       */
       // Comment2
       foo: boolean,
     };

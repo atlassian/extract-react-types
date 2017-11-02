@@ -11,6 +11,7 @@ const createBabylonOptions = require('babylon-options');
 const babylon = require('babylon');
 const babel = require('babel-core');
 const stripIndent = require('strip-indent');
+const {normalizeComment} = require('babel-normalize-comments');
 
 const converters = {};
 
@@ -90,7 +91,7 @@ converters.TypeAlias = path => {
 };
 
 converters.IntersectionTypeAnnotation = path => {
-  const types = path.node.types.map(convert);
+  const types = path.get('types').map(p => convert(p));
   return { kind: 'intersection', types };
 };
 
@@ -238,28 +239,27 @@ converters.ImportSpecifier = path => {
 }
 
 function attachCommentProperty(source, dest, name) {
-  if (source[name]) {
-    if (!dest[name]) dest[name] = [];
-    dest[name] = dest[name].concat(source[name]);
+  if (!source) {
+    console.log(dest);
   }
+  if (!source[name]) return;
+  if (!dest[name]) dest[name] = [];
+
+  let comments = source[name].map(comment => {
+    return {
+      type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
+      value: normalizeComment(comment),
+      raw: comment.value,
+    };
+  });
+
+  dest[name] = dest[name].concat(comments);
 }
 
 function attachComments(source, dest) {
   attachCommentProperty(source, dest, 'leadingComments');
   attachCommentProperty(source, dest, 'trailingComments');
   attachCommentProperty(source, dest, 'innerComments');
-
-  if (dest.leadingComments) {
-    dest.description = dest.leadingComments.map(comment => {
-      if (comment.type === 'CommentLine') {
-        return comment.value.trimLeft();
-      } else {
-        return stripIndent(comment.value).split('\n').map(commentLine => (
-          commentLine
-        )).join('\n')
-      }
-    }).join('\n')
-  }
 }
 
 function convert(path) {
