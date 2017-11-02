@@ -15,13 +15,14 @@
     "babel-flow-identifiers": "^1.1.3",
     "babel-flow-scope": "^1.2.1",
     "babel-identifiers": "^1.0.0",
+    "babel-normalize-comments": "^1.0.0",
     "babel-react-components": "^1.1.0",
     "babylon": "^7.0.0-beta.22",
-    "babylon-options": "^1.1.2"
+    "babylon-options": "^1.1.2",
+    "strip-indent": "^2.0.0"
   },
   "devDependencies": {
     "flow-bin": "^0.53.1",
-    "jest": "^20.0.4",
-    "strip-indent": "^2.0.0"
+    "jest": "^20.0.4"
   }
 }

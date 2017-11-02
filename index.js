@@ -10,6 +10,8 @@ const {isReactComponentClass} = require('babel-react-components');
 const createBabylonOptions = require('babylon-options');
 const babylon = require('babylon');
 const babel = require('babel-core');
+const stripIndent = require('strip-indent');
+const {normalizeComment} = require('babel-normalize-comments');
 
 const converters = {};
 
@@ -89,7 +91,7 @@ converters.TypeAlias = path => {
 };
 
 converters.IntersectionTypeAnnotation = path => {
-  const types = path.node.types.map(convert);
+  const types = path.get('types').map(p => convert(p));
   return { kind: 'intersection', types };
 };
 
@@ -236,10 +238,36 @@ converters.ImportSpecifier = path => {
   };
 }
 
+function attachCommentProperty(source, dest, name) {
+  if (!source) {
+    console.log(dest);
+  }
+  if (!source[name]) return;
+  if (!dest[name]) dest[name] = [];
+
+  let comments = source[name].map(comment => {
+    return {
+      type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
+      value: normalizeComment(comment),
+      raw: comment.value,
+    };
+  });
+
+  dest[name] = dest[name].concat(comments);
+}
+
+function attachComments(source, dest) {
+  attachCommentProperty(source, dest, 'leadingComments');
+  attachCommentProperty(source, dest, 'trailingComments');
+  attachCommentProperty(source, dest, 'innerComments');
+}
+
 function convert(path) {
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
-  return converter(path);
+  let result = converter(path);
+  attachComments(path.node, result);
+  return result;
 }
 
 function extractReactTypes(code /*: string */, typeSystem /*: 'flow' | 'typescript' */) {

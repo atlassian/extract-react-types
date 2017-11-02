@@ -168,7 +168,7 @@ const TESTS = [{
     }
   `
 }, {
-  name: 'flow type',
+  name: 'flow intersection',
   typeSystem: 'flow',
   code: `
     class Component extends React.Component<{foo: number & string}> {
@@ -360,6 +360,21 @@ const TESTS = [{
   code: `
     enum Color {Red, Green, Blue};
     class Component extends React.Component<{foo: Color}> {
+
+    }
+  `
+}, {
+  name: 'comments',
+  typeSystem: 'flow',
+  code: `
+    type Props = {
+      /**
+       * Comment1
+       */
+      // Comment2
+      foo: boolean,
+    };
+    class Component extends React.Component<Props> {
 
     }
   `
