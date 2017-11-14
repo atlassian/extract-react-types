@@ -110,6 +110,13 @@ assert-plus@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-0.2.0.tgz#d74e1b87e7affc0db8aadb7021f3fe48101ab234"
 
+ast-pretty-print@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ast-pretty-print/-/ast-pretty-print-2.0.1.tgz#e3a0f443b8f9414d7925dea18d125362e4f6a372"
+  dependencies:
+    pretty-format-ast "^1.0.1"
+    pretty-format2 "^2.0.3"
+
 async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -196,6 +203,18 @@ babel-errors@^1.0.1, babel-errors@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/babel-errors/-/babel-errors-1.1.1.tgz#43f7142dd3b365633c758d155bffa3ba41523794"
 
+babel-explode-module@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/babel-explode-module/-/babel-explode-module-1.4.0.tgz#b20076f0ee5ff28e8f16baa3146fe136a27c6504"
+  dependencies:
+    babel-types "^6.24.1"
+
+babel-explode-module@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-explode-module/-/babel-explode-module-2.0.0.tgz#d635653b44b1bdf1d5ceafacafb891611876ce3b"
+  dependencies:
+    babel-types "^6.24.1"
+
 babel-file-loader@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/babel-file-loader/-/babel-file-loader-1.0.3.tgz#b9df875e136d6cddc9dfcb36334cd1ad58fffe7f"
@@ -225,6 +244,10 @@ babel-flow-identifiers@^1.1.3:
 babel-flow-scope@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/babel-flow-scope/-/babel-flow-scope-1.2.1.tgz#2b646211811a203ef0b11ebd219af29428b15990"
+
+babel-flow-types@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/babel-flow-types/-/babel-flow-types-1.2.2.tgz#71674e4ab3c41137bdc29278b2ecff82029863c6"
 
 babel-generator@7.0.0-alpha.19:
   version "7.0.0-alpha.19"
@@ -265,6 +288,12 @@ babel-helper-get-function-arity@7.0.0-alpha.19:
   dependencies:
     babel-types "7.0.0-alpha.19"
 
+babel-helper-simplify-module@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/babel-helper-simplify-module/-/babel-helper-simplify-module-2.2.0.tgz#62ccda7d379992eea9c1141400d1f63cd9918e16"
+  dependencies:
+    babel-explode-module "^1.4.0"
+
 babel-helpers@7.0.0-alpha.19:
   version "7.0.0-alpha.19"
   resolved "https://registry.yarnpkg.com/babel-helpers/-/babel-helpers-7.0.0-alpha.19.tgz#860701311b3ac06e3158eb2aba97b86ca8a1f16f"
@@ -290,6 +319,12 @@ babel-jest@^20.0.3:
     babel-plugin-istanbul "^4.0.0"
     babel-preset-jest "^20.0.3"
 
+babel-log@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-log/-/babel-log-2.0.0.tgz#9925f99521d3d3ccb5839c0a31120291dd1ba638"
+  dependencies:
+    ast-pretty-print "^2.0.0"
+
 babel-messages@7.0.0-alpha.19:
   version "7.0.0-alpha.19"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-7.0.0-alpha.19.tgz#269b34b85070be6f6d101169ed3fdafc856dfd06"
@@ -299,6 +334,12 @@ babel-messages@^6.23.0:
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
   dependencies:
     babel-runtime "^6.22.0"
+
+"babel-normalize-comments@git+https://github.com/Noviny/babel-normalize-comments.git":
+  version "1.0.0"
+  resolved "git+https://github.com/Noviny/babel-normalize-comments.git#0264e6905f015e7d3f176da4725a3104bb1e2040"
+  dependencies:
+    babel-flow-types "^1.2.2"
 
 babel-plugin-istanbul@^4.0.0:
   version "4.1.4"
@@ -1730,6 +1771,18 @@ prelude-ls@~1.1.2:
 preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
+
+pretty-format-ast@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/pretty-format-ast/-/pretty-format-ast-1.0.1.tgz#1d8cff9adeeaad5376aa80997952a55a2907ca8d"
+  dependencies:
+    pretty-format2 "^2.0.3"
+
+pretty-format2@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/pretty-format2/-/pretty-format2-2.0.3.tgz#a506a3fa2a18ee85aeec9abb60c395b264957363"
+  dependencies:
+    ansi-styles "^3.0.0"
 
 pretty-format@^20.0.3:
   version "20.0.3"
