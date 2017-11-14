@@ -18,7 +18,7 @@
     "babel-helper-simplify-module": "^2.2.0",
     "babel-identifiers": "^1.0.0",
     "babel-log": "^2.0.0",
-    "babel-normalize-comments": "git+https://github.com/Noviny/babel-normalize-comments.git",
+    "babel-normalize-comments": "^1.0.1",
     "babel-react-components": "^1.1.0",
     "babel-types": "^6.26.0",
     "babylon-options": "^1.1.2",
