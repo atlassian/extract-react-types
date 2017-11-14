@@ -248,12 +248,10 @@ converters.ImportSpecifier = (path, context) => {
     }
 
     if (!/^\./.test(path.parent.source.value)) {
-      let name = `${moduleSpecifier}.${path.node.imported.name}`;
-
       return {
-        kind: name,
+        kind: 'external',
         importKind,
-        name: '',
+        name: path.node.imported.name,
         moduleSpecifier,
       };
     }
