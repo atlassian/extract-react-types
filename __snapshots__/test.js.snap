@@ -623,6 +623,62 @@ Object {
 }
 `;
 
+exports[`object method 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "default": Object {
+            "key": "something",
+            "kind": "ArrowFunctionExpression",
+            "value": "() => {}",
+          },
+          "key": "something",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`object property 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "default": Object {
+            "key": "something",
+            "kind": "StringLiteral",
+            "value": "'this string'",
+          },
+          "key": "something",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts any 1`] = `
 Object {
   "classes": Array [
@@ -887,6 +943,32 @@ Object {
       "props": Array [
         Object {
           "kind": "void",
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`value identifier 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "default": Object {
+            "key": "something",
+            "kind": "StringLiteral",
+            "value": "'this string'",
+          },
+          "key": "something",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
         },
       ],
     },

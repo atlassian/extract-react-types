@@ -363,6 +363,54 @@ const TESTS = [{
 
     }
   `
+}, {
+  name: 'object property',
+  typeSystem: 'flow',
+  code: `
+  import React, { type Node } from 'react';
+
+  type Props = {
+    something: string,
+  };
+
+  class Component extends React.Component<Props> {
+    defaultProps = {
+      something: 'this string'
+    }
+  }
+  `
+}, {
+  name: 'object method',
+  typeSystem: 'flow',
+  code: `
+  import React, { type Node } from 'react';
+
+  type Props = {
+    something: () => mixed,
+  };
+
+  class Component extends React.Component<Props> {
+    defaultProps = {
+      something: () => {}
+    }
+  }
+  `
+}, {
+  name: 'value identifier',
+  typeSystem: 'flow',
+  code: `
+  import React, { type Node } from 'react';
+
+  type Props = {
+    something: string,
+  };
+
+  class Component extends React.Component<Props> {
+    defaultProps = {
+      something: 'this string'
+    }
+  }
+  `
 }];
 
 for (let testCase of TESTS) {
