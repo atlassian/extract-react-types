@@ -13,14 +13,13 @@ const babel = require('babel-core');
 const t = require('babel-types');
 const stripIndent = require('strip-indent');
 const {normalizeComment} = require('babel-normalize-comments');
+const generate = require('babel-generator').default;
 
 const matchExported = require('./matchExported');
-
 const converters = {};
 
 converters.Program = (path, context) => {
   let result = {};
-
   result.kind = 'program';
   result.classes = [];
 
@@ -30,13 +29,39 @@ converters.Program = (path, context) => {
 
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
+      let defaultProps = [];
 
-      result.classes.push(convert(props, context));
+      path.get('body').node.body.find(a => {
+        if (a.type === 'ClassProperty' && a.key.name === 'defaultProps') {
+          defaultProps = a.value.properties
+        }
+      });
+
+      const classProperties = convert(props, Object.assign({}, context, { mode: 'type' }))
+
+      defaultProps.forEach(property => {
+        const prop = classProperties.props.find(p => p.key === property.key.name)
+        const value = convert(property,  Object.assign({}, context, { mode: 'value' }));
+        if (value) prop.default = value;
+      });
+
+      result.classes.push(classProperties);
     },
   });
-
   return result;
 };
+
+converters.ObjectProperty = (path, context) => {
+  const key = convert(path.key, context)
+  const value = generate(path.value).code;
+  return { key, value, kind: path.value.type }
+}
+
+converters.ObjectMethod = (path, context) => {
+  const key = convert(path.key, context)
+  const value = generate(path.body).code;
+  return { key, value, kind: path.body.type }
+}
 
 converters.ObjectTypeAnnotation = (path, context) => {
   let result = {};
@@ -72,20 +97,23 @@ converters.GenericTypeAnnotation = (path, context) => {
 }
 
 converters.Identifier = (path, context) => {
-  let kind = getIdentifierKind(path);
+  if (context.mode === 'value') return path.name;
+  if (context.mode === 'type') {
+    let kind = getIdentifierKind(path);
 
-  if (kind === 'reference') {
-    let bindingPath;
+    if (kind === 'reference') {
+      let bindingPath;
 
-    if (isFlowIdentifier(path)) {
-      let flowBinding = findFlowBinding(path, path.node.name);
-      if (!flowBinding) throw new Error;
-      bindingPath = flowBinding.path.parentPath;
-    } else {
-      bindingPath = path.scope.getBinding(path.node.name);
+      if (isFlowIdentifier(path)) {
+        let flowBinding = findFlowBinding(path, path.node.name);
+        if (!flowBinding) throw new Error;
+        bindingPath = flowBinding.path.parentPath;
+      } else {
+        bindingPath = path.scope.getBinding(path.node.name);
+      }
+
+      return bindingPath && convert(bindingPath, context);
     }
-
-    return bindingPath && convert(bindingPath, context);
   }
 };
 
@@ -248,12 +276,10 @@ converters.ImportSpecifier = (path, context) => {
     }
 
     if (!/^\./.test(path.parent.source.value)) {
-      let name = `${moduleSpecifier}.${path.node.imported.name}`;
-
       return {
-        kind: name,
+        kind: 'external',
         importKind,
-        name: '',
+        name: path.node.imported.name,
         moduleSpecifier,
       };
     }
@@ -288,17 +314,14 @@ converters.ImportSpecifier = (path, context) => {
       };
     }
 
-    return convert(exported, {
-      ...context,
-      replacementId: t.identifier(id),
-    });
+    return convert(exported, Object.assign({},
+      context,
+      { replacementId: t.identifier(id) },
+    ));
   }
 }
 
 function attachCommentProperty(source, dest, name) {
-   if (!source) {
-     console.log(dest);
-   }
    if (!source || !source[name]) return;
    if (!dest[name]) dest[name] = [];
 
