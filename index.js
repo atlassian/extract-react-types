@@ -74,6 +74,7 @@ converters.GenericTypeAnnotation = (path, context) => {
 converters.Identifier = (path, context) => {
   let kind = getIdentifierKind(path);
 
+
   if (kind === 'reference') {
     let bindingPath;
 
@@ -85,7 +86,11 @@ converters.Identifier = (path, context) => {
       bindingPath = path.scope.getBinding(path.node.name);
     }
 
-    return bindingPath && convert(bindingPath, context);
+    if (bindingPath) {
+      return convert(bindingPath, context);
+    } else {
+      return { kind: 'id', name: path.node.name };
+    }
   }
 };
 
@@ -288,10 +293,9 @@ converters.ImportSpecifier = (path, context) => {
       };
     }
 
-    return convert(exported, {
-      ...context,
+    return convert(exported, Object.assign({}, context, {
       replacementId: t.identifier(id),
-    });
+    }));
   }
 }
 

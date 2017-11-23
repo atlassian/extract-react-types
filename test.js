@@ -363,6 +363,13 @@ const TESTS = [{
 
     }
   `
+}, {
+  only: true,
+  name: 'test',
+  typeSystem: 'flow',
+  code: `
+    class Component extends React.Component<{ foo?: Object }> {}
+  `
 }];
 
 for (let testCase of TESTS) {
