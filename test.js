@@ -364,7 +364,6 @@ const TESTS = [{
     }
   `
 }, {
-  only: true,
   name: 'test',
   typeSystem: 'flow',
   code: `
