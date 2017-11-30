@@ -31,7 +31,6 @@ converters.Program = (path, context) => {
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
 
-      let updating = convert(props, context)
       result.classes.push(convert(props, context));
     },
   });
