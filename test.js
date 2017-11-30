@@ -85,7 +85,6 @@ const TESTS = [{
     }
   `
 }, {
-  skip: true,
   name: 'flow array',
   typeSystem: 'flow',
   code: `
@@ -177,8 +176,7 @@ const TESTS = [{
     }
   `
 }, {
-  only: true,
-  name: 'new test ben change this name',
+  name: 'intersection type',
   typeSystem: 'flow',
   code: `
   type BaseProps = { bar: string }
@@ -189,8 +187,7 @@ const TESTS = [{
   }
   `
 }, {
-  only: true,
-  name: 'new test 2 ben also fix this',
+  name: 'with spread in type annotation',
   typeSystem: 'flow',
   code: `
   type BaseProps = { foo: string }
@@ -202,7 +199,6 @@ const TESTS = [{
   }
   `
 }, {
-  skip: true,
   name: 'flow array union',
   typeSystem: 'flow',
   code: `

@@ -31,12 +31,7 @@ converters.Program = (path, context) => {
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
 
-      // props can be IntersectionTypeAnnotation, GenericTypeAnnotation, or ObjectTypeAnnotation
-      // TSTypeLiteral
       let updating = convert(props, context)
-      // console.log(updating);
-      if (updating.types) console.log(updating.types.map(a => a.props));
-      if (updating.props) console.log(updating.props.map(a => a.props));
       result.classes.push(convert(props, context));
     },
   });
@@ -48,12 +43,12 @@ converters.ObjectTypeAnnotation = (path, context) => {
   let result = {};
 
   result.kind = 'object';
-  result.props = [];
+  result.members = [];
 
   let properties = path.get('properties');
 
   for (let property of properties) {
-    result.props.push(convert(property, context));
+    result.members.push(convert(property, context));
   }
 
   return result;
@@ -74,17 +69,20 @@ converters.UnionTypeAnnotation = (path, context) => {
 };
 
 converters.TypeParameterInstantiation = (path, context) => {
-  let params = path.get('params').map(p => convert(p, context))
-  return { kind: 'typeParameter', params }
+  return  path.get('params').map(p => ({
+    kind: 'typeParam', type: convert(p, context)
+  }))
 }
 
 converters.GenericTypeAnnotation = (path, context) => {
-  let typeParams;
-  if (path.get('typeParameters').node) {
-    typeParams = convert(path.get('typeParameters'), context)
+  let result = {};
+
+  result.kind = 'generic'
+  result.value = convert(path.get('id'), context)
+  if (path.node.typeParameters) {
+    result.typeParams = convert(path.get('typeParameters'), context)
   }
-  if (typeParams) return { ...convert(path.get('id'), context), typeParams };
-  else return convert(path.get('id'), context);
+  return result;
 }
 
 converters.Identifier = (path, context) => {
@@ -249,7 +247,10 @@ converters.TSFunctionType = (path, context) => {
 };
 
 converters.ObjectTypeSpreadProperty = (path, context) => {
-  return convert(path.get('argument'), context)
+  return {
+    kind: 'spread',
+    value: convert(path.get('argument'), context)
+  }
 }
 
 converters.ImportSpecifier = (path, context) => {
