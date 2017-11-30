@@ -623,6 +623,61 @@ Object {
 }
 `;
 
+exports[`new test 2 ben also fix this 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "kind": "object",
+          "props": Array [
+            Object {
+              "key": "bar",
+              "kind": "property",
+              "optional": false,
+              "value": Object {
+                "kind": "string",
+              },
+            },
+          ],
+        },
+        Object {
+          "key": "isDefaultChecked",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`new test ben change this name 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "props": Array [
+        Object {
+          "key": "something",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test 1`] = `
 Object {
   "classes": Array [

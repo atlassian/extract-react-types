@@ -85,6 +85,7 @@ const TESTS = [{
     }
   `
 }, {
+  skip: true,
   name: 'flow array',
   typeSystem: 'flow',
   code: `
@@ -176,6 +177,32 @@ const TESTS = [{
     }
   `
 }, {
+  only: true,
+  name: 'new test ben change this name',
+  typeSystem: 'flow',
+  code: `
+  type BaseProps = { bar: string }
+
+  class Component extends React.Component<BaseProps & {
+    isDefaultChecked: boolean,
+  }> {
+  }
+  `
+}, {
+  only: true,
+  name: 'new test 2 ben also fix this',
+  typeSystem: 'flow',
+  code: `
+  type BaseProps = { foo: string }
+  type Props = {
+    ...BaseProps,
+    isDefaultChecked: boolean,
+  }
+  class Component extends React.Component<Props> {
+  }
+  `
+}, {
+  skip: true,
   name: 'flow array union',
   typeSystem: 'flow',
   code: `
@@ -364,7 +391,6 @@ const TESTS = [{
     }
   `
 }, {
-  only: true,
   name: 'test',
   typeSystem: 'flow',
   code: `

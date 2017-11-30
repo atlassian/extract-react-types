@@ -31,6 +31,12 @@ converters.Program = (path, context) => {
       let params = path.get('superTypeParameters').get('params');
       let props = params[0];
 
+      // props can be IntersectionTypeAnnotation, GenericTypeAnnotation, or ObjectTypeAnnotation
+      // TSTypeLiteral
+      let updating = convert(props, context)
+      // console.log(updating);
+      if (updating.types) console.log(updating.types.map(a => a.props));
+      if (updating.props) console.log(updating.props.map(a => a.props));
       result.classes.push(convert(props, context));
     },
   });
@@ -67,13 +73,22 @@ converters.UnionTypeAnnotation = (path, context) => {
   return { kind: 'union', types };
 };
 
+converters.TypeParameterInstantiation = (path, context) => {
+  let params = path.get('params').map(p => convert(p, context))
+  return { kind: 'typeParameter', params }
+}
+
 converters.GenericTypeAnnotation = (path, context) => {
-  return convert(path.get('id'), context);
+  let typeParams;
+  if (path.get('typeParameters').node) {
+    typeParams = convert(path.get('typeParameters'), context)
+  }
+  if (typeParams) return { ...convert(path.get('id'), context), typeParams };
+  else return convert(path.get('id'), context);
 }
 
 converters.Identifier = (path, context) => {
   let kind = getIdentifierKind(path);
-
 
   if (kind === 'reference') {
     let bindingPath;
@@ -99,7 +114,7 @@ converters.TypeAlias = (path, context) => {
 };
 
 converters.IntersectionTypeAnnotation = (path, context) => {
-  const types = path.node.types.map(p => convert(p, context));
+  const types = path.get('types').map(p => convert(p, context));
   return { kind: 'intersection', types };
 };
 
@@ -233,6 +248,10 @@ converters.TSFunctionType = (path, context) => {
   };
 };
 
+converters.ObjectTypeSpreadProperty = (path, context) => {
+  return convert(path.get('argument'), context)
+}
+
 converters.ImportSpecifier = (path, context) => {
   let importKind = path.node.importKind || path.parent.importKind || 'value';
   let moduleSpecifier = path.parent.source.value;
@@ -324,6 +343,7 @@ function attachCommentProperty(source, dest, name) {
  }
 
 function convert(path, context) {
+  if (typeof path.get !== 'function') throw new Error(`Did not pass a NodePath to convert() ${JSON.stringify(path)}`);
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
   let result = converter(path, context);
