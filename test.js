@@ -176,6 +176,29 @@ const TESTS = [{
     }
   `
 }, {
+  name: 'intersection type',
+  typeSystem: 'flow',
+  code: `
+  type BaseProps = { bar: string }
+
+  class Component extends React.Component<BaseProps & {
+    isDefaultChecked: boolean,
+  }> {
+  }
+  `
+}, {
+  name: 'with spread in type annotation',
+  typeSystem: 'flow',
+  code: `
+  type BaseProps = { foo: string }
+  type Props = {
+    ...BaseProps,
+    isDefaultChecked: boolean,
+  }
+  class Component extends React.Component<Props> {
+  }
+  `
+}, {
   name: 'flow array union',
   typeSystem: 'flow',
   code: `

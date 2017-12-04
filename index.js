@@ -42,12 +42,12 @@ converters.ObjectTypeAnnotation = (path, context) => {
   let result = {};
 
   result.kind = 'object';
-  result.props = [];
+  result.members = [];
 
   let properties = path.get('properties');
 
   for (let property of properties) {
-    result.props.push(convert(property, context));
+    result.members.push(convert(property, context));
   }
 
   return result;
@@ -67,13 +67,25 @@ converters.UnionTypeAnnotation = (path, context) => {
   return { kind: 'union', types };
 };
 
+converters.TypeParameterInstantiation = (path, context) => {
+  return  path.get('params').map(p => ({
+    kind: 'typeParam', type: convert(p, context)
+  }))
+}
+
 converters.GenericTypeAnnotation = (path, context) => {
-  return convert(path.get('id'), context);
+  let result = {};
+
+  result.kind = 'generic'
+  result.value = convert(path.get('id'), context)
+  if (path.node.typeParameters) {
+    result.typeParams = convert(path.get('typeParameters'), context)
+  }
+  return result;
 }
 
 converters.Identifier = (path, context) => {
   let kind = getIdentifierKind(path);
-
 
   if (kind === 'reference') {
     let bindingPath;
@@ -99,7 +111,7 @@ converters.TypeAlias = (path, context) => {
 };
 
 converters.IntersectionTypeAnnotation = (path, context) => {
-  const types = path.node.types.map(p => convert(p, context));
+  const types = path.get('types').map(p => convert(p, context));
   return { kind: 'intersection', types };
 };
 
@@ -233,6 +245,13 @@ converters.TSFunctionType = (path, context) => {
   };
 };
 
+converters.ObjectTypeSpreadProperty = (path, context) => {
+  return {
+    kind: 'spread',
+    value: convert(path.get('argument'), context)
+  }
+}
+
 converters.ImportSpecifier = (path, context) => {
   let importKind = path.node.importKind || path.parent.importKind || 'value';
   let moduleSpecifier = path.parent.source.value;
@@ -324,6 +343,7 @@ function attachCommentProperty(source, dest, name) {
  }
 
 function convert(path, context) {
+  if (typeof path.get !== 'function') throw new Error(`Did not pass a NodePath to convert() ${JSON.stringify(path)}`);
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
   let result = converter(path, context);
