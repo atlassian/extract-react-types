@@ -1,5 +1,252 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`array expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "elements": Array [
+              Object {
+                "kind": "string",
+                "value": "a",
+              },
+            ],
+            "kind": "array",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "typeParams": Array [
+              Object {
+                "kind": "typeParam",
+                "type": Object {
+                  "kind": "string",
+                },
+              },
+            ],
+            "value": Object {
+              "kind": "id",
+              "name": "Array",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`arrow function expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "number",
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`binary expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "binary",
+            "left": Object {
+              "kind": "number",
+              "value": 3,
+            },
+            "operator": "+",
+            "right": Object {
+              "kind": "number",
+              "value": 5,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`boolean literal 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "boolean",
+            "value": true,
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`defined member expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "memberExpression",
+            "object": Object {
+              "kind": "object",
+              "members": Array [
+                Object {
+                  "key": Object {
+                    "kind": "id",
+                    "name": "c",
+                    "type": null,
+                  },
+                  "kind": "property",
+                  "value": Object {
+                    "async": false,
+                    "generator": false,
+                    "id": null,
+                    "kind": "function",
+                    "parameters": Array [
+                      Object {
+                        "kind": "param",
+                        "type": Object {
+                          "kind": "string",
+                        },
+                        "value": Object {
+                          "kind": "id",
+                          "name": "a",
+                        },
+                      },
+                      Object {
+                        "kind": "param",
+                        "type": Object {
+                          "kind": "string",
+                        },
+                        "value": Object {
+                          "kind": "id",
+                          "name": "b",
+                        },
+                      },
+                    ],
+                    "returnType": Object {
+                      "kind": "number",
+                    },
+                  },
+                },
+              ],
+            },
+            "property": Object {
+              "kind": "id",
+              "name": "c",
+              "type": null,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`exists type annotation 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "exists",
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow any 1`] = `
 Object {
   "classes": Array [
@@ -692,6 +939,155 @@ Object {
 }
 `;
 
+exports[`function expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "number",
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`imported member expression default 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "memberExpression",
+            "object": Object {
+              "kind": "id",
+              "name": "b",
+              "type": null,
+            },
+            "property": Object {
+              "kind": "id",
+              "name": "c",
+              "type": null,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`imported member expression named 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "memberExpression",
+            "object": Object {
+              "kind": "id",
+              "name": "b",
+              "type": null,
+            },
+            "property": Object {
+              "kind": "id",
+              "name": "c",
+              "type": null,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`imported member expression named alias 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "memberExpression",
+            "object": Object {
+              "kind": "id",
+              "name": "b",
+              "type": null,
+            },
+            "property": Object {
+              "kind": "id",
+              "name": "c",
+              "type": null,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`intersection type 1`] = `
 Object {
   "classes": Array [
@@ -734,6 +1130,155 @@ Object {
 }
 `;
 
+exports[`member expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "memberExpression",
+            "object": Object {
+              "kind": "id",
+              "name": "b",
+              "type": null,
+            },
+            "property": Object {
+              "kind": "id",
+              "name": "c",
+              "type": null,
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`null literal 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "null",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": true,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`numeric literal 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "number",
+            "value": 5,
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`spread element  1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "boolean",
+            "value": true,
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+        Object {
+          "default": Object {
+            "kind": "boolean",
+            "value": false,
+          },
+          "key": "b",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`string literal 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "string",
+            "value": "stringVal",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test 1`] = `
 Object {
   "classes": Array [
@@ -750,6 +1295,31 @@ Object {
               "kind": "id",
               "name": "Object",
             },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`test get defaultProps 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "string",
+            "value": "a",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
           },
         },
       ],

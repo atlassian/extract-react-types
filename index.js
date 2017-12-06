@@ -26,6 +26,11 @@ const getPropFromObject = (obj, property) => {
   return obj.members.find(p => p.key === property.key.name);
 };
 
+const resolveFromGeneric = type => {
+  if (type.kind !== "generic") return type;
+  return resolveFromGeneric(type.value);
+};
+
 const getProp = (props, property) => {
   let prop;
   if (props.kind === "intersection") {
@@ -77,7 +82,8 @@ converters.Program = (path, context) => {
 
       if (defaultProps && defaultProps.value && defaultProps.value.members) {
         defaultProps.value.members.forEach(property => {
-          const prop = getProp(classProperties.value, property);
+          let ungeneric = resolveFromGeneric(classProperties);
+          const prop = getProp(ungeneric, property);
           if (prop) prop.default = property.value;
         });
       }
