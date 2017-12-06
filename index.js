@@ -285,6 +285,14 @@ converters.ObjectExpression = (path, context) => {
         members = members.concat(mem.value.value.members);
       } else if (mem.value.kind === "object") {
         members = members.concat(mem.value.members);
+      } else if (mem.value.kind === "variable") {
+        let dcl = mem.value.declarations;
+        dcl = dcl[dcl.length - 1].value;
+        if (dcl.kind !== "object") {
+          throw new Error("Trying to spread a non-object item onto an object");
+        } else {
+          members = members.concat(dcl.members);
+        }
       }
     } else if (mem.kind === "property") {
       members.push(mem);
