@@ -110,6 +110,17 @@ converters.ClassProperty = (path, context) => {
   };
 };
 
+converters.CallExpression = (path, context) => {
+  let callee = convert(path.get("callee"), context);
+  let args = path.get("arguments").map(a => convert(a, context));
+
+  return {
+    kind: "call",
+    callee,
+    args
+  };
+};
+
 converters.ObjectProperty = (path, context) => {
   return {
     kind: "property",
