@@ -36,6 +36,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -71,6 +76,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -104,6 +114,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -129,6 +144,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -206,6 +226,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -241,6 +266,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -262,6 +292,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -295,6 +330,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -336,6 +376,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -357,6 +402,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -378,6 +428,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "FooComponent",
+        "type": null,
+      },
     },
     Object {
       "kind": "object",
@@ -391,6 +446,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "BarComponent",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -415,6 +475,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -447,6 +512,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -479,6 +549,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -508,6 +583,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -533,6 +613,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -565,6 +650,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -604,6 +694,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -615,6 +710,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "value": Object {
         "kind": "id",
         "name": "A",
@@ -630,6 +730,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "value": Object {
         "kind": "object",
         "members": Array [
@@ -673,6 +778,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -694,6 +804,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -722,6 +837,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -743,6 +863,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -764,6 +889,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -775,6 +905,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "value": Object {
         "kind": "object",
         "members": Array [
@@ -825,6 +960,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -836,6 +976,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "value": Object {
         "kind": "object",
         "members": Array [
@@ -882,6 +1027,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -912,6 +1062,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -933,6 +1088,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -968,6 +1128,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1006,6 +1171,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1044,6 +1214,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1082,6 +1257,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1093,6 +1273,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "intersection",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "types": Array [
         Object {
           "kind": "generic",
@@ -1162,6 +1347,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1186,6 +1376,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1211,6 +1406,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1248,6 +1448,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1273,6 +1478,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1298,6 +1508,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1323,6 +1538,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1334,6 +1554,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "any",
@@ -1350,6 +1575,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "id",
@@ -1367,6 +1597,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "boolean",
@@ -1383,6 +1618,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "FooComponent",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "void",
@@ -1391,6 +1631,11 @@ Object {
     },
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "BarComponent",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "void",
@@ -1407,6 +1652,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "id",
@@ -1424,6 +1674,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "function",
@@ -1453,7 +1708,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "id",
-      "name": "ComponentProps",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -1465,6 +1724,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "union",
@@ -1498,6 +1762,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "object",
@@ -1525,6 +1794,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "string",
@@ -1541,6 +1815,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "string",
@@ -1557,6 +1836,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "tuple",
@@ -1581,6 +1865,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "union",
@@ -1605,6 +1894,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "props": Array [
         Object {
           "kind": "void",
@@ -1621,6 +1915,11 @@ Object {
   "classes": Array [
     Object {
       "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
       "value": Object {
         "kind": "object",
         "members": Array [

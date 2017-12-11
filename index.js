@@ -74,25 +74,45 @@ converters.Program = (path, context) => {
   path.traverse({
     ClassDeclaration(path) {
       if (!isReactComponentClass(path)) return;
-      let params = path.get("superTypeParameters").get("params");
-      let props = params[0];
-      let defaultProps = getDefaultProps(path);
-
-      let classProperties = convert(props, { ...context, mode: "type" });
-
-      if (defaultProps && defaultProps.value && defaultProps.value.members) {
-        defaultProps.value.members.forEach(property => {
-          let ungeneric = resolveFromGeneric(classProperties);
-          const prop = getProp(ungeneric, property);
-          if (prop) prop.default = property.value;
-        });
-      }
+      let classProperties = convertReactComponentClass(path, context);
 
       result.classes.push(classProperties);
     }
   });
 
   return result;
+};
+
+function convertReactComponentClass(path, context) {
+  let params = path.get("superTypeParameters").get("params");
+  let props = params[0];
+  let defaultProps = getDefaultProps(path);
+
+  let classProperties = convert(props, { ...context, mode: "type" });
+  classProperties.name = convert(path.get("id"), {
+    ...context,
+    mode: "value"
+  });
+  if (defaultProps && defaultProps.value && defaultProps.value.members) {
+    defaultProps.value.members.forEach(property => {
+      let ungeneric = resolveFromGeneric(classProperties);
+      const prop = getProp(ungeneric, property);
+      if (prop) prop.default = property.value;
+    });
+  }
+
+  return classProperties;
+}
+
+converters.ClassDeclaration = (path, context) => {
+  if (!isReactComponentClass(path)) {
+    return {
+      kind: "class",
+      name: convert(path.get("id"), context)
+    };
+  } else {
+    return convertReactComponentClass(path, context);
+  }
 };
 
 converters.SpreadElement = (path, context) => {
@@ -413,7 +433,10 @@ converters.Identifier = (path, context) => {
       }
 
       if (bindingPath) {
-        return convert(bindingPath, context);
+        if (bindingPath.kind === "module") {
+          bindingPath = bindingPath.path;
+        }
+        if (bindingPath.kind !== "module") return convert(bindingPath, context);
       } else {
         return { kind: "id", name: path.node.name };
       }
