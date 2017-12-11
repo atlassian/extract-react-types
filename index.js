@@ -141,12 +141,25 @@ converters.CallExpression = (path, context) => {
   };
 };
 
+converters.TypeofTypeAnnotation = (path, context) => {
+  let type = convert(path.get("argument"), context);
+  return {
+    kind: "typeof",
+    type,
+    name: type.value.name
+  };
+};
+
 converters.ObjectProperty = (path, context) => {
   return {
     kind: "property",
     key: convert(path.get("key"), context),
     value: convert(path.get("value"), context)
   };
+};
+
+converters.ExistentialTypeParam = (path, context) => {
+  return { kind: "exists" };
 };
 
 converters.StringLiteral = (path, context) => {
