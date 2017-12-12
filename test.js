@@ -621,6 +621,17 @@ const TESTS = [
       }
     }
   `
+  },
+  {
+    name: "unary operator",
+    typeSystem: "flow",
+    code: `
+    class Component extends React.Component<{ a: number }> {
+      defaultProps = {
+        a: -1
+      }
+    }
+  `
   }
 ];
 

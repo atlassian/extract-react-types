@@ -1910,6 +1910,40 @@ Object {
 }
 `;
 
+exports[`unary operator 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "argument": Object {
+              "kind": "number",
+              "value": 1,
+            },
+            "kind": "unary",
+            "operator": "-",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`with spread in type annotation 1`] = `
 Object {
   "classes": Array [

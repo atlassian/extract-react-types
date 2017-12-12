@@ -122,6 +122,14 @@ converters.SpreadElement = (path, context) => {
   };
 };
 
+converters.UnaryExpression = (path, context) => {
+  return {
+    kind: "unary",
+    operator: path.node.operator,
+    argument: convert(path.get("argument"), context)
+  };
+};
+
 converters.ClassProperty = (path, context) => {
   return {
     kind: "property",
