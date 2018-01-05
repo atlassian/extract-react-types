@@ -449,6 +449,58 @@ const TESTS = [
   `
   },
   {
+    name: "test defaultProp as JSXElement",
+    typeSystem: "flow",
+    code: `
+      import type { Node } from 'react';
+      const Icon = <div></div>
+      class Component extends React.Component<{a: Node }> {
+        defaultProps = {
+          a: <Icon name={"test icon"}/>
+        }
+      }
+    `
+  },
+  {
+    name: "test defaultProp as JSXElement with member expression",
+    typeSystem: "flow",
+    code: `
+    import type { Node } from 'react';
+    const Icon = <div></div>
+    const componentObj = { Icon }
+    class Component extends React.Component<{a: Node }> {
+      defaultProps = {
+        a: <componentObj.Icon name={"test icon"}/>
+      }
+    }
+    `
+  },
+  {
+    name: "test defaultProp as JSXElement with multiple props",
+    typeSystem: "flow",
+    code: `
+      import type { Node } from 'react';
+      const Icon = <div></div>
+      class Component extends React.Component<{a: Node}>{
+        defaultProps = {
+          a: <Icon name="test icon" iconType="avatar" />
+        }
+      }
+    `
+  }, {
+      name: "test defaultProp as JSXElement with JSXExpressionContainer",
+      typeSystem: "flow",
+      code: `
+        import type { Node } from 'react';
+        const Icon = <div></div>
+        class Component extends React.Component<{a: Node}>{
+          defaultProps = {
+            a: <Icon name={"test icon"} />
+          }
+        }
+      `
+    },
+  {
     name: "spread element ",
     typeSystem: "flow",
     code: `
