@@ -1519,6 +1519,253 @@ Object {
 }
 `;
 
+exports[`test defaultProp as JSXElement 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "JSXElement",
+            "value": Object {
+              "attributes": Array [
+                Object {
+                  "kind": "JSXAttribute",
+                  "name": Object {
+                    "kind": "JSXIdentifier",
+                    "value": "name",
+                  },
+                  "value": Object {
+                    "kind": "JSXExpressionContainer",
+                    "value": Object {
+                      "kind": "string",
+                      "value": "test icon",
+                    },
+                  },
+                },
+              ],
+              "kind": "JSXOpeningElement",
+              "name": Object {
+                "kind": "JSXIdentifier",
+                "value": "Icon",
+              },
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "importKind": "type",
+              "kind": "import",
+              "moduleSpecifier": "react",
+              "name": "Node",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`test defaultProp as JSXElement with JSXExpressionContainer 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "JSXElement",
+            "value": Object {
+              "attributes": Array [
+                Object {
+                  "kind": "JSXAttribute",
+                  "name": Object {
+                    "kind": "JSXIdentifier",
+                    "value": "name",
+                  },
+                  "value": Object {
+                    "kind": "JSXExpressionContainer",
+                    "value": Object {
+                      "kind": "string",
+                      "value": "test icon",
+                    },
+                  },
+                },
+              ],
+              "kind": "JSXOpeningElement",
+              "name": Object {
+                "kind": "JSXIdentifier",
+                "value": "Icon",
+              },
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "importKind": "type",
+              "kind": "import",
+              "moduleSpecifier": "react",
+              "name": "Node",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`test defaultProp as JSXElement with member expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "JSXElement",
+            "value": Object {
+              "attributes": Array [
+                Object {
+                  "kind": "JSXAttribute",
+                  "name": Object {
+                    "kind": "JSXIdentifier",
+                    "value": "name",
+                  },
+                  "value": Object {
+                    "kind": "JSXExpressionContainer",
+                    "value": Object {
+                      "kind": "string",
+                      "value": "test icon",
+                    },
+                  },
+                },
+              ],
+              "kind": "JSXOpeningElement",
+              "name": Object {
+                "kind": "JSXMemberExpression",
+                "object": Object {
+                  "kind": "JSXIdentifier",
+                  "value": "componentObj",
+                },
+                "property": Object {
+                  "kind": "JSXIdentifier",
+                  "value": "Icon",
+                },
+              },
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "importKind": "type",
+              "kind": "import",
+              "moduleSpecifier": "react",
+              "name": "Node",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`test defaultProp as JSXElement with multiple props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "JSXElement",
+            "value": Object {
+              "attributes": Array [
+                Object {
+                  "kind": "JSXAttribute",
+                  "name": Object {
+                    "kind": "JSXIdentifier",
+                    "value": "name",
+                  },
+                  "value": Object {
+                    "kind": "string",
+                    "value": "test icon",
+                  },
+                },
+                Object {
+                  "kind": "JSXAttribute",
+                  "name": Object {
+                    "kind": "JSXIdentifier",
+                    "value": "iconType",
+                  },
+                  "value": Object {
+                    "kind": "string",
+                    "value": "avatar",
+                  },
+                },
+              ],
+              "kind": "JSXOpeningElement",
+              "name": Object {
+                "kind": "JSXIdentifier",
+                "value": "Icon",
+              },
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "importKind": "type",
+              "kind": "import",
+              "moduleSpecifier": "react",
+              "name": "Node",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test get defaultProps 1`] = `
 Object {
   "classes": Array [

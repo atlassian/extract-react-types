@@ -122,6 +122,51 @@ converters.SpreadElement = (path, context) => {
   };
 };
 
+converters.JSXAttribute = (path, context) => {
+  return {
+    kind: 'JSXAttribute',
+    name: convert(path.get('name'), context),
+    value: convert(path.get('value'), context),
+  }
+}
+
+converters.JSXExpressionContainer = (path, context) => {
+  return {
+    kind: 'JSXExpressionContainer',
+    value: convert(path.get('expression'), context),
+  }
+}
+
+converters.JSXElement = (path, context) => {
+  return {
+    kind: 'JSXElement',
+    value: convert(path.get('openingElement'), context),
+  }
+}
+
+converters.JSXIdentifier = (path,context) => {
+  return {
+    kind: 'JSXIdentifier',
+    value: path.node.name,
+  }
+}
+
+converters.JSXMemberExpression = (path, context) => {
+  return {
+    kind: 'JSXMemberExpression',
+    object: convert(path.get("object"), context),
+    property: convert(path.get("property"), context),
+  }
+}
+
+
+converters.JSXOpeningElement = (path, context) => {
+  return {
+    kind: 'JSXOpeningElement',
+    name: convert(path.get('name'), context),
+    attributes: path.get('attributes').map(item => convert(item, context)),
+  };
+}
 converters.ClassProperty = (path, context) => {
   return {
     kind: "property",
