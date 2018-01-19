@@ -104,6 +104,20 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
+converters.TaggedTemplateExpression = (path, context) => {
+  return {
+    kind: "templateExpression",
+    tag: convert(path.get('tag'), context),
+  }
+}
+converters.TemplateLiteral = (path, context) => {
+  return {
+    kind: 'templateLiteral',
+    expressions: convert(path.get('expressions'), context),
+    quasis: convert(path.get('quasis'), context)
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
@@ -144,7 +158,7 @@ converters.JSXElement = (path, context) => {
   }
 }
 
-converters.JSXIdentifier = (path,context) => {
+converters.JSXIdentifier = (path, context) => {
   return {
     kind: 'JSXIdentifier',
     value: path.node.name,
@@ -667,23 +681,12 @@ function importConverterGeneral(path, context) {
       moduleSpecifier
     };
   } else {
+    let name;
     let kind = path.parent.importKind;
     if (kind === "typeof") {
       throw new Error({ path, error: "import typeof is unsupported" });
     }
 
-    if (!/^\./.test(path.parent.source.value)) {
-      return {
-        kind: "external",
-        importKind,
-        name: path.node.imported.name,
-        moduleSpecifier
-      };
-    }
-
-    let file = loadImportSync(path.parentPath, context.resolveOptions);
-
-    let name;
     if (path.type === "ImportDefaultSpecifier" && kind === "value") {
       name = "default";
     } else if (path.node.imported) {
@@ -691,6 +694,17 @@ function importConverterGeneral(path, context) {
     } else {
       name = path.node.local.name;
     }
+
+    if (!/^\./.test(path.parent.source.value)) {
+      return {
+        kind: "external",
+        importKind,
+        name,
+        moduleSpecifier
+      };
+    }
+
+    let file = loadImportSync(path.parentPath, context.resolveOptions);
 
     let id;
     if (path.node.imported) {

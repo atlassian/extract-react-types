@@ -1489,6 +1489,52 @@ Object {
 }
 `;
 
+exports[`tagged template expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "templateExpression",
+            "tag": Object {
+              "kind": "memberExpression",
+              "object": Object {
+                "kind": "id",
+                "name": "styled",
+                "type": null,
+              },
+              "property": Object {
+                "kind": "id",
+                "name": "div",
+                "type": null,
+              },
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "mixed",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test 1`] = `
 Object {
   "classes": Array [

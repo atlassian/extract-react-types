@@ -488,9 +488,9 @@ const TESTS = [
       }
     `
   }, {
-      name: "test defaultProp as JSXElement with JSXExpressionContainer",
-      typeSystem: "flow",
-      code: `
+    name: "test defaultProp as JSXElement with JSXExpressionContainer",
+    typeSystem: "flow",
+    code: `
         import type { Node } from 'react';
         const Icon = <div></div>
         class Component extends React.Component<{a: Node}>{
@@ -499,7 +499,7 @@ const TESTS = [
           }
         }
       `
-    },
+  },
   {
     name: "spread element ",
     typeSystem: "flow",
@@ -673,6 +673,19 @@ const TESTS = [
       }
     }
   `
+  },
+  {
+    name: "tagged template expression",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: () => mixed }> {
+        defaultProps = {
+          a: styled.div\`
+            width: 19px;
+          \`
+        }
+      }
+    `
   }
 ];
 
