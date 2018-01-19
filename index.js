@@ -681,21 +681,21 @@ function importConverterGeneral(path, context) {
       moduleSpecifier
     };
   } else {
+    let name;
     let kind = path.parent.importKind;
     if (kind === "typeof") {
       throw new Error({ path, error: "import typeof is unsupported" });
     }
 
-    if (!/^\./.test(path.parent.source.value)) {
-      let name;
-      if (path.type === "ImportDefaultSpecifier" && kind === "value") {
-        name = "default";
-      } else if (path.node.imported) {
-        name = path.node.imported.name;
-      } else {
-        name = path.node.local.name;
-      }
+    if (path.type === "ImportDefaultSpecifier" && kind === "value") {
+      name = "default";
+    } else if (path.node.imported) {
+      name = path.node.imported.name;
+    } else {
+      name = path.node.local.name;
+    }
 
+    if (!/^\./.test(path.parent.source.value)) {
       return {
         kind: "external",
         importKind,
@@ -705,15 +705,6 @@ function importConverterGeneral(path, context) {
     }
 
     let file = loadImportSync(path.parentPath, context.resolveOptions);
-
-    let name;
-    if (path.type === "ImportDefaultSpecifier" && kind === "value") {
-      name = "default";
-    } else if (path.node.imported) {
-      name = path.node.imported.name;
-    } else {
-      name = path.node.local.name;
-    }
 
     let id;
     if (path.node.imported) {
