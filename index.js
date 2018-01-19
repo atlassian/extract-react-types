@@ -104,6 +104,20 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
+converters.TaggedTemplateExpression = (path, context) => {
+  return {
+    kind: "templateExpression",
+    tag: convert(path.get('tag'), context),
+  }
+}
+converters.TemplateLiteral = (path, context) => {
+  return {
+    kind: 'templateLiteral',
+    expressions: convert(path.get('expressions'), context),
+    quasis: convert(path.get('quasis'), context)
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
@@ -144,7 +158,7 @@ converters.JSXElement = (path, context) => {
   }
 }
 
-converters.JSXIdentifier = (path,context) => {
+converters.JSXIdentifier = (path, context) => {
   return {
     kind: 'JSXIdentifier',
     value: path.node.name,
@@ -673,10 +687,19 @@ function importConverterGeneral(path, context) {
     }
 
     if (!/^\./.test(path.parent.source.value)) {
+      let name;
+      if (path.type === "ImportDefaultSpecifier" && kind === "value") {
+        name = "default";
+      } else if (path.node.imported) {
+        name = path.node.imported.name;
+      } else {
+        name = path.node.local.name;
+      }
+
       return {
         kind: "external",
         importKind,
-        name: path.node.imported.name,
+        name,
         moduleSpecifier
       };
     }
