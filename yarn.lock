@@ -347,6 +347,10 @@ babel-identifiers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/babel-identifiers/-/babel-identifiers-1.0.0.tgz#71aeb1ae97190ec3c4edb3ab11609f3bd1135ab8"
 
+babel-identifiers@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/babel-identifiers/-/babel-identifiers-1.1.2.tgz#fed5d526c88b1c669ba2dbd1148eaed4357aea42"
+
 babel-jest@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-21.2.0.tgz#2ce059519a9374a2c46f2455b6fbef5ad75d863e"

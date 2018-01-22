@@ -1,5 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Assignment Pattern 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "param",
+                "type": undefined,
+                "value": Object {
+                  "kind": "AssignmentPattern",
+                  "left": Object {
+                    "kind": "id",
+                    "name": "b",
+                    "type": null,
+                  },
+                  "right": Object {
+                    "kind": "number",
+                    "value": 3,
+                  },
+                },
+              },
+            ],
+            "returnType": Object {
+              "kind": "number",
+            },
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "number",
+              },
+            ],
+            "returnType": Object {
+              "kind": "number",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`array expression 1`] = `
 Object {
   "classes": Array [
