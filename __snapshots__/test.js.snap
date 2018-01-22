@@ -15,7 +15,7 @@ Object {
             "parameters": Array [
               Object {
                 "kind": "param",
-                "type": undefined,
+                "type": null,
                 "value": Object {
                   "kind": "AssignmentPattern",
                   "left": Object {

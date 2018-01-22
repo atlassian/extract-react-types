@@ -274,7 +274,7 @@ function convertParameter(param, context) {
   return {
     kind: "param",
     value: rest,
-    type
+    type: type || null
   };
 }
 
@@ -484,7 +484,6 @@ converters.Identifier = (path, context) => {
       }
     } else if (kind === "static" || kind === "binding") {
       let type = null;
-
       if (path.node.typeAnnotation) {
         type = convert(path.get("typeAnnotation"), {
           ...context,
