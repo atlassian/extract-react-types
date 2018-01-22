@@ -104,6 +104,14 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
+converters.AssignmentPattern = (path, context) =>{
+  return {
+    kind: "AssignmentPattern",
+    left: convert(path.get('left'), context),
+    right: convert(path.get('right'), context),
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {

@@ -621,6 +621,17 @@ const TESTS = [
       }
     }
   `
+  },
+  {
+    name: "Assignment Pattern",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{a: number => number}> {
+        defaultProps = {
+          a: function (b = 3): number { return b; }
+        }
+      }
+    `
   }
 ];
 
