@@ -118,6 +118,14 @@ converters.TemplateLiteral = (path, context) => {
   }
 }
 
+converters.AssignmentPattern = (path, context) =>{
+  return {
+    kind: "AssignmentPattern",
+    left: convert(path.get('left'), context),
+    right: convert(path.get('right'), context),
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
@@ -266,7 +274,7 @@ function convertParameter(param, context) {
   return {
     kind: "param",
     value: rest,
-    type
+    type: type || null
   };
 }
 
@@ -476,7 +484,6 @@ converters.Identifier = (path, context) => {
       }
     } else if (kind === "static" || kind === "binding") {
       let type = null;
-
       if (path.node.typeAnnotation) {
         type = convert(path.get("typeAnnotation"), {
           ...context,
