@@ -1328,6 +1328,41 @@ Object {
 }
 `;
 
+exports[`function declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "args": Array [],
+            "callee": Object {
+              "kind": "id",
+              "name": "sayHello",
+              "type": null,
+            },
+            "kind": "call",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`function expression 1`] = `
 Object {
   "classes": Array [
@@ -1593,6 +1628,46 @@ Object {
             "parameters": Array [],
             "returnType": Object {
               "kind": "mixed",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`new expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "args": Array [],
+            "callee": Object {
+              "kind": "id",
+              "name": "Date",
+              "type": null,
+            },
+            "isConstructor": true,
+            "kind": "call",
+          },
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "Date",
             },
           },
         },

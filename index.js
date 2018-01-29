@@ -224,6 +224,14 @@ converters.CallExpression = (path, context) => {
   };
 };
 
+converters.NewExpression = (path, context) => {
+  const convertedCallExpression = converters.CallExpression(path, context);
+  return {
+    ...convertedCallExpression,
+    isConstructor: true,
+  }
+};
+
 converters.TypeofTypeAnnotation = (path, context) => {
   let type = convert(path.get("argument"), context);
   return {
@@ -431,6 +439,13 @@ converters.ObjectExpression = (path, context) => {
     members
   };
 };
+
+converters.FunctionDeclaration = (path, context) => {
+  return {
+    kind: "FunctionDeclaration",
+    id: convert(path.get("id"), context),
+  };
+}
 
 converters.VariableDeclaration = (path, context) => {
   let res = {};

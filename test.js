@@ -733,7 +733,6 @@ const TESTS = [
     `
   },
   {
-    only: true,
     name: "non-standard key with default",
     typeSystem: "flow",
     code: `
@@ -743,7 +742,31 @@ const TESTS = [
         }
       }
     `
-  }
+  },
+  {
+    name: "new expression",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: Date }> {
+        defaultProps = {
+          a: new Date()
+        }
+      }
+    `
+  },
+  {
+    name: "function declaration",
+    typeSystem: "flow",
+    code: `
+      function sayHello() { return 'hello'; };
+
+      class Component extends React.Component<{ a: string }> {
+        defaultProps = {
+          a: sayHello(),
+        }
+      }
+    `
+  },
 ];
 
 for (let testCase of TESTS) {
