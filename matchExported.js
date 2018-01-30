@@ -1,7 +1,7 @@
 // @flow
 const { explodeModule } = require("babel-explode-module");
 const { explodedToStatements } = require("babel-helper-simplify-module");
-const { format } = require("babel-log");
+const printAST = require('ast-pretty-print');
 const t = require("babel-types");
 
 module.exports = function matchExported(
@@ -43,11 +43,11 @@ module.exports = function matchExported(
     } else if (item.node.id) {
       id = item.node.id;
     } else {
-      throw new Error(`Unexpected node:\n\n${format(item)}`);
+      throw new Error(`Unexpected node:\n\n${printAST(item)}`);
     }
 
     if (!id) {
-      throw new Error(`Couldn't find id on node:\n\n${format(item)}`);
+      throw new Error(`Couldn't find id on node:\n\n${printAST(item)}`);
     }
 
     return id.name === local;
