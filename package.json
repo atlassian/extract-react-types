@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "ast-pretty-print": "^2.0.1",
     "babel-core": "7.0.0-alpha.19",
     "babel-errors": "^1.1.1",
     "babel-explode-module": "^2.0.0",
@@ -18,7 +19,6 @@
     "babel-flow-scope": "^1.2.1",
     "babel-helper-simplify-module": "^2.2.0",
     "babel-identifiers": "^1.1.2",
-    "babel-log": "^2.0.0",
     "babel-normalize-comments": "^1.0.1",
     "babel-react-components": "^1.1.0",
     "babel-types": "^6.26.0",
