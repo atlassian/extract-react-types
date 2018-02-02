@@ -104,6 +104,28 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
+converters.TaggedTemplateExpression = (path, context) => {
+  return {
+    kind: "templateExpression",
+    tag: convert(path.get('tag'), context),
+  }
+}
+converters.TemplateLiteral = (path, context) => {
+  return {
+    kind: 'templateLiteral',
+    expressions: convert(path.get('expressions'), context),
+    quasis: convert(path.get('quasis'), context)
+  }
+}
+
+converters.AssignmentPattern = (path, context) =>{
+  return {
+    kind: "AssignmentPattern",
+    left: convert(path.get('left'), context),
+    right: convert(path.get('right'), context),
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
@@ -129,6 +151,52 @@ converters.UnaryExpression = (path, context) => {
     argument: convert(path.get("argument"), context)
   };
 };
+
+converters.JSXAttribute = (path, context) => {
+  return {
+    kind: 'JSXAttribute',
+    name: convert(path.get('name'), context),
+    value: convert(path.get('value'), context),
+  }
+}
+
+converters.JSXExpressionContainer = (path, context) => {
+  return {
+    kind: 'JSXExpressionContainer',
+    value: convert(path.get('expression'), context),
+  }
+}
+
+converters.JSXElement = (path, context) => {
+  return {
+    kind: 'JSXElement',
+    value: convert(path.get('openingElement'), context),
+  }
+}
+
+converters.JSXIdentifier = (path, context) => {
+  return {
+    kind: 'JSXIdentifier',
+    value: path.node.name,
+  }
+}
+
+converters.JSXMemberExpression = (path, context) => {
+  return {
+    kind: 'JSXMemberExpression',
+    object: convert(path.get("object"), context),
+    property: convert(path.get("property"), context),
+  }
+}
+
+
+converters.JSXOpeningElement = (path, context) => {
+  return {
+    kind: 'JSXOpeningElement',
+    name: convert(path.get('name'), context),
+    attributes: path.get('attributes').map(item => convert(item, context)),
+  };
+}
 
 converters.ClassProperty = (path, context) => {
   return {
@@ -215,7 +283,7 @@ function convertParameter(param, context) {
   return {
     kind: "param",
     value: rest,
-    type
+    type: type || null
   };
 }
 
@@ -425,7 +493,6 @@ converters.Identifier = (path, context) => {
       }
     } else if (kind === "static" || kind === "binding") {
       let type = null;
-
       if (path.node.typeAnnotation) {
         type = convert(path.get("typeAnnotation"), {
           ...context,
@@ -630,23 +697,12 @@ function importConverterGeneral(path, context) {
       moduleSpecifier
     };
   } else {
+    let name;
     let kind = path.parent.importKind;
     if (kind === "typeof") {
       throw new Error({ path, error: "import typeof is unsupported" });
     }
 
-    if (!/^\./.test(path.parent.source.value)) {
-      return {
-        kind: "external",
-        importKind,
-        name: path.node.imported.name,
-        moduleSpecifier
-      };
-    }
-
-    let file = loadImportSync(path.parentPath, context.resolveOptions);
-
-    let name;
     if (path.type === "ImportDefaultSpecifier" && kind === "value") {
       name = "default";
     } else if (path.node.imported) {
@@ -654,6 +710,17 @@ function importConverterGeneral(path, context) {
     } else {
       name = path.node.local.name;
     }
+
+    if (!/^\./.test(path.parent.source.value)) {
+      return {
+        kind: "external",
+        importKind,
+        name,
+        moduleSpecifier
+      };
+    }
+
+    let file = loadImportSync(path.parentPath, context.resolveOptions);
 
     let id;
     if (path.node.imported) {
