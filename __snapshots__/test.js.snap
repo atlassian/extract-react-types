@@ -349,6 +349,7 @@ Object {
                   },
                 },
               ],
+              "referenceIdName": "b",
             },
             "property": Object {
               "kind": "id",
@@ -1340,6 +1341,7 @@ Object {
             "callee": Object {
               "kind": "id",
               "name": "sayHello",
+              "referenceIdName": "sayHello",
               "type": null,
             },
             "kind": "call",
@@ -1657,8 +1659,7 @@ Object {
               "name": "Date",
               "type": null,
             },
-            "isConstructor": true,
-            "kind": "call",
+            "kind": "new",
           },
           "key": "a",
           "kind": "property",
