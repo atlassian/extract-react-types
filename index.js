@@ -493,7 +493,11 @@ converters.Identifier = (path, context) => {
             `Unable to resolve binding path for: ${bindingPath.type}`
           );
         }
-        return convert(foundPath, context);
+        const convertedValue = convert(foundPath, context);
+        return {
+          ...convertedValue,
+          referenceIdName: path.node.name,
+        };
       } else {
         let type = null;
 
