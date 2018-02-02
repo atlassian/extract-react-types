@@ -134,6 +134,19 @@ converters.AssignmentPattern = (path, context) => {
   };
 };
 
+converters.ObjectPattern = (path, context) => {
+  let properties = [];
+
+  for (const property of properties) {
+    properties.push(convert(property, context));
+  }
+
+  return {
+    kind: "ObjectPattern",
+    properties,
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
