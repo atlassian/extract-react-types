@@ -107,24 +107,24 @@ function convertReactComponentClass(path, context) {
 converters.TaggedTemplateExpression = (path, context) => {
   return {
     kind: "templateExpression",
-    tag: convert(path.get('tag'), context),
-  }
-}
+    tag: convert(path.get("tag"), context)
+  };
+};
 converters.TemplateLiteral = (path, context) => {
   return {
-    kind: 'templateLiteral',
-    expressions: convert(path.get('expressions'), context),
-    quasis: convert(path.get('quasis'), context)
-  }
-}
+    kind: "templateLiteral",
+    expressions: convert(path.get("expressions"), context),
+    quasis: convert(path.get("quasis"), context)
+  };
+};
 
-converters.AssignmentPattern = (path, context) =>{
+converters.AssignmentPattern = (path, context) => {
   return {
     kind: "AssignmentPattern",
-    left: convert(path.get('left'), context),
-    right: convert(path.get('right'), context),
-  }
-}
+    left: convert(path.get("left"), context),
+    right: convert(path.get("right"), context)
+  };
+};
 
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
@@ -154,49 +154,48 @@ converters.UnaryExpression = (path, context) => {
 
 converters.JSXAttribute = (path, context) => {
   return {
-    kind: 'JSXAttribute',
-    name: convert(path.get('name'), context),
-    value: convert(path.get('value'), context),
-  }
-}
+    kind: "JSXAttribute",
+    name: convert(path.get("name"), context),
+    value: convert(path.get("value"), context)
+  };
+};
 
 converters.JSXExpressionContainer = (path, context) => {
   return {
-    kind: 'JSXExpressionContainer',
-    value: convert(path.get('expression'), context),
-  }
-}
+    kind: "JSXExpressionContainer",
+    value: convert(path.get("expression"), context)
+  };
+};
 
 converters.JSXElement = (path, context) => {
   return {
-    kind: 'JSXElement',
-    value: convert(path.get('openingElement'), context),
-  }
-}
+    kind: "JSXElement",
+    value: convert(path.get("openingElement"), context)
+  };
+};
 
 converters.JSXIdentifier = (path, context) => {
   return {
-    kind: 'JSXIdentifier',
-    value: path.node.name,
-  }
-}
+    kind: "JSXIdentifier",
+    value: path.node.name
+  };
+};
 
 converters.JSXMemberExpression = (path, context) => {
   return {
-    kind: 'JSXMemberExpression',
+    kind: "JSXMemberExpression",
     object: convert(path.get("object"), context),
-    property: convert(path.get("property"), context),
-  }
-}
-
+    property: convert(path.get("property"), context)
+  };
+};
 
 converters.JSXOpeningElement = (path, context) => {
   return {
-    kind: 'JSXOpeningElement',
-    name: convert(path.get('name'), context),
-    attributes: path.get('attributes').map(item => convert(item, context)),
+    kind: "JSXOpeningElement",
+    name: convert(path.get("name"), context),
+    attributes: path.get("attributes").map(item => convert(item, context))
   };
-}
+};
 
 converters.ClassProperty = (path, context) => {
   return {
@@ -347,9 +346,17 @@ converters.ObjectTypeAnnotation = (path, context) => {
 };
 
 converters.ObjectTypeProperty = (path, context) => {
+  let key = path.get("key");
+  let keyName = "";
+  if (key.type === "Identifier") {
+    keyName = key.node.name;
+  } else if (key.type === "StringLiteral") {
+    keyName = key.node.value;
+  }
+
   let result = {};
   result.kind = "property";
-  result.key = path.get("key").node.name;
+  result.key = keyName;
   result.value = convert(path.get("value"), context);
   result.optional = path.node.optional;
   return result;
@@ -554,11 +561,11 @@ converters.BooleanTypeAnnotation = path => {
 };
 
 converters.BooleanLiteralTypeAnnotation = path => {
-  return { kind: 'boolean' };
+  return { kind: "boolean" };
 };
 
 converters.NullLiteralTypeAnnotation = path => {
-  return { kind: 'null' };
+  return { kind: "null" };
 };
 
 converters.StringLiteralTypeAnnotation = path => {

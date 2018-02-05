@@ -709,6 +709,30 @@ const TESTS = [
         }
       }
     `
+  },
+  {
+    name: "BooleanLiteralTypeAnnotation",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{a: string => true}> {
+      }
+    `
+  },
+  {
+    name: "NullLiteralTypeAnnotation",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{a: null}> {
+      }
+    `
+  },
+  {
+    name: "non-standard key",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ 'ab-a': number, a: number }> {
+      }
+    `
   }
 ];
 

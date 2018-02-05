@@ -61,6 +61,66 @@ Object {
 }
 `;
 
+exports[`BooleanLiteralTypeAnnotation 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "string",
+              },
+            ],
+            "returnType": Object {
+              "kind": "boolean",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`NullLiteralTypeAnnotation 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "null",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`array expression 1`] = `
 Object {
   "classes": Array [
@@ -1405,6 +1465,40 @@ Object {
             "returnType": Object {
               "kind": "mixed",
             },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`non-standard key 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": "ab-a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+        Object {
+          "key": "a",
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
           },
         },
       ],
