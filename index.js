@@ -553,6 +553,14 @@ converters.BooleanTypeAnnotation = path => {
   return { kind: "boolean" };
 };
 
+converters.BooleanLiteralTypeAnnotation = path => {
+  return { kind: 'boolean' };
+};
+
+converters.NullLiteralTypeAnnotation = path => {
+  return { kind: 'null' };
+};
+
 converters.StringLiteralTypeAnnotation = path => {
   return { kind: "stringLiteral", value: path.node.value };
 };
