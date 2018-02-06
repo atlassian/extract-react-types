@@ -18,12 +18,20 @@ const matchExported = require("./matchExported");
 const converters = {};
 
 const getPropFromObject = (obj, property) => {
-  if (!property.key || !property.key.name) {
-    return;
-    // look into resolving this. It's types being returned instead of idents...
-    // more, the with leadinComments etc, very weird
+  // The kind of the object member must be the same as the kind of the property
+  if (property.key.kind === "id") {
+    return obj.members.find(p => p.key.name === property.key.name);
+  } else if (property.key.kind === "string") {
+    return obj.members.find(p => p.key.value === property.key.value);
+  } else {
+    throw new Error(
+      JSON.stringify({
+        error: "could not find property to go with default",
+        default: property,
+        properties: obj.members
+      })
+    );
   }
-  return obj.members.find(p => p.key === property.key.name);
 };
 
 const resolveFromGeneric = type => {
@@ -97,7 +105,7 @@ function convertReactComponentClass(path, context) {
     defaultProps.value.members.forEach(property => {
       let ungeneric = resolveFromGeneric(classProperties);
       const prop = getProp(ungeneric, property);
-      if (prop) prop.default = property.value;
+      prop.default = property.value;
     });
   }
 
