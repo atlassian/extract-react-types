@@ -1346,7 +1346,10 @@ Object {
             },
             "kind": "call",
           },
-          "key": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1661,7 +1664,10 @@ Object {
             },
             "kind": "new",
           },
-          "key": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
