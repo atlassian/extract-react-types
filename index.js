@@ -346,17 +346,9 @@ converters.ObjectTypeAnnotation = (path, context) => {
 };
 
 converters.ObjectTypeProperty = (path, context) => {
-  let key = path.get("key");
-  let keyName = "";
-  if (key.type === "Identifier") {
-    keyName = key.node.name;
-  } else if (key.type === "StringLiteral") {
-    keyName = key.node.value;
-  }
-
   let result = {};
   result.kind = "property";
-  result.key = keyName;
+  result.key = convert(path.get("key"), context);
   result.value = convert(path.get("value"), context);
   result.optional = path.node.optional;
   return result;
@@ -520,11 +512,11 @@ converters.Identifier = (path, context) => {
       let bindingPath;
 
       if (isFlowIdentifier(path)) {
-        let flowBinding = findFlowBinding(path, path.node.name);
+        let flowBinding = findFlowBinding(path, name);
         if (!flowBinding) throw new Error();
         bindingPath = flowBinding.path.parentPath;
       } else {
-        bindingPath = path.scope.getBinding(path.node.name);
+        bindingPath = path.scope.getBinding(name);
       }
 
       if (bindingPath) {
@@ -533,8 +525,10 @@ converters.Identifier = (path, context) => {
         }
         if (bindingPath.kind !== "module") return convert(bindingPath, context);
       } else {
-        return { kind: "id", name: path.node.name };
+        return { kind: "id", name: name };
       }
+    } else if (kind === "static" || kind === "binding") {
+      return { kind: "id", name };
     }
   }
 };

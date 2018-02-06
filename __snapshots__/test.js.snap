@@ -7,34 +7,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "async": false,
-            "generator": false,
-            "id": null,
-            "kind": "function",
-            "parameters": Array [
-              Object {
-                "kind": "param",
-                "type": null,
-                "value": Object {
-                  "kind": "AssignmentPattern",
-                  "left": Object {
-                    "kind": "id",
-                    "name": "b",
-                    "type": null,
-                  },
-                  "right": Object {
-                    "kind": "number",
-                    "value": 3,
-                  },
-                },
-              },
-            ],
-            "returnType": Object {
-              "kind": "number",
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -68,7 +44,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -102,7 +81,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -128,16 +110,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "elements": Array [
-              Object {
-                "kind": "string",
-                "value": "a",
-              },
-            ],
-            "kind": "array",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -175,17 +151,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "async": false,
-            "generator": false,
-            "id": null,
-            "kind": "function",
-            "parameters": Array [],
-            "returnType": Object {
-              "kind": "number",
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -215,19 +184,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "binary",
-            "left": Object {
-              "kind": "number",
-              "value": 3,
-            },
-            "operator": "+",
-            "right": Object {
-              "kind": "number",
-              "value": 5,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -253,11 +213,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "boolean",
-            "value": true,
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -283,59 +242,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "memberExpression",
-            "object": Object {
-              "kind": "object",
-              "members": Array [
-                Object {
-                  "key": Object {
-                    "kind": "id",
-                    "name": "c",
-                    "type": null,
-                  },
-                  "kind": "property",
-                  "value": Object {
-                    "async": false,
-                    "generator": false,
-                    "id": null,
-                    "kind": "function",
-                    "parameters": Array [
-                      Object {
-                        "kind": "param",
-                        "type": Object {
-                          "kind": "string",
-                        },
-                        "value": Object {
-                          "kind": "id",
-                          "name": "a",
-                        },
-                      },
-                      Object {
-                        "kind": "param",
-                        "type": Object {
-                          "kind": "string",
-                        },
-                        "value": Object {
-                          "kind": "id",
-                          "name": "b",
-                        },
-                      },
-                    ],
-                    "returnType": Object {
-                      "kind": "number",
-                    },
-                  },
-                },
-              ],
-            },
-            "property": Object {
-              "kind": "id",
-              "name": "c",
-              "type": null,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -365,17 +275,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "async": false,
-            "generator": false,
-            "id": null,
-            "kind": "function",
-            "parameters": Array [],
-            "returnType": Object {
-              "kind": "exists",
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -405,7 +308,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "age",
+          "key": Object {
+            "kind": "id",
+            "name": "age",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -431,7 +337,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -469,7 +378,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -515,7 +427,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -541,7 +456,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": true,
           "value": Object {
@@ -559,7 +477,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": true,
           "value": Object {
@@ -585,7 +506,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -614,7 +538,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -651,7 +578,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -688,7 +618,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -722,7 +655,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -752,7 +688,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -789,7 +728,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -799,7 +741,10 @@ Object {
                 "kind": "object",
                 "members": Array [
                   Object {
-                    "key": "prop",
+                    "key": Object {
+                      "kind": "id",
+                      "name": "prop",
+                    },
                     "kind": "property",
                     "optional": false,
                     "value": Object {
@@ -860,7 +805,10 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "key": "children",
+            "key": Object {
+              "kind": "id",
+              "name": "children",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
@@ -888,7 +836,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -917,7 +868,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "age",
+          "key": Object {
+            "kind": "id",
+            "name": "age",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -950,7 +904,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -976,7 +933,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": true,
           "value": Object {
@@ -1002,7 +962,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1035,7 +998,10 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "key": "foo",
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
@@ -1043,7 +1009,10 @@ Object {
             },
           },
           Object {
-            "key": "bar",
+            "key": Object {
+              "kind": "id",
+              "name": "bar",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
@@ -1065,7 +1034,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1106,7 +1078,10 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "key": "children",
+            "key": Object {
+              "kind": "id",
+              "name": "children",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
@@ -1132,7 +1107,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1166,7 +1144,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "age",
+          "key": Object {
+            "kind": "id",
+            "name": "age",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1201,7 +1182,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1227,17 +1211,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "async": false,
-            "generator": false,
-            "id": null,
-            "kind": "function",
-            "parameters": Array [],
-            "returnType": Object {
-              "kind": "number",
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1267,20 +1244,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "memberExpression",
-            "object": Object {
-              "kind": "id",
-              "name": "b",
-              "type": null,
-            },
-            "property": Object {
-              "kind": "id",
-              "name": "c",
-              "type": null,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1310,20 +1277,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "memberExpression",
-            "object": Object {
-              "kind": "id",
-              "name": "b",
-              "type": null,
-            },
-            "property": Object {
-              "kind": "id",
-              "name": "c",
-              "type": null,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1353,20 +1310,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "memberExpression",
-            "object": Object {
-              "kind": "id",
-              "name": "b",
-              "type": null,
-            },
-            "property": Object {
-              "kind": "id",
-              "name": "c",
-              "type": null,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1406,7 +1353,10 @@ Object {
             "kind": "object",
             "members": Array [
               Object {
-                "key": "bar",
+                "key": Object {
+                  "kind": "id",
+                  "name": "bar",
+                },
                 "kind": "property",
                 "optional": false,
                 "value": Object {
@@ -1420,7 +1370,10 @@ Object {
           "kind": "object",
           "members": Array [
             Object {
-              "key": "isDefaultChecked",
+              "key": Object {
+                "kind": "id",
+                "name": "isDefaultChecked",
+              },
               "kind": "property",
               "optional": false,
               "value": Object {
@@ -1443,20 +1396,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "memberExpression",
-            "object": Object {
-              "kind": "id",
-              "name": "b",
-              "type": null,
-            },
-            "property": Object {
-              "kind": "id",
-              "name": "c",
-              "type": null,
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1486,7 +1429,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "ab-a",
+          "key": Object {
+            "kind": "string",
+            "value": "ab-a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1494,7 +1440,10 @@ Object {
           },
         },
         Object {
-          "key": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1520,10 +1469,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "null",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": true,
           "value": Object {
@@ -1549,11 +1498,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "number",
-            "value": 5,
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1579,11 +1527,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "boolean",
-            "value": true,
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1591,11 +1538,10 @@ Object {
           },
         },
         Object {
-          "default": Object {
-            "kind": "boolean",
-            "value": false,
+          "key": Object {
+            "kind": "id",
+            "name": "b",
           },
-          "key": "b",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1621,11 +1567,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "string",
-            "value": "stringVal",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1651,23 +1596,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "templateExpression",
-            "tag": Object {
-              "kind": "memberExpression",
-              "object": Object {
-                "kind": "id",
-                "name": "styled",
-                "type": null,
-              },
-              "property": Object {
-                "kind": "id",
-                "name": "div",
-                "type": null,
-              },
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1697,7 +1629,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "key": "foo",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
           "kind": "property",
           "optional": true,
           "value": Object {
@@ -1727,33 +1662,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "JSXElement",
-            "value": Object {
-              "attributes": Array [
-                Object {
-                  "kind": "JSXAttribute",
-                  "name": Object {
-                    "kind": "JSXIdentifier",
-                    "value": "name",
-                  },
-                  "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
-                      "kind": "string",
-                      "value": "test icon",
-                    },
-                  },
-                },
-              ],
-              "kind": "JSXOpeningElement",
-              "name": Object {
-                "kind": "JSXIdentifier",
-                "value": "Icon",
-              },
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1785,33 +1697,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "JSXElement",
-            "value": Object {
-              "attributes": Array [
-                Object {
-                  "kind": "JSXAttribute",
-                  "name": Object {
-                    "kind": "JSXIdentifier",
-                    "value": "name",
-                  },
-                  "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
-                      "kind": "string",
-                      "value": "test icon",
-                    },
-                  },
-                },
-              ],
-              "kind": "JSXOpeningElement",
-              "name": Object {
-                "kind": "JSXIdentifier",
-                "value": "Icon",
-              },
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1843,40 +1732,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "JSXElement",
-            "value": Object {
-              "attributes": Array [
-                Object {
-                  "kind": "JSXAttribute",
-                  "name": Object {
-                    "kind": "JSXIdentifier",
-                    "value": "name",
-                  },
-                  "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
-                      "kind": "string",
-                      "value": "test icon",
-                    },
-                  },
-                },
-              ],
-              "kind": "JSXOpeningElement",
-              "name": Object {
-                "kind": "JSXMemberExpression",
-                "object": Object {
-                  "kind": "JSXIdentifier",
-                  "value": "componentObj",
-                },
-                "property": Object {
-                  "kind": "JSXIdentifier",
-                  "value": "Icon",
-                },
-              },
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1908,41 +1767,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "JSXElement",
-            "value": Object {
-              "attributes": Array [
-                Object {
-                  "kind": "JSXAttribute",
-                  "name": Object {
-                    "kind": "JSXIdentifier",
-                    "value": "name",
-                  },
-                  "value": Object {
-                    "kind": "string",
-                    "value": "test icon",
-                  },
-                },
-                Object {
-                  "kind": "JSXAttribute",
-                  "name": Object {
-                    "kind": "JSXIdentifier",
-                    "value": "iconType",
-                  },
-                  "value": Object {
-                    "kind": "string",
-                    "value": "avatar",
-                  },
-                },
-              ],
-              "kind": "JSXOpeningElement",
-              "name": Object {
-                "kind": "JSXIdentifier",
-                "value": "Icon",
-              },
-            },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -1974,11 +1802,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "kind": "string",
-            "value": "a",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -2365,15 +2192,10 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "default": Object {
-            "argument": Object {
-              "kind": "number",
-              "value": 1,
-            },
-            "kind": "unary",
-            "operator": "-",
+          "key": Object {
+            "kind": "id",
+            "name": "a",
           },
-          "key": "a",
           "kind": "property",
           "optional": false,
           "value": Object {
@@ -2413,7 +2235,10 @@ Object {
                 "kind": "object",
                 "members": Array [
                   Object {
-                    "key": "foo",
+                    "key": Object {
+                      "kind": "id",
+                      "name": "foo",
+                    },
                     "kind": "property",
                     "optional": false,
                     "value": Object {
@@ -2425,7 +2250,10 @@ Object {
             },
           },
           Object {
-            "key": "isDefaultChecked",
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
