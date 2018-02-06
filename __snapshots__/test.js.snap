@@ -349,6 +349,7 @@ Object {
                   },
                 },
               ],
+              "referenceIdName": "b",
             },
             "property": Object {
               "kind": "id",
@@ -1328,6 +1329,45 @@ Object {
 }
 `;
 
+exports[`function declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "args": Array [],
+            "callee": Object {
+              "kind": "id",
+              "name": "sayHello",
+              "referenceIdName": "sayHello",
+              "type": null,
+            },
+            "kind": "call",
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`function expression 1`] = `
 Object {
   "classes": Array [
@@ -1593,6 +1633,48 @@ Object {
             "parameters": Array [],
             "returnType": Object {
               "kind": "mixed",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`new expression 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "args": Array [],
+            "callee": Object {
+              "kind": "id",
+              "name": "Date",
+              "type": null,
+            },
+            "kind": "new",
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "Date",
             },
           },
         },

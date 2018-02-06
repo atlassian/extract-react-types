@@ -134,6 +134,19 @@ converters.AssignmentPattern = (path, context) => {
   };
 };
 
+converters.ObjectPattern = (path, context) => {
+  let properties = [];
+
+  for (const property of properties) {
+    properties.push(convert(property, context));
+  }
+
+  return {
+    kind: "ObjectPattern",
+    properties,
+  }
+}
+
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
     return {
@@ -213,12 +226,25 @@ converters.ClassProperty = (path, context) => {
   };
 };
 
-converters.CallExpression = (path, context) => {
-  let callee = convert(path.get("callee"), context);
-  let args = path.get("arguments").map(a => convert(a, context));
+function convertCall(path, context) {
+  const callee = convert(path.get("callee"), context);
+  const args = path.get("arguments").map(a => convert(a, context));
+  return { callee, args };
+}
 
+converters.CallExpression = (path, context) => {
+  const { callee, args } = convertCall(path, context);
   return {
     kind: "call",
+    callee,
+    args
+  };
+};
+
+converters.NewExpression = (path, context) => {
+  const { callee, args } = convertCall(path, context);
+  return {
+    kind: "new",
     callee,
     args
   };
@@ -294,40 +320,39 @@ function convertParameter(param, context) {
   };
 }
 
-converters.ArrowFunctionExpression = (path, context) => {
-  let parameters = path.get("params").map(p => convertParameter(p, context));
+function convertFunction(path, context) {
+  const parameters = path.get("params").map(p => convertParameter(p, context));
   let returnType = null;
+  let id = null;
 
   if (path.node.returnType) {
     returnType = convert(path.get("returnType"), context);
   }
 
+  if (path.node.id) {
+    id = convert(path.get('id'), context);
+  }
+
   return {
     kind: "function",
-    id: null,
+    id: id,
     async: path.node.async,
     generator: path.node.generator,
     parameters,
     returnType
   };
+}
+
+converters.FunctionDeclaration = (path, context) => {
+  return convertFunction(path, context);
+}
+
+converters.ArrowFunctionExpression = (path, context) => {
+  return convertFunction(path, context);
 };
 
 converters.FunctionExpression = (path, context) => {
-  let parameters = path.get("params").map(p => convertParameter(p, context));
-  let returnType = null;
-
-  if (path.node.returnType) {
-    returnType = convert(path.get("returnType"), context);
-  }
-
-  return {
-    kind: "function",
-    id: null,
-    async: path.node.async,
-    generator: path.node.generator,
-    parameters,
-    returnType
-  };
+  return convertFunction(path, context);
 };
 
 converters.TypeAnnotation = (path, context) => {
@@ -481,7 +506,11 @@ converters.Identifier = (path, context) => {
             `Unable to resolve binding path for: ${bindingPath.type}`
           );
         }
-        return convert(foundPath, context);
+        const convertedValue = convert(foundPath, context);
+        return {
+          ...convertedValue,
+          referenceIdName: path.node.name,
+        };
       } else {
         let type = null;
 
