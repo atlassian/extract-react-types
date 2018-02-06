@@ -714,16 +714,14 @@ const TESTS = [
     name: "BooleanLiteralTypeAnnotation",
     typeSystem: "flow",
     code: `
-      class Component extends React.Component<{a: string => true}> {
-      }
+      class Component extends React.Component<{a: string => true}> {}
     `
   },
   {
     name: "NullLiteralTypeAnnotation",
     typeSystem: "flow",
     code: `
-      class Component extends React.Component<{a: null}> {
-      }
+      class Component extends React.Component<{a: null}> {}
     `
   },
   {
@@ -731,6 +729,18 @@ const TESTS = [
     typeSystem: "flow",
     code: `
       class Component extends React.Component<{ 'ab-a': number, a: number }> {
+      }
+    `
+  },
+  {
+    only: true,
+    name: "non-standard key with default",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ 'ab-a': number, a: number }> {
+        defaultProps = {
+          'ab-a': 37,
+        }
       }
     `
   }

@@ -18,12 +18,20 @@ const matchExported = require("./matchExported");
 const converters = {};
 
 const getPropFromObject = (obj, property) => {
-  if (!property.key || !property.key.name) {
-    return;
-    // look into resolving this. It's types being returned instead of idents...
-    // more, the with leadinComments etc, very weird
+  // The kind of the object member must be the same as the kind of the property
+  if (property.key.kind === "id") {
+    return obj.members.find(p => p.key.name === property.key.name);
+  } else if (property.key.kind === "string") {
+    return obj.members.find(p => p.key.value === property.key.value);
+  } else {
+    throw new Error(
+      JSON.stringify({
+        error: "could not find property to go with default",
+        default: property,
+        properties: obj.members
+      })
+    );
   }
-  return obj.members.find(p => p.key === property.key.name);
 };
 
 const resolveFromGeneric = type => {
@@ -97,7 +105,7 @@ function convertReactComponentClass(path, context) {
     defaultProps.value.members.forEach(property => {
       let ungeneric = resolveFromGeneric(classProperties);
       const prop = getProp(ungeneric, property);
-      if (prop) prop.default = property.value;
+      prop.default = property.value;
     });
   }
 
@@ -346,17 +354,9 @@ converters.ObjectTypeAnnotation = (path, context) => {
 };
 
 converters.ObjectTypeProperty = (path, context) => {
-  let key = path.get("key");
-  let keyName = "";
-  if (key.type === "Identifier") {
-    keyName = key.node.name;
-  } else if (key.type === "StringLiteral") {
-    keyName = key.node.value;
-  }
-
   let result = {};
   result.kind = "property";
-  result.key = keyName;
+  result.key = convert(path.get("key"), context);
   result.value = convert(path.get("value"), context);
   result.optional = path.node.optional;
   return result;
@@ -520,11 +520,11 @@ converters.Identifier = (path, context) => {
       let bindingPath;
 
       if (isFlowIdentifier(path)) {
-        let flowBinding = findFlowBinding(path, path.node.name);
+        let flowBinding = findFlowBinding(path, name);
         if (!flowBinding) throw new Error();
         bindingPath = flowBinding.path.parentPath;
       } else {
-        bindingPath = path.scope.getBinding(path.node.name);
+        bindingPath = path.scope.getBinding(name);
       }
 
       if (bindingPath) {
@@ -533,8 +533,10 @@ converters.Identifier = (path, context) => {
         }
         if (bindingPath.kind !== "module") return convert(bindingPath, context);
       } else {
-        return { kind: "id", name: path.node.name };
+        return { kind: "id", name: name };
       }
+    } else if (kind === "static" || kind === "binding") {
+      return { kind: "id", name };
     }
   }
 };
