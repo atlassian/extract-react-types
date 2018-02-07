@@ -17,21 +17,25 @@ const { normalizeComment } = require("babel-normalize-comments");
 const matchExported = require("./matchExported");
 const converters = {};
 
-const getPropFromObject = (obj, property) => {
-  // The kind of the object member must be the same as the kind of the property
-  if (property.key.kind === "id") {
-    return obj.members.find(p => p.key.name === property.key.name);
-  } else if (property.key.kind === "string") {
-    return obj.members.find(p => p.key.value === property.key.value);
-  } else {
-    throw new Error(
-      JSON.stringify({
-        error: "could not find property to go with default",
-        default: property,
-        properties: obj.members
-      })
-    );
-  }
+const getPropFromObject = (props, property) => {
+  let prop;
+
+  props.members.forEach(p => {
+    if (p.kind === "spread") {
+      let p2 = getPropFromObject(p.value.value, property);
+      if (p2) prop = p2;
+      // The kind of the object member must be the same as the kind of the property
+    } else if (property.key.kind === "id" && p.key.name === property.key.name) {
+      prop = p;
+    } else if (
+      property.key.kind === "string" &&
+      p.key.value === property.key.value
+    ) {
+      prop = p;
+    }
+  });
+
+  return prop;
 };
 
 const resolveFromGeneric = type => {
@@ -105,6 +109,15 @@ function convertReactComponentClass(path, context) {
     defaultProps.value.members.forEach(property => {
       let ungeneric = resolveFromGeneric(classProperties);
       const prop = getProp(ungeneric, property);
+      if (!prop) {
+        throw new Error(
+          JSON.stringify(
+            `could not find property to go with default of ${
+              property.key.value ? property.key.value : property.key.name
+            } in ${classProperties.name}`
+          )
+        );
+      }
       prop.default = property.value;
     });
   }
@@ -143,9 +156,9 @@ converters.ObjectPattern = (path, context) => {
 
   return {
     kind: "ObjectPattern",
-    properties,
-  }
-}
+    properties
+  };
+};
 
 converters.ClassDeclaration = (path, context) => {
   if (!isReactComponentClass(path)) {
@@ -330,7 +343,7 @@ function convertFunction(path, context) {
   }
 
   if (path.node.id) {
-    id = convert(path.get('id'), context);
+    id = convert(path.get("id"), context);
   }
 
   return {
@@ -345,7 +358,7 @@ function convertFunction(path, context) {
 
 converters.FunctionDeclaration = (path, context) => {
   return convertFunction(path, context);
-}
+};
 
 converters.ArrowFunctionExpression = (path, context) => {
   return convertFunction(path, context);
@@ -509,7 +522,7 @@ converters.Identifier = (path, context) => {
         const convertedValue = convert(foundPath, context);
         return {
           ...convertedValue,
-          referenceIdName: path.node.name,
+          referenceIdName: path.node.name
         };
       } else {
         let type = null;
