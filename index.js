@@ -1,5 +1,180 @@
 // @flow
-"use strict";
+
+/* StringTypeAnnotation */
+type String = { kind: "string", value?: string };
+type Param = { kind: "param", value: Array<AnyKind>, type: AnyKind | null };
+type TypeParam = { kind: "typeParam", type: AnyTypeKind };
+type Id = { kind: "id", name: string, type?: $Diff<AnyKind, Id> | null };
+type TemplateLiteral = {
+  kind: "templateLiteral",
+  expressions: Array<AnyValueKind>,
+  quasis: any /* Array<TemplateElement> */
+};
+
+type TemplateExpression = { kind: "templateExpression", tag: Id };
+type AssignmentPattern = {
+  kind: "AssignmentPattern",
+  left: AnyKind,
+  right: AnyKind
+};
+/* *** */ type ObjectPattern = {
+  kind: "ObjectPattern",
+  /* change to members */ properties: Array<Property>
+};
+/* *** */ type Obj = { kind: "object", members: Array<Property> };
+/* TSTypeLiteral return object type with properties */
+type ClassKind = { kind: "class", name: Id } | Generic;
+/* *** */ type Spread = {
+  kind: "spread",
+  value: Array<Property | Generic>
+};
+/* *** */ type Unary = {
+  kind: "unary",
+  operator: string,
+  argument: AnyValueKind
+};
+type JSXAttribute = { kind: "JSXAttribute", name: string, value: any };
+type JSXExpressionContainer = {
+  kind: "JSXExpressionContainer",
+  value: any
+};
+type JSXElement = { kind: "JSXElement", value: any };
+type JSXIdentifier = { kind: "JSXIdentifier", value: any };
+/* *** */ type JSXMemberExpression = {
+  kind: "JSXMemberExpression",
+  object: any,
+  property: any
+};
+type JSXOpeningElement = {
+  kind: "JSXOpeningElement",
+  name: any,
+  attributes: any
+};
+type Property = {
+  kind: "property",
+  key: Id | String,
+  value: AnyKind,
+  optional?: boolean
+};
+/* *** */ type Call = {
+  kind: "call",
+  callee: Id,
+  args: Array<AnyValueKind>
+};
+/* *** */ type New = {
+  kind: "new",
+  callee: Id,
+  args: Array<AnyValueKind>
+};
+type Typeof = { kind: "typeof", name: string };
+type Exists = { kind: "exists" };
+type Number = {
+  kind: "number",
+  value?: number
+}; /*numberLiteral and NumberTypeAnnotation are oddly different */
+type Null = { kind: "null" };
+/* does not follow the pattern for string & stringliteral */
+type Boolean = { kind: "boolean", value?: boolean };
+/* *** */ type ArrayExpression = { kind: "array", elements: AnyKind };
+/* rename for confusion */
+type BinaryExpression = {
+  kind: "binary",
+  operator: string,
+  left: AnyValueKind,
+  right: AnyValueKind
+};
+/* &&& */ type MemberExpression = {
+  kind: "memberExpression",
+  object: Id,
+  property: Id | MemberExpression
+};
+/* FunctionTypeAnnotation and TSFunctionType returns this type but is different */
+type Func = {
+  kind: "function",
+  id?: Id | null,
+  async?: boolean,
+  generator?: boolean,
+  parameters: Param,
+  returnType: AnyTypeKind | null
+};
+/* *** */ type Union = { kind: "union", types: Array<AnyTypeKind> };
+/* ~~~ */ type Generic = { kind: "generic", value: AnyTypeKind };
+type Initial = { kind: "initial", id: Id, value: AnyValueKind };
+type Variable = { kind: "variable", declarations: Array<Initial> };
+/* *** */ type Intersection = {
+  kind: "intersection",
+  types: Array<AnyTypeKind>
+};
+type Void = { kind: "void" };
+type StringLiteral = { kind: "stringLiteral", value: string };
+type NumberLiteral = {
+  kind: "numberLiteral"
+}; /* why does this not have a value */
+type Mixed = { kind: "mixed" };
+type Any = { kind: "any" };
+type Nullable = { kind: "nullable", arguments: AnyKind };
+type Literal = { kind: "literal" };
+type Tuple = { kind: "tuple", types: AnyKind };
+type Import = {
+  kind: "import",
+  importKind: string /* check what this is*/,
+  name: string,
+  moduleSpecifier: string
+};
+
+/* ? */ type Program = { kind: "program", classes: Array<Property> };
+
+type AnyTypeKind =
+  | String
+  | Id
+  | AssignmentPattern
+  | ObjectPattern
+  | Obj
+  | ClassKind
+  | Unary
+  | Property
+  | Exists
+  | Null
+  | Number
+  | Boolean
+  | Func
+  | Union
+  | Generic
+  | Void
+  | StringLiteral
+  | NumberLiteral
+  | Mixed
+  | Any
+  | Nullable
+  | Literal
+  | Tuple;
+type AnyValueKind =
+  | String
+  | Param
+  | Id
+  | TemplateLiteral
+  | TemplateExpression
+  | AssignmentPattern
+  | ObjectPattern
+  | JSXAttribute
+  | JSXExpressionContainer
+  | JSXElement
+  | JSXIdentifier
+  | JSXOpeningElement
+  | Property
+  | Call
+  | New
+  | Typeof
+  | Number
+  | Null
+  | Boolean
+  | BinaryExpression
+  | MemberExpression
+  | Func
+  | Import;
+type AnyKind = AnyTypeKind | AnyValueKind | Program;
+
+// TODO: Add TemplateElement converter
 
 const createBabelFile = require("babel-file");
 const { loadImportSync } = require("babel-file-loader");
@@ -78,7 +253,7 @@ const getDefaultProps = (path, context) => {
   return defaultProps;
 };
 
-converters.Program = (path, context) => {
+converters.Program = (path, context): Program => {
   let result = {};
   result.kind = "program";
   result.classes = [];
@@ -125,13 +300,13 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
-converters.TaggedTemplateExpression = (path, context) => {
+converters.TaggedTemplateExpression = (path, context): TemplateExpression => {
   return {
     kind: "templateExpression",
     tag: convert(path.get("tag"), context)
   };
 };
-converters.TemplateLiteral = (path, context) => {
+converters.TemplateLiteral = (path, context): TemplateLiteral => {
   return {
     kind: "templateLiteral",
     expressions: convert(path.get("expressions"), context),
@@ -139,7 +314,7 @@ converters.TemplateLiteral = (path, context) => {
   };
 };
 
-converters.AssignmentPattern = (path, context) => {
+converters.AssignmentPattern = (path, context): AssignmentPattern => {
   return {
     kind: "AssignmentPattern",
     left: convert(path.get("left"), context),
@@ -147,10 +322,11 @@ converters.AssignmentPattern = (path, context) => {
   };
 };
 
-converters.ObjectPattern = (path, context) => {
+/* this seems broken ? */
+converters.ObjectPattern = (path, context): ObjectPattern => {
   let properties = [];
 
-  for (const property of properties) {
+  for (const property of path.get("properties")) {
     properties.push(convert(property, context));
   }
 
@@ -160,7 +336,7 @@ converters.ObjectPattern = (path, context) => {
   };
 };
 
-converters.ClassDeclaration = (path, context) => {
+converters.ClassDeclaration = (path, context): ClassKind => {
   if (!isReactComponentClass(path)) {
     return {
       kind: "class",
@@ -171,14 +347,14 @@ converters.ClassDeclaration = (path, context) => {
   }
 };
 
-converters.SpreadElement = (path, context) => {
+converters.SpreadElement = (path, context): Spread => {
   return {
     kind: "spread",
     value: convert(path.get("argument"), context)
   };
 };
 
-converters.UnaryExpression = (path, context) => {
+converters.UnaryExpression = (path, context): Unary => {
   return {
     kind: "unary",
     operator: path.node.operator,
@@ -186,7 +362,7 @@ converters.UnaryExpression = (path, context) => {
   };
 };
 
-converters.JSXAttribute = (path, context) => {
+converters.JSXAttribute = (path, context): JSXAttribute => {
   return {
     kind: "JSXAttribute",
     name: convert(path.get("name"), context),
@@ -194,28 +370,28 @@ converters.JSXAttribute = (path, context) => {
   };
 };
 
-converters.JSXExpressionContainer = (path, context) => {
+converters.JSXExpressionContainer = (path, context): JSXExpressionContainer => {
   return {
     kind: "JSXExpressionContainer",
     value: convert(path.get("expression"), context)
   };
 };
 
-converters.JSXElement = (path, context) => {
+converters.JSXElement = (path, context): JSXElement => {
   return {
     kind: "JSXElement",
     value: convert(path.get("openingElement"), context)
   };
 };
 
-converters.JSXIdentifier = (path, context) => {
+converters.JSXIdentifier = (path, context): JSXIdentifier => {
   return {
     kind: "JSXIdentifier",
     value: path.node.name
   };
 };
 
-converters.JSXMemberExpression = (path, context) => {
+converters.JSXMemberExpression = (path, context): JSXMemberExpression => {
   return {
     kind: "JSXMemberExpression",
     object: convert(path.get("object"), context),
@@ -223,7 +399,7 @@ converters.JSXMemberExpression = (path, context) => {
   };
 };
 
-converters.JSXOpeningElement = (path, context) => {
+converters.JSXOpeningElement = (path, context): JSXOpeningElement => {
   return {
     kind: "JSXOpeningElement",
     name: convert(path.get("name"), context),
@@ -231,7 +407,7 @@ converters.JSXOpeningElement = (path, context) => {
   };
 };
 
-converters.ClassProperty = (path, context) => {
+converters.ClassProperty = (path, context): Property => {
   return {
     kind: "property",
     key: convert(path.get("key"), context),
@@ -245,7 +421,7 @@ function convertCall(path, context) {
   return { callee, args };
 }
 
-converters.CallExpression = (path, context) => {
+converters.CallExpression = (path, context): Call => {
   const { callee, args } = convertCall(path, context);
   return {
     kind: "call",
@@ -254,7 +430,7 @@ converters.CallExpression = (path, context) => {
   };
 };
 
-converters.NewExpression = (path, context) => {
+converters.NewExpression = (path, context): New => {
   const { callee, args } = convertCall(path, context);
   return {
     kind: "new",
@@ -263,7 +439,7 @@ converters.NewExpression = (path, context) => {
   };
 };
 
-converters.TypeofTypeAnnotation = (path, context) => {
+converters.TypeofTypeAnnotation = (path, context): Typeof => {
   let type = convert(path.get("argument"), context);
   return {
     kind: "typeof",
@@ -272,7 +448,7 @@ converters.TypeofTypeAnnotation = (path, context) => {
   };
 };
 
-converters.ObjectProperty = (path, context) => {
+converters.ObjectProperty = (path, context): Property => {
   return {
     kind: "property",
     key: convert(path.get("key"), context),
@@ -280,34 +456,34 @@ converters.ObjectProperty = (path, context) => {
   };
 };
 
-converters.ExistentialTypeParam = (path, context) => {
+converters.ExistentialTypeParam = (path, context): Exists => {
   return { kind: "exists" };
 };
 
-converters.StringLiteral = (path, context) => {
+converters.StringLiteral = (path, context): String => {
   return { kind: "string", value: path.node.value };
 };
 
-converters.NumericLiteral = (path, context) => {
+converters.NumericLiteral = (path, context): Number => {
   return { kind: "number", value: path.node.value };
 };
 
-converters.NullLiteral = (path, context) => {
+converters.NullLiteral = (path, context): Null => {
   return { kind: "null" };
 };
 
-converters.BooleanLiteral = (path, context) => {
+converters.BooleanLiteral = (path, context): Boolean => {
   return { kind: "boolean", value: path.node.value };
 };
 
-converters.ArrayExpression = (path, context) => {
+converters.ArrayExpression = (path, context): ArrayExpression => {
   return {
     kind: "array",
     elements: path.get("elements").map(e => convert(e, context))
   };
 };
 
-converters.BinaryExpression = (path, context) => {
+converters.BinaryExpression = (path, context): BinaryExpression => {
   return {
     kind: "binary",
     operator: path.node.operator,
@@ -316,7 +492,7 @@ converters.BinaryExpression = (path, context) => {
   };
 };
 
-converters.MemberExpression = (path, context) => {
+converters.MemberExpression = (path, context): MemberExpression => {
   return {
     kind: "memberExpression",
     object: convert(path.get("object"), context),
@@ -324,7 +500,7 @@ converters.MemberExpression = (path, context) => {
   };
 };
 
-function convertParameter(param, context) {
+function convertParameter(param, context): Param {
   let { type, ...rest } = convert(param, context);
   return {
     kind: "param",
@@ -333,7 +509,7 @@ function convertParameter(param, context) {
   };
 }
 
-function convertFunction(path, context) {
+function convertFunction(path, context): Func {
   const parameters = path.get("params").map(p => convertParameter(p, context));
   let returnType = null;
   let id = null;
@@ -372,11 +548,11 @@ converters.TypeAnnotation = (path, context) => {
   return convert(path.get("typeAnnotation"), context);
 };
 
-converters.ExistsTypeAnnotation = (path, context) => {
+converters.ExistsTypeAnnotation = (path, context): Exists => {
   return { kind: "exists" };
 };
 
-converters.ObjectTypeAnnotation = (path, context) => {
+converters.ObjectTypeAnnotation = (path, context): Object => {
   let result = {};
 
   result.kind = "object";
@@ -391,7 +567,7 @@ converters.ObjectTypeAnnotation = (path, context) => {
   return result;
 };
 
-converters.ObjectTypeProperty = (path, context) => {
+converters.ObjectTypeProperty = (path, context): Property => {
   let result = {};
   result.kind = "property";
   result.key = convert(path.get("key"), context);
@@ -400,19 +576,19 @@ converters.ObjectTypeProperty = (path, context) => {
   return result;
 };
 
-converters.UnionTypeAnnotation = (path, context) => {
+converters.UnionTypeAnnotation = (path, context): Union => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "union", types };
 };
 
-converters.TypeParameterInstantiation = (path, context) => {
+converters.TypeParameterInstantiation = (path, context): TypeParam => {
   return path.get("params").map(p => ({
     kind: "typeParam",
     type: convert(p, context)
   }));
 };
 
-converters.GenericTypeAnnotation = (path, context) => {
+converters.GenericTypeAnnotation = (path, context): Generic => {
   let result = {};
 
   result.kind = "generic";
@@ -423,7 +599,7 @@ converters.GenericTypeAnnotation = (path, context) => {
   return result;
 };
 
-converters.ObjectMethod = (path, context) => {
+converters.ObjectMethod = (path, context): Func => {
   let parameters = path.get("params").map(p => convertParameter(p, context));
   let returnType = null;
 
@@ -441,7 +617,7 @@ converters.ObjectMethod = (path, context) => {
   };
 };
 
-converters.ObjectExpression = (path, context) => {
+converters.ObjectExpression = (path, context): Object => {
   let members = [];
   path.get("properties").forEach(p => {
     let mem = convert(p, context);
@@ -470,13 +646,14 @@ converters.ObjectExpression = (path, context) => {
   };
 };
 
-converters.VariableDeclaration = (path, context) => {
+converters.VariableDeclaration = (path, context): Variable => {
   let res = {};
   res.kind = "variable";
   res.declarations = path.get("declarations").map(p => convert(p, context));
   return res;
 };
-converters.VariableDeclarator = (path, context) => {
+
+converters.VariableDeclarator = (path, context): Initial => {
   return {
     kind: "initial",
     id: convert(path.get("id"), context),
@@ -484,7 +661,7 @@ converters.VariableDeclarator = (path, context) => {
   };
 };
 
-converters.Identifier = (path, context) => {
+converters.Identifier = (path, context): Id => {
   let kind = getIdentifierKind(path);
   let name = path.node.name;
 
@@ -581,13 +758,14 @@ converters.Identifier = (path, context) => {
       return { kind: "id", name };
     }
   }
+  throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
 
 converters.TypeAlias = (path, context) => {
   return convert(path.get("right"), context);
 };
 
-converters.IntersectionTypeAnnotation = (path, context) => {
+converters.IntersectionTypeAnnotation = (path, context): Intersection => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "intersection", types };
 };
@@ -596,39 +774,40 @@ converters.QualifiedTypeIdentifier = (path, context) => {
   return convert(path.get("id"), context);
 };
 
-converters.VoidTypeAnnotation = path => {
+converters.VoidTypeAnnotation = (path): Void => {
   return { kind: "void" };
 };
 
-converters.BooleanTypeAnnotation = path => {
+converters.BooleanTypeAnnotation = (path): Boolean => {
   return { kind: "boolean" };
 };
 
-converters.BooleanLiteralTypeAnnotation = path => {
+converters.BooleanLiteralTypeAnnotation = (path): Boolean => {
   return { kind: "boolean" };
 };
 
-converters.NullLiteralTypeAnnotation = path => {
+converters.NullLiteralTypeAnnotation = (path): Null => {
   return { kind: "null" };
 };
 
-converters.StringLiteralTypeAnnotation = path => {
+converters.StringLiteralTypeAnnotation = (path): StringLiteral => {
   return { kind: "stringLiteral", value: path.node.value };
 };
 
-converters.NumberLiteralTypeAnnotation = path => {
+// This should absolutely return a value
+converters.NumberLiteralTypeAnnotation = (path): NumberLiteral => {
   return { kind: "numberLiteral" };
 };
 
-converters.MixedTypeAnnotation = path => {
+converters.MixedTypeAnnotation = (path): Mixed => {
   return { kind: "mixed" };
 };
 
-converters.AnyTypeAnnotation = path => {
+converters.AnyTypeAnnotation = (path): Any => {
   return { kind: "any" };
 };
 
-converters.NumberTypeAnnotation = path => {
+converters.NumberTypeAnnotation = (path): Number => {
   return { kind: "number" };
 };
 
@@ -636,7 +815,7 @@ converters.FunctionTypeParam = (path, context) => {
   return convert(path.get("typeAnnotation"), context);
 };
 
-converters.FunctionTypeAnnotation = (path, context) => {
+converters.FunctionTypeAnnotation = (path, context): Func => {
   const parameters = path.get("params").map(p => convert(p, context));
   const returnType = convert(path.get("returnType"), context);
 
@@ -647,37 +826,37 @@ converters.FunctionTypeAnnotation = (path, context) => {
   };
 };
 
-converters.StringTypeAnnotation = path => {
+converters.StringTypeAnnotation = (path): String => {
   return { kind: "string" };
 };
 
-converters.NullableTypeAnnotation = (path, context) => {
+converters.NullableTypeAnnotation = (path, context): Nullable => {
   return {
     kind: "nullable",
     arguments: convert(path.get("typeAnnotation"), context)
   };
 };
 
-converters.TSStringKeyword = path => {
+converters.TSStringKeyword = (path): String => {
   return { kind: "string" };
 };
 
-converters.TSNumberKeyword = path => {
+converters.TSNumberKeyword = (path): Number => {
   return { kind: "number" };
 };
 
-converters.TSBooleanKeyword = path => {
+converters.TSBooleanKeyword = (path): Boolean => {
   return { kind: "boolean" };
 };
 
-converters.TSVoidKeyword = path => {
+converters.TSVoidKeyword = (path): Void => {
   return { kind: "void" };
 };
 
 // converters.TSPropertySignature = path => {
 // };
 
-converters.TSTypeLiteral = (path, context) => {
+converters.TSTypeLiteral = (path, context): Obj => {
   let result = {};
 
   result.kind = "object";
@@ -696,7 +875,7 @@ converters.TSTypeLiteral = (path, context) => {
   return result;
 };
 
-converters.TSLiteralType = path => {
+converters.TSLiteralType = (path): Literal => {
   return {
     kind: "literal",
     value: path.node.literal.value
@@ -707,21 +886,21 @@ converters.TSTypeReference = (path, context) => {
   return convert(path.get("typeName"), context);
 };
 
-converters.TSUnionType = (path, context) => {
+converters.TSUnionType = (path, context): Union => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "union", types };
 };
 
-converters.TSAnyKeyword = path => {
+converters.TSAnyKeyword = (path): Any => {
   return { kind: "any" };
 };
 
-converters.TSTupleType = (path, context) => {
+converters.TSTupleType = (path, context): Tuple => {
   const types = path.get("elementTypes").map(p => convert(p, context));
   return { kind: "tuple", types };
 };
 
-converters.TSFunctionType = (path, context) => {
+converters.TSFunctionType = (path, context): Func => {
   const parameters = path.get("parameters").map(p => convert(p, context));
   const returnType = convert(
     path.get("typeAnnotation").get("typeAnnotation"),
@@ -735,7 +914,7 @@ converters.TSFunctionType = (path, context) => {
   };
 };
 
-converters.ObjectTypeSpreadProperty = (path, context) => {
+converters.ObjectTypeSpreadProperty = (path, context): Spread => {
   return {
     kind: "spread",
     value: convert(path.get("argument"), context)

@@ -767,6 +767,17 @@ const TESTS = [
       }
     `
   },
+  {
+    name: "template literal with quasis",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: string }> {
+        defaultProps = {
+          a: \`asdf\${abcd}\`,
+        }
+      }
+    `
+  }
 ];
 
 for (let testCase of TESTS) {

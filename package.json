@@ -6,7 +6,8 @@
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "babel": "babel index.js -o something.js"
   },
   "dependencies": {
     "ast-pretty-print": "^2.0.1",
@@ -27,6 +28,9 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.53.1",
     "jest": "^21.2.1"
   }
