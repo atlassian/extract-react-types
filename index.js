@@ -1,6 +1,4 @@
 // @flow
-
-/* StringTypeAnnotation */
 type String = { kind: "string", value?: string };
 type Param = { kind: "param", value: Array<AnyKind>, type: AnyKind | null };
 type TypeParam = { kind: "typeParam", type: AnyTypeKind };
@@ -19,10 +17,9 @@ type AssignmentPattern = {
 };
 /* *** */ type ObjectPattern = {
   kind: "ObjectPattern",
-  /* change to members */ properties: Array<Property>
+  members: Array<Property>
 };
 /* *** */ type Obj = { kind: "object", members: Array<Property> };
-/* TSTypeLiteral return object type with properties */
 type ClassKind = { kind: "class", name: Id } | Generic;
 /* *** */ type Spread = {
   kind: "spread",
@@ -71,9 +68,8 @@ type Exists = { kind: "exists" };
 type Number = {
   kind: "number",
   value?: number
-}; /*numberLiteral and NumberTypeAnnotation are oddly different */
+};
 type Null = { kind: "null" };
-/* does not follow the pattern for string & stringliteral */
 type Boolean = { kind: "boolean", value?: boolean };
 /* *** */ type ArrayExpression = { kind: "array", elements: AnyKind };
 /* rename for confusion */
@@ -88,7 +84,6 @@ type BinaryExpression = {
   object: Id,
   property: Id | MemberExpression
 };
-/* FunctionTypeAnnotation and TSFunctionType returns this type but is different */
 type Func = {
   kind: "function",
   id?: Id | null,
@@ -106,10 +101,6 @@ type Variable = { kind: "variable", declarations: Array<Initial> };
   types: Array<AnyTypeKind>
 };
 type Void = { kind: "void" };
-type StringLiteral = { kind: "stringLiteral", value: string };
-type NumberLiteral = {
-  kind: "numberLiteral"
-}; /* why does this not have a value */
 type Mixed = { kind: "mixed" };
 type Any = { kind: "any" };
 type Nullable = { kind: "nullable", arguments: AnyKind };
@@ -117,7 +108,7 @@ type Literal = { kind: "literal" };
 type Tuple = { kind: "tuple", types: AnyKind };
 type Import = {
   kind: "import",
-  importKind: string /* check what this is*/,
+  importKind: "value" | "type",
   name: string,
   moduleSpecifier: string
 };
@@ -135,24 +126,29 @@ type AnyTypeKind =
   | Property
   | Exists
   | Null
+  | TypeParam
   | Number
   | Boolean
   | Func
   | Union
   | Generic
   | Void
-  | StringLiteral
-  | NumberLiteral
+  | Intersection
   | Mixed
   | Any
   | Nullable
   | Literal
+  | Spread
   | Tuple;
 type AnyValueKind =
   | String
+  | Spread
   | Param
   | Id
   | TemplateLiteral
+  | ArrayExpression
+  | Variable
+  | JSXMemberExpression
   | TemplateExpression
   | AssignmentPattern
   | ObjectPattern
@@ -324,15 +320,15 @@ converters.AssignmentPattern = (path, context): AssignmentPattern => {
 
 /* this seems broken ? */
 converters.ObjectPattern = (path, context): ObjectPattern => {
-  let properties = [];
+  let members = [];
 
   for (const property of path.get("properties")) {
-    properties.push(convert(property, context));
+    members.push(convert(property, context));
   }
 
   return {
     kind: "ObjectPattern",
-    properties
+    members
   };
 };
 
@@ -783,20 +779,20 @@ converters.BooleanTypeAnnotation = (path): Boolean => {
 };
 
 converters.BooleanLiteralTypeAnnotation = (path): Boolean => {
-  return { kind: "boolean" };
+  return { kind: "boolean", value: path.node.value };
 };
 
 converters.NullLiteralTypeAnnotation = (path): Null => {
   return { kind: "null" };
 };
 
-converters.StringLiteralTypeAnnotation = (path): StringLiteral => {
-  return { kind: "stringLiteral", value: path.node.value };
+converters.StringLiteralTypeAnnotation = (path): String => {
+  return { kind: "string", value: path.node.value };
 };
 
 // This should absolutely return a value
-converters.NumberLiteralTypeAnnotation = (path): NumberLiteral => {
-  return { kind: "numberLiteral" };
+converters.NumberLiteralTypeAnnotation = (path): Number => {
+  return { kind: "number", value: path.node.value };
 };
 
 converters.MixedTypeAnnotation = (path): Mixed => {
@@ -862,12 +858,12 @@ converters.TSTypeLiteral = (path, context): Obj => {
   result.kind = "object";
   // TODO: find object key
   // result.key = '';
-  result.props = [];
+  result.members = [];
 
-  let properties = path.get("members");
+  let members = path.get("members");
 
-  properties.forEach(memberPath => {
-    result.props.push(
+  members.forEach(memberPath => {
+    result.members.push(
       convert(memberPath.get("typeAnnotation").get("typeAnnotation"), context)
     );
   });
