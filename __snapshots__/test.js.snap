@@ -86,6 +86,7 @@ Object {
             ],
             "returnType": Object {
               "kind": "boolean",
+              "value": true,
             },
           },
         },
@@ -1279,11 +1280,12 @@ Object {
             "kind": "union",
             "types": Array [
               Object {
-                "kind": "stringLiteral",
+                "kind": "string",
                 "value": "25",
               },
               Object {
-                "kind": "numberLiteral",
+                "kind": "number",
+                "value": 30,
               },
             ],
           },
@@ -1969,6 +1971,61 @@ Object {
 }
 `;
 
+exports[`template literal with quasis 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "expressions": Array [
+              Object {
+                "kind": "id",
+                "name": "abcd",
+                "type": null,
+              },
+            ],
+            "kind": "templateLiteral",
+            "quasis": Array [
+              Object {
+                "kind": "templateElement",
+                "value": Object {
+                  "cooked": "asdf",
+                  "raw": "asdf",
+                },
+              },
+              Object {
+                "kind": "templateElement",
+                "value": Object {
+                  "cooked": "",
+                  "raw": "",
+                },
+              },
+            ],
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test 1`] = `
 Object {
   "classes": Array [
@@ -2299,16 +2356,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "any",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "any",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2320,17 +2377,17 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "id",
           "name": "Array",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2342,16 +2399,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "boolean",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "boolean",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2363,29 +2420,29 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "void",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "FooComponent",
         "type": null,
       },
-      "props": Array [
+    },
+    Object {
+      "kind": "object",
+      "members": Array [
         Object {
           "kind": "void",
         },
       ],
-    },
-    Object {
-      "kind": "object",
       "name": Object {
         "kind": "id",
         "name": "BarComponent",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "void",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2397,17 +2454,17 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "id",
           "name": "Color",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2419,12 +2476,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "function",
           "parameters": Array [
@@ -2442,6 +2494,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2469,12 +2526,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "union",
           "types": Array [
@@ -2489,6 +2541,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2507,15 +2564,10 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "object",
-          "props": Array [
+          "members": Array [
             Object {
               "kind": "string",
             },
@@ -2528,6 +2580,11 @@ Object {
           "kind": "boolean",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2539,16 +2596,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "string",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "string",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2560,16 +2617,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "string",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "string",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2581,12 +2638,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "tuple",
           "types": Array [
@@ -2599,6 +2651,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2610,12 +2667,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "union",
           "types": Array [
@@ -2628,6 +2680,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2639,16 +2696,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "void",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "void",
-        },
-      ],
     },
   ],
   "kind": "program",
