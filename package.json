@@ -2,5 +2,9 @@
   "name": "kind-to-string",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ert-types": "^0.0.1",
+    "jest": "^22.2.2"
+  }
 }
