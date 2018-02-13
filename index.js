@@ -2,53 +2,55 @@
 
 /*::
 import type {
-  String,
-  Param,
-  TemplateElement,
-  TypeParam,
-  Id,
-  TemplateLiteral,
-  TemplateExpression,
+  // These three types are to allow us to show unions of the below
+  AnyKind,
+  AnyTypeKind,
+  AnyValueKind,
+  // The below are base types in extract-react-types
+  Any,
+  ArrayExpression,
   AssignmentPattern,
-  ObjectPattern,
-  Obj,
+  BinaryExpression,
+  Boolean,
+  Call,
   ClassKind,
-  Spread,
-  Unary,
+  Exists,
+  Func,
+  Generic,
+  Id,
+  Import,
+  Initial,
+  Intersection,
   JSXAttribute,
-  JSXExpressionContainer,
   JSXElement,
+  JSXExpressionContainer,
   JSXIdentifier,
   JSXMemberExpression,
   JSXOpeningElement,
-  Property,
-  Call,
-  New,
-  Typeof,
-  Exists,
-  Number,
-  Null,
-  Boolean,
-  ArrayExpression,
-  BinaryExpression,
-  MemberExpression,
-  Func,
-  Union,
-  Generic,
-  Initial,
-  Variable,
-  Intersection,
-  Void,
-  Mixed,
-  Any,
-  Nullable,
   Literal,
-  Tuple,
-  Import,
+  MemberExpression,
+  Mixed,
+  New,
+  Null,
+  Nullable,
+  Number,
+  Obj,
+  ObjectPattern,
+  Param,
   Program,
-  AnyTypeKind,
-  AnyValueKind,
-  AnyKind,
+  Property,
+  Spread,
+  String,
+  TemplateElement,
+  TemplateExpression,
+  TemplateLiteral,
+  Tuple,
+  Typeof,
+  TypeParam,
+  Unary,
+  Union,
+  Variable,
+  Void,
 } from 'ert-types';
 */
 
@@ -125,6 +127,11 @@ converters.array = (type /*:ArrayExpression*/) /*:string*/ => {
   return `[${mapConvertAndJoin(type.elements)}]`;
 };
 
+converters.property = () => {
+  console.error('The converting of properties should be handled by the containing data structure')
+  return ''
+}
+
 converters.object = (type /*:Obj*/) /*:string*/ => {
   return `{ ${type.members
     .map(m => `${convert(m.key)}: ${m.value.defaultValue || convert(m.value)}`)
@@ -186,8 +193,25 @@ converters.variable = (type /*:Variable*/) /*:string*/ => {
   return convert(val.id);
 };
 
-converters.templateExpression = ({ tag }) => {
-  return `${convert(tag)}`;
+converters.templateExpression = type => {
+  return `${convert(type.tag)}`;
+};
+
+converters.templateLiteral = type => {
+  let str = type.quasis.reduce(function(newStr, v, i) {
+    let quasi = convert(v);
+    newStr = `${newStr}${quasi}`;
+    if (type.expressions[i]) {
+      let exp = convert(type.expressions[i]);
+      newStr = `${newStr}\${${exp}}`;
+    }
+    return newStr;
+  }, '');
+  return `\`${str}\``;
+};
+
+converters.templateElement = type => {
+  return type.value.cooked.toString();
 };
 
 function convert(type /*:AnyKind*/) {

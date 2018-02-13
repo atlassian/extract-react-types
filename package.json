@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "ert-types": "^0.0.1",
+    "extract-react-types": "^0.7.1",
     "husky": "^0.14.3",
     "jest": "^22.2.2",
     "prettier": "^1.10.2"

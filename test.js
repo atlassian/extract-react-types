@@ -1,6 +1,21 @@
+// @flow
 const convert = require('./index');
 const { resolveToLast } = require('./utils');
 const extractReactTypes = require('extract-react-types');
+
+const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
+  let file = `
+class Component extends React.Component<${propTypes}> {
+  defaultProps = ${defaultProps}
+}`;
+  let res = extractReactTypes(file, type);
+  return res.classes[0].members;
+};
+
+const getSingleDefault = (defaultPropVal, type) => {
+  return assembleERTAST(`{ a: any }`, `{ a: ${defaultPropVal} }`)[0].default;
+};
+
 const base = {
   kind: 'memberExpression',
   property: {
@@ -87,6 +102,20 @@ describe('kind 2 string tests', () => {
         it('and the final type is of type id', () => {
           expect(convert(nestedMemberExpressionId)).toBe('testObject.a.a');
         });
+      });
+    });
+    describe('templateLiteral', () => {
+      it('should resolve to same string', () => {
+        let str = '`abc${a}de`';
+        let reId = getSingleDefault(str);
+        let final = convert(reId);
+        expect(final).toBe(str);
+      });
+      it('should resolve excaped characters', () => {
+        let str = '`abc${a}de\n`';
+        let reId = getSingleDefault(str);
+        let final = convert(reId);
+        expect(final).toBe(str);
       });
     });
   });
