@@ -516,6 +516,20 @@ const TESTS = [
   `
   },
   {
+    name: "spread element cannot find",
+    typeSystem: "flow",
+    code: `
+    import something from 'somewhere'
+
+    class Component extends React.Component<{ a: boolean, b: boolean }> {
+      defaultProps = {
+        ...something,
+        b: false
+      }
+    }
+  `
+  },
+  {
     name: "string literal",
     typeSystem: "flow",
     code: `

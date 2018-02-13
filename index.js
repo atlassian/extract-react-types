@@ -52,8 +52,6 @@ import type {
 } from 'ert-types';
 */
 
-// TODO: Add TemplateElement converter
-
 const createBabelFile = require("babel-file");
 const { loadImportSync } = require("babel-file-loader");
 const { isFlowIdentifier } = require("babel-flow-identifiers");
@@ -811,10 +809,17 @@ converters.ObjectTypeSpreadProperty = (path, context)/*: Spread*/ => {
 function importConverterGeneral(path, context)/*: Import */ {
   let importKind = path.node.importKind || path.parent.importKind || "value";
   let moduleSpecifier = path.parent.source.value;
+  let name;
+  let kind = path.parent.importKind;
+  if (path.type === "ImportDefaultSpecifier" && kind === "value") {
+    name = "default";
+  } else if (path.node.imported) {
+    name = path.node.imported.name;
+  } else {
+    name = path.node.local.name;
+  }
 
   if (!path.hub.file.opts.filename) {
-    let name = path.node.imported.name;
-
     return {
       kind: "import",
       importKind,
@@ -822,18 +827,8 @@ function importConverterGeneral(path, context)/*: Import */ {
       moduleSpecifier
     };
   } else {
-    let name;
-    let kind = path.parent.importKind;
     if (kind === "typeof") {
       throw new Error({ path, error: "import typeof is unsupported" });
-    }
-
-    if (path.type === "ImportDefaultSpecifier" && kind === "value") {
-      name = "default";
-    } else if (path.node.imported) {
-      name = path.node.imported.name;
-    } else {
-      name = path.node.local.name;
     }
 
     if (!/^\./.test(path.parent.source.value)) {
