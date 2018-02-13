@@ -521,9 +521,9 @@ const TESTS = [
     code: `
     import something from 'somewhere'
 
-    class Component extends React.Component<{ a: boolean, b: boolean }> {
+    class Component extends React.Component<{ a: any, b: boolean }> {
       defaultProps = {
-        ...something,
+        a: { ...something },
         b: false
       }
     }
@@ -788,6 +788,17 @@ const TESTS = [
       class Component extends React.Component<{ a: string }> {
         defaultProps = {
           a: \`asdf\${abcd}\`,
+        }
+      }
+    `
+  },
+  {
+    name: "Should handle rest element",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: () => void }> {
+        defaultProps = {
+          a: ({ a, ...restOfThis }) => {},
         }
       }
     `

@@ -17,7 +17,7 @@ Object {
                 "kind": "param",
                 "type": null,
                 "value": Object {
-                  "kind": "AssignmentPattern",
+                  "kind": "assignmentPattern",
                   "left": Object {
                     "kind": "id",
                     "name": "b",
@@ -117,6 +117,78 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "null",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`Should handle rest element 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "objectPattern",
+                  "members": Array [
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "a",
+                        "type": null,
+                      },
+                      "kind": "property",
+                      "value": Object {
+                        "kind": "id",
+                        "name": "a",
+                        "type": null,
+                      },
+                    },
+                    Object {
+                      "argument": Object {
+                        "kind": "id",
+                        "name": "restOfThis",
+                        "type": null,
+                      },
+                      "kind": "rest",
+                    },
+                  ],
+                },
+              },
+            ],
+            "returnType": null,
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "void",
+            },
           },
         },
       ],
@@ -1896,6 +1968,21 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
+          "default": Object {
+            "kind": "object",
+            "members": Array [
+              Object {
+                "kind": "spread",
+                "value": Object {
+                  "importKind": "value",
+                  "kind": "import",
+                  "moduleSpecifier": "somewhere",
+                  "name": "default",
+                  "referenceIdName": "something",
+                },
+              },
+            ],
+          },
           "key": Object {
             "kind": "id",
             "name": "a",
@@ -1903,7 +1990,7 @@ Object {
           "kind": "property",
           "optional": false,
           "value": Object {
-            "kind": "boolean",
+            "kind": "any",
           },
         },
         Object {
