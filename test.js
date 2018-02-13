@@ -118,6 +118,37 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(str);
       });
     });
+    describe('object', () => {
+      it('should test a spread object', () => {
+        let defaults = `{ a: { ...something, b: "val" } }`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(defaults);
+      });
+    });
+    describe('function', () => {
+      it('should test a spread object', () => {
+        let defaults = `() => {}`;
+        let returnVal = `() => undefined`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(returnVal);
+      });
+      it('should test a default of a function type', () => {
+        let defaults = `(a = () => {}) => {}`;
+        let returnVal = `(a = () => undefined) => undefined`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(returnVal);
+      });
+      it.only('should handle a spread', () => {
+        let defaults = `({ ...res }) => {}`;
+        let returnVal = `(a = () => undefined) => undefined`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(returnVal);
+      });
+    });
   });
   describe('utilities', () => {
     describe('resolveLast', () => {});

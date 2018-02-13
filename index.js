@@ -8,6 +8,7 @@ import type {
   AnyValueKind,
   // The below are base types in extract-react-types
   Any,
+  Rest,
   ArrayExpression,
   AssignmentPattern,
   BinaryExpression,
@@ -51,173 +52,216 @@ import type {
   Union,
   Variable,
   Void,
-} from 'ert-types';
+} from 'extract-react-types/index.flow.js';
+
 */
 
-const { resolveToLast, mapConvertAndJoin } = require('./utils');
+const { resolveToLast } = require('./utils');
 
-const converters = {};
+const unaryWhiteList = ['-', '+'];
 
-/*
+function mapConvertAndJoin(array, joiner = ', ') {
+  if (!Array.isArray(array)) return '';
+  return array.map(convert).join(joiner);
+}
+
+const converters = {
+  /*
   If the value here is undefined, we can safely assume that we're dealing with
   a BooleanTypeAnnotation and not a BooleanLiteralTypeAnnotation.
-*/
-converters.boolean = (type /*:Boolean*/) /*:string*/ =>
-  type.value ? type.value.toString() : 'boolean';
-/*
-  If the value here is undefined, we can safely assume that we're dealing with
-  a NumberTypeAnnotation and not a NumberLiteralTypeAnnotation.
-*/
-converters.number = (type /*:Number*/) /*:string*/ =>
-  type.value ? type.value.toString() : 'number';
-/*
+  */
+  boolean: (type /*: Boolean*/) /*:string*/ =>
+    type.value ? type.value.toString() : type.kind,
+  /*
+    If the value here is undefined, we can safely assume that we're dealing with
+    a NumberTypeAnnotation and not a NumberLiteralTypeAnnotation.
+    */
+  number: (type /*: Number*/) /*:string*/ =>
+    type.value ? type.value.toString() : type.kind,
+  /*
   If the value here is undefined, we can safely assume that we're dealing with
   a StringTypeAnnotation and not a StringLiteralTypeAnnotation.
 */
-converters.string = (type /*:any*/) /*:string*/ => `"${type.value.toString()}"`;
-converters.custom = (type /*:any*/) /*:string*/ => type.value.toString();
-converters.any = (type /*:AnyValueKind*/) /*:string*/ => type.value.toString();
-converters.void = () /*:string*/ => 'undefined';
-converters.mixed = (type /*:Mixed*/) /*:string*/ => type.value.toString();
-converters.null = () /*:string*/ => 'null';
-converters.unary = (type /*:Unary*/) /*:string*/ =>
-  `${type.operator}${convert(type.argument)}`;
+  string: (type /*: String*/) /*:string*/ =>
+    type.value ? `"${type.value.toString()}"` : type.kind,
+  custom: (type /*:any*/) /*:string*/ => type.value.toString(),
+  any: (type /*: Any*/) /*:string*/ => type.kind,
+  void: () /*:string*/ => 'undefined',
+  mixed: (type /*:Mixed*/) /*:string*/ => type.kind,
+  null: () /*:string*/ => 'null',
 
-converters.id = (type /*:Id*/) /*:string*/ => {
-  if (type.resolvedVal) {
-    return convert(type.resolvedVal);
-  }
-  return type.name;
-};
+  unary: (type /*:Unary*/) /*:string*/ => {
+    let space = unaryWhiteList.includes(type.operator) ? '' : ' ';
+    return `${type.operator}${space}${convert(type.argument)}`;
+  },
 
-converters.JSXMemberExpression = (type /*:any*/) /*:string*/ => {
-  return `${convert(type.object)}.${convert(type.property)}`;
-};
-converters.JSXExpressionContainer = (type /*:any*/) /*:string*/ => {
-  return `{ ${convert(type.expression)} }`;
-};
+  id: (type /*:Id*/) /*:string*/ => {
+    return type.name;
+  },
 
-converters.JSXElement = (type /*:any*/) /*:string*/ => {
-  return `<${convert(type.value.name)} ${type.value.attributes.map(attribute =>
-    convert(attribute),
-  )} />`;
-};
+  JSXMemberExpression: (type /*:any*/) /*:string*/ => {
+    return `${convert(type.object)}.${convert(type.property)}`;
+  },
+  JSXExpressionContainer: (type /*:any*/) /*:string*/ => {
+    return `{ ${convert(type.expression)} }`;
+  },
 
-converters.JSXIdentifier = (type /*:any*/) /*:string*/ => {
-  return `${type.value}`;
-};
+  JSXElement: (type /*: JSXElement */) /*:string*/ => {
+    return `<${convert(type.value.name)} ${type.value.attributes.map(
+      attribute => convert(attribute),
+    )} />`;
+  },
 
-converters.JSXAttribute = (type /*:any*/) /*:string*/ => {
-  return `${convert(type.name)}= ${convert(type.value)}`;
-};
+  JSXIdentifier: (type /*: JSXIdentifier */) /*:string*/ => {
+    return `${type.value}`;
+  },
 
-converters.binary = (type /*:BinaryExpression*/) /*:string*/ => {
-  const left = convert(type.left);
-  const right = convert(type.right);
-  return `${left} ${type.operator} ${right}`;
-};
+  JSXAttribute: (type /*: JSXAttribute */) /*:string*/ => {
+    return `${convert(type.name)}= ${convert(type.value)}`;
+  },
 
-converters.function = (type /*:Func*/) /*:string*/ => {
-  return `(${type.parameters.map(p => convert(p.value)).join(', ')}) => ${
-    type.returnType
-  }`;
-};
+  binary: (type /*: BinaryExpression */) /*:string*/ => {
+    const left = convert(type.left);
+    const right = convert(type.right);
+    return `${left} ${type.operator} ${right}`;
+  },
 
-converters.array = (type /*:ArrayExpression*/) /*:string*/ => {
-  return `[${mapConvertAndJoin(type.elements)}]`;
-};
+  function: (type /*: Func */) /*:string*/ => {
+    return `(${mapConvertAndJoin(type.parameters)}) => ${
+      type.returnType === null ? 'undefined' : convert(type.returnType)
+    }`;
+  },
 
-converters.property = () => {
-  console.error('The converting of properties should be handled by the containing data structure')
-  return ''
-}
+  objectPattern: (type /*: ObjectPattern */) => {
+    return `{ ${mapConvertAndJoin(type.members)} }`;
+  },
 
-converters.object = (type /*:Obj*/) /*:string*/ => {
-  return `{ ${type.members
-    .map(m => `${convert(m.key)}: ${m.value.defaultValue || convert(m.value)}`)
-    .join(', ')} }`;
-};
+  rest: (type /*: Rest */) => {
+    return `...${convert(type.argument)}`;
+  },
 
-converters.memberExpression = (type /*:MemberExpression*/) /*:string*/ => {
-  const object = resolveToLast(type.object);
-  const property = convert(type.property);
-  switch (object.kind) {
-    case 'id':
-      return `${convert(type.object)}.${property}`;
-    case 'object':
-      const mem = object.members.find(m => {
-        if (typeof m.key !== 'string') {
-          // Issue here is that convert(key) can result in either a String type or an Id type,
-          // one returns the value wrapped in quotations, the other does not.
-          // We're stripping the quotations so we can do an accurate match against the property which is always an Id
-          return convert(m.key).replace(/"/g, '') === property;
+  assignmentPattern: (type /*: AssignmentPattern */) /*:string*/ => {
+    return `${convert(type.left)} = ${convert(type.right)}`;
+  },
+
+  param: (type /*: Param */) => {
+    // this will not hold once we have types
+    return convert(type.value);
+  },
+
+  array: (type /*:ArrayExpression*/) /*:string*/ => {
+    return `[${mapConvertAndJoin(type.elements)}]`;
+  },
+
+  spread: (type /*: Spread */) /*:string*/ => {
+    return `...${convert(type.value)}`;
+  },
+
+  property: (type /*: Property */) /*:string*/ => {
+    return `${convert(type.key)}: ${convert(type.value)}`;
+  },
+
+  object: (type /*:Obj*/) /*:string*/ => {
+    return `{ ${mapConvertAndJoin(type.members)} }`;
+  },
+
+  memberExpression: (type /*:MemberExpression*/) /*:string*/ => {
+    const object = resolveToLast(type.object);
+    const property = convert(type.property);
+    switch (object.kind) {
+      case 'id':
+        return `${convert(type.object)}.${property}`;
+      case 'object':
+        const mem = object.members.find(m => {
+          if (typeof m.key !== 'string') {
+            // Issue here is that convert(key) can result in either a String type or an Id type,
+            // one returns the value wrapped in quotations, the other does not.
+            // We're stripping the quotations so we can do an accurate match against the property which is always an Id
+            return convert(m.key).replace(/"/g, '') === property;
+          }
+          return m.key === property;
+        });
+        if (mem && mem.value) {
+          return convert(mem.value);
+        } else {
+          console.error(`${property} not found in ${convert(object)}`);
+          return 'undefined';
         }
-        return m.key === property;
-      });
-      if (mem && mem.value) {
-        return convert(mem.value);
-      } else {
-        console.error(`${property} not found in ${convert(object)}`);
-        return 'undefined';
-      }
-    default:
-      console.error();
-      return '';
-  }
-};
-
-converters.call = (type /*:Call*/) /*:string*/ => {
-  return `${convert(type.callee)}(${mapConvertAndJoin(type.args)})`;
-};
-
-converters.new = (type /*:New*/) /*:string*/ => {
-  const callee = convert(type.callee);
-  const args = mapConvertAndJoin(type.args);
-  return `new ${callee}(${args})`;
-};
-
-converters.external = (type /*:any*/) /*:string*/ => {
-  if (type.importKind === 'value') {
-    return `${type.moduleSpecifier}.${type.name}`;
-  }
-  // eslint-disable-next-line no-console
-  console.warn('could not convert external', type);
-  return '';
-};
-
-converters.variable = (type /*:Variable*/) /*:string*/ => {
-  const val = type.declarations[type.declarations.length - 1];
-  if (val.value) {
-    return convert(val.value);
-  }
-  return convert(val.id);
-};
-
-converters.templateExpression = type => {
-  return `${convert(type.tag)}`;
-};
-
-converters.templateLiteral = type => {
-  let str = type.quasis.reduce(function(newStr, v, i) {
-    let quasi = convert(v);
-    newStr = `${newStr}${quasi}`;
-    if (type.expressions[i]) {
-      let exp = convert(type.expressions[i]);
-      newStr = `${newStr}\${${exp}}`;
+      default:
+        console.error();
+        return '';
     }
-    return newStr;
-  }, '');
-  return `\`${str}\``;
+  },
+
+  call: (type /*:Call*/) /*:string*/ => {
+    return `${convert(type.callee)}(${mapConvertAndJoin(type.args)})`;
+  },
+
+  new: (type /*:New*/) /*:string*/ => {
+    const callee = convert(type.callee);
+    const args = mapConvertAndJoin(type.args);
+    return `new ${callee}(${args})`;
+  },
+
+  external: (type /*:any*/) /*:string*/ => {
+    if (type.importKind === 'value') {
+      return `${type.moduleSpecifier}.${type.name}`;
+    }
+    // eslint-disable-next-line no-console
+    console.warn('could not convert external', type);
+    return '';
+  },
+
+  variable: (type /*:Variable*/) /*:string*/ => {
+    const val = type.declarations[type.declarations.length - 1];
+    if (val.value) {
+      return convert(val.value);
+    }
+    return convert(val.id);
+  },
+
+  templateExpression: (type /*: TemplateExpression */) => {
+    return `${convert(type.tag)}`;
+  },
+
+  templateLiteral: (type /*: TemplateLiteral */) => {
+    let str = type.quasis.reduce(function(newStr, v, i) {
+      let quasi = convert(v);
+      newStr = `${newStr}${quasi}`;
+      if (type.expressions[i]) {
+        let exp = convert(type.expressions[i]);
+        newStr = `${newStr}\${${exp}}`;
+      }
+      return newStr;
+    }, '');
+    return `\`${str}\``;
+  },
+
+  templateElement: (type /*: TemplateElement */) => {
+    return type.value.cooked.toString();
+  },
+
+  // We should write these
+  JSXOpeningElement: (type /*: any */) /*: string*/ => '',
+  ObjectPattern: (type /*: any */) /*: string*/ => '',
+  class: (type /*: any */) /*: string*/ => '',
+  exists: (type /*: any */) /*: string*/ => '',
+  generic: (type /*: any */) /*: string*/ => '',
+  import: (type /*: any */) /*: string*/ => '',
+  intersection: (type /*: any */) /*: string*/ => '',
+  literal: (type /*: any */) /*: string*/ => '',
+  nullable: (type /*: any */) /*: string*/ => '',
+  program: (type /*: any */) /*: string*/ => '',
+  tuple: (type /*: any */) /*: string*/ => '',
+  typeParam: (type /*: any */) /*: string*/ => '',
+  typeof: (type /*: any */) /*: string*/ => '',
+  union: (type /*: any */) /*: string*/ => '',
 };
 
-converters.templateElement = type => {
-  return type.value.cooked.toString();
-};
-
-function convert(type /*:AnyKind*/) {
+function convert(type /*: any */) {
   const converter = converters[type.kind];
   if (!converter) {
-    console.error('could not find converter for', type.kind);
+    console.trace('could not find converter for', type.kind);
   } else {
     return converter(type);
   }

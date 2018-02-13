@@ -11,8 +11,3 @@ module.exports.resolveToLast = function resolveToLast (type/*: MemberExpression 
       break;
   }
 }
-
-module.exports.mapConvertAndJoin = function mapConvertAndJoin (array, joiner = ',') {
-  if (!Array.isArray(array)) return '';
-  return array.map(convert).join(joiner);
-};
