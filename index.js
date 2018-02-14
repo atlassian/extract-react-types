@@ -47,7 +47,7 @@ import type {
   TemplateLiteral,
   Tuple,
   Typeof,
-  TypeParam,
+  TypeParams,
   Unary,
   Union,
   Variable,
@@ -72,7 +72,7 @@ const converters = {
   */
   boolean: (type /*: Boolean*/, mode /*: string */) /*:string*/ =>
     type.value != null ? type.value.toString() : type.kind,
-  exists: (type /*: Exist */, mode /*: string */) /*: string*/ => `*`,
+  exists: (type /*: Exists */, mode /*: string */) /*: string*/ => `*`,
   /*
     If the value here is undefined, we can safely assume that we're dealing with
     a NumberTypeAnnotation and not a NumberLiteralTypeAnnotation.
