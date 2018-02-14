@@ -11,7 +11,5 @@
     "jest": "^22.2.2",
     "prettier": "^1.10.2"
   },
-  "dependencies": {
-    "extract-react-types": "^0.7.1"
-  }
+  "dependencies": {}
 }

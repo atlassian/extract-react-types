@@ -5,16 +5,24 @@ const extractReactTypes = require('extract-react-types');
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   let file = `
-class Component extends React.Component<${propTypes}> {
-  defaultProps = ${defaultProps}
-}`;
+  class Component extends React.Component<${propTypes}> {
+    defaultProps = ${defaultProps}
+  }`;
   let res = extractReactTypes(file, type);
   return res.classes[0].members;
 };
 
-const getSingleDefault = (defaultPropVal, type) => {
+const getSingleDefault = (defaultPropVal) => {
   return assembleERTAST(`{ a: any }`, `{ a: ${defaultPropVal} }`)[0].default;
 };
+const getSingleProp = (defaultPropType) => {
+  const propTypes = assembleERTAST(`{ a: ${defaultPropType} }`, `{}`)[0];
+  return convert(propTypes.value);
+}
+const getSingleTSPropTypes = (defaultPropType) => {
+  const propTypes = assembleERTAST(`{ a: ${defaultPropType} }`, `{}`, 'typescript')[0];
+  return convert(propTypes);
+}
 
 const base = {
   kind: 'memberExpression',
@@ -81,6 +89,7 @@ const nestedMemberExpressionObject = {
 
 describe('kind 2 string tests', () => {
   describe('converters', () => {
+
     describe('memberExpression', () => {
       describe('If the object property is of the type Obj', () => {
         it('and the property does not exist, we should log an error and return an empty string', () => {
@@ -102,6 +111,14 @@ describe('kind 2 string tests', () => {
         it('and the final type is of type id', () => {
           expect(convert(nestedMemberExpressionId)).toBe('testObject.a.a');
         });
+      });
+    });
+    describe('exists', () => {
+      it('should return a string representation of the exist kind', () => {
+        let str = `*`;
+        let result = '*';
+        let final = getSingleProp(str);
+        expect(final).toBe(result);
       });
     });
     describe('templateLiteral', () => {
@@ -141,14 +158,85 @@ describe('kind 2 string tests', () => {
         let final = convert(reId);
         expect(final).toBe(returnVal);
       });
-      it.only('should handle a spread', () => {
+      it('should handle a spread', () => {
         let defaults = `({ ...res }) => {}`;
-        let returnVal = `(a = () => undefined) => undefined`;
+        let returnVal = `({ ...res }) => undefined`;
         let reId = getSingleDefault(defaults);
         let final = convert(reId);
         expect(final).toBe(returnVal);
       });
     });
+    describe('ObjectPattern', () => {
+      it('should', () => {
+        let defaults = `({ a, b }) => {}`;
+        let returnVal = `({ a, b }) => undefined`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(returnVal);
+      });
+
+      it('should handle assignment', () => {
+        let defaults = `({ a = 24, b = 3 }) => {}`;
+        let returnVal = `({ a = 24, b = 3 }) => undefined`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(returnVal);
+      });
+    });
+    describe('JSXElement', () => {
+      it('resolve to a self-closing JSXElement with attributes', () => {
+        let defaults = `<div a={3} b={4} />`;
+        let reId = getSingleDefault(defaults);
+        let final = convert(reId);
+        expect(final).toBe(defaults);
+      });
+    });
+    describe('intersection', () => {
+      it('should return a string representation of an intersection type', () => {
+        let prop = `true & false`;
+        let final = getSingleProp(prop);
+        expect(final).toBe(prop);
+      });
+    });
+    describe('nullable', () => {
+      it('should return a string representation of a nullable type value', () => {
+        let prop = `{ b: ?string }`;
+        let final = getSingleProp(prop);
+        expect(final).toBe(prop);
+      })
+    });
+    describe('typeof', () => {
+      it('if no name property is present it should return a string representation of a typeof invocation', () => {
+        let prop = `typeof 34`;
+        let result = 'number';
+        let final = getSingleProp(prop);
+        expect(final).toBe(result);
+      });
+      it('if a name property is present, it should return a string representation of the id of the type', () => {
+        let prop = 'typeof Foo';
+        let final = getSingleProp(prop);
+        expect(final).toBe(prop);
+      });
+    });
+    describe('generic', () => {
+      it('If type params exist it should return a string representation of a generic type with params', () => {
+        let prop = `Array<string>`;
+        let final = getSingleProp(prop);
+        expect(final).toBe(prop);
+      });
+      it('If type params do not exist, it should return the name of the type as a string', () => {
+        let prop = `Foo`;
+        let final = getSingleProp(prop);
+        expect(final).toBe(prop);
+      })
+    });
+    describe('tuples', () => {
+      it('Resolves down to a string representation of a tuple', () => {
+        let prop = `[string, number]`;
+        let final = getSingleTSPropTypes(prop, 'typescript');
+        expect(final).toBe(prop);
+      })
+    })
   });
   describe('utilities', () => {
     describe('resolveLast', () => {});
