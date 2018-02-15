@@ -438,10 +438,10 @@ converters.UnionTypeAnnotation = (path, context) /*: K.Union*/ => {
 };
 
 converters.TypeParameterInstantiation = (path, context) /*: K.TypeParams*/ => {
-  return path.get("params").map(p => ({
+  return {
     kind: "typeParams",
-    type: convert(p, context)
-  }));
+    params: path.get("params").map(p => convert(p, context))
+  };
 };
 
 converters.GenericTypeAnnotation = (path, context) /*: K.Generic*/ => {

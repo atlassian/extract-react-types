@@ -227,14 +227,14 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParams",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "string",
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
@@ -543,14 +543,14 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParams",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "boolean",
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
@@ -584,10 +584,10 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParams",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "union",
                   "types": Array [
                     Object {
@@ -598,8 +598,8 @@ Object {
                     },
                   ],
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
