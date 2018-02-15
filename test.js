@@ -188,6 +188,13 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(str);
       });
     });
+    describe('any', () => {
+      it('should resolve to whatever type kind is passed in', () => {
+        let str = `any`;
+        let final = getSingleProp(str);
+        expect(final).toBe(str);
+      })
+    })
     describe('object', () => {
       it('should test a spread object', () => {
         let defaults = `{ a: { ...something, b: "val" } }`;
