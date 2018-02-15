@@ -270,7 +270,7 @@ const converters = {
 function convert(type /*: any */, mode /*: string*/ = 'value') {
   const converter = converters[type.kind];
   if (!converter) {
-    console.trace('could not find converter for', type.kind);
+    console.error('could not find converter for', type.kind);
   } else {
     return converter(type);
   }
