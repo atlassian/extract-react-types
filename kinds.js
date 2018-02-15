@@ -77,7 +77,7 @@ export type New = {
   // typing args causes 1000 errors
   args: Array<AnyValueKind>
 };
-export type Typeof = { kind: "typeof", name: string };
+export type Typeof = { kind: "typeof", name: string, type: AnyKind };
 export type Exists = { kind: "exists" };
 export type Number = {
   kind: "number",
