@@ -1,7 +1,6 @@
 [ignore]
 
 [include]
-ert-types
 
 [libs]
 
