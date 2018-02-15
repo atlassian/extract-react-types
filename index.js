@@ -186,8 +186,10 @@ const converters = {
           console.error(`${property} not found in ${convert(object)}`);
           return 'undefined';
         }
+      case 'import':
+        return `${convert(type.object)}.${property}`;
       default:
-        console.error();
+        console.error('failed to resolve member expression');
         return '';
     }
   },
@@ -267,6 +269,13 @@ const converters = {
   },
   union: (type /*: K.Union */, mode /*: string */) /*: string*/ =>
     `${mapConvertAndJoin(type.types, ' | ')}`,
+  import: (type /*: K.Import */, mode /*: string */) /*: string*/ => {
+    if (type.name === 'default') {
+      return `${type.moduleSpecifier}`;
+    } else {
+      return `${type.moduleSpecifier}.${type.name}`;
+    }
+  },
 
   // TS
   tuple: (type /*: K.Tuple */, mode /*: string */) /*: string*/ =>
