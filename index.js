@@ -161,6 +161,12 @@ const converters = {
   ) /*:string*/ => {
     const object = resolveToLast(type.object);
     const property = convert(type.property);
+    
+    if (!object) {
+      console.error('Object property does not exist on this member expression');
+      return '';
+    }
+
     switch (object.kind) {
       case 'id':
         return `${convert(type.object)}.${property}`;
@@ -268,6 +274,11 @@ const converters = {
 };
 
 function convert(type /*: any */, mode /*: string*/ = 'value') {
+  if (!type) {
+    console.error('No type argument has been passed in');
+    return '';
+  }
+
   const converter = converters[type.kind];
   if (!converter) {
     console.error('could not find converter for', type.kind);
