@@ -132,7 +132,6 @@ const converters = {
     const sameId =
       type.key.kind === 'id' &&
       type.value.kind === 'id' &&
-      type.key.kind === type.value.kind &&
       type.key.name === type.value.name;
 
     const assignmentSameId =
