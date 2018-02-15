@@ -267,11 +267,7 @@ const converters = {
     `[${mapConvertAndJoin(type.types)}]`,
 };
 
-function convert(
-  type /*: any */,
-  mode /*: string*/ = 'value',
-  converters /*: Object*/ = converters,
-) {
+function convert(type /*: any */, mode /*: string*/ = 'value') {
   const converter = converters[type.kind];
   if (!converter) {
     console.trace('could not find converter for', type.kind);

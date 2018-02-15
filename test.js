@@ -12,17 +12,21 @@ const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   return res.classes[0].members;
 };
 
-const getSingleDefault = (defaultPropVal) => {
+const getSingleDefault = defaultPropVal => {
   return assembleERTAST(`{ a: any }`, `{ a: ${defaultPropVal} }`)[0].default;
 };
-const getSingleProp = (defaultPropType) => {
+const getSingleProp = defaultPropType => {
   const propTypes = assembleERTAST(`{ a: ${defaultPropType} }`, `{}`)[0];
   return convert(propTypes.value);
-}
-const getSingleTSPropTypes = (defaultPropType) => {
-  const propTypes = assembleERTAST(`{ a: ${defaultPropType} }`, `{}`, 'typescript')[0];
+};
+const getSingleTSPropTypes = defaultPropType => {
+  const propTypes = assembleERTAST(
+    `{ a: ${defaultPropType} }`,
+    `{}`,
+    'typescript',
+  )[0];
   return convert(propTypes);
-}
+};
 
 const base = {
   kind: 'memberExpression',
@@ -127,7 +131,7 @@ describe('kind 2 string tests', () => {
           const result = `{ c: boolean }`;
           const final = getSingleProp(str);
           expect(final).toBe(result);
-        })
+        });
       });
       describe('If a value exists', () => {
         it('return the string representatio of the value', () => {
@@ -152,7 +156,7 @@ describe('kind 2 string tests', () => {
           const final = getSingleProp(str);
           expect(final).toBe(result);
         });
-      })
+      });
     });
     describe('string', () => {
       describe('If no value exists', () => {
@@ -168,7 +172,7 @@ describe('kind 2 string tests', () => {
           const final = getSingleProp(str);
           expect(final).toBe(result);
         });
-      })
+      });
     });
     describe('templateLiteral', () => {
       it('should resolve to same string', () => {
@@ -252,7 +256,7 @@ describe('kind 2 string tests', () => {
         let prop = `{ b: ?string }`;
         let final = getSingleProp(prop);
         expect(final).toBe(prop);
-      })
+      });
     });
     describe('typeof', () => {
       it('if no name property is present it should return a string representation of a typeof invocation', () => {
@@ -277,15 +281,15 @@ describe('kind 2 string tests', () => {
         let prop = `Foo`;
         let final = getSingleProp(prop);
         expect(final).toBe(prop);
-      })
+      });
     });
     describe('tuples', () => {
       it('Resolves down to a string representation of a tuple', () => {
         let prop = `[string, number]`;
         let final = getSingleTSPropTypes(prop, 'typescript');
         expect(final).toBe(prop);
-      })
-    })
+      });
+    });
   });
   describe('utilities', () => {
     describe('resolveLast', () => {});
