@@ -270,7 +270,7 @@ const converters = {
 function convert(
   type /*: any */,
   mode /*: string*/ = 'value',
-  converters: Object = converters,
+  converters /*: Object*/ = converters,
 ) {
   const converter = converters[type.kind];
   if (!converter) {
