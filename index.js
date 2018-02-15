@@ -5,7 +5,7 @@ import type {
   String,
   Param,
   TemplateElement,
-  TypeParam,
+  TypeParams,
   Id,
   TemplateLiteral,
   TemplateExpression,
@@ -130,6 +130,7 @@ const getDefaultProps = (path, context) => {
   return defaultProps;
 };
 
+
 converters.Program = (path, context) /*: Program*/ => {
   let result = {};
   result.kind = "program";
@@ -231,6 +232,9 @@ converters.ObjectPattern = (path, context) /*: ObjectPattern*/ => {
     members
   };
 };
+converters.ClassExpression = (path, context) => {
+  console.warn(path.node);
+}
 
 converters.ClassDeclaration = (path, context) /*: ClassKind*/ => {
   if (!isReactComponentClass(path)) {
@@ -272,7 +276,7 @@ converters.JSXExpressionContainer = (
 ) /*: JSXExpressionContainer*/ => {
   return {
     kind: "JSXExpressionContainer",
-    value: convert(path.get("expression"), context)
+    expression: convert(path.get("expression"), context)
   };
 };
 
@@ -343,7 +347,7 @@ converters.TypeofTypeAnnotation = (path, context) /*: Typeof*/ => {
   return {
     kind: "typeof",
     type,
-    name: type.value.name
+    name: resolveFromGeneric(type).name
   };
 };
 
@@ -480,11 +484,11 @@ converters.UnionTypeAnnotation = (path, context) /*: Union*/ => {
   return { kind: "union", types };
 };
 
-converters.TypeParameterInstantiation = (path, context) /*: TypeParam*/ => {
-  return path.get("params").map(p => ({
-    kind: "typeParam",
-    type: convert(p, context)
-  }));
+converters.TypeParameterInstantiation = (path, context) /*: TypeParams */ => {
+  return {
+    kind: 'typeParams',
+    params: path.get("params").map(p => (convert(p, context))),
+  }
 };
 
 converters.GenericTypeAnnotation = (path, context) /*: Generic*/ => {

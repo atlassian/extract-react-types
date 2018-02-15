@@ -5,7 +5,7 @@ export type Param = {
   value: AnyKind,
   type: AnyKind | null
 };
-export type TypeParam = { kind: "typeParam", type: AnyTypeKind };
+export type TypeParams = { kind: "typeParams", params: Array<AnyTypeKind> };
 export type Id = { kind: "id", name: string, type?: $Diff<AnyKind, Id> | null };
 export type TemplateLiteral = {
   kind: "templateLiteral",
@@ -33,7 +33,7 @@ export type Property = {
   value: AnyKind,
   optional?: boolean
 };
-export type ClassKind = { kind: "class", name: Id } | Generic;
+export type ClassKind = { kind: "class", name: Id };
 export type Spread = {
   kind: "spread",
   value: Property | Generic
@@ -50,7 +50,7 @@ export type JSXAttribute = {
 };
 export type JSXExpressionContainer = {
   kind: "JSXExpressionContainer",
-  value: any
+  expression: any
 };
 export type JSXElement = { kind: "JSXElement", value: any };
 export type JSXIdentifier = { kind: "JSXIdentifier", value: any };
@@ -154,7 +154,7 @@ export type AnyTypeKind =
   | String
   | Tuple
   | Typeof
-  | TypeParam
+  | TypeParams
   | Unary
   | Union
   | Void;
