@@ -89,7 +89,6 @@ const nestedMemberExpressionObject = {
 
 describe('kind 2 string tests', () => {
   describe('converters', () => {
-
     describe('memberExpression', () => {
       describe('If the object property is of the type Obj', () => {
         it('and the property does not exist, we should log an error and return an empty string', () => {
@@ -114,12 +113,62 @@ describe('kind 2 string tests', () => {
       });
     });
     describe('exists', () => {
-      it('should return a string representation of the exist kind', () => {
-        let str = `*`;
-        let result = '*';
-        let final = getSingleProp(str);
+      it('return a string representation of the exist kind', () => {
+        const str = `*`;
+        const result = '*';
+        const final = getSingleProp(str);
         expect(final).toBe(result);
       });
+    });
+    describe('boolean', () => {
+      describe('If no value exists', () => {
+        it('return the string representation of the kind', () => {
+          const str = `{ c: boolean }`;
+          const result = `{ c: boolean }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        })
+      });
+      describe('If a value exists', () => {
+        it('return the string representatio of the value', () => {
+          const str = `{ c: true }`;
+          const result = `{ c: true }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        });
+      });
+    });
+    describe('number', () => {
+      describe('If no value exists', () => {
+        it('return the string representation of the kind', () => {
+          const str = `{ c: number }`;
+          const result = `{ c: number }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        });
+        it('return the string representatio of the value', () => {
+          const str = `{ c: 3 }`;
+          const result = `{ c: 3 }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        });
+      })
+    });
+    describe('string', () => {
+      describe('If no value exists', () => {
+        it('return the string representation of the kind', () => {
+          const str = `{ c: string }`;
+          const result = `{ c: string }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        });
+        it('return the string representatio of the value', () => {
+          const str = `{ c: "hello" }`;
+          const result = `{ c: "hello" }`;
+          const final = getSingleProp(str);
+          expect(final).toBe(result);
+        });
+      })
     });
     describe('templateLiteral', () => {
       it('should resolve to same string', () => {
