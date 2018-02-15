@@ -1,4 +1,5 @@
 // @flow
+/*::
 export type String = { kind: "string", value?: string };
 export type Param = {
   kind: "param",
@@ -109,7 +110,11 @@ export type Func = {
   returnType: AnyTypeKind | null
 };
 export type Union = { kind: "union", types: Array<AnyTypeKind> };
-export type Generic = { kind: "generic", value: AnyTypeKind };
+export type Generic = {
+  kind: "generic",
+  value: AnyTypeKind,
+  typeParams?: TypeParams
+};
 export type Initial = { kind: "initial", id: Id, value: AnyValueKind };
 export type Variable = { kind: "variable", declarations: Array<Initial> };
 export type Intersection = {
@@ -187,3 +192,4 @@ export type AnyValueKind =
   | TemplateLiteral
   | Variable;
 export type AnyKind = AnyTypeKind | AnyValueKind | Program;
+*/
