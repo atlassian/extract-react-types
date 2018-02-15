@@ -291,6 +291,16 @@ describe('kind 2 string tests', () => {
       });
     });
   });
+  describe('import', () => {
+    it('Resolves down to a string representation of an external import', () => {
+      let file = `
+        import { Component } from 'react';
+        class Something extends React.Component<{ a: Component }> {}`;
+      let res = extractReactTypes(file, 'flow').classes[0].members[0].value;
+      let converted = convert(res);
+      expect(converted).toBe('react.Component');
+    });
+  });
   describe('utilities', () => {
     describe('resolveLast', () => {});
   });
