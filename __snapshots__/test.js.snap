@@ -229,7 +229,7 @@ Object {
             "kind": "generic",
             "typeParams": Array [
               Object {
-                "kind": "typeParam",
+                "kind": "typeParams",
                 "type": Object {
                   "kind": "string",
                 },
@@ -545,7 +545,7 @@ Object {
             "kind": "generic",
             "typeParams": Array [
               Object {
-                "kind": "typeParam",
+                "kind": "typeParams",
                 "type": Object {
                   "kind": "boolean",
                 },
@@ -586,7 +586,7 @@ Object {
             "kind": "generic",
             "typeParams": Array [
               Object {
-                "kind": "typeParam",
+                "kind": "typeParams",
                 "type": Object {
                   "kind": "union",
                   "types": Array [
@@ -2208,11 +2208,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
@@ -2269,11 +2269,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
@@ -2330,11 +2330,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
