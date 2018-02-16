@@ -222,14 +222,6 @@ const converters = {
     return `new ${callee}(${args})`;
   },
 
-  external: (type /*:any*/, mode /*: string */) /*:string*/ => {
-    if (type.importKind === 'value') {
-      return `${type.moduleSpecifier}.${type.name}`;
-    }
-    console.error('could not convert external', type);
-    return '';
-  },
-
   variable: (type /*: K.Variable*/, mode /*: string */) /*:string*/ => {
     const val = type.declarations[type.declarations.length - 1];
     if (val.value) {
