@@ -21,7 +21,7 @@ function getKind(type) {
       return convert(type);
     case 'exists':
     case 'typeof':
-      return getKind(resolveFromGeneric(type));
+      return convert(type);
     case 'generic': {
       if (type.typeParams) {
         return `${convert(type.value)}<${type.typeParams.params
@@ -312,8 +312,6 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
   return '';
 }
 
-module.exports = {
-  convert,
-  getKind,
-  resolveFromGeneric,
-};
+module.exports = convert;
+module.exports.getKind = getKind;
+module.exports.resolveFromGeneric = resolveFromGeneric;
