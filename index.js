@@ -20,7 +20,7 @@ const converters = {
   */
   boolean: (type /*: K.Boolean*/, mode /*: string */) /*:string*/ =>
     type.value != null ? type.value.toString() : type.kind,
-  exists: (type /*: K.Exists */, mode /*: string */) /*: string*/ => `*`,
+  exists: (type /*: K.Exists */, mode /*: string */) /*: '*' */ => `*`,
   /*
     If the value here is undefined, we can safely assume that we're dealing with
     a NumberTypeAnnotation and not a NumberLiteralTypeAnnotation.
@@ -36,10 +36,10 @@ const converters = {
   custom: (type /*:any*/, mode /*: string */) /*:string*/ =>
     type.value.toString(),
   any: (type /*: K.Any*/, mode /*: string */) /*:string*/ => type.kind,
-  void: (type /*: K.Void */, mode /*: string */) /*:string*/ => 'undefined',
+  void: (type /*: K.Void */, mode /*: string */) /*: 'undefined' */ => 'undefined',
   literal: (type /*: any */, mode /*: string */) /*: string*/ => `${type.kind}`,
   mixed: (type /*: K.Mixed*/, mode /*: string */) /*:string*/ => type.kind,
-  null: (type /*: K.Null */, mode /*: string */) /*:string*/ => 'null',
+  null: (type /*: K.Null */, mode /*: string */) /*: 'null' */ => 'null',
 
   unary: (type /*: K.Unary*/, mode /*: string */) /*:string*/ => {
     let space = unaryWhiteList.includes(type.operator) ? '' : ' ';
@@ -161,7 +161,7 @@ const converters = {
   ) /*:string*/ => {
     const object = resolveToLast(type.object);
     const property = convert(type.property);
-    
+
     if (!object) {
       console.error('Object property does not exist on this member expression');
       return '';

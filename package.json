@@ -1,8 +1,10 @@
 {
   "name": "kind-to-string",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
+  "author": "Atlassian",
+  "repository": "gwyneplaine/kind2string",
   "scripts": {
     "test": "jest"
   },

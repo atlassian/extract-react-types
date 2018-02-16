@@ -307,6 +307,16 @@ describe('kind 2 string tests', () => {
       let converted = convert(res);
       expect(converted).toBe('react.Component');
     });
+    it.skip('Resolves down to a string representation for namespaced external imports', () => {
+      let file =`
+        import { Component } from 'react';
+        import * as foo from 'bar';
+        class Something extends Component<{ a: foo }> {}
+      `
+      let res = extractReactTypes(file, 'flow').classes[0].members[0].value;
+      let converted = convert(res);
+      expect(converted).toBe('foo');
+    });
   });
   describe('utilities', () => {
     describe('resolveLast', () => {});
