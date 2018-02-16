@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "extract-react-types": "^0.8.0",
     "flow-bin": "^0.65.0",
     "jest": "^22.2.2",
     "prettier": "^1.10.2"
