@@ -1,6 +1,6 @@
 # Kind 2 String - a parser for extract-react-types
 
-Kind 2 Strong is designed to take the data structures outputted by [extract-react-tyes]() and convert it down to a (useful) string, as well as performing safe traversal through the output of `extract-react-types` so that trying to display information in your docs
+Kind 2 String is designed to take the data structures outputted by [extract-react-tyes](https://www.npmjs.com/package/extract-react-types) and convert it down to a (useful) string, as well as performing safe traversal through the output of `extract-react-types` so that trying to display information in your docs
 
 It exposes a convert method which allows you to ensure the data structure resolves to a string. It also exposes its converter object, allowing you to overwrite converters of your choice, if you wish to perform some other action other than the default string converter.
 
@@ -12,3 +12,5 @@ import convert from 'kind2string';
 
 export default () => <div>convert(generatedData)</div>;
 ```
+
+Also, if you are handling the kinds in a custom way, it is good to pass the final kind to kind2string, to ensure that you always pass a string to your react components.

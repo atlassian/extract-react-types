@@ -27,7 +27,6 @@ function getKind(type) {
         return `${convert(type.value)}<${type.typeParams.params
           .map(getKind)
           .join(', ')}>`;
-        return convert(type);
       }
       return getKind(resolveFromGeneric(type));
     }
@@ -59,7 +58,8 @@ const converters = {
   custom: (type /*:any*/, mode /*: string */) /*:string*/ =>
     type.value.toString(),
   any: (type /*: K.Any*/, mode /*: string */) /*:string*/ => type.kind,
-  void: (type /*: K.Void */, mode /*: string */) /*: 'undefined' */ => 'undefined',
+  void: (type /*: K.Void */, mode /*: string */) /*: 'undefined' */ =>
+    'undefined',
   literal: (type /*: any */, mode /*: string */) /*: string*/ => `${type.kind}`,
   mixed: (type /*: K.Mixed*/, mode /*: string */) /*:string*/ => type.kind,
   null: (type /*: K.Null */, mode /*: string */) /*: 'null' */ => 'null',
@@ -312,6 +312,8 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
   return '';
 }
 
-module.exports = convert;
-module.exports.getKind = getKind;
-module.exports.resolveFromGeneric = resolveFromGeneric;
+module.exports = {
+  convert,
+  getKind,
+  resolveFromGeneric,
+};
