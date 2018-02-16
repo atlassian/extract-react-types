@@ -1,5 +1,8 @@
 // @flow
-"use strict";
+/*::
+export type * from './kinds'
+import * as K from './kinds'
+*/
 
 const createBabelFile = require("babel-file");
 const { loadImportSync } = require("babel-file-loader");
@@ -78,7 +81,7 @@ const getDefaultProps = (path, context) => {
   return defaultProps;
 };
 
-converters.Program = (path, context) => {
+converters.Program = (path, context) /*: K.Program*/ => {
   let result = {};
   result.kind = "program";
   result.classes = [];
@@ -125,42 +128,61 @@ function convertReactComponentClass(path, context) {
   return classProperties;
 }
 
-converters.TaggedTemplateExpression = (path, context) => {
+converters.TaggedTemplateExpression = (
+  path,
+  context
+) /*: K.TemplateExpression*/ => {
   return {
     kind: "templateExpression",
     tag: convert(path.get("tag"), context)
   };
 };
-converters.TemplateLiteral = (path, context) => {
+
+converters.TemplateElement = (path, context) /*: K.TemplateElement*/ => {
   return {
-    kind: "templateLiteral",
-    expressions: convert(path.get("expressions"), context),
-    quasis: convert(path.get("quasis"), context)
+    kind: "templateElement",
+    value: path.node.value
   };
 };
 
-converters.AssignmentPattern = (path, context) => {
+converters.TemplateLiteral = (path, context) /*: K.TemplateLiteral*/ => {
+  // hard challenge, we need to know the combined ordering of expressions and quasis
   return {
-    kind: "AssignmentPattern",
+    kind: "templateLiteral",
+    expressions: path.get("expressions").map(e => convert(e, context)),
+    quasis: path.get("quasis").map(q => convert(q, context))
+  };
+};
+
+converters.RestElement = (path, context) /*: K.Rest */ => {
+  return {
+    kind: "rest",
+    argument: convert(path.get("argument"), context)
+  };
+};
+
+converters.AssignmentPattern = (path, context) /*: K.AssignmentPattern*/ => {
+  return {
+    kind: "assignmentPattern",
     left: convert(path.get("left"), context),
     right: convert(path.get("right"), context)
   };
 };
 
-converters.ObjectPattern = (path, context) => {
-  let properties = [];
+converters.ObjectPattern = (path, context) /*: K.ObjectPattern*/ => {
+  let members = [];
 
-  for (const property of properties) {
-    properties.push(convert(property, context));
+  for (const property of path.get("properties")) {
+    members.push(convert(property, context));
   }
 
   return {
-    kind: "ObjectPattern",
-    properties
+    kind: "objectPattern",
+    members
   };
 };
 
-converters.ClassDeclaration = (path, context) => {
+converters.ClassDeclaration = (path, context) /*: K.ClassKind*/ => {
   if (!isReactComponentClass(path)) {
     return {
       kind: "class",
@@ -171,14 +193,14 @@ converters.ClassDeclaration = (path, context) => {
   }
 };
 
-converters.SpreadElement = (path, context) => {
+converters.SpreadElement = (path, context) /*: K.Spread*/ => {
   return {
     kind: "spread",
     value: convert(path.get("argument"), context)
   };
 };
 
-converters.UnaryExpression = (path, context) => {
+converters.UnaryExpression = (path, context) /*: K.Unary*/ => {
   return {
     kind: "unary",
     operator: path.node.operator,
@@ -186,7 +208,7 @@ converters.UnaryExpression = (path, context) => {
   };
 };
 
-converters.JSXAttribute = (path, context) => {
+converters.JSXAttribute = (path, context) /*: K.JSXAttribute*/ => {
   return {
     kind: "JSXAttribute",
     name: convert(path.get("name"), context),
@@ -194,28 +216,34 @@ converters.JSXAttribute = (path, context) => {
   };
 };
 
-converters.JSXExpressionContainer = (path, context) => {
+converters.JSXExpressionContainer = (
+  path,
+  context
+) /*: K.JSXExpressionContainer*/ => {
   return {
     kind: "JSXExpressionContainer",
-    value: convert(path.get("expression"), context)
+    expression: convert(path.get("expression"), context)
   };
 };
 
-converters.JSXElement = (path, context) => {
+converters.JSXElement = (path, context) /*: K.JSXElement*/ => {
   return {
     kind: "JSXElement",
     value: convert(path.get("openingElement"), context)
   };
 };
 
-converters.JSXIdentifier = (path, context) => {
+converters.JSXIdentifier = (path, context) /*: K.JSXIdentifier*/ => {
   return {
     kind: "JSXIdentifier",
     value: path.node.name
   };
 };
 
-converters.JSXMemberExpression = (path, context) => {
+converters.JSXMemberExpression = (
+  path,
+  context
+) /*: K.JSXMemberExpression*/ => {
   return {
     kind: "JSXMemberExpression",
     object: convert(path.get("object"), context),
@@ -223,7 +251,7 @@ converters.JSXMemberExpression = (path, context) => {
   };
 };
 
-converters.JSXOpeningElement = (path, context) => {
+converters.JSXOpeningElement = (path, context) /*: K.JSXOpeningElement*/ => {
   return {
     kind: "JSXOpeningElement",
     name: convert(path.get("name"), context),
@@ -231,7 +259,7 @@ converters.JSXOpeningElement = (path, context) => {
   };
 };
 
-converters.ClassProperty = (path, context) => {
+converters.ClassProperty = (path, context) /*: K.Property*/ => {
   return {
     kind: "property",
     key: convert(path.get("key"), context),
@@ -245,7 +273,7 @@ function convertCall(path, context) {
   return { callee, args };
 }
 
-converters.CallExpression = (path, context) => {
+converters.CallExpression = (path, context) /*: K.Call*/ => {
   const { callee, args } = convertCall(path, context);
   return {
     kind: "call",
@@ -254,7 +282,7 @@ converters.CallExpression = (path, context) => {
   };
 };
 
-converters.NewExpression = (path, context) => {
+converters.NewExpression = (path, context) /*: K.New*/ => {
   const { callee, args } = convertCall(path, context);
   return {
     kind: "new",
@@ -263,16 +291,16 @@ converters.NewExpression = (path, context) => {
   };
 };
 
-converters.TypeofTypeAnnotation = (path, context) => {
+converters.TypeofTypeAnnotation = (path, context) /*: K.Typeof*/ => {
   let type = convert(path.get("argument"), context);
   return {
     kind: "typeof",
     type,
-    name: type.value.name
+    name: resolveFromGeneric(type).name
   };
 };
 
-converters.ObjectProperty = (path, context) => {
+converters.ObjectProperty = (path, context) /*: K.Property*/ => {
   return {
     kind: "property",
     key: convert(path.get("key"), context),
@@ -280,34 +308,34 @@ converters.ObjectProperty = (path, context) => {
   };
 };
 
-converters.ExistentialTypeParam = (path, context) => {
+converters.ExistentialTypeParam = (path, context) /*: K.Exists*/ => {
   return { kind: "exists" };
 };
 
-converters.StringLiteral = (path, context) => {
+converters.StringLiteral = (path, context) /*: K.String*/ => {
   return { kind: "string", value: path.node.value };
 };
 
-converters.NumericLiteral = (path, context) => {
+converters.NumericLiteral = (path, context) /*: K.Number*/ => {
   return { kind: "number", value: path.node.value };
 };
 
-converters.NullLiteral = (path, context) => {
+converters.NullLiteral = (path, context) /*: K.Null*/ => {
   return { kind: "null" };
 };
 
-converters.BooleanLiteral = (path, context) => {
+converters.BooleanLiteral = (path, context) /*: K.Boolean*/ => {
   return { kind: "boolean", value: path.node.value };
 };
 
-converters.ArrayExpression = (path, context) => {
+converters.ArrayExpression = (path, context) /*: K.ArrayExpression*/ => {
   return {
     kind: "array",
     elements: path.get("elements").map(e => convert(e, context))
   };
 };
 
-converters.BinaryExpression = (path, context) => {
+converters.BinaryExpression = (path, context) /*: K.BinaryExpression*/ => {
   return {
     kind: "binary",
     operator: path.node.operator,
@@ -316,7 +344,7 @@ converters.BinaryExpression = (path, context) => {
   };
 };
 
-converters.MemberExpression = (path, context) => {
+converters.MemberExpression = (path, context) /*: K.MemberExpression*/ => {
   return {
     kind: "memberExpression",
     object: convert(path.get("object"), context),
@@ -324,7 +352,7 @@ converters.MemberExpression = (path, context) => {
   };
 };
 
-function convertParameter(param, context) {
+function convertParameter(param, context) /*: K.Param*/ {
   let { type, ...rest } = convert(param, context);
   return {
     kind: "param",
@@ -333,7 +361,7 @@ function convertParameter(param, context) {
   };
 }
 
-function convertFunction(path, context) {
+function convertFunction(path, context) /*: K.Func*/ {
   const parameters = path.get("params").map(p => convertParameter(p, context));
   let returnType = null;
   let id = null;
@@ -372,26 +400,15 @@ converters.TypeAnnotation = (path, context) => {
   return convert(path.get("typeAnnotation"), context);
 };
 
-converters.ExistsTypeAnnotation = (path, context) => {
+converters.ExistsTypeAnnotation = (path, context) /*: K.Exists*/ => {
   return { kind: "exists" };
 };
 
-converters.ObjectTypeAnnotation = (path, context) => {
-  let result = {};
-
-  result.kind = "object";
-  result.members = [];
-
-  let properties = path.get("properties");
-
-  for (let property of properties) {
-    result.members.push(convert(property, context));
-  }
-
-  return result;
+converters.ObjectTypeAnnotation = (path, context) /*: K.Obj*/ => {
+  return convertObject(path, context);
 };
 
-converters.ObjectTypeProperty = (path, context) => {
+converters.ObjectTypeProperty = (path, context) /*: K.Property*/ => {
   let result = {};
   result.kind = "property";
   result.key = convert(path.get("key"), context);
@@ -400,19 +417,19 @@ converters.ObjectTypeProperty = (path, context) => {
   return result;
 };
 
-converters.UnionTypeAnnotation = (path, context) => {
+converters.UnionTypeAnnotation = (path, context) /*: K.Union*/ => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "union", types };
 };
 
-converters.TypeParameterInstantiation = (path, context) => {
-  return path.get("params").map(p => ({
-    kind: "typeParam",
-    type: convert(p, context)
-  }));
+converters.TypeParameterInstantiation = (path, context) /*: K.TypeParams*/ => {
+  return {
+    kind: "typeParams",
+    params: path.get("params").map(p => convert(p, context))
+  };
 };
 
-converters.GenericTypeAnnotation = (path, context) => {
+converters.GenericTypeAnnotation = (path, context) /*: K.Generic*/ => {
   let result = {};
 
   result.kind = "generic";
@@ -423,7 +440,7 @@ converters.GenericTypeAnnotation = (path, context) => {
   return result;
 };
 
-converters.ObjectMethod = (path, context) => {
+converters.ObjectMethod = (path, context) /*: K.Func*/ => {
   let parameters = path.get("params").map(p => convertParameter(p, context));
   let returnType = null;
 
@@ -441,42 +458,50 @@ converters.ObjectMethod = (path, context) => {
   };
 };
 
-converters.ObjectExpression = (path, context) => {
+function convertObject(path, context) {
   let members = [];
   path.get("properties").forEach(p => {
     let mem = convert(p, context);
     if (mem.kind === "spread") {
-      if (mem.value.kind === "initial" && mem.value.value.kind === "object") {
-        members = members.concat(mem.value.value.members);
-      } else if (mem.value.kind === "object") {
-        members = members.concat(mem.value.members);
-      } else if (mem.value.kind === "variable") {
-        let dcl = mem.value.declarations;
-        dcl = dcl[dcl.length - 1].value;
-        if (dcl.kind !== "object") {
+      let memVal = resolveFromGeneric(mem.value);
+      if (memVal.kind === "initial" && memVal.value.kind === "object") {
+        members = members.concat(memVal.value.members);
+      } else if (memVal.kind === "object") {
+        members = members.concat(memVal.members);
+      } else if (memVal.kind === "variable") {
+        let declarations = memVal.declarations;
+        declarations = declarations[declarations.length - 1].value;
+        if (declarations.kind !== "object") {
           throw new Error("Trying to spread a non-object item onto an object");
         } else {
-          members = members.concat(dcl.members);
+          members = members.concat(declarations.members);
         }
+      } else if (memVal.kind === "import") {
+        // We are explicitly calling out we are handling the import kind
+        members = members.concat(mem);
+      } else {
+        // This is a fallback
+        members = members.concat(mem);
       }
     } else if (mem.kind === "property") {
       members.push(mem);
     }
   });
+  return { kind: "object", members };
+}
 
-  return {
-    kind: "object",
-    members
-  };
+converters.ObjectExpression = (path, context) /*: K.Obj*/ => {
+  return convertObject(path, context);
 };
 
-converters.VariableDeclaration = (path, context) => {
+converters.VariableDeclaration = (path, context) /*: K.Variable*/ => {
   let res = {};
   res.kind = "variable";
   res.declarations = path.get("declarations").map(p => convert(p, context));
   return res;
 };
-converters.VariableDeclarator = (path, context) => {
+
+converters.VariableDeclarator = (path, context) /*: K.Initial*/ => {
   return {
     kind: "initial",
     id: convert(path.get("id"), context),
@@ -484,7 +509,7 @@ converters.VariableDeclarator = (path, context) => {
   };
 };
 
-converters.Identifier = (path, context) => {
+converters.Identifier = (path, context) /*: K.Id*/ => {
   let kind = getIdentifierKind(path);
   let name = path.node.name;
 
@@ -581,13 +606,17 @@ converters.Identifier = (path, context) => {
       return { kind: "id", name };
     }
   }
+  throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
 
 converters.TypeAlias = (path, context) => {
   return convert(path.get("right"), context);
 };
 
-converters.IntersectionTypeAnnotation = (path, context) => {
+converters.IntersectionTypeAnnotation = (
+  path,
+  context
+) /*: K.Intersection*/ => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "intersection", types };
 };
@@ -596,39 +625,40 @@ converters.QualifiedTypeIdentifier = (path, context) => {
   return convert(path.get("id"), context);
 };
 
-converters.VoidTypeAnnotation = path => {
+converters.VoidTypeAnnotation = (path) /*: K.Void*/ => {
   return { kind: "void" };
 };
 
-converters.BooleanTypeAnnotation = path => {
+converters.BooleanTypeAnnotation = (path) /*: K.Boolean*/ => {
   return { kind: "boolean" };
 };
 
-converters.BooleanLiteralTypeAnnotation = path => {
-  return { kind: "boolean" };
+converters.BooleanLiteralTypeAnnotation = (path) /*: K.Boolean*/ => {
+  return { kind: "boolean", value: path.node.value };
 };
 
-converters.NullLiteralTypeAnnotation = path => {
+converters.NullLiteralTypeAnnotation = (path) /*: K.Null*/ => {
   return { kind: "null" };
 };
 
-converters.StringLiteralTypeAnnotation = path => {
-  return { kind: "stringLiteral", value: path.node.value };
+converters.StringLiteralTypeAnnotation = (path) /*: K.String*/ => {
+  return { kind: "string", value: path.node.value };
 };
 
-converters.NumberLiteralTypeAnnotation = path => {
-  return { kind: "numberLiteral" };
+// This should absolutely return a value
+converters.NumberLiteralTypeAnnotation = (path) /*: K.Number*/ => {
+  return { kind: "number", value: path.node.value };
 };
 
-converters.MixedTypeAnnotation = path => {
+converters.MixedTypeAnnotation = (path) /*: K.Mixed*/ => {
   return { kind: "mixed" };
 };
 
-converters.AnyTypeAnnotation = path => {
+converters.AnyTypeAnnotation = (path) /*: K.Any*/ => {
   return { kind: "any" };
 };
 
-converters.NumberTypeAnnotation = path => {
+converters.NumberTypeAnnotation = (path) /*: K.Number*/ => {
   return { kind: "number" };
 };
 
@@ -636,8 +666,8 @@ converters.FunctionTypeParam = (path, context) => {
   return convert(path.get("typeAnnotation"), context);
 };
 
-converters.FunctionTypeAnnotation = (path, context) => {
-  const parameters = path.get("params").map(p => convert(p, context));
+converters.FunctionTypeAnnotation = (path, context) /*: K.Func*/ => {
+  const parameters = path.get("params").map(p => convertParameter(p, context));
   const returnType = convert(path.get("returnType"), context);
 
   return {
@@ -647,48 +677,48 @@ converters.FunctionTypeAnnotation = (path, context) => {
   };
 };
 
-converters.StringTypeAnnotation = path => {
+converters.StringTypeAnnotation = (path) /*: K.String*/ => {
   return { kind: "string" };
 };
 
-converters.NullableTypeAnnotation = (path, context) => {
+converters.NullableTypeAnnotation = (path, context) /*: K.Nullable*/ => {
   return {
     kind: "nullable",
     arguments: convert(path.get("typeAnnotation"), context)
   };
 };
 
-converters.TSStringKeyword = path => {
+converters.TSStringKeyword = (path) /*: K.String*/ => {
   return { kind: "string" };
 };
 
-converters.TSNumberKeyword = path => {
+converters.TSNumberKeyword = (path) /*: K.Number*/ => {
   return { kind: "number" };
 };
 
-converters.TSBooleanKeyword = path => {
+converters.TSBooleanKeyword = (path) /*: K.Boolean*/ => {
   return { kind: "boolean" };
 };
 
-converters.TSVoidKeyword = path => {
+converters.TSVoidKeyword = (path) /*: K.Void*/ => {
   return { kind: "void" };
 };
 
 // converters.TSPropertySignature = path => {
 // };
 
-converters.TSTypeLiteral = (path, context) => {
+converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
   let result = {};
 
   result.kind = "object";
   // TODO: find object key
   // result.key = '';
-  result.props = [];
+  result.members = [];
 
-  let properties = path.get("members");
+  let members = path.get("members");
 
-  properties.forEach(memberPath => {
-    result.props.push(
+  members.forEach(memberPath => {
+    result.members.push(
       convert(memberPath.get("typeAnnotation").get("typeAnnotation"), context)
     );
   });
@@ -696,7 +726,7 @@ converters.TSTypeLiteral = (path, context) => {
   return result;
 };
 
-converters.TSLiteralType = path => {
+converters.TSLiteralType = (path) /*: K.Literal*/ => {
   return {
     kind: "literal",
     value: path.node.literal.value
@@ -707,21 +737,21 @@ converters.TSTypeReference = (path, context) => {
   return convert(path.get("typeName"), context);
 };
 
-converters.TSUnionType = (path, context) => {
+converters.TSUnionType = (path, context) /*: K.Union*/ => {
   const types = path.get("types").map(p => convert(p, context));
   return { kind: "union", types };
 };
 
-converters.TSAnyKeyword = path => {
+converters.TSAnyKeyword = (path) /*: K.Any*/ => {
   return { kind: "any" };
 };
 
-converters.TSTupleType = (path, context) => {
+converters.TSTupleType = (path, context) /*: K.Tuple*/ => {
   const types = path.get("elementTypes").map(p => convert(p, context));
   return { kind: "tuple", types };
 };
 
-converters.TSFunctionType = (path, context) => {
+converters.TSFunctionType = (path, context) /*: K.Func*/ => {
   const parameters = path.get("parameters").map(p => convert(p, context));
   const returnType = convert(
     path.get("typeAnnotation").get("typeAnnotation"),
@@ -735,20 +765,27 @@ converters.TSFunctionType = (path, context) => {
   };
 };
 
-converters.ObjectTypeSpreadProperty = (path, context) => {
+converters.ObjectTypeSpreadProperty = (path, context) /*: K.Spread*/ => {
   return {
     kind: "spread",
     value: convert(path.get("argument"), context)
   };
 };
 
-function importConverterGeneral(path, context) {
+function importConverterGeneral(path, context) /*: K.Import */ {
   let importKind = path.node.importKind || path.parent.importKind || "value";
   let moduleSpecifier = path.parent.source.value;
+  let name;
+  let kind = path.parent.importKind;
+  if (path.type === "ImportDefaultSpecifier" && kind === "value") {
+    name = "default";
+  } else if (path.node.imported) {
+    name = path.node.imported.name;
+  } else {
+    name = path.node.local.name;
+  }
 
   if (!path.hub.file.opts.filename) {
-    let name = path.node.imported.name;
-
     return {
       kind: "import",
       importKind,
@@ -756,26 +793,17 @@ function importConverterGeneral(path, context) {
       moduleSpecifier
     };
   } else {
-    let name;
-    let kind = path.parent.importKind;
     if (kind === "typeof") {
       throw new Error({ path, error: "import typeof is unsupported" });
     }
 
-    if (path.type === "ImportDefaultSpecifier" && kind === "value") {
-      name = "default";
-    } else if (path.node.imported) {
-      name = path.node.imported.name;
-    } else {
-      name = path.node.local.name;
-    }
-
     if (!/^\./.test(path.parent.source.value)) {
       return {
-        kind: "external",
+        kind: "import",
         importKind,
         name,
-        moduleSpecifier
+        moduleSpecifier,
+        external: true
       };
     }
 
@@ -871,7 +899,7 @@ function extractReactTypes(
     file.addCode(code);
     file.parseCode(code);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return convert(file.path, { resolveOptions });
 }

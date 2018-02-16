@@ -17,7 +17,7 @@ Object {
                 "kind": "param",
                 "type": null,
                 "value": Object {
-                  "kind": "AssignmentPattern",
+                  "kind": "assignmentPattern",
                   "left": Object {
                     "kind": "id",
                     "name": "b",
@@ -44,7 +44,11 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -81,11 +85,16 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
             ],
             "returnType": Object {
               "kind": "boolean",
+              "value": true,
             },
           },
         },
@@ -130,6 +139,78 @@ Object {
 }
 `;
 
+exports[`Should handle rest element 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "async": false,
+            "generator": false,
+            "id": null,
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "objectPattern",
+                  "members": Array [
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "a",
+                        "type": null,
+                      },
+                      "kind": "property",
+                      "value": Object {
+                        "kind": "id",
+                        "name": "a",
+                        "type": null,
+                      },
+                    },
+                    Object {
+                      "argument": Object {
+                        "kind": "id",
+                        "name": "restOfThis",
+                        "type": null,
+                      },
+                      "kind": "rest",
+                    },
+                  ],
+                },
+              },
+            ],
+            "returnType": null,
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [],
+            "returnType": Object {
+              "kind": "void",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`array expression 1`] = `
 Object {
   "classes": Array [
@@ -154,14 +235,14 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParam",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "string",
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
@@ -470,14 +551,14 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParam",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "boolean",
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
@@ -511,10 +592,10 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "generic",
-            "typeParams": Array [
-              Object {
-                "kind": "typeParam",
-                "type": Object {
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
                   "kind": "union",
                   "types": Array [
                     Object {
@@ -525,8 +606,8 @@ Object {
                     },
                   ],
                 },
-              },
-            ],
+              ],
+            },
             "value": Object {
               "kind": "id",
               "name": "Array",
@@ -673,10 +754,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -713,10 +802,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -753,7 +850,11 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -823,10 +924,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -863,20 +972,24 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "object",
-                "members": Array [
-                  Object {
-                    "key": Object {
-                      "kind": "id",
-                      "name": "prop",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "object",
+                  "members": Array [
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "prop",
+                      },
+                      "kind": "property",
+                      "optional": false,
+                      "value": Object {
+                        "kind": "string",
+                      },
                     },
-                    "kind": "property",
-                    "optional": false,
-                    "value": Object {
-                      "kind": "string",
-                    },
-                  },
-                ],
+                  ],
+                },
               },
             ],
             "returnType": Object {
@@ -1279,11 +1392,12 @@ Object {
             "kind": "union",
             "types": Array [
               Object {
-                "kind": "stringLiteral",
+                "kind": "string",
                 "value": "25",
               },
               Object {
-                "kind": "numberLiteral",
+                "kind": "number",
+                "value": 30,
               },
             ],
           },
@@ -1887,6 +2001,65 @@ Object {
 }
 `;
 
+exports[`spread element cannot find 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "object",
+            "members": Array [
+              Object {
+                "kind": "spread",
+                "value": Object {
+                  "importKind": "value",
+                  "kind": "import",
+                  "moduleSpecifier": "somewhere",
+                  "name": "default",
+                  "referenceIdName": "something",
+                },
+              },
+            ],
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "any",
+          },
+        },
+        Object {
+          "default": Object {
+            "kind": "boolean",
+            "value": false,
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "b",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`string literal 1`] = `
 Object {
   "classes": Array [
@@ -1969,6 +2142,61 @@ Object {
 }
 `;
 
+exports[`template literal with quasis 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "expressions": Array [
+              Object {
+                "kind": "id",
+                "name": "abcd",
+                "type": null,
+              },
+            ],
+            "kind": "templateLiteral",
+            "quasis": Array [
+              Object {
+                "kind": "templateElement",
+                "value": Object {
+                  "cooked": "asdf",
+                  "raw": "asdf",
+                },
+              },
+              Object {
+                "kind": "templateElement",
+                "value": Object {
+                  "cooked": "",
+                  "raw": "",
+                },
+              },
+            ],
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`test 1`] = `
 Object {
   "classes": Array [
@@ -2020,11 +2248,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
@@ -2081,11 +2309,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
@@ -2142,11 +2370,11 @@ Object {
                     "value": "name",
                   },
                   "value": Object {
-                    "kind": "JSXExpressionContainer",
-                    "value": Object {
+                    "expression": Object {
                       "kind": "string",
                       "value": "test icon",
                     },
+                    "kind": "JSXExpressionContainer",
                   },
                 },
               ],
@@ -2299,16 +2527,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "any",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "any",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2320,17 +2548,17 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "id",
           "name": "Array",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2342,16 +2570,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "boolean",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "boolean",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2363,29 +2591,29 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "void",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "FooComponent",
         "type": null,
       },
-      "props": Array [
+    },
+    Object {
+      "kind": "object",
+      "members": Array [
         Object {
           "kind": "void",
         },
       ],
-    },
-    Object {
-      "kind": "object",
       "name": Object {
         "kind": "id",
         "name": "BarComponent",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "void",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2397,17 +2625,17 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "id",
           "name": "Color",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2419,12 +2647,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "function",
           "parameters": Array [
@@ -2442,6 +2665,11 @@ Object {
           },
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2469,12 +2697,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "union",
           "types": Array [
@@ -2489,6 +2712,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2507,15 +2735,10 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "object",
-          "props": Array [
+          "members": Array [
             Object {
               "kind": "string",
             },
@@ -2528,6 +2751,11 @@ Object {
           "kind": "boolean",
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2539,16 +2767,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "string",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "string",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2560,16 +2788,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "string",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "string",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2581,12 +2809,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "tuple",
           "types": Array [
@@ -2599,6 +2822,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2610,12 +2838,7 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "props": Array [
+      "members": Array [
         Object {
           "kind": "union",
           "types": Array [
@@ -2628,6 +2851,11 @@ Object {
           ],
         },
       ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
     },
   ],
   "kind": "program",
@@ -2639,16 +2867,16 @@ Object {
   "classes": Array [
     Object {
       "kind": "object",
+      "members": Array [
+        Object {
+          "kind": "void",
+        },
+      ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
       },
-      "props": Array [
-        Object {
-          "kind": "void",
-        },
-      ],
     },
   ],
   "kind": "program",
@@ -2706,25 +2934,14 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "kind": "spread",
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
             "value": Object {
-              "kind": "generic",
-              "value": Object {
-                "kind": "object",
-                "members": Array [
-                  Object {
-                    "key": Object {
-                      "kind": "id",
-                      "name": "foo",
-                    },
-                    "kind": "property",
-                    "optional": false,
-                    "value": Object {
-                      "kind": "string",
-                    },
-                  },
-                ],
-              },
+              "kind": "string",
             },
           },
           Object {

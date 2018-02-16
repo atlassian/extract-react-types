@@ -516,6 +516,20 @@ const TESTS = [
   `
   },
   {
+    name: "spread element cannot find",
+    typeSystem: "flow",
+    code: `
+    import something from 'somewhere'
+
+    class Component extends React.Component<{ a: any, b: boolean }> {
+      defaultProps = {
+        a: { ...something },
+        b: false
+      }
+    }
+  `
+  },
+  {
     name: "string literal",
     typeSystem: "flow",
     code: `
@@ -767,6 +781,28 @@ const TESTS = [
       }
     `
   },
+  {
+    name: "template literal with quasis",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: string }> {
+        defaultProps = {
+          a: \`asdf\${abcd}\`,
+        }
+      }
+    `
+  },
+  {
+    name: "Should handle rest element",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: () => void }> {
+        defaultProps = {
+          a: ({ a, ...restOfThis }) => {},
+        }
+      }
+    `
+  }
 ];
 
 for (let testCase of TESTS) {
