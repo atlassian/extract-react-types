@@ -21,7 +21,7 @@ function getKind(type) {
       return convert(type);
     case 'exists':
     case 'typeof':
-      return getKind(resolveFromGeneric(type));
+      return convert(type);
     case 'generic': {
       if (type.typeParams) {
         return `${convert(type.value)}<${type.typeParams.params
