@@ -9,7 +9,23 @@ module.exports.resolveToLast = function resolveToLast(
     case 'memberExpression':
       return resolveToLast(type.object);
     default:
-      console.error('WHAT DID YOU GIVE ME?!');
+      console.error(
+        `Unexpected initial type of member expression`,
+        JSON.stringify(type),
+      );
       break;
   }
+};
+
+module.exports.resolveFromGeneric = function resolveFromGeneric(type) {
+  if (type.kind !== 'generic') return type;
+  if (type.typeParams) {
+    // If a generic type is an Array, we don't want to just return the value,
+    // But also the entire type object, so we can parse the typeParams later on.
+    return type;
+  }
+  if (type.value.kind === 'generic') {
+    return resolveFromGeneric(type.value);
+  }
+  return type.value;
 };

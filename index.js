@@ -4,13 +4,36 @@
 import * as K from 'extract-react-types'
 */
 
-const { resolveToLast } = require('./utils');
+const { resolveToLast, resolveFromGeneric } = require('./utils');
 
 const unaryWhiteList = ['-', '+'];
 
 function mapConvertAndJoin(array, joiner = ', ') {
   if (!Array.isArray(array)) return '';
   return array.map(a => convert(a)).join(joiner);
+}
+
+function getKind(type) {
+  switch (type.kind) {
+    case 'nullable':
+      return `nullable ${getKind(type.arguments)}`;
+    case 'id':
+      return convert(type);
+    case 'exists':
+    case 'typeof':
+      return getKind(resolveFromGeneric(type));
+    case 'generic': {
+      if (type.typeParams) {
+        return `${convert(type.value)}<${type.typeParams.params
+          .map(getKind)
+          .join(', ')}>`;
+        return convert(type);
+      }
+      return getKind(resolveFromGeneric(type));
+    }
+    default:
+      return type.kind;
+  }
 }
 
 const converters = {
@@ -152,6 +175,7 @@ const converters = {
   },
 
   object: (type /*: K.Obj*/, mode /*: string */) /*:string*/ => {
+    if (type.members.length === 0) return `{}`;
     return `{ ${mapConvertAndJoin(type.members)} }`;
   },
 
@@ -202,15 +226,6 @@ const converters = {
     const callee = convert(type.callee);
     const args = mapConvertAndJoin(type.args);
     return `new ${callee}(${args})`;
-  },
-
-  external: (type /*:any*/, mode /*: string */) /*:string*/ => {
-    if (type.importKind === 'value') {
-      return `${type.moduleSpecifier}.${type.name}`;
-    }
-    // eslint-disable-next-line no-console
-    console.warn('could not convert external', type);
-    return '';
   },
 
   variable: (type /*: K.Variable*/, mode /*: string */) /*:string*/ => {
@@ -298,3 +313,5 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
 }
 
 module.exports = convert;
+module.exports.getKind = getKind;
+module.exports.resolveFromGeneric = resolveFromGeneric;
