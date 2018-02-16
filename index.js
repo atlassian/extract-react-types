@@ -312,6 +312,8 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
   return '';
 }
 
-module.exports = convert;
-module.exports.getKind = getKind;
-module.exports.resolveFromGeneric = resolveFromGeneric;
+module.exports = {
+  convert,
+  getKind,
+  resolveFromGeneric,
+};
