@@ -169,7 +169,6 @@ converters.AssignmentPattern = (path, context) /*: K.AssignmentPattern*/ => {
   };
 };
 
-/* this seems broken ? */
 converters.ObjectPattern = (path, context) /*: K.ObjectPattern*/ => {
   let members = [];
 
@@ -181,9 +180,6 @@ converters.ObjectPattern = (path, context) /*: K.ObjectPattern*/ => {
     kind: "objectPattern",
     members
   };
-};
-converters.ClassExpression = (path, context) => {
-  console.warn(path.node);
 };
 
 converters.ClassDeclaration = (path, context) /*: K.ClassKind*/ => {
@@ -409,18 +405,7 @@ converters.ExistsTypeAnnotation = (path, context) /*: K.Exists*/ => {
 };
 
 converters.ObjectTypeAnnotation = (path, context) /*: K.Obj*/ => {
-  let result = {};
-
-  result.kind = "object";
-  result.members = [];
-
-  let properties = path.get("properties");
-
-  for (let property of properties) {
-    result.members.push(convert(property, context));
-  }
-
-  return result;
+  return convertObject(path, context);
 };
 
 converters.ObjectTypeProperty = (path, context) /*: K.Property*/ => {
@@ -473,24 +458,25 @@ converters.ObjectMethod = (path, context) /*: K.Func*/ => {
   };
 };
 
-converters.ObjectExpression = (path, context) /*: K.Obj*/ => {
+function convertObject(path, context) {
   let members = [];
   path.get("properties").forEach(p => {
     let mem = convert(p, context);
     if (mem.kind === "spread") {
-      if (mem.value.kind === "initial" && mem.value.value.kind === "object") {
-        members = members.concat(mem.value.value.members);
-      } else if (mem.value.kind === "object") {
-        members = members.concat(mem.value.members);
-      } else if (mem.value.kind === "variable") {
-        let dcl = mem.value.declarations;
-        dcl = dcl[dcl.length - 1].value;
-        if (dcl.kind !== "object") {
+      let memVal = resolveFromGeneric(mem.value);
+      if (memVal.kind === "initial" && memVal.value.kind === "object") {
+        members = members.concat(memVal.value.members);
+      } else if (memVal.kind === "object") {
+        members = members.concat(memVal.members);
+      } else if (memVal.kind === "variable") {
+        let declarations = memVal.declarations;
+        declarations = declarations[declarations.length - 1].value;
+        if (declarations.kind !== "object") {
           throw new Error("Trying to spread a non-object item onto an object");
         } else {
-          members = members.concat(dcl.members);
+          members = members.concat(declarations.members);
         }
-      } else if (mem.value.kind === "import") {
+      } else if (memVal.kind === "import") {
         // We are explicitly calling out we are handling the import kind
         members = members.concat(mem);
       } else {
@@ -501,11 +487,11 @@ converters.ObjectExpression = (path, context) /*: K.Obj*/ => {
       members.push(mem);
     }
   });
+  return { kind: "object", members };
+}
 
-  return {
-    kind: "object",
-    members
-  };
+converters.ObjectExpression = (path, context) /*: K.Obj*/ => {
+  return convertObject(path, context);
 };
 
 converters.VariableDeclaration = (path, context) /*: K.Variable*/ => {
@@ -681,7 +667,7 @@ converters.FunctionTypeParam = (path, context) => {
 };
 
 converters.FunctionTypeAnnotation = (path, context) /*: K.Func*/ => {
-  const parameters = path.get("params").map(p => convert(p, context));
+  const parameters = path.get("params").map(p => convertParameter(p, context));
   const returnType = convert(path.get("returnType"), context);
 
   return {
@@ -913,7 +899,7 @@ function extractReactTypes(
     file.addCode(code);
     file.parseCode(code);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return convert(file.path, { resolveOptions });
 }

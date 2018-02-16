@@ -44,7 +44,11 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -81,7 +85,11 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
             ],
             "returnType": Object {
@@ -746,10 +754,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -786,10 +802,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -826,7 +850,11 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -896,10 +924,18 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "string",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "string",
+                },
               },
               Object {
-                "kind": "number",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "number",
+                },
               },
             ],
             "returnType": Object {
@@ -936,20 +972,24 @@ Object {
             "kind": "function",
             "parameters": Array [
               Object {
-                "kind": "object",
-                "members": Array [
-                  Object {
-                    "key": Object {
-                      "kind": "id",
-                      "name": "prop",
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "object",
+                  "members": Array [
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "prop",
+                      },
+                      "kind": "property",
+                      "optional": false,
+                      "value": Object {
+                        "kind": "string",
+                      },
                     },
-                    "kind": "property",
-                    "optional": false,
-                    "value": Object {
-                      "kind": "string",
-                    },
-                  },
-                ],
+                  ],
+                },
               },
             ],
             "returnType": Object {
@@ -2894,25 +2934,14 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "kind": "spread",
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
             "value": Object {
-              "kind": "generic",
-              "value": Object {
-                "kind": "object",
-                "members": Array [
-                  Object {
-                    "key": Object {
-                      "kind": "id",
-                      "name": "foo",
-                    },
-                    "kind": "property",
-                    "optional": false,
-                    "value": Object {
-                      "kind": "string",
-                    },
-                  },
-                ],
-              },
+              "kind": "string",
             },
           },
           Object {
