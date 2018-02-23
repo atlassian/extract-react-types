@@ -1,7 +1,6 @@
 // @flow
 const k2s = require('./dist');
-const convert = k2s.default;
-const { resolveToLast } = k2s;
+import convert, { resolveLast } from './src';
 
 const extractReactTypes = require('extract-react-types');
 
