@@ -14,3 +14,5 @@ export default () => <div>convert(generatedData)</div>;
 ```
 
 Also, if you are handling the kinds in a custom way, it is good to pass the final kind to kind2string, to ensure that you always pass a string to your react components.
+
+For examples of how to use this, the [@atlaskit/docs](https://www.npmjs.com/package/@atlaskit/docs) is this package. A good pattern on how to implement `kind2string` can be found in the [prettyproptypes](https://bitbucket.org/atlassian/atlaskit-mk-2/src/HEAD/packages/utils/docs/src/Props/PrettyPropType.js?at=master&fileviewer=file-view-default) file.
