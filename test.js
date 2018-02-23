@@ -1,6 +1,8 @@
 // @flow
-const convert = require('./index');
-const { resolveToLast } = require('./utils');
+const k2s = require('./dist');
+const convert = k2s.default;
+const { resolveToLast } = k2s;
+
 const extractReactTypes = require('extract-react-types');
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
@@ -193,8 +195,8 @@ describe('kind 2 string tests', () => {
         let str = `any`;
         let final = getSingleProp(str);
         expect(final).toBe(str);
-      })
-    })
+      });
+    });
     describe('object', () => {
       it('should test a spread object', () => {
         let defaults = `{ a: { ...something, b: "val" } }`;
@@ -308,11 +310,11 @@ describe('kind 2 string tests', () => {
       expect(converted).toBe('react.Component');
     });
     it.skip('Resolves down to a string representation for namespaced external imports', () => {
-      let file =`
+      let file = `
         import { Component } from 'react';
         import * as foo from 'bar';
         class Something extends Component<{ a: foo }> {}
-      `
+      `;
       let res = extractReactTypes(file, 'flow').classes[0].members[0].value;
       let converted = convert(res);
       expect(converted).toBe('foo');

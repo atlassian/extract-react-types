@@ -1,6 +1,4 @@
-module.exports.resolveToLast = function resolveToLast(
-  type /*: MemberExpression | Obj | Id*/,
-) {
+export function resolveToLast(type /*: MemberExpression | Obj | Id*/) {
   switch (type.kind) {
     case 'id':
     case 'object':
@@ -15,9 +13,9 @@ module.exports.resolveToLast = function resolveToLast(
       );
       break;
   }
-};
+}
 
-module.exports.resolveFromGeneric = function resolveFromGeneric(type) {
+export function resolveFromGeneric(type) {
   if (type.kind !== 'generic') return type;
   if (type.typeParams) {
     // If a generic type is an Array, we don't want to just return the value,
@@ -28,4 +26,4 @@ module.exports.resolveFromGeneric = function resolveFromGeneric(type) {
     return resolveFromGeneric(type.value);
   }
   return type.value;
-};
+}
