@@ -266,6 +266,13 @@ const converters = {
     return type.value.cooked.toString();
   },
 
+  class: (
+    type /*: K.ClassKind */,
+    mode /*: string */,
+  ) /*: string */ => {
+    return convert(type.name);
+  },
+
   // We should write these
   generic: (type /*: K.Generic */, mode /*: string */) /*: string*/ => {
     const typeParams = type.typeParams ? convert(type.typeParams) : '';
