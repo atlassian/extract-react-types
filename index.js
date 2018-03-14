@@ -200,6 +200,15 @@ converters.SpreadElement = (path, context) /*: K.Spread*/ => {
   };
 };
 
+// This has been renamed to SpreadElement in babel 7. Added here for backwards
+// compatibility in other projects
+converters.SpreadProperty = (path, context)/*: K.Spread*/ => {
+  return {
+    kind: "spread",
+    value: convert(path.get("argument"), context)
+  };
+}
+
 converters.UnaryExpression = (path, context) /*: K.Unary*/ => {
   return {
     kind: "unary",
