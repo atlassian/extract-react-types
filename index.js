@@ -1,6 +1,7 @@
 // @flow
 
 const path = require('path');
+// $FlowFixMe
 const extractReactTypes = require('extract-react-types');
 
 module.exports = function extractReactTypesLoader(content /* : string */) {
