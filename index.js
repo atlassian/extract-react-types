@@ -781,6 +781,13 @@ converters.ObjectTypeSpreadProperty = (path, context) /*: K.Spread*/ => {
   };
 };
 
+converters.ArrayTypeAnnotation = (path, context) /*: K.ArrayType*/ => {
+  return {
+    kind: "arrayType",
+    type: convert(path.get("elementType"), context)
+  };
+};
+
 function importConverterGeneral(path, context) /*: K.Import */ {
   let importKind = path.node.importKind || path.parent.importKind || "value";
   let moduleSpecifier = path.parent.source.value;

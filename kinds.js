@@ -27,6 +27,12 @@ export type ObjectPattern = {
   kind: "objectPattern",
   members: Array<Property>
 };
+
+export type ArrayType = {
+  kind: "arrayType",
+  type: AnyTypeKind,
+}
+
 export type Obj = { kind: "object", members: Array<Property> };
 export type Property = {
   kind: "property",

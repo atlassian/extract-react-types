@@ -139,6 +139,38 @@ Object {
 }
 `;
 
+exports[`Should handle ArrayTypeAnnotations 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "arrayType",
+            "type": Object {
+              "kind": "number",
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Should handle rest element 1`] = `
 Object {
   "classes": Array [
