@@ -64,6 +64,26 @@ const getProp = (props, property) => {
   return prop;
 };
 
+const isVariableOfMembers = defaultProps => {
+  let defaultPropsIsVar =
+    defaultProps &&
+    defaultProps.value &&
+    defaultProps.value.kind === "variable";
+  if (!defaultPropsIsVar) {
+    return false;
+  }
+  let declarations = defaultProps.value.declarations;
+
+  let lastDeclarationIsObject =
+    declarations[declarations.length - 1].value.kind === "object";
+
+  if (lastDeclarationIsObject) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const getDefaultProps = (path, context) => {
   let defaultProps = null;
 
@@ -78,7 +98,24 @@ const getDefaultProps = (path, context) => {
         defaultProps = convert(p, { ...context, mode: "value" });
       }
     });
-  return defaultProps;
+
+  let defaultPropsArr = [];
+
+  if (!defaultProps) {
+    return [];
+  } else if (
+    defaultProps &&
+    defaultProps.value &&
+    defaultProps.value.kind === "object"
+  ) {
+    return defaultProps.value.members;
+  } else if (isVariableOfMembers(defaultProps)) {
+    return defaultProps.value.declarations[
+        defaultProps.value.declarations.length - 1
+      ].value.members;
+  } else {
+    throw new Error(`Could not resolve default Props, ${defaultProps}`);
+  }
 };
 
 converters.Program = (path, context) /*: K.Program*/ => {
@@ -108,22 +145,21 @@ function convertReactComponentClass(path, context) {
     ...context,
     mode: "value"
   });
-  if (defaultProps && defaultProps.value && defaultProps.value.members) {
-    defaultProps.value.members.forEach(property => {
-      let ungeneric = resolveFromGeneric(classProperties);
-      const prop = getProp(ungeneric, property);
-      if (!prop) {
-        throw new Error(
-          JSON.stringify(
-            `could not find property to go with default of ${
-              property.key.value ? property.key.value : property.key.name
-            } in ${classProperties.name}`
-          )
-        );
-      }
-      prop.default = property.value;
-    });
-  }
+
+  defaultProps.forEach(property => {
+    let ungeneric = resolveFromGeneric(classProperties);
+    const prop = getProp(ungeneric, property);
+    if (!prop) {
+      throw new Error(
+        JSON.stringify(
+          `could not find property to go with default of ${property.key.value
+            ? property.key.value
+            : property.key.name} in ${classProperties.name}`
+        )
+      );
+    }
+    prop.default = property.value;
+  });
 
   return classProperties;
 }
@@ -778,6 +814,13 @@ converters.ObjectTypeSpreadProperty = (path, context) /*: K.Spread*/ => {
   return {
     kind: "spread",
     value: convert(path.get("argument"), context)
+  };
+};
+
+converters.ArrayTypeAnnotation = (path, context) /*: K.ArrayType*/ => {
+  return {
+    kind: "arrayType",
+    type: convert(path.get("elementType"), context)
   };
 };
 

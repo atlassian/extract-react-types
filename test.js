@@ -802,6 +802,13 @@ const TESTS = [
         }
       }
     `
+  },
+  {
+    name: "Should handle ArrayTypeAnnotations",
+    typeSystem: "flow",
+    code: `
+      class Component extends React.Component<{ a: number[] }> {}
+    `
   }
 ];
 
