@@ -1,6 +1,6 @@
 // @flow
 const k2s = require('./dist');
-import convert, { resolveLast } from './src';
+import convert from './src';
 
 const extractReactTypes = require('extract-react-types');
 
@@ -294,9 +294,16 @@ describe('kind 2 string tests', () => {
     describe('tuples', () => {
       it('Resolves down to a string representation of a tuple', () => {
         let prop = `[string, number]`;
-        let final = getSingleTSPropTypes(prop, 'typescript');
+        let final = getSingleTSPropTypes(prop);
         expect(final).toBe(prop);
       });
+    });
+  });
+  describe('arrayType', () => {
+    it('should convert the array syntix to a string', () => {
+      let prop = `number[]`;
+      let final = getSingleProp(prop);
+      expect(final).toBe('Array of number');
     });
   });
   describe('import', () => {

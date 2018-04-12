@@ -13,7 +13,7 @@ function mapConvertAndJoin(array, joiner = ', ') {
   return array.map(a => convert(a)).join(joiner);
 }
 
-function getKind(type) {
+function getKind(type: K.AnyKind) {
   switch (type.kind) {
     case 'nullable':
       return `nullable ${getKind(type.arguments)}`;
@@ -24,9 +24,8 @@ function getKind(type) {
       return convert(type);
     case 'generic': {
       if (type.typeParams) {
-        return `${convert(type.value)}<${type.typeParams.params
-          .map(getKind)
-          .join(', ')}>`;
+        let typeParams = type.typeParams.params.map(getKind).join(', ');
+        return `${convert(type.value)}<${typeParams}>`;
       }
       return getKind(resolveFromGeneric(type));
     }
@@ -147,6 +146,10 @@ const converters = {
     return `[${mapConvertAndJoin(type.elements)}]`;
   },
 
+  arrayType: (type /*: K.ArrayType*/, mode /*: string */) /*:string*/ => {
+    return `Array of ${convert(type.type)}`;
+  },
+
   spread: (type /*: K.Spread */, mode /*: string */) /*:string*/ => {
     return `...${convert(type.value)}`;
   },
@@ -265,14 +268,9 @@ const converters = {
   ) /*: string */ => {
     return type.value.cooked.toString();
   },
-
-  class: (
-    type /*: K.ClassKind */,
-    mode /*: string */,
-  ) /*: string */ => {
+  class: (type /*: K.ClassKind */, mode /*: string */) /*: string */ => {
     return convert(type.name);
   },
-
   // We should write these
   generic: (type /*: K.Generic */, mode /*: string */) /*: string*/ => {
     const typeParams = type.typeParams ? convert(type.typeParams) : '';
@@ -312,7 +310,11 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
 
   const converter = converters[type.kind];
   if (!converter) {
-    console.error('could not find converter for', type.kind);
+    if (!type.kind) {
+      console.error('convert was passed an object without a kind', type);
+    } else {
+      console.error('could not find converter for', type.kind);
+    }
   } else {
     return converter(type);
   }

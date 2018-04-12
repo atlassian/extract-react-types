@@ -1377,9 +1377,9 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-react-types@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.8.0.tgz#7c34bbf4a1d01c79f0d1f8b07a0b137da54b3fae"
+extract-react-types@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.9.0.tgz#553986e465d385855f37c629178a04f4552fd11e"
   dependencies:
     ast-pretty-print "^2.0.1"
     babel-core "7.0.0-alpha.19"
