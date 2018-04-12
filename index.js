@@ -75,7 +75,8 @@ const isVariableOfMembers = defaultProps => {
   let declarations = defaultProps.value.declarations;
 
   let lastDeclarationIsObject =
-    declarations[declarations.length - 1].value === "object";
+    declarations[declarations.length - 1].value.kind === "object";
+
   if (lastDeclarationIsObject) {
     return true;
   } else {
@@ -101,23 +102,20 @@ const getDefaultProps = (path, context) => {
   let defaultPropsArr = [];
 
   if (!defaultProps) {
-    return defaultPropsArr;
+    return [];
   } else if (
     defaultProps &&
     defaultProps.value &&
     defaultProps.value.kind === "object"
   ) {
-    defaultPropsArr = defaultProps.value.members;
+    return defaultProps.value.members;
   } else if (isVariableOfMembers(defaultProps)) {
-    defaultPropsArr =
-      defaultProps.value.declarations[
+    return defaultProps.value.declarations[
         defaultProps.value.declarations.length - 1
       ].value.members;
   } else {
     throw new Error(`Could not resolve default Props, ${defaultProps}`);
   }
-
-  return defaultProps;
 };
 
 converters.Program = (path, context) /*: K.Program*/ => {
