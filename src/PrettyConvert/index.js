@@ -4,7 +4,7 @@ import { gridSize } from "../components/constants";
 import Button from "../components/Button";
 import convert, { resolveFromGeneric } from "kind2string";
 import allComponents, { type Components } from "../components";
-import Toggle from "./toggle";
+import Toggle from "./Toggle";
 import prettyConvert, { SIMPLE_TYPES } from "./converters";
 
 const Wrapper = (props: { children: Node }) => (
