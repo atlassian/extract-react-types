@@ -6,7 +6,7 @@ import * as K from 'extract-react-types'
 
 import { resolveToLast, resolveFromGeneric } from './utils';
 
-const unaryWhiteList = ['-', '+'];
+const unaryWhiteList = ['-', '+', '!'];
 
 function mapConvertAndJoin(array, joiner = ', ') {
   if (!Array.isArray(array)) return '';
@@ -222,7 +222,17 @@ const converters = {
   },
 
   call: (type /*: K.Call*/, mode /*: string */) /*:string*/ => {
-    return `${convert(type.callee)}(${mapConvertAndJoin(type.args)})`;
+    let callSignature = ''
+    if (type.callee.referenceIdName) {
+      callSignature = type.callee.referenceIdName
+    } else if (type.callee.id) {
+      callSignature = convert(type.callee.id)
+    } else {
+      callSignature = convert(type.callee)
+    }
+
+
+    return `${callSignature}(${mapConvertAndJoin(type.args)})`;
   },
 
   new: (type /*: K.New*/, mode /*: string */) /*:string*/ => {
