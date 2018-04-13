@@ -1,22 +1,30 @@
 {
   "name": "pretty-proptypes",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "prettily render prop types from extract-react-types data",
   "main": "dist/index.js",
   "scripts": {
     "test": "yarn ava",
     "build": "babel src -d dist --ignore __tests__/",
-    "prepublish": "yarn build && yarn test",
+    "prepublish": "yarn build",
     "dev": "yarn build --watch"
   },
-  "keywords": ["extract-react-types", "react", "props", "documentation"],
+  "keywords": [
+    "extract-react-types",
+    "react",
+    "props",
+    "documentation"
+  ],
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
     "emotion": "^9.1.1",
-    "kind2string": "^0.4.0",
+    "kind2string": "^0.4.1",
     "react-markings": "^1.2.0"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",

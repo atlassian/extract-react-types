@@ -9,10 +9,6 @@ const renderPropType = (
   propType: any,
   { overrides = {}, shouldCollapseProps, components }: any
 ) => {
-  // captureMenuScroll
-  if (propType.key.name === "captureMenuScroll") {
-    console.log(propType);
-  }
   if (!components) {
     components = allComponents;
   } else {

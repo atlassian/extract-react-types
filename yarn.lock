@@ -2128,9 +2128,9 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-kind2string@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/kind2string/-/kind2string-0.4.0.tgz#c19367f990d3c8e1fc18a31bddd73f043a176358"
+kind2string@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/kind2string/-/kind2string-0.4.1.tgz#5d1e2d608ab1d72c5d81f9646b848b4e6ba01108"
 
 last-line-stream@^1.0.0:
   version "1.0.0"
