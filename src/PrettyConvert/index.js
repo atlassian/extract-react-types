@@ -3,8 +3,6 @@ import React, { Component, type Node } from "react";
 import { gridSize } from "../components/constants";
 import Button from "../components/Button";
 import convert, { resolveFromGeneric } from "kind2string";
-// import ChevronDownIcon from "@atlaskit/icon/glyph/chevron-down";
-// import ChevronUpIcon from "@atlaskit/icon/glyph/chevron-up";
 import allComponents, { type Components } from "../components";
 import Toggle from "./toggle";
 import prettyConvert, { SIMPLE_TYPES } from "./converters";
