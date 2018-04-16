@@ -1,7 +1,7 @@
 // @flow
-import React, { type Node } from "react";
+import React, { type Node } from 'react';
 
-const Button = (props: { children: Node, isCollapsed: boolean }) => (
+const Button = (props: { isCollapsed: boolean }) => (
   <button
     css={`
       background: linear-gradient(to bottom, #1f8be6 0%, #1178ce 100%) #1385e5;
