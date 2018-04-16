@@ -40,6 +40,8 @@ module.exports = function matchExported(
       id = item.node.declarations[0].id;
     } else if (item.isImportDeclaration()) {
       id = item.node.specifiers[0].local;
+    } else if (item.isExportNamedDeclaration()) {
+      id = item.node.specifiers[0].exported;
     } else if (item.node.id) {
       id = item.node.id;
     } else {
