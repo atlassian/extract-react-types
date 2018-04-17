@@ -73,14 +73,12 @@ export type JSXMemberExpression = {
 };
 export type Call = {
   kind: "call",
-  callee: Id,
-  // typing args causes 1000 errors
-  args: Array<any>
+  callee: Id | Func,
+  args: Array<AnyValueKind>
 };
 export type New = {
   kind: "new",
   callee: Id,
-  // typing args causes 1000 errors
   args: Array<AnyValueKind>
 };
 export type Typeof = { kind: "typeof", name: string, type: AnyKind };
