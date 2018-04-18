@@ -142,12 +142,7 @@ test('resolve generic of array', t => {
       .html()
       .includes('Array'),
   );
-  t.true(
-    wrapper
-      .find(components.Indent)
-      .html()
-      .includes('string'),
-  );
+  t.true(wrapper.html().includes('string'));
 });
 
 test.skip('object with spread object', t => {
