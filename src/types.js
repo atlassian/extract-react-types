@@ -1,5 +1,5 @@
 // @flow
-import type { Components } from "./components";
+import type { Components } from './components';
 
 export type Kind = any;
 
@@ -11,5 +11,5 @@ export type CommonProps = {
   typeValue: Kind,
   type: string,
   shouldCollapse?: boolean,
-  components: Components
+  components: Components,
 };

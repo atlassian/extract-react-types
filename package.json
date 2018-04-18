@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "yarn ava",
-    "build": "babel src -d dist --ignore __tests__/",
+    "build": "babel src -d dist --ignore *.test.js",
     "prepublish": "yarn build",
     "dev": "yarn build --watch"
   },
@@ -36,8 +36,22 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "extract-react-types": "^0.9.0",
     "flow-bin": "^0.69.0",
+    "jsdom": "^11.7.0",
     "prettier": "^1.12.0",
-    "react": "^16.3.1"
+    "react": "^16.3.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.3.1"
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "./setup-test-env.js"
+    ],
+    "babel": "inherit"
   }
 }
