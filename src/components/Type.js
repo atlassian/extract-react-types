@@ -1,7 +1,7 @@
 // @flow
-import React, { type Node } from "react";
-import { borderRadius, colors } from "./constants";
-import { css } from "emotion";
+import React, { type Node } from 'react';
+import { borderRadius, colors } from './constants';
+import { css } from 'emotion';
 
 const baseType = css`
   background-color: ${colors.P50};
@@ -24,6 +24,8 @@ const stringType = css`
   color: ${colors.G500};
 `;
 
+const functionType = css``;
+
 const Type = (props: { children: Node }) => (
   <span className={baseType} {...props} />
 );
@@ -36,5 +38,9 @@ const StringType = (props: { children: Node }) => (
   <span className={stringType} {...props} />
 );
 
-export { TypeMeta, StringType };
+const FunctionType = (props: { children: Node }) => (
+  <span className={functionType} {...props} />
+);
+
+export { TypeMeta, StringType, FunctionType };
 export default Type;

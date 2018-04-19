@@ -37,10 +37,6 @@ export default class Prop extends Component<PropProps> {
       components,
     } = commonProps;
 
-    // if (type !== 'function') {
-    //   return null;
-    // }
-
     return (
       <PropTypeWrapper>
         <PropTypeHeading

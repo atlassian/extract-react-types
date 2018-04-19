@@ -1,8 +1,9 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type Node, Fragment, Component } from 'react';
 import convert, { resolveFromGeneric } from 'kind2string';
 import type { Components } from '../components';
-import { colors } from '../components/constants';
+import AddBrackets from './AddBrackets';
+import { colors, borderRadius } from '../components/constants';
 /*::
 import * as K from 'extract-react-types'
 */
@@ -41,7 +42,7 @@ export const TypeMinWidth = (props: { children: Node }) => (
 const Arrow = () => (
   <span
     css={`
-      background-color: ${colors.G50};
+      color: ${colors.G500};
     `}
   >
     {' => '}
@@ -86,19 +87,16 @@ export const converters: { [string]: ?Function } = {
       // If a type meets this criteria, we print out its contents as per below.
       return (
         <span>
-          <components.TypeMeta>
-            {convert(type.value)} <components.Outline>{'<'}</components.Outline>
-          </components.TypeMeta>
-          {type.typeParams &&
-            type.typeParams.params.map((param, index, array) => (
-              <span key={index}>
-                {prettyConvert(param, components, depth)}
-                {type.typeParams && index === array.length - 1 ? '' : ', '}
-              </span>
-            ))}
-          <components.TypeMeta>
-            <components.Outline>{'>'}</components.Outline>
-          </components.TypeMeta>
+          <components.TypeMeta>{convert(type.value)}</components.TypeMeta>
+          <AddBrackets openBracket="<" closeBracket=">">
+            {type.typeParams &&
+              type.typeParams.params.map((param, index, array) => (
+                <span key={index}>
+                  {prettyConvert(param, components, depth)}
+                  {type.typeParams && index === array.length - 1 ? '' : ', '}
+                </span>
+              ))}
+          </AddBrackets>
         </span>
       );
     }
@@ -106,7 +104,7 @@ export const converters: { [string]: ?Function } = {
   },
   object: (type: K.Obj, components: Components, depth: number) => {
     if (type.members.length === 0) {
-      return <components.Type>object</components.Type>;
+      return <components.Type>Object</components.Type>;
     }
     let simpleObj =
       type.members.filter(mem => !SIMPLE_TYPES.includes(mem.kind)).length === 0;
@@ -116,23 +114,23 @@ export const converters: { [string]: ?Function } = {
     }
     return (
       <span>
-        <components.TypeMeta>
-          Shape <components.Outline>{'{'}</components.Outline>
-        </components.TypeMeta>
-        <components.Indent>
-          {type.members.map(prop => {
-            if (prop.kind === 'spread') {
-              const nestedObj = resolveFromGeneric(prop.value);
-              return nestedObj.members.map(newProp =>
-                prettyConvert(newProp, components, depth),
-              );
-            }
-            return prettyConvert(prop, components, depth);
-          })}
-        </components.Indent>
-        <components.TypeMeta>
-          <components.Outline>{'}'}</components.Outline>
-        </components.TypeMeta>
+        <AddBrackets
+          BracketStyler={components.TypeMeta}
+          openBracket="{"
+          closeBracket="}"
+        >
+          <components.Indent>
+            {type.members.map(prop => {
+              if (prop.kind === 'spread') {
+                const nestedObj = resolveFromGeneric(prop.value);
+                return nestedObj.members.map(newProp =>
+                  prettyConvert(newProp, components, depth),
+                );
+              }
+              return prettyConvert(prop, components, depth);
+            })}
+          </components.Indent>
+        </AddBrackets>
       </span>
     );
   },
@@ -150,20 +148,21 @@ export const converters: { [string]: ?Function } = {
   ),
   union: (type: K.Union, components: Components, depth: number) => (
     <span>
-      <components.TypeMeta>
-        One of <components.Outline>{'('}</components.Outline>
-      </components.TypeMeta>
-      <components.Indent>
-        {type.types.map((t, index, array) => (
-          <div key={index}>
-            {prettyConvert(t, components, depth + 1)}
-            {array.length - 1 === index ? '' : ', '}
-          </div>
-        ))}
-      </components.Indent>
-      <components.TypeMeta>
-        <components.Outline>{')'}</components.Outline>
-      </components.TypeMeta>
+      <components.TypeMeta>One of </components.TypeMeta>
+      <AddBrackets
+        BracketStyler={components.TypeMeta}
+        openBracket="<"
+        closeBracket=">"
+      >
+        <components.Indent>
+          {type.types.map((t, index, array) => (
+            <div key={index}>
+              {prettyConvert(t, components, depth + 1)}
+              {array.length - 1 === index ? '' : ', '}
+            </div>
+          ))}
+        </components.Indent>
+      </AddBrackets>
     </span>
   ),
   function: (type: K.Func, components: Components, depth: number) => {
@@ -185,16 +184,12 @@ export const converters: { [string]: ?Function } = {
     } else if (simpleParameters || type.parameters.length < 2) {
       return (
         <span>
-          <components.StringType>
-            <components.Outline>{'('}</components.Outline>
-          </components.StringType>
-          {type.parameters.map((param, index, array) => [
-            prettyConvert(param, components, depth),
-            array.length - 1 === index ? '' : ', ',
-          ])}
-          <components.StringType>
-            <components.Outline>{')'}</components.Outline>
-          </components.StringType>
+          <AddBrackets BracketStyler={components.FunctionType}>
+            {type.parameters.map((param, index, array) => [
+              prettyConvert(param, components, depth),
+              array.length - 1 === index ? '' : ', ',
+            ])}
+          </AddBrackets>
           <Arrow />
           {type.returnType
             ? prettyConvert(type.returnType, components, depth)
@@ -202,22 +197,20 @@ export const converters: { [string]: ?Function } = {
         </span>
       );
     } else {
+      console.log('Nope still complex', type);
       return (
         <span>
-          <components.StringType>
-            <components.Outline>{'('}</components.Outline>
-          </components.StringType>
-          <components.Indent>
-            {type.parameters.map((param, index, array) => (
-              <div key={convert(param.value)}>
-                {prettyConvert(param, components, depth)}
-                {array.length - 1 === index ? '' : ', '}
-              </div>
-            ))}
-          </components.Indent>
-          <components.StringType>
-            <components.Outline>{')'}</components.Outline>
-          </components.StringType>
+          <components.TypeMeta>function </components.TypeMeta>
+          <AddBrackets BracketStyler={components.FunctionType}>
+            <components.Indent>
+              {type.parameters.map((param, index, array) => (
+                <div key={convert(param.value)}>
+                  {prettyConvert(param, components, depth + 1)}
+                  {array.length - 1 === index ? '' : ', '}
+                </div>
+              ))}
+            </components.Indent>
+          </AddBrackets>
           <Arrow />
           {type.returnType
             ? prettyConvert(type.returnType, components, depth)
@@ -233,14 +226,8 @@ export const converters: { [string]: ?Function } = {
       </span>
     );
   },
-  typeof: (type: K.Typeof, components, depth) => {
-    return (
-      <components.TypeMeta>
-        <components.Outline>type of: </components.Outline>
-        {prettyConvert(type.type, components, depth)}
-      </components.TypeMeta>
-    );
-  },
+  typeof: (type: K.Typeof, components, depth) =>
+    prettyConvert(type.type, components, depth),
 };
 
 const prettyConvert = (
