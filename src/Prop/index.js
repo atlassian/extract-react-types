@@ -1,11 +1,11 @@
 // @flow
-import React, { Component, type ComponentType, type Node } from "react";
-import { gridSize } from "../components/constants";
-import PrettyPropType from "../PrettyConvert";
-import md from "react-markings";
-import PropTypeHeading from "./Heading";
-import type { Components } from "../components";
-import type { CommonProps } from "../types";
+import React, { Component, type ComponentType, type Node } from 'react';
+import { gridSize } from '../components/constants';
+import PrettyPropType from '../PrettyConvert';
+import md from 'react-markings';
+import PropTypeHeading from './Heading';
+import type { Components } from '../components';
+import type { CommonProps } from '../types';
 
 const PropTypeWrapper = (props: { children: Node }) => (
   <div
@@ -17,12 +17,12 @@ const PropTypeWrapper = (props: { children: Node }) => (
 );
 
 type PropProps = CommonProps & {
-  shapeComponent: ComponentType<CommonProps>
+  shapeComponent: ComponentType<CommonProps>,
 };
 
 export default class Prop extends Component<PropProps> {
   static defaultProps = {
-    shapeComponent: (props: CommonProps) => <PrettyPropType {...props} />
+    shapeComponent: (props: CommonProps) => <PrettyPropType {...props} />,
   };
 
   render() {
@@ -34,7 +34,7 @@ export default class Prop extends Component<PropProps> {
       name,
       required,
       type,
-      components
+      components,
     } = commonProps;
 
     return (

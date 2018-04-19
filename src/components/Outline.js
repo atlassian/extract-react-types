@@ -1,6 +1,6 @@
 // @flow
-import React, { type Node } from "react";
-import { colors } from "./constants";
+import React, { type Node } from 'react';
+import { colors } from './constants';
 
 const Outline = (props: { children: Node }) => (
   <span

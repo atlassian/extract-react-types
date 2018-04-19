@@ -110,10 +110,6 @@ test('simple object', t => {
   let values = getSingleDefault(`{ a: 'something', b: 'elsewhere' }`);
   let wrapper = shallow(prettyConvert(values, components));
 
-  let outlines = wrapper.find(components.Outline);
-  t.is(outlines.length, 2);
-  t.true(outlines.at(0).containsMatchingElement('{'));
-  t.true(outlines.at(1).containsMatchingElement('}'));
   let indent = wrapper.find(components.Indent);
   t.is(indent.length, 1);
   t.is(indent.find(TypeMinWidth).length, 2);
@@ -124,12 +120,6 @@ test('object with nested object', t => {
   let wrapper = shallow(prettyConvert(values, components));
   let indent = wrapper.find(components.Indent);
   t.is(indent.length, 2);
-
-  let firstIndent = indent.at(0);
-  let outlines = firstIndent.find(components.Outline);
-  t.is(outlines.length, 2);
-  t.true(outlines.at(0).containsMatchingElement('{'));
-  t.true(outlines.at(1).containsMatchingElement('}'));
 });
 
 test('resolve generic of array', t => {
@@ -142,12 +132,7 @@ test('resolve generic of array', t => {
       .html()
       .includes('Array'),
   );
-  t.true(
-    wrapper
-      .find(components.Indent)
-      .html()
-      .includes('string'),
-  );
+  t.true(wrapper.html().includes('string'));
 });
 
 test.skip('object with spread object', t => {
