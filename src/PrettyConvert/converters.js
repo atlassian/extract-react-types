@@ -141,7 +141,7 @@ export const converters: { [string]: ?Function } = {
       </TypeMinWidth>{' '}
       {type.value.kind !== 'generic' ? type.value.kind : ''}
       {type.optional ? null : (
-        <components.Required> required</components.Required>
+        <components.Required>required</components.Required>
       )}{' '}
       {printComplexType(type.value, components, depth)}
     </div>
@@ -197,7 +197,6 @@ export const converters: { [string]: ?Function } = {
         </span>
       );
     } else {
-      console.log('Nope still complex', type);
       return (
         <span>
           <components.TypeMeta>function </components.TypeMeta>
