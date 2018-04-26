@@ -171,6 +171,42 @@ Object {
 }
 `;
 
+exports[`Should handle importing JSON files 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "importKind": "value",
+            "kind": "import",
+            "moduleSpecifier": "./__fixtures__/test",
+            "name": "name",
+            "referenceIdName": "name",
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Should handle rest element 1`] = `
 Object {
   "classes": Array [
@@ -1084,6 +1120,7 @@ Object {
             "value": Object {
               "kind": "generic",
               "value": Object {
+                "external": true,
                 "importKind": "type",
                 "kind": "import",
                 "moduleSpecifier": "react",
@@ -2046,6 +2083,7 @@ Object {
               Object {
                 "kind": "spread",
                 "value": Object {
+                  "external": true,
                   "importKind": "value",
                   "kind": "import",
                   "moduleSpecifier": "somewhere",
@@ -2304,6 +2342,7 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
+              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2365,6 +2404,7 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
+              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2433,6 +2473,7 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
+              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2502,6 +2543,7 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
+              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
