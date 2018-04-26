@@ -946,7 +946,7 @@ function extractReactTypes(
 ) {
   let plugins = ["jsx"];
 
-  if (!resolveOptions.extensions) {
+  if (resolveOptions && !resolveOptions.extensions) {
     // The resolve package that babel-file-loader uses only resolves .js files by default instead of the
     // default extension list of node (.js, .json and .node) so add .json back here.
     resolveOptions.extensions = ['.js', '.json'];
