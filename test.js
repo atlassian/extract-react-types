@@ -809,6 +809,19 @@ const TESTS = [
     code: `
       class Component extends React.Component<{ a: number[] }> {}
     `
+  },
+  {
+    name: "Should handle importing JSON files",
+    typeSystem: "flow",
+    code: `
+      import { name, version } from "./__fixtures__/test";
+
+      class Component extends React.Component<{ a: string }> {
+        defaultProps = {
+          a: name,
+        }
+      }
+    `
   }
 ];
 
@@ -825,7 +838,8 @@ for (let testCase of TESTS) {
 
   testFn(testCase.name, () => {
     let code = stripIndent(testCase.code);
-    let result = extractReactTypes(code, testCase.typeSystem);
+    // Pass in file name so we can resolve imports to files in __fixtures__
+    let result = extractReactTypes(code, testCase.typeSystem, __filename);
     expect(result).toMatchSnapshot();
   });
 }

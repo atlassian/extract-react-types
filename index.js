@@ -4,8 +4,9 @@ export type * from './kinds'
 import * as K from './kinds'
 */
 
+const nodePath = require('path');
 const createBabelFile = require("babel-file");
-const { loadImportSync } = require("babel-file-loader");
+const { loadFileSync, resolveImportFilePathSync } = require("babel-file-loader");
 const { isFlowIdentifier } = require("babel-flow-identifiers");
 const { findFlowBinding } = require("babel-flow-scope");
 const { getIdentifierKind } = require("babel-identifiers");
@@ -138,7 +139,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
 function convertReactComponentClass(path, context) {
   let params = path.get("superTypeParameters").get("params");
   let props = params[0];
-  let defaultProps = getDefaultProps(path);
+  let defaultProps = getDefaultProps(path, context);
 
   let classProperties = convert(props, { ...context, mode: "type" });
   classProperties.name = convert(path.get("id"), {
@@ -859,7 +860,19 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
-    let file = loadImportSync(path.parentPath, context.resolveOptions);
+    const filePath = resolveImportFilePathSync(path.parentPath, context.resolveOptions);
+
+    // Don't attempt to parse JSON
+    if (nodePath.extname(filePath) === '.json') {
+      return {
+        kind: "import",
+        importKind,
+        name,
+        moduleSpecifier,
+      };
+    }
+
+    let file = loadFileSync(filePath);
 
     let id;
     if (path.node.imported) {
@@ -932,6 +945,12 @@ function extractReactTypes(
   resolveOptions /*:? Object */ = {}
 ) {
   let plugins = ["jsx"];
+
+  if (resolveOptions && !resolveOptions.extensions) {
+    // The resolve package that babel-file-loader uses only resolves .js files by default instead of the
+    // default extension list of node (.js, .json and .node) so add .json back here.
+    resolveOptions.extensions = ['.js', '.json'];
+  }
 
   if (typeSystem === "flow") plugins.push("flow");
   else if (typeSystem === "typescript") plugins.push("typescript");
