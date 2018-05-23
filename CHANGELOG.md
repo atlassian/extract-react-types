@@ -1,5 +1,8 @@
 # extract-react-types-loader
 
+## 0.1.3
+- [patch] Sanity test release, no actual change [481c086](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/481c086)
+
 ## 0.1.2
 - [patch] Upgrade extract-react-types version [f78d035](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f78d035)
 
