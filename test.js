@@ -822,7 +822,16 @@ const TESTS = [
         }
       }
     `
-  }
+  },
+  {
+    name: "typeof statements",
+    typeSystem: "flow",
+    code: `
+      const one = 1;
+
+      class Component extends React.Component<{ a: typeof one }> {}
+  `
+  },
 ];
 
 for (let testCase of TESTS) {
