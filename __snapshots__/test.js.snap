@@ -2957,6 +2957,44 @@ Object {
 }
 `;
 
+exports[`typeof statements 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "typeof",
+            "name": undefined,
+            "type": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "number",
+                "referenceIdName": "one",
+                "value": 1,
+              },
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`unary operator 1`] = `
 Object {
   "classes": Array [
