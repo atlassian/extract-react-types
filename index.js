@@ -338,7 +338,7 @@ converters.NewExpression = (path, context) /*: K.New*/ => {
 };
 
 converters.TypeofTypeAnnotation = (path, context) /*: K.Typeof*/ => {
-  let type = convert(path.get("argument"), context);
+  let type = convert(path.get("argument"), {...context, mode: 'value' });
   return {
     kind: "typeof",
     type,
