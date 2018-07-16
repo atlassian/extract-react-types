@@ -864,10 +864,30 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       throw new Error({ path, error: 'import typeof is unsupported' });
     }
 
-    const filePath = resolveImportFilePathSync(
-      path.parentPath,
-      context.resolveOptions
-    );
+    let filePath;
+
+    try {
+      filePath = resolveImportFilePathSync(
+        path.parentPath,
+        context.resolveOptions
+      );
+    } catch (e) {
+      return {
+        kind: 'import',
+        importKind,
+        name,
+        moduleSpecifier
+      };
+    }
+
+    if (!filePath) {
+      return {
+        kind: 'import',
+        importKind,
+        name,
+        moduleSpecifier
+      };
+    }
 
     // Don't attempt to parse JSON
     if (nodePath.extname(filePath) === '.json') {
@@ -879,18 +899,7 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
-    let file;
-
-    try {
-      file = loadFileSync(filePath);
-    } catch (e) {
-      return {
-        kind: 'import',
-        importKind,
-        name,
-        moduleSpecifier
-      };
-    }
+    let file = loadFileSync(filePath);
 
     let id;
     if (path.node.imported) {
