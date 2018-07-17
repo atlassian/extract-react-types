@@ -1,13 +1,13 @@
 // @flow
-"use strict";
+'use strict';
 
-const extractReactTypes = require("./");
-const stripIndent = require("strip-indent");
+const extractReactTypes = require('./');
+const stripIndent = require('strip-indent');
 
 const TESTS = [
   {
-    name: "flow boolean",
-    typeSystem: "flow",
+    name: 'flow boolean',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: boolean }> {
       // ...
@@ -15,8 +15,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow string",
-    typeSystem: "flow",
+    name: 'flow string',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: string }> {
       // ...
@@ -24,8 +24,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow number",
-    typeSystem: "flow",
+    name: 'flow number',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: number }> {
       // ...
@@ -33,8 +33,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function",
-    typeSystem: "flow",
+    name: 'flow function',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (string, number) => string }> {
       // ...
@@ -42,8 +42,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function named params",
-    typeSystem: "flow",
+    name: 'flow function named params',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (name: string, age: number) => void }> {
       // ...
@@ -51,8 +51,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function unnamed params",
-    typeSystem: "flow",
+    name: 'flow function unnamed params',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (string, number) => void }> {
       // ...
@@ -60,8 +60,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function unnamed params w/ object",
-    typeSystem: "flow",
+    name: 'flow function unnamed params w/ object',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: ({ prop: string }) => void }> {
       // ...
@@ -69,8 +69,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function return type",
-    typeSystem: "flow",
+    name: 'flow function return type',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (number) => void }> {
       // ...
@@ -78,8 +78,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow function type",
-    typeSystem: "flow",
+    name: 'flow function type',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Function }> {
       // ...
@@ -87,8 +87,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow maybe",
-    typeSystem: "flow",
+    name: 'flow maybe',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: ?string }> {
       // ...
@@ -96,8 +96,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow array",
-    typeSystem: "flow",
+    name: 'flow array',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Array<boolean> }> {
       // ...
@@ -105,8 +105,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow union",
-    typeSystem: "flow",
+    name: 'flow union',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: boolean | number }> {
       // ...
@@ -114,8 +114,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow union literals",
-    typeSystem: "flow",
+    name: 'flow union literals',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: '25' | 30 }> {
       // ...
@@ -123,8 +123,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow mixed",
-    typeSystem: "flow",
+    name: 'flow mixed',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: mixed }> {
       // ...
@@ -132,8 +132,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow any",
-    typeSystem: "flow",
+    name: 'flow any',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: any }> {
       // ...
@@ -141,8 +141,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow generic class",
-    typeSystem: "flow",
+    name: 'flow generic class',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<A> {
       name: A;
@@ -150,8 +150,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow type",
-    typeSystem: "flow",
+    name: 'flow type',
+    typeSystem: 'flow',
     code: `
     type ComponentProps = {
       foo: number,
@@ -163,8 +163,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow type identifier",
-    typeSystem: "flow",
+    name: 'flow type identifier',
+    typeSystem: 'flow',
     code: `
     import * as React from 'react';
 
@@ -178,8 +178,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow exported type alias reference",
-    typeSystem: "flow",
+    name: 'flow exported type alias reference',
+    typeSystem: 'flow',
     code: `
     export type Foo = boolean;
     class Component extends React.Component<{ foo: Foo }> {
@@ -188,8 +188,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow type",
-    typeSystem: "flow",
+    name: 'flow type',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{foo: number & string}> {
 
@@ -197,8 +197,8 @@ const TESTS = [
   `
   },
   {
-    name: "intersection type",
-    typeSystem: "flow",
+    name: 'intersection type',
+    typeSystem: 'flow',
     code: `
   type BaseProps = { bar: string }
 
@@ -209,8 +209,8 @@ const TESTS = [
   `
   },
   {
-    name: "with spread in type annotation",
-    typeSystem: "flow",
+    name: 'with spread in type annotation',
+    typeSystem: 'flow',
     code: `
   type BaseProps = { foo: string }
   type Props = {
@@ -222,8 +222,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow array union",
-    typeSystem: "flow",
+    name: 'flow array union',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Array<boolean | number> }> {
       // ...
@@ -231,8 +231,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow void",
-    typeSystem: "flow",
+    name: 'flow void',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: void }> {
       // ...
@@ -240,24 +240,24 @@ const TESTS = [
   `
   },
   {
-    name: "flow optional",
-    typeSystem: "flow",
+    name: 'flow optional',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo?: number }> {
     }
   `
   },
   {
-    name: "flow no React component",
-    typeSystem: "flow",
+    name: 'flow no React component',
+    typeSystem: 'flow',
     code: `
     class FooComponent extends Bar<{ foo?: number }> {
     }
   `
   },
   {
-    name: "flow different React component",
-    typeSystem: "flow",
+    name: 'flow different React component',
+    typeSystem: 'flow',
     code: `
     import {Component} from 'react';
 
@@ -269,8 +269,8 @@ const TESTS = [
   `
   },
   {
-    name: "flow import { type }",
-    typeSystem: "flow",
+    name: 'flow import { type }',
+    typeSystem: 'flow',
     code: `
     import React, { type Node } from 'react';
 
@@ -284,8 +284,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts boolean",
-    typeSystem: "typescript",
+    name: 'ts boolean',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{ foo: boolean }> {
 
@@ -293,8 +293,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts string",
-    typeSystem: "typescript",
+    name: 'ts string',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{ foo: string }> {
 
@@ -302,8 +302,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts object",
-    typeSystem: "typescript",
+    name: 'ts object',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {
 
@@ -311,8 +311,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts interface",
-    typeSystem: "typescript",
+    name: 'ts interface',
+    typeSystem: 'typescript',
     code: `
     interface ComponentProps {
       foo: string;
@@ -325,8 +325,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts function",
-    typeSystem: "typescript",
+    name: 'ts function',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: (string, boolean) => number}> {
       // ...
@@ -334,8 +334,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts array",
-    typeSystem: "typescript",
+    name: 'ts array',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: Array<number>}> {
       // ...
@@ -343,8 +343,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts union",
-    typeSystem: "typescript",
+    name: 'ts union',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: number | string}> {
       // ...
@@ -352,8 +352,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts any",
-    typeSystem: "typescript",
+    name: 'ts any',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: any}> {
       // ...
@@ -361,8 +361,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts literals",
-    typeSystem: "typescript",
+    name: 'ts literals',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: '25' | 30}> {
 
@@ -370,8 +370,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts optional",
-    typeSystem: "typescript",
+    name: 'ts optional',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo?: string}> {
 
@@ -379,8 +379,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts void",
-    typeSystem: "typescript",
+    name: 'ts void',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: void}> {
 
@@ -388,8 +388,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts no react component",
-    typeSystem: "typescript",
+    name: 'ts no react component',
+    typeSystem: 'typescript',
     code: `
     class Component extends Foo<{foo: void}> {
 
@@ -397,8 +397,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts different React components",
-    typeSystem: "typescript",
+    name: 'ts different React components',
+    typeSystem: 'typescript',
     code: `
     import {Component} from 'react';
 
@@ -412,8 +412,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts tuple",
-    typeSystem: "typescript",
+    name: 'ts tuple',
+    typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: [string, number]}> {
 
@@ -421,8 +421,8 @@ const TESTS = [
   `
   },
   {
-    name: "ts enum",
-    typeSystem: "typescript",
+    name: 'ts enum',
+    typeSystem: 'typescript',
     code: `
     enum Color {Red, Green, Blue};
     class Component extends React.Component<{foo: Color}> {
@@ -431,15 +431,15 @@ const TESTS = [
   `
   },
   {
-    name: "test",
-    typeSystem: "flow",
+    name: 'test',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo?: Object }> {}
   `
   },
   {
-    name: "test get defaultProps",
-    typeSystem: "flow",
+    name: 'test get defaultProps',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: string }> {
       defaultProps = {
@@ -449,8 +449,8 @@ const TESTS = [
   `
   },
   {
-    name: "test defaultProp as JSXElement",
-    typeSystem: "flow",
+    name: 'test defaultProp as JSXElement',
+    typeSystem: 'flow',
     code: `
       import type { Node } from 'react';
       const Icon = <div></div>
@@ -462,8 +462,8 @@ const TESTS = [
     `
   },
   {
-    name: "test defaultProp as JSXElement with member expression",
-    typeSystem: "flow",
+    name: 'test defaultProp as JSXElement with member expression',
+    typeSystem: 'flow',
     code: `
     import type { Node } from 'react';
     const Icon = <div></div>
@@ -476,8 +476,8 @@ const TESTS = [
     `
   },
   {
-    name: "test defaultProp as JSXElement with multiple props",
-    typeSystem: "flow",
+    name: 'test defaultProp as JSXElement with multiple props',
+    typeSystem: 'flow',
     code: `
       import type { Node } from 'react';
       const Icon = <div></div>
@@ -489,8 +489,8 @@ const TESTS = [
     `
   },
   {
-    name: "test defaultProp as JSXElement with JSXExpressionContainer",
-    typeSystem: "flow",
+    name: 'test defaultProp as JSXElement with JSXExpressionContainer',
+    typeSystem: 'flow',
     code: `
         import type { Node } from 'react';
         const Icon = <div></div>
@@ -502,8 +502,8 @@ const TESTS = [
       `
   },
   {
-    name: "spread element ",
-    typeSystem: "flow",
+    name: 'spread element ',
+    typeSystem: 'flow',
     code: `
 
     const something = { a: true }
@@ -516,8 +516,8 @@ const TESTS = [
   `
   },
   {
-    name: "spread element cannot find",
-    typeSystem: "flow",
+    name: 'spread element cannot find',
+    typeSystem: 'flow',
     code: `
     import something from 'somewhere'
 
@@ -530,8 +530,8 @@ const TESTS = [
   `
   },
   {
-    name: "string literal",
-    typeSystem: "flow",
+    name: 'string literal',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: string }> {
       defaultProps = {
@@ -541,8 +541,8 @@ const TESTS = [
   `
   },
   {
-    name: "numeric literal",
-    typeSystem: "flow",
+    name: 'numeric literal',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: number }> {
       defaultProps = {
@@ -552,8 +552,8 @@ const TESTS = [
   `
   },
   {
-    name: "null literal",
-    typeSystem: "flow",
+    name: 'null literal',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a?: number }> {
       defaultProps = {
@@ -563,8 +563,8 @@ const TESTS = [
   `
   },
   {
-    name: "boolean literal",
-    typeSystem: "flow",
+    name: 'boolean literal',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: boolean }> {
       defaultProps = {
@@ -574,8 +574,8 @@ const TESTS = [
   `
   },
   {
-    name: "array expression",
-    typeSystem: "flow",
+    name: 'array expression',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: Array<string> }> {
       defaultProps = {
@@ -585,8 +585,8 @@ const TESTS = [
   `
   },
   {
-    name: "binary expression",
-    typeSystem: "flow",
+    name: 'binary expression',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: number }> {
       defaultProps = {
@@ -596,8 +596,8 @@ const TESTS = [
   `
   },
   {
-    name: "member expression",
-    typeSystem: "flow",
+    name: 'member expression',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: () => mixed }> {
       defaultProps = {
@@ -607,8 +607,8 @@ const TESTS = [
   `
   },
   {
-    name: "defined member expression",
-    typeSystem: "flow",
+    name: 'defined member expression',
+    typeSystem: 'flow',
     code: `
     const b = {
       c: (a: string, b: string): number => {}
@@ -621,8 +621,8 @@ const TESTS = [
   `
   },
   {
-    name: "imported member expression default",
-    typeSystem: "flow",
+    name: 'imported member expression default',
+    typeSystem: 'flow',
     code: `
     import c from 'somewhere-awesome'
     class Component extends React.Component<{ a: () => mixed }> {
@@ -633,8 +633,8 @@ const TESTS = [
   `
   },
   {
-    name: "imported member expression named",
-    typeSystem: "flow",
+    name: 'imported member expression named',
+    typeSystem: 'flow',
     code: `
     import { c } from 'somewhere-awesome'
     class Component extends React.Component<{ a: () => mixed }> {
@@ -645,8 +645,8 @@ const TESTS = [
   `
   },
   {
-    name: "imported member expression named alias",
-    typeSystem: "flow",
+    name: 'imported member expression named alias',
+    typeSystem: 'flow',
     code: `
     import { d as c } from 'somewhere-awesome'
     class Component extends React.Component<{ a: () => mixed }> {
@@ -657,8 +657,8 @@ const TESTS = [
   `
   },
   {
-    name: "arrow function expression",
-    typeSystem: "flow",
+    name: 'arrow function expression',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: () => mixed }> {
       defaultProps = {
@@ -668,8 +668,8 @@ const TESTS = [
   `
   },
   {
-    name: "function expression",
-    typeSystem: "flow",
+    name: 'function expression',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: () => mixed }> {
       defaultProps = {
@@ -679,8 +679,8 @@ const TESTS = [
   `
   },
   {
-    name: "exists type annotation",
-    typeSystem: "flow",
+    name: 'exists type annotation',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: () => mixed }> {
       defaultProps = {
@@ -690,8 +690,8 @@ const TESTS = [
   `
   },
   {
-    name: "unary operator",
-    typeSystem: "flow",
+    name: 'unary operator',
+    typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ a: number }> {
       defaultProps = {
@@ -701,8 +701,8 @@ const TESTS = [
   `
   },
   {
-    name: "tagged template expression",
-    typeSystem: "flow",
+    name: 'tagged template expression',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ a: () => mixed }> {
         defaultProps = {
@@ -714,8 +714,8 @@ const TESTS = [
     `
   },
   {
-    name: "Assignment Pattern",
-    typeSystem: "flow",
+    name: 'Assignment Pattern',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{a: number => number}> {
         defaultProps = {
@@ -725,30 +725,30 @@ const TESTS = [
     `
   },
   {
-    name: "BooleanLiteralTypeAnnotation",
-    typeSystem: "flow",
+    name: 'BooleanLiteralTypeAnnotation',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{a: string => true}> {}
     `
   },
   {
-    name: "NullLiteralTypeAnnotation",
-    typeSystem: "flow",
+    name: 'NullLiteralTypeAnnotation',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{a: null}> {}
     `
   },
   {
-    name: "non-standard key",
-    typeSystem: "flow",
+    name: 'non-standard key',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ 'ab-a': number, a: number }> {
       }
     `
   },
   {
-    name: "non-standard key with default",
-    typeSystem: "flow",
+    name: 'non-standard key with default',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ 'ab-a': number, a: number }> {
         defaultProps = {
@@ -758,8 +758,8 @@ const TESTS = [
     `
   },
   {
-    name: "new expression",
-    typeSystem: "flow",
+    name: 'new expression',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ a: Date }> {
         defaultProps = {
@@ -769,8 +769,8 @@ const TESTS = [
     `
   },
   {
-    name: "function declaration",
-    typeSystem: "flow",
+    name: 'function declaration',
+    typeSystem: 'flow',
     code: `
       function sayHello() { return 'hello'; };
 
@@ -782,8 +782,8 @@ const TESTS = [
     `
   },
   {
-    name: "template literal with quasis",
-    typeSystem: "flow",
+    name: 'template literal with quasis',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ a: string }> {
         defaultProps = {
@@ -793,8 +793,8 @@ const TESTS = [
     `
   },
   {
-    name: "Should handle rest element",
-    typeSystem: "flow",
+    name: 'Should handle rest element',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ a: () => void }> {
         defaultProps = {
@@ -804,15 +804,15 @@ const TESTS = [
     `
   },
   {
-    name: "Should handle ArrayTypeAnnotations",
-    typeSystem: "flow",
+    name: 'Should handle ArrayTypeAnnotations',
+    typeSystem: 'flow',
     code: `
       class Component extends React.Component<{ a: number[] }> {}
     `
   },
   {
-    name: "Should handle importing JSON files",
-    typeSystem: "flow",
+    name: 'Should handle importing JSON files',
+    typeSystem: 'flow',
     code: `
       import { name, version } from "./__fixtures__/test";
 
@@ -824,14 +824,14 @@ const TESTS = [
     `
   },
   {
-    name: "typeof statements",
-    typeSystem: "flow",
+    name: 'typeof statements',
+    typeSystem: 'flow',
     code: `
       const one = 1;
 
       class Component extends React.Component<{ a: typeof one }> {}
   `
-  },
+  }
 ];
 
 for (let testCase of TESTS) {

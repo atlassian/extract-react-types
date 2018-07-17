@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "flow-bin": "^0.53.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "prettier": "^1.13.7"
   }
 }

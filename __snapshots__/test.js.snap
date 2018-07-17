@@ -1120,7 +1120,6 @@ Object {
             "value": Object {
               "kind": "generic",
               "value": Object {
-                "external": true,
                 "importKind": "type",
                 "kind": "import",
                 "moduleSpecifier": "react",
@@ -2083,7 +2082,6 @@ Object {
               Object {
                 "kind": "spread",
                 "value": Object {
-                  "external": true,
                   "importKind": "value",
                   "kind": "import",
                   "moduleSpecifier": "somewhere",
@@ -2342,7 +2340,6 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
-              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2404,7 +2401,6 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
-              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2473,7 +2469,6 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
-              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",
@@ -2543,7 +2538,6 @@ Object {
           "value": Object {
             "kind": "generic",
             "value": Object {
-              "external": true,
               "importKind": "type",
               "kind": "import",
               "moduleSpecifier": "react",

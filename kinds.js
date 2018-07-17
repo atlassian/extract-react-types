@@ -7,7 +7,7 @@ export type Param = {
   type: AnyKind | null
 };
 export type TypeParams = { kind: "typeParams", params: Array<AnyTypeKind> };
-export type Id = { kind: "id", name: string, type?: $Diff<AnyKind, Id> | null };
+export type Id = { kind: "id", name: string, type?: ?$Diff<AnyKind, Id> };
 export type TemplateLiteral = {
   kind: "templateLiteral",
   expressions: Array<AnyValueKind>,
@@ -140,6 +140,9 @@ export type Import = {
 };
 
 export type Program = { kind: "program", classes: Array<Property> };
+
+export type ExportSpecifier = { kind: "exportSpecifier", local: Id, exported: Id };
+export type Export = { kind: "export", exports: Array<Id>, source?: String };
 
 export type AnyTypeKind =
   | Any
