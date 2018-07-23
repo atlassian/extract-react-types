@@ -7,6 +7,17 @@ module.exports = function extractReactTypesLoader(content /* : string */) {
   const filename = this.resource;
   const ext = path.extname(filename);
   const typeSystem = ext === '.ts' || ext === '.tsx' ? 'typescript' : 'flow';
-  const types = extractReactTypes(content, typeSystem, filename);
+
+  const resolveOpts = {
+    pathFilter: (pkg, location, dist) => {
+      if (pkg['atlaskit:src'] && location.includes('node_modules')) {
+        console.log(location, location.replace(dist, pkg['atlaskit:src']));
+        return location.replace(dist, pkg['atlaskit:src']);
+      }
+      return null;
+    },
+  };
+
+  const types = extractReactTypes(content, typeSystem, filename, resolveOpts);
   return `module.exports = ${JSON.stringify(types)}`;
 };
