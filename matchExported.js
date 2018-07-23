@@ -1,8 +1,8 @@
 // @flow
-const { explodeModule } = require("babel-explode-module");
-const { explodedToStatements } = require("babel-helper-simplify-module");
+const { explodeModule } = require('babel-explode-module');
+const { explodedToStatements } = require('babel-helper-simplify-module');
 const printAST = require('ast-pretty-print');
-const t = require("babel-types");
+const t = require('babel-types');
 
 module.exports = function matchExported(
   file /* : Object */,
@@ -31,7 +31,11 @@ module.exports = function matchExported(
     return null;
   }
 
-  let statement = file.path.get("body").find(item => {
+  if (local === 'default' && match.source) {
+    local = exportName;
+  }
+
+  let statement = file.path.get('body').find(item => {
     if (!item.isDeclaration()) return false;
 
     let id = null;
