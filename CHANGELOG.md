@@ -1,5 +1,8 @@
 # extract-react-types-loader
 
+## 0.2.0
+- [minor] Add pathFilter function to resolve atlaskit:src paths within atlaskit [c5214a3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5214a3)
+
 ## 0.1.3
 - [patch] Sanity test release, no actual change [481c086](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/481c086)
 
