@@ -1,6 +1,6 @@
 {
   "name": "extract-react-types-loader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.js",
   "dependencies": {
     "extract-react-types": "^0.12.1"

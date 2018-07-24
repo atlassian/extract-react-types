@@ -1,5 +1,8 @@
 # extract-react-types-loader
 
+## 0.2.1
+- [patch] Remove console log [e16d2b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e16d2b6)
+
 ## 0.2.0
 - [minor] Add pathFilter function to resolve atlaskit:src paths within atlaskit [c5214a3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5214a3)
 
