@@ -1406,6 +1406,59 @@ Object {
 }
 `;
 
+exports[`flow type parameter declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
+                  "kind": "string",
+                },
+              ],
+            },
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [],
+              "returnType": Object {
+                "kind": "generic",
+                "value": Object {
+                  "kind": "typeParamsDeclaration",
+                  "params": Array [
+                    Object {
+                      "kind": "typeParam",
+                      "name": "T",
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      ],
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow union 1`] = `
 Object {
   "classes": Array [
