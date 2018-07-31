@@ -1,6 +1,6 @@
 // @flow
-import React, { type Node } from "react";
-import { colors, gridSize, borderRadius } from "../components/constants";
+import React, { type Node } from 'react';
+import { colors, gridSize, borderRadius } from '../components/constants';
 
 const Heading = (props: { children: Node }) => (
   <h3
@@ -65,7 +65,7 @@ type PropTypeHeadingProps = {
   required: boolean,
   type: any,
   // This is probably giving up
-  defaultValue?: any
+  defaultValue?: any,
 };
 
 const PropTypeHeading = (props: PropTypeHeadingProps) => (
