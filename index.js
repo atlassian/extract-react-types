@@ -586,8 +586,8 @@ converters.VariableDeclarator = (path, context) /*: K.Initial*/ => {
 converters.Identifier = (path, context) /*: K.Id*/ => {
   let kind = getIdentifierKind(path);
   let name = path.node.name;
-
-  if (context.mode === 'value') {
+  
+  if (context.mode === "value") {
     let res = {};
     if (kind === 'reference') {
       let binding = path.scope.getBinding(name);
@@ -845,7 +845,7 @@ converters.TSLiteralType = (path) /*: K.Literal*/ => {
 
 // TODO: Figure out a proper way to detect array-like
 function isTsArray(path) {
-  const typeParameters = path.get('typeParameters');
+  const typeParameters = path.get("typeParameters");
   return typeParameters && typeParameters.node;
 }
 
@@ -861,8 +861,8 @@ converters.TSTypeReference = (path, context) => {
   }
 
   return {
-    kind: 'generic',
-    value: convert(path.get('typeName'), context)
+    kind: "generic",
+    value: convert(path.get("typeName"), context)
   }
 };
 
@@ -881,22 +881,16 @@ converters.TSTupleType = (path, context) /*: K.Tuple*/ => {
 };
 
 converters.TSFunctionType = (path, context) /*: K.Func*/ => {
-  // const parameters = path.get('parameters').map(p => convert(p, context));
-  // const returnType = convert(
-  //   path.get('typeAnnotation').get('typeAnnotation'),
-  const parameters = path.get('parameters').map(p => convertParameter(p, context));
+  const parameters = path.get("parameters").map(p => convertParameter(p, context));
   const returnType = convert(
-    path.get('typeAnnotation'),
+    path.get("typeAnnotation"),
     context
   );
 
   return {
-    // kind: 'function',
-    // returnType,
-    // parameters
-    kind: 'generic',
+    kind: "generic",
     value: {
-      kind: 'function',
+      kind: "function",
       returnType,
       parameters
     }
@@ -904,20 +898,20 @@ converters.TSFunctionType = (path, context) /*: K.Func*/ => {
 };
 
 converters.TSInterfaceDeclaration = (path, context) => {
-  return convert(path.get('body'), context);
+  return convert(path.get("body"), context);
 };
 
 converters.TSInterfaceBody = (path, context) => {
   let members = [];
 
-  path.get('body').forEach(p => {
-    const key = convert(p.get('key'), context);
-    const value = convert(p.get('typeAnnotation'), context);
+  path.get("body").forEach(p => {
+    const key = convert(p.get("key"), context);
+    const value = convert(p.get("typeAnnotation"), context);
     const optional = p.node.optional || false;
 
     members.push(
       {
-        kind: 'property',
+        kind: "property",
         key,
         value,
         optional,
@@ -926,18 +920,18 @@ converters.TSInterfaceBody = (path, context) => {
   });
 
   return {
-    kind: 'object',
+    kind: "object",
     members
   };
 };
 
 converters.TSTypeAnnotation = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
+  return convert(path.get("typeAnnotation"), context);
 };
 
 converters.TSQualifiedName = (path, context) => {
-  const left = convert(path.get('left'), context);
-  const right = convert(path.get('right'), context);
+  const left = convert(path.get("left"), context);
+  const right = convert(path.get("right"), context);
 
   return {
     kind: 'id',
@@ -946,19 +940,19 @@ converters.TSQualifiedName = (path, context) => {
 };
 
 converters.TSEnumDeclaration = (path, context) => {
-  const { name } = path.get('id').node;
-  const types = path.get('members').map(p => {
+  const { name } = path.get("id").node;
+  const types = path.get("members").map(p => {
     const member = convert(p, context);
     return {
       kind: member.kind,
       name: `${name}.${member.name}`,
     }
   });
-  return { kind: 'union', types };
+  return { kind: "union", types };
 };
 
 converters.TSEnumMember = (path, context) => {
-  return convert(path.get('id'), context);
+  return convert(path.get("id"), context);
 };
 
 converters.TSArray = (path, context) => {
@@ -1198,7 +1192,7 @@ function attachCommentProperty(source, dest, name) {
   // if (!dest[name]) dest[name] = [];
 
   const mapComment = comment => ({
-    type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
+    type: comment.type === "CommentLine" ? "commentLine" : "commentBlock",
     value: normalizeComment(comment),
     raw: comment.value
   });
@@ -1255,11 +1249,11 @@ function extractReactTypes(
     resolveOptions.extensions = ['.js', '.json'];
   }
 
-  if (typeSystem === 'flow') plugins.push('flow');
-  else if (typeSystem === 'typescript') {
-    plugins.push('typescript');
-    resolveOptions.extensions.push('.tsx');
-    resolveOptions.extensions.push('.ts');
+  if (typeSystem === "flow") plugins.push("flow");
+  else if (typeSystem === "typescript") {
+    plugins.push("typescript");
+    resolveOptions.extensions.push(".tsx");
+    resolveOptions.extensions.push(".ts");
   }
   else throw new Error('typeSystem must be either "flow" or "typescript"');
 
