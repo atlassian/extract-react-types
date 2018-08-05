@@ -2671,8 +2671,26 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "id",
-          "name": "Array",
+          "key": Object {
+            "kind": "id",
+            "name": "Array",
+          },
+          "kind": "generic",
+          "value": Object {
+            "kind": "generic",
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
+                  "kind": "number",
+                },
+              ],
+            },
+            "value": Object {
+              "kind": "id",
+              "name": "Array",
+            },
+          },
         },
       ],
       "name": Object {
@@ -2748,8 +2766,24 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "id",
-          "name": "Color",
+          "kind": "generic",
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "id",
+                "name": "Color.Red",
+              },
+              Object {
+                "kind": "id",
+                "name": "Color.Green",
+              },
+              Object {
+                "kind": "id",
+                "name": "Color.Blue",
+              },
+            ],
+          },
         },
       ],
       "name": Object {
@@ -2770,19 +2804,30 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "function",
-          "parameters": Array [
-            Object {
-              "kind": "id",
-              "name": "string",
+          "kind": "generic",
+          "value": Object {
+            "kind": "function",
+            "parameters": Array [
+              Object {
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "id",
+                  "name": "string",
+                },
+              },
+              Object {
+                "kind": "param",
+                "type": null,
+                "value": Object {
+                  "kind": "id",
+                  "name": "boolean",
+                },
+              },
+            ],
+            "returnType": Object {
+              "kind": "number",
             },
-            Object {
-              "kind": "id",
-              "name": "boolean",
-            },
-          ],
-          "returnType": Object {
-            "kind": "number",
           },
         },
       ],
@@ -2801,11 +2846,38 @@ exports[`ts interface 1`] = `
 Object {
   "classes": Array [
     Object {
-      "kind": "id",
+      "kind": "generic",
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "bar",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+        ],
       },
     },
   ],

@@ -11,7 +11,7 @@ const {
   resolveImportFilePathSync
 } = require('babel-file-loader');
 const { isFlowIdentifier } = require('babel-flow-identifiers');
-const { findFlowBinding } = require('babel-flow-scope');
+const { getTypeBinding } = require("babel-type-scopes");
 const { getIdentifierKind } = require('babel-identifiers');
 const { isReactComponentClass } = require('babel-react-components');
 const createBabylonOptions = require('babylon-options');
@@ -664,9 +664,37 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
       let bindingPath;
 
       if (isFlowIdentifier(path)) {
-        let flowBinding = findFlowBinding(path, name);
+        let flowBinding = getTypeBinding(path, name);
         if (!flowBinding) throw new Error();
         bindingPath = flowBinding.path.parentPath;
+      } else if (isTsIdentifier(path)) {
+        let foundPath = path.scope.getBinding(name);
+        if (
+          foundPath && (
+          foundPath.path.isImportDefaultSpecifier() ||
+          foundPath.path.isImportNamespaceSpecifier() ||
+          foundPath.path.isImportSpecifier())
+        ) {
+          // Note: 
+          // We cannot resolve the imported type properly at this time,
+          // so we'll return the name of the type for now.
+          return {
+            kind: "id",
+            name,
+          };
+        }
+
+        let tsBinding = getTypeBinding(path, name);
+        if (!tsBinding) {
+          
+
+          return {
+            kind: "id",
+            name,
+          };
+          // throw new Error();
+        };
+        bindingPath = tsBinding.path.parentPath;
       } else {
         bindingPath = path.scope.getBinding(name);
       }
@@ -685,6 +713,14 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
   }
   throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
+
+function isTsIdentifier(path) {
+  if (path.parentPath.type === "TSTypeReference" && getIdentifierKind(path) === "reference") {
+    return true;
+  }
+  
+  return false;
+}
 
 converters.TypeAlias = (path, context) => {
   return convert(path.get('right'), context);
@@ -781,8 +817,9 @@ converters.TSVoidKeyword = (path) /*: K.Void*/ => {
   return { kind: 'void' };
 };
 
-// converters.TSPropertySignature = path => {
-// };
+converters.TSPropertySignature = (path, context) => {
+  return { kind: "void" };
+};
 
 converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
   let result = {};
@@ -810,8 +847,36 @@ converters.TSLiteralType = (path) /*: K.Literal*/ => {
   };
 };
 
+// TODO: Figure out a proper way to detect array-like
+function isTsArray(path) {
+  const typeParameters = path.get('typeParameters');
+  return typeParameters && typeParameters.node;
+}
+
 converters.TSTypeReference = (path, context) => {
-  return convert(path.get('typeName'), context);
+  // return convert(path.get('typeName'), context);
+  const typeParameters = path.get('typeParameters');
+
+  if (typeParameters.node) {
+    return {
+      kind: 'generic',
+      key: convert(path.get('typeName'), context),
+      value: {
+        kind: 'generic',
+        typeParams: convert(typeParameters, context),
+        value: {
+          kind: 'id',
+          name: 'Array'
+        }
+      }
+      // value: convert(typeParameters, context)
+    }
+  }
+
+  return {
+    kind: 'generic',
+    value: convert(path.get('typeName'), context)
+  }
 };
 
 converters.TSUnionType = (path, context) /*: K.Union*/ => {
@@ -829,17 +894,90 @@ converters.TSTupleType = (path, context) /*: K.Tuple*/ => {
 };
 
 converters.TSFunctionType = (path, context) /*: K.Func*/ => {
-  const parameters = path.get('parameters').map(p => convert(p, context));
+  // const parameters = path.get('parameters').map(p => convert(p, context));
+  // const returnType = convert(
+  //   path.get('typeAnnotation').get('typeAnnotation'),
+  const parameters = path.get('parameters').map(p => convertParameter(p, context));
   const returnType = convert(
-    path.get('typeAnnotation').get('typeAnnotation'),
+    path.get('typeAnnotation'),
     context
   );
 
   return {
-    kind: 'function',
-    returnType,
-    parameters
+    // kind: 'function',
+    // returnType,
+    // parameters
+    kind: 'generic',
+    value: {
+      kind: 'function',
+      returnType,
+      parameters
+    }
   };
+};
+
+converters.TSInterfaceDeclaration = (path, context) => {
+  return convert(path.get('body'), context);
+};
+
+converters.TSInterfaceBody = (path, context) => {
+  let members = [];
+
+  path.get('body').forEach(p => {
+    const key = convert(p.get('key'), context);
+    const value = convert(p.get('typeAnnotation'), context);
+    const optional = p.node.optional || false;
+    
+    members.push(
+      {
+        kind: 'property',
+        key,
+        value,
+        optional,
+      }
+    );
+  });
+
+  return {
+    kind: 'object',
+    members
+  };
+};
+
+converters.TSTypeAnnotation = (path, context) => {
+  return convert(path.get('typeAnnotation'), context);
+};
+
+converters.TSQualifiedName = (path, context) => {
+  const left = convert(path.get('left'), context);
+  const right = convert(path.get('right'), context);
+
+  return {
+    kind: 'generic',
+    value: {
+      kind: 'id',
+      name: `${left.name}.${right.name}`,
+    }
+  }
+};
+
+converters.TSEnumDeclaration = (path, context) => {
+  const { name } = path.get('id').node;
+  const types = path.get('members').map(p => {
+    const member = convert(p, context);
+    return {
+      kind: member.kind,
+      name: `${name}.${member.name}`,
+    }
+  });
+  return { kind: 'union', types };
+};
+
+converters.TSEnumMember = (path, context) => {
+  return convert(path.get('id'), context);
+};
+
+converters.TSArray = (path, context) => {
 };
 
 converters.ObjectTypeSpreadProperty = (path, context) /*: K.Spread*/ => {
@@ -1023,15 +1161,30 @@ function attachCommentProperty(source, dest, name) {
   if (!source || !source[name]) return;
   if (!dest[name]) dest[name] = [];
 
-  let comments = source[name].map(comment => {
-    return {
-      type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
-      value: normalizeComment(comment),
-      raw: comment.value
-    };
+  const mapComment = comment => ({
+    type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
+    value: normalizeComment(comment),
+    raw: comment.value
   });
 
-  dest[name] = dest[name].concat(comments);
+  if (source.type === 'TSInterfaceBody') {
+    source.body.forEach((p, index) => {
+      if (!p[name]) return;
+
+      if (!dest.members[index][name]) {
+        dest.members[index][name] = [];
+      }
+
+      let comments = p[name].map(mapComment);
+      dest.members[index][name] = dest.members[index][name].concat(comments);
+    });
+  } else {
+    if (!source || !source[name]) return;
+    if (!dest[name]) dest[name] = [];
+
+    let comments = source[name].map(mapComment);
+    dest[name] = dest[name].concat(comments);
+  }
 }
 
 function attachComments(source, dest) {
@@ -1067,7 +1220,11 @@ function extractReactTypes(
   }
 
   if (typeSystem === 'flow') plugins.push('flow');
-  else if (typeSystem === 'typescript') plugins.push('typescript');
+  else if (typeSystem === 'typescript') {
+    plugins.push('typescript');
+    resolveOptions.extensions.push('.tsx');
+    resolveOptions.extensions.push('.ts');
+  }
   else throw new Error('typeSystem must be either "flow" or "typescript"');
 
   let parserOpts = createBabylonOptions({
