@@ -489,6 +489,23 @@ converters.TypeParameterInstantiation = (path, context) /*: K.TypeParams*/ => {
   };
 };
 
+converters.TypeParameterDeclaration = (
+  path,
+  context
+) /*: K.TypeParamsDeclaration */ => {
+  return {
+    kind: 'typeParamsDeclaration',
+    params: path.get('params').map(p => convert(p, context))
+  };
+};
+
+converters.TypeParameter = (path, context) /*: K.TypeParam */ => {
+  return {
+    kind: 'typeParam',
+    name: path.node.name
+  };
+};
+
 converters.GenericTypeAnnotation = (path, context) /*: K.Generic*/ => {
   let result = {};
 

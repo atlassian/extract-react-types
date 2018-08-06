@@ -7,6 +7,11 @@ export type Param = {
   type: AnyKind | null
 };
 export type TypeParams = { kind: "typeParams", params: Array<AnyTypeKind> };
+export type TypeParam = { kind: "typeParam", name: string };
+export type TypeParamsDeclaration = {
+  kind: "typeParamsDeclaration",
+  params: Array<AnyTypeKind>
+};
 export type Id = { kind: "id", name: string, type?: ?$Diff<AnyKind, Id> };
 export type TemplateLiteral = {
   kind: "templateLiteral",
