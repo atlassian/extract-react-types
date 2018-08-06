@@ -840,6 +840,10 @@ converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
   return result;
 };
 
+converters.TSTypeAliasDeclaration = (path, context) => /* K.Obj */ {
+  return convert(path.get('typeAnnotation'), context);
+}
+
 converters.TSLiteralType = (path) /*: K.Literal*/ => {
   return {
     kind: 'literal',
@@ -1158,8 +1162,8 @@ converters.ImportSpecifier = (path, context) => {
 };
 
 function attachCommentProperty(source, dest, name) {
-  if (!source || !source[name]) return;
-  if (!dest[name]) dest[name] = [];
+  // if (!source || !source[name]) return;
+  // if (!dest[name]) dest[name] = [];
 
   const mapComment = comment => ({
     type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',

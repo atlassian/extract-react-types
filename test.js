@@ -840,6 +840,44 @@ const TESTS = [
 
       class Component extends React.Component<{ a: Foo<string> }> {}
   `
+  },
+  {
+    name: 'ts type comments',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        /* Type comment for a */
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'flow type comments',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        /* Type comment for a */
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts type alias',
+    typeSystem: 'typescript',
+    code: `
+      type Props = {
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
   }
 ];
 
