@@ -1370,6 +1370,45 @@ Object {
 }
 `;
 
+exports[`flow type comments 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "leadingComments": Array [
+              Object {
+                "raw": " Type comment for a ",
+                "type": "commentBlock",
+                "value": "Type comment for a",
+              },
+            ],
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow type identifier 1`] = `
 Object {
   "classes": Array [
@@ -3019,6 +3058,69 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type alias 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "kind": "string",
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type comments 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "leadingComments": Array [
+              Object {
+                "raw": " Type comment for a ",
+                "type": "commentBlock",
+                "value": "Type comment for a",
+              },
+            ],
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
       },
     },
   ],
