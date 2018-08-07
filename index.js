@@ -1005,7 +1005,7 @@ converters.ImportDeclaration = (path, context) =>{
 };
 
 converters.TSParenthesizedType = (path, context) =>{
-  return { kind: 'any' };
+  return convert(path.get('typeAnnotation'), context);
 };
 
 converters.TSIndexSignature = (path, context) =>{

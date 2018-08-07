@@ -956,6 +956,17 @@ const TESTS = [
       class Component extends React.Component<Props> {}
     `
   },
+  {
+    name: 'TSParenthesizedType',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        a: ({ b: string })
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
 ];
 
 const TESTS2 = [
