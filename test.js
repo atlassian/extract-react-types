@@ -881,6 +881,18 @@ const TESTS = [
   }
 ];
 
+const TESTS2 = [
+  {
+    name: 'flow type parameter declaration',
+    typeSystem: 'flow',
+    code: `
+      type Foo<T> = () => T;
+
+      class Component extends React.Component<{ a: Foo<string> }> {}
+  `
+  }
+];
+
 for (let testCase of TESTS) {
   let testFn;
 

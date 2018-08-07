@@ -15,10 +15,7 @@ const { getTypeBinding } = require("babel-type-scopes");
 const { getIdentifierKind } = require('babel-identifiers');
 const { isReactComponentClass } = require('babel-react-components');
 const createBabylonOptions = require('babylon-options');
-const babylon = require('babylon');
-const babel = require('babel-core');
 const t = require('babel-types');
-const stripIndent = require('strip-indent');
 const { normalizeComment } = require('babel-normalize-comments');
 const { sync: resolveSync } = require('resolve');
 
@@ -678,21 +675,19 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
           // Note: 
           // We cannot resolve the imported type properly at this time,
           // so we'll return the name of the type for now.
-          return {
-            kind: "id",
-            name,
-          };
+          // return {
+          //   kind: "id",
+          //   name,
+          // };
+          return convert(foundPath.path, context);
         }
 
         let tsBinding = getTypeBinding(path, name);
         if (!tsBinding) {
-          
-
           return {
             kind: "id",
             name,
           };
-          // throw new Error();
         };
         bindingPath = tsBinding.path.parentPath;
       } else {
@@ -818,7 +813,11 @@ converters.TSVoidKeyword = (path) /*: K.Void*/ => {
 };
 
 converters.TSPropertySignature = (path, context) => {
-  return { kind: "void" };
+  return { kind: 'void' };
+};
+
+converters.TSUndefinedKeyword = (path, context) => {
+  return { kind: 'undefined' };
 };
 
 converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
@@ -982,6 +981,23 @@ converters.TSEnumMember = (path, context) => {
 };
 
 converters.TSArray = (path, context) => {
+  return { kind: 'any' };
+};
+
+converters.TSArrayType = (path, context) => {
+  return { kind: 'any' };
+};
+
+converters.TSTypeParameterInstantiation = (path, context) => {
+  return { kind: 'any' };
+};
+
+converters.ImportNamespaceSpecifier = (path, context) => {
+  return { kind: 'any' };
+};
+
+converters.undefined = (path, context) => {
+  return { kind: 'any' };
 };
 
 converters.ObjectTypeSpreadProperty = (path, context) /*: K.Spread*/ => {
@@ -1058,7 +1074,7 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
-    let file = loadFileSync(filePath);
+    let file = loadFileSync(filePath, context.parserOpts);
 
     let id;
     if (path.node.imported) {
@@ -1171,7 +1187,7 @@ function attachCommentProperty(source, dest, name) {
     raw: comment.value
   });
 
-  if (source.type === 'TSInterfaceBody') {
+  if (source && source.type === 'TSInterfaceBody') {
     source.body.forEach((p, index) => {
       if (!p[name]) return;
 
@@ -1236,18 +1252,22 @@ function extractReactTypes(
     plugins
   });
 
-  let file = new babel.File({
-    options: { parserOpts, filename },
-    passes: []
-  });
+  let file = createBabelFile(code, { parserOpts, filename });
 
-  try {
-    file.addCode(code);
-    file.parseCode(code);
-  } catch (err) {
-    console.error(err);
-  }
-  return convert(file.path, { resolveOptions });
+  // let ast = babel.parseSync(code, { parserOpts, filename });
+
+  // let file = new babel.File({
+  //   options: { parserOpts, filename },
+  //   passes: []
+  // }, { code, ast });
+
+  // try {
+  //   file.addCode(code);
+  //   file.parseCode(code);
+  // } catch (err) {
+  //   console.error(err);
+  // }
+  return convert(file.path, { resolveOptions, parserOpts });
 }
 
 module.exports = extractReactTypes;
