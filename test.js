@@ -934,6 +934,28 @@ const TESTS = [
       }
     `
   },
+  {
+    name: 'ts method signature',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        on(x: string): void;
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
+  {
+    name: 'ts call signature declaration',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        (x: string): void;
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
 ];
 
 const TESTS2 = [

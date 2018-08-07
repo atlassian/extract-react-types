@@ -2894,6 +2894,48 @@ Object {
 }
 `;
 
+exports[`ts call signature declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": undefined,
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "x",
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "void",
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts different React components 1`] = `
 Object {
   "classes": Array [
@@ -3118,6 +3160,51 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts method signature 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "on",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "x",
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "void",
+              },
+            },
+          },
+        ],
       },
     },
   ],
@@ -3467,6 +3554,13 @@ Object {
             "optional": false,
             "value": Object {
               "kind": "string",
+              "leadingComments": Array [
+                Object {
+                  "raw": " Type comment for a ",
+                  "type": "commentBlock",
+                  "value": "Type comment for a",
+                },
+              ],
             },
           },
         ],

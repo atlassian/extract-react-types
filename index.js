@@ -898,21 +898,11 @@ converters.TSFunctionType = (path, context) /*: K.Func*/ => {
 };
 
 converters.TSMethodSignature = (path, context) => {
-  const parameters = path.get("parameters").map(p => convertParameter(p, context));
-  const returnType = convert(
-    path.get("typeAnnotation"),
-    context
-  );
+  return convertMethodCall(path, context);
+}
 
-  return {
-    kind: 'property',
-    key: convert(path.get('key'), context),
-    value: {
-      kind: 'function',
-      returnType,
-      parameters
-    }
-  };
+converters.TSCallSignatureDeclaration = (path, context) => {
+  return convertMethodCall(path, context);
 }
 
 converters.TSInterfaceDeclaration = (path, context) => {
@@ -920,31 +910,14 @@ converters.TSInterfaceDeclaration = (path, context) => {
 };
 
 converters.TSInterfaceBody = (path, context) => {
-  let members = [];
-
-  path.get("body").forEach(p => {
-    if (p.node.type === 'TSMethodSignature') {
-      members.push(convert(p, context))
-    } else {
-      const key = convert(p.get("key"), context);
-      const value = convert(p.get("typeAnnotation"), context);
-      const optional = p.node.optional || false;
-  
-      members.push(
-        {
-          kind: "property",
-          key,
-          value,
-          optional,
-        }
-      );
-
-    }
-  });
-
   return {
     kind: "object",
-    members
+    members: path.get('body').map(p => ({
+      kind: 'property',
+      key: p.node.key && convert(p.get('key'), context),
+      optional: !!p.node.optional,
+      value: convert(p, context)
+    }))
   };
 };
 
@@ -1209,6 +1182,20 @@ converters.ExportNamedDeclaration = (path, context) /*: K.Export */ => {
 converters.ImportSpecifier = (path, context) => {
   return importConverterGeneral(path, context);
 };
+
+function convertMethodCall(path, context) {
+  const parameters = path.get('parameters').map(p => convertParameter(p, context));
+  const returnType = convert(
+    path.get('typeAnnotation'),
+    context
+  );
+
+  return {
+    kind: 'function',
+    returnType,
+    parameters
+  };
+}
 
 function attachCommentProperty(source, dest, name) {
   // if (!source || !source[name]) return;
