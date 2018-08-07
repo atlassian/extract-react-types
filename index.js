@@ -1145,7 +1145,7 @@ converters.ExportNamedDeclaration = (path, context) /*: K.Export */ => {
 
     let actualPath = resolveSync(
       nodePath.join(nodePath.dirname(filePath), source.node.value),
-      context.resolveOpts
+      context.resolveOptions
     );
 
     if (specifiers.length !== 1) {
