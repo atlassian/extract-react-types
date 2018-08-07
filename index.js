@@ -672,7 +672,7 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
           foundPath.path.isImportNamespaceSpecifier() ||
           foundPath.path.isImportSpecifier())
         ) {
-          // Note: 
+          // Note:
           // We cannot resolve the imported type properly at this time,
           // so we'll return the name of the type for now.
           // return {
@@ -713,7 +713,7 @@ function isTsIdentifier(path) {
   if (path.parentPath.type === "TSTypeReference" && getIdentifierKind(path) === "reference") {
     return true;
   }
-  
+
   return false;
 }
 
@@ -813,30 +813,23 @@ converters.TSVoidKeyword = (path) /*: K.Void*/ => {
 };
 
 converters.TSPropertySignature = (path, context) => {
-  return { kind: 'void' };
+  return convert(path.get('typeAnnotation'), context);
 };
 
 converters.TSUndefinedKeyword = (path, context) => {
-  return { kind: 'undefined' };
+  return { kind: 'void' };
 };
 
 converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
-  let result = {};
-
-  result.kind = 'object';
-  // TODO: find object key
-  // result.key = '';
-  result.members = [];
-
-  let members = path.get('members');
-
-  members.forEach(memberPath => {
-    result.members.push(
-      convert(memberPath.get('typeAnnotation').get('typeAnnotation'), context)
-    );
-  });
-
-  return result;
+  return {
+  kind: 'object',
+  members: path.get('members').map(memberPath => ({
+      kind: 'property',
+      optional: !!memberPath.node.optional,
+      key: convert(memberPath.get('key'), context),
+      value: convert(memberPath, context),
+    }))
+  };
 };
 
 converters.TSTypeAliasDeclaration = (path, context) => /* K.Obj */ {
@@ -845,7 +838,7 @@ converters.TSTypeAliasDeclaration = (path, context) => /* K.Obj */ {
 
 converters.TSLiteralType = (path) /*: K.Literal*/ => {
   return {
-    kind: 'literal',
+    kind: 'string',
     value: path.node.literal.value
   };
 };
@@ -930,7 +923,7 @@ converters.TSInterfaceBody = (path, context) => {
     const key = convert(p.get('key'), context);
     const value = convert(p.get('typeAnnotation'), context);
     const optional = p.node.optional || false;
-    
+
     members.push(
       {
         kind: 'property',
@@ -985,11 +978,11 @@ converters.TSArray = (path, context) => {
 };
 
 converters.TSArrayType = (path, context) => {
-  return { kind: 'any' };
+  return convert(path.get('elementType'), context);
 };
 
 converters.TSTypeParameterInstantiation = (path, context) => {
-  return { kind: 'any' };
+  return { kind: 'any', params: [] };
 };
 
 converters.ImportNamespaceSpecifier = (path, context) => {
@@ -1012,6 +1005,14 @@ converters.ArrayTypeAnnotation = (path, context) /*: K.ArrayType*/ => {
     kind: 'arrayType',
     type: convert(path.get('elementType'), context)
   };
+};
+
+converters.ImportDeclaration = (path, context) =>{
+  return { kind: 'any' };
+};
+
+converters.TSParenthesizedType = (path, context) =>{
+  return { kind: 'any' };
 };
 
 function importConverterGeneral(path, context) /*: K.Import */ {

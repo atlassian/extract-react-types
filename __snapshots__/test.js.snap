@@ -207,6 +207,49 @@ Object {
 }
 `;
 
+exports[`Should handle importing other ts files 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "id",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Should handle rest element 1`] = `
 Object {
   "classes": Array [
@@ -3089,6 +3132,51 @@ Object {
 }
 `;
 
+exports[`ts type alias declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "union",
+                "types": Array [
+                  Object {
+                    "kind": "string",
+                    "value": "one",
+                  },
+                  Object {
+                    "kind": "string",
+                    "value": "two",
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts type comments 1`] = `
 Object {
   "classes": Array [
@@ -3135,15 +3223,23 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "union",
-          "types": Array [
-            Object {
-              "kind": "number",
-            },
-            Object {
-              "kind": "string",
-            },
-          ],
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "number",
+              },
+              Object {
+                "kind": "string",
+              },
+            ],
+          },
         },
       ],
       "name": Object {

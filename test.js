@@ -878,7 +878,36 @@ const TESTS = [
       class Component extends React.Component<Props> {
       }
     `
-  }
+  },
+  {
+    name: 'ts type alias declaration',
+    typeSystem: 'typescript',
+    only: true,
+    code: `
+      type LiteralType = 'one' | 'two';
+      interface Props {
+        a: LiteralType;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'Should handle importing other ts files',
+    typeSystem: 'typescript',
+    code: `
+      import { Props } from "./__fixtures__/props";
+
+      class Component extends React.Component<Props> {
+        // defaultProps = {
+        //   id: 5,
+        //   name: ":lol:"
+        // }
+      }
+    `
+  },
+
 ];
 
 const TESTS2 = [
