@@ -850,22 +850,13 @@ function isTsArray(path) {
 }
 
 converters.TSTypeReference = (path, context) => {
-  // return convert(path.get('typeName'), context);
   const typeParameters = path.get('typeParameters');
 
   if (typeParameters.node) {
     return {
       kind: 'generic',
-      key: convert(path.get('typeName'), context),
-      value: {
-        kind: 'generic',
-        typeParams: convert(typeParameters, context),
-        value: {
-          kind: 'id',
-          name: 'Array'
-        }
-      }
-      // value: convert(typeParameters, context)
+      typeParams: convert(typeParameters, context),
+      value: convert(path.get('typeName'), context),
     }
   }
 
@@ -949,11 +940,8 @@ converters.TSQualifiedName = (path, context) => {
   const right = convert(path.get('right'), context);
 
   return {
-    kind: 'generic',
-    value: {
-      kind: 'id',
-      name: `${left.name}.${right.name}`,
-    }
+    kind: 'id',
+    name: `${left.name}.${right.name}`,
   }
 };
 
@@ -978,11 +966,17 @@ converters.TSArray = (path, context) => {
 };
 
 converters.TSArrayType = (path, context) => {
-  return convert(path.get('elementType'), context);
+  return {
+    kind: 'arrayType',
+    type: convert(path.get('elementType'), context)
+  };
 };
 
 converters.TSTypeParameterInstantiation = (path, context) => {
-  return { kind: 'any', params: [] };
+  return {
+    kind: 'typeParams',
+    params: path.get('params').map(param => convert(param, context))
+  };
 };
 
 converters.ImportNamespaceSpecifier = (path, context) => {
@@ -1007,11 +1001,32 @@ converters.ArrayTypeAnnotation = (path, context) /*: K.ArrayType*/ => {
   };
 };
 
+converters.TSIntersectionType = (path, context) /*: K.Intersection*/  => {
+  const types = path.get('types').map(type => convert(type, context));
+  return { kind: 'intersection', types }
+}
+
+converters.TSIndexSignature = (path, context) =>{
+  return { kind: 'any' };
+};
+
 converters.ImportDeclaration = (path, context) =>{
   return { kind: 'any' };
 };
 
 converters.TSParenthesizedType = (path, context) =>{
+  return { kind: 'any' };
+};
+
+converters.TSIndexSignature = (path, context) =>{
+  return { kind: 'any' };
+};
+
+converters.TSObjectKeyword = (path, context) =>{
+  return { kind: 'any' };
+};
+
+converters.TSNullKeyword = (path, context) =>{
   return { kind: 'any' };
 };
 

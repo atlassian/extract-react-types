@@ -880,13 +880,40 @@ const TESTS = [
     `
   },
   {
-    name: 'ts type alias declaration',
+    name: 'ts type alias declaration - 1',
     typeSystem: 'typescript',
-    only: true,
     code: `
       type LiteralType = 'one' | 'two';
       interface Props {
         a: LiteralType;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts type alias declaration - 2',
+    typeSystem: 'typescript',
+    code: `
+      type ReactElement = React.ReactElement<any> | React.ReactElement<any>[];
+      interface Props {
+        a: ReactElement;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'flow type alias declaration - 1',
+    typeSystem: 'flow',
+    code: `
+      import * as React from 'react';
+
+      type ReactElement = React.Element<any> | React.Element<any>[];
+      type Props = {
+        a: ReactElement,
       }
 
       class Component extends React.Component<Props> {
@@ -907,7 +934,6 @@ const TESTS = [
       }
     `
   },
-
 ];
 
 const TESTS2 = [
