@@ -433,7 +433,7 @@ function convertFunction(path, context) /*: K.Func*/ {
 
   return {
     kind: 'function',
-    id: id,
+    id,
     async: path.node.async,
     generator: path.node.generator,
     parameters,
@@ -586,7 +586,7 @@ converters.VariableDeclarator = (path, context) /*: K.Initial*/ => {
 converters.Identifier = (path, context) /*: K.Id*/ => {
   let kind = getIdentifierKind(path);
   let name = path.node.name;
-  
+
   if (context.mode === "value") {
     let res = {};
     if (kind === 'reference') {
@@ -812,10 +812,6 @@ converters.TSVoidKeyword = (path) /*: K.Void*/ => {
   return { kind: 'void' };
 };
 
-converters.TSPropertySignature = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
-};
-
 converters.TSUndefinedKeyword = (path, context) => {
   return { kind: 'void' };
 };
@@ -823,13 +819,17 @@ converters.TSUndefinedKeyword = (path, context) => {
 converters.TSTypeLiteral = (path, context) /*: K.Obj*/ => {
   return {
   kind: 'object',
-  members: path.get('members').map(memberPath => ({
-      kind: 'property',
-      optional: !!memberPath.node.optional,
-      key: convert(memberPath.get('key'), context),
-      value: convert(memberPath, context),
-    }))
+  members: path.get('members').map(memberPath => convert(memberPath, context))
   };
+};
+
+converters.TSPropertySignature = (path, context) => {
+  return {
+    kind: 'property',
+    optional: !!path.node.optional,
+    key: convert(path.get('key'), context),
+    value: convert(path.get('typeAnnotation'), context),
+  }
 };
 
 converters.TSTypeAliasDeclaration = (path, context) => /* K.Obj */ {
@@ -898,11 +898,20 @@ converters.TSFunctionType = (path, context) /*: K.Func*/ => {
 };
 
 converters.TSMethodSignature = (path, context) => {
-  return convertMethodCall(path, context);
+  return {
+    kind: 'property',
+    optional: !!path.node.optional,
+    key: convert(path.get('key'), context),
+    value: convertMethodCall(path, context),
+  }
 }
 
 converters.TSCallSignatureDeclaration = (path, context) => {
-  return convertMethodCall(path, context);
+  return {
+    kind: 'property',
+    optional: false,
+    value: convertMethodCall(path, context)
+  };
 }
 
 converters.TSInterfaceDeclaration = (path, context) => {
@@ -912,12 +921,7 @@ converters.TSInterfaceDeclaration = (path, context) => {
 converters.TSInterfaceBody = (path, context) => {
   return {
     kind: 'object',
-    members: path.get('body').map(p => ({
-      kind: 'property',
-      key: p.node.key && convert(p.get('key'), context),
-      optional: !!p.node.optional,
-      value: convert(p, context)
-    }))
+    members: path.get('body').map(prop => convert(prop, context))
   };
 };
 
@@ -970,6 +974,7 @@ converters.TSTypeParameterInstantiation = (path, context) => {
 };
 
 converters.ImportNamespaceSpecifier = (path, context) => {
+  throw new Error('lol');
   return { kind: 'any' };
 };
 
@@ -996,8 +1001,16 @@ converters.TSIntersectionType = (path, context) /*: K.Intersection*/ => {
   return { kind: 'intersection', types }
 }
 
-converters.TSIndexSignature = (path, context) => {
-  return { kind: 'any' };
+converters.TSIndexSignature = (path, context) =>{
+  const id = path.get('parameters')[0];
+  return {
+    kind: 'property',
+    key: {
+      kind: 'id',
+      name: `[${convert(id, context).name}: ${convert(id.get('typeAnnotation'), context).kind}]`
+    },
+    value: convert(path.get('typeAnnotation'), context),
+  };
 };
 
 converters.ImportDeclaration = (path, context) => {
@@ -1227,34 +1240,20 @@ function convertMethodCall(path, context) {
   };
 }
 
-function attachCommentProperty(source, dest, name) {
-  // if (!source || !source[name]) return;
-  // if (!dest[name]) dest[name] = [];
-
-  const mapComment = comment => ({
+function mapComment(comment) {
+  return {
     type: comment.type === "CommentLine" ? "commentLine" : "commentBlock",
     value: normalizeComment(comment),
     raw: comment.value
-  });
-
-  if (source && source.type === 'TSInterfaceBody') {
-    source.body.forEach((p, index) => {
-      if (!p[name]) return;
-
-      if (!dest.members[index][name]) {
-        dest.members[index][name] = [];
-      }
-
-      let comments = p[name].map(mapComment);
-      dest.members[index][name] = dest.members[index][name].concat(comments);
-    });
-  } else {
-    if (!source || !source[name]) return;
-    if (!dest[name]) dest[name] = [];
-
-    let comments = source[name].map(mapComment);
-    dest[name] = dest[name].concat(comments);
   }
+}
+
+function attachCommentProperty(source, dest, name) {
+  if (!source || !source[name]) return;
+  if (!dest[name]) dest[name] = [];
+
+  let comments = source[name].map(mapComment);
+  dest[name] = dest[name].concat(comments);
 }
 
 function attachComments(source, dest) {

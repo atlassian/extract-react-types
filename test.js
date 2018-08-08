@@ -927,10 +927,6 @@ const TESTS = [
       import { Props } from "./__fixtures__/props";
 
       class Component extends React.Component<Props> {
-        // defaultProps = {
-        //   id: 5,
-        //   name: ":lol:"
-        // }
       }
     `
   },

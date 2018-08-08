@@ -2953,7 +2953,6 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "key": undefined,
             "kind": "property",
             "optional": false,
             "value": Object {
@@ -3599,13 +3598,6 @@ Object {
             "optional": false,
             "value": Object {
               "kind": "string",
-              "leadingComments": Array [
-                Object {
-                  "raw": " Type comment for a ",
-                  "type": "commentBlock",
-                  "value": "Type comment for a",
-                },
-              ],
             },
           },
         ],
