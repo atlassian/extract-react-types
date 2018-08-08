@@ -991,12 +991,12 @@ converters.ArrayTypeAnnotation = (path, context) /*: K.ArrayType*/ => {
   };
 };
 
-converters.TSIntersectionType = (path, context) /*: K.Intersection*/  => {
+converters.TSIntersectionType = (path, context) /*: K.Intersection*/ => {
   const types = path.get('types').map(type => convert(type, context));
   return { kind: 'intersection', types }
 }
 
- converters.TSIndexSignature = (path, context) =>{
+converters.TSIndexSignature = (path, context) => {
   return { kind: 'any' };
 };
 
@@ -1092,6 +1092,15 @@ function importConverterGeneral(path, context) /*: K.Import */ {
     let exported = matchExported(file, name);
 
     if (!exported) {
+
+      // TODO: This needs to be recursive.
+      let exportAll = file.path.get('body')
+        .filter(item => item.isExportAllDeclaration())
+        .map(item => matchExported(resolveExportAllDeclaration(item, context), name))
+        .filter(Boolean)
+      ;
+
+      if (!exportAll.length) {
       return {
         kind: 'import',
         importKind,
@@ -1100,8 +1109,29 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
+      exported = exportAll[0];
+    }
+
     return convert(exported, { ...context, replacementId: t.identifier(id) });
   }
+}
+
+function resolveExportAllDeclaration(path, context) {
+  let source = path.get('source');
+
+  // The parentPath is a reference to where we currently are. We want to
+  // get the source value, but resolving this first makes this easier.
+  let filePath = resolveImportFilePathSync(
+    source.parentPath,
+    context.resolveOptions
+  );
+
+  let actualPath = resolveSync(
+    nodePath.join(nodePath.dirname(filePath), source.node.value),
+    context.resolveOptions
+  );
+
+  return loadFileSync(actualPath, context.parserOpts);
 }
 
 converters.ImportDefaultSpecifier = (path, context) => {
