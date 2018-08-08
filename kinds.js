@@ -204,4 +204,7 @@ export type AnyValueKind =
   | TemplateLiteral
   | Variable;
 export type AnyKind = AnyTypeKind | AnyValueKind | Program;
+export type ThisKind = {
+  kind: "this"
+}
 */

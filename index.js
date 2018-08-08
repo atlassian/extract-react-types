@@ -996,25 +996,29 @@ converters.TSIntersectionType = (path, context) /*: K.Intersection*/  => {
   return { kind: 'intersection', types }
 }
 
-converters.TSIndexSignature = (path, context) =>{
+ converters.TSIndexSignature = (path, context) =>{
   return { kind: 'any' };
 };
 
-converters.ImportDeclaration = (path, context) =>{
+converters.ImportDeclaration = (path, context) => {
   return { kind: 'any' };
 };
 
-converters.TSParenthesizedType = (path, context) =>{
+converters.TSParenthesizedType = (path, context) => {
   return convert(path.get('typeAnnotation'), context);
 };
 
-converters.TSObjectKeyword = (path, context) =>{
+converters.TSObjectKeyword = (path, context) => {
   return { kind: 'object', members: [] };
 };
 
-converters.TSNullKeyword = (path, context) =>{
+converters.TSNullKeyword = (path, context) => {
   return { kind: 'null' };
 };
+
+converters.TSThisType = (path, context) /*:K.ThisType */ => {
+  return { kind: 'custom', value: 'this' }
+}
 
 function importConverterGeneral(path, context) /*: K.Import */ {
   let importKind = path.node.importKind || path.parent.importKind || 'value';
