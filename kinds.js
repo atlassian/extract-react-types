@@ -205,6 +205,7 @@ export type AnyValueKind =
   | Variable;
 export type AnyKind = AnyTypeKind | AnyValueKind | Program;
 export type ThisKind = {
-  kind: "this"
+  kind: "custom",
+  value: "this"
 }
 */
