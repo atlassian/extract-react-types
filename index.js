@@ -911,7 +911,7 @@ converters.TSInterfaceDeclaration = (path, context) => {
 
 converters.TSInterfaceBody = (path, context) => {
   return {
-    kind: "object",
+    kind: 'object',
     members: path.get('body').map(p => ({
       kind: 'property',
       key: p.node.key && convert(p.get('key'), context),
@@ -1008,16 +1008,12 @@ converters.TSParenthesizedType = (path, context) =>{
   return convert(path.get('typeAnnotation'), context);
 };
 
-converters.TSIndexSignature = (path, context) =>{
-  return { kind: 'any' };
-};
-
 converters.TSObjectKeyword = (path, context) =>{
-  return { kind: 'any' };
+  return { kind: 'object', members: [] };
 };
 
 converters.TSNullKeyword = (path, context) =>{
-  return { kind: 'any' };
+  return { kind: 'null' };
 };
 
 function importConverterGeneral(path, context) /*: K.Import */ {
