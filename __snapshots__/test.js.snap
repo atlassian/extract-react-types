@@ -322,51 +322,6 @@ Object {
 }
 `;
 
-exports[`TSParenthesizedType 1`] = `
-Object {
-  "classes": Array [
-    Object {
-      "kind": "generic",
-      "name": Object {
-        "kind": "id",
-        "name": "Component",
-        "type": null,
-      },
-      "value": Object {
-        "kind": "object",
-        "members": Array [
-          Object {
-            "key": Object {
-              "kind": "id",
-              "name": "a",
-            },
-            "kind": "property",
-            "optional": false,
-            "value": Object {
-              "kind": "object",
-              "members": Array [
-                Object {
-                  "key": Object {
-                    "kind": "id",
-                    "name": "b",
-                  },
-                  "kind": "property",
-                  "optional": false,
-                  "value": Object {
-                    "kind": "string",
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-  "kind": "program",
-}
-`;
-
 exports[`array expression 1`] = `
 Object {
   "classes": Array [
@@ -3172,6 +3127,64 @@ Object {
 }
 `;
 
+exports[`ts interface extend 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "number",
+              "value": 1,
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "b",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "c",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`ts literals 1`] = `
 Object {
   "classes": Array [
@@ -3349,6 +3362,51 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts parenthesized type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "object",
+              "members": Array [
+                Object {
+                  "key": Object {
+                    "kind": "id",
+                    "name": "b",
+                  },
+                  "kind": "property",
+                  "optional": false,
+                  "value": Object {
+                    "kind": "string",
+                  },
+                },
+              ],
+            },
+          },
+        ],
       },
     },
   ],

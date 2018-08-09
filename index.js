@@ -409,6 +409,19 @@ converters.MemberExpression = (path, context) /*: K.MemberExpression*/ => {
   };
 };
 
+function isTsIdentifier(path) {
+  if (
+    ['TSExpressionWithTypeArguments', 'TSTypeReference'].indexOf(
+      path.parentPath.type
+    ) !== -1 &&
+    getIdentifierKind(path) === 'reference'
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 function convertParameter(param, context) /*: K.Param*/ {
   let { type, ...rest } = convert(param, context);
   return {
@@ -709,14 +722,6 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
   throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
 
-function isTsIdentifier(path) {
-  if (path.parentPath.type === "TSTypeReference" && getIdentifierKind(path) === "reference") {
-    return true;
-  }
-
-  return false;
-}
-
 converters.TypeAlias = (path, context) => {
   return convert(path.get('right'), context);
 };
@@ -915,8 +920,18 @@ converters.TSCallSignatureDeclaration = (path, context) => {
 }
 
 converters.TSInterfaceDeclaration = (path, context) => {
-  return convert(path.get("body"), context);
+  const extendedTypes = extendedTypesMembers(path, context);
+  const interfaceType = convert(path.get('body'), context);
+  return {
+    kind: 'object',
+    // Merge the current interface members with any extended members
+    members: interfaceType.members.concat(extendedTypes)
+  }
 };
+
+converters.TSExpressionWithTypeArguments = (path, context) => {
+  return convert(path.get('expression'), context)
+}
 
 converters.TSInterfaceBody = (path, context) => {
   return {
@@ -1031,6 +1046,17 @@ converters.TSNullKeyword = (path, context) => {
 
 converters.TSThisType = (path, context) /*:K.ThisType */ => {
   return { kind: 'custom', value: 'this' }
+}
+
+function extendedTypesMembers(path, context) {
+  const members = path.get('extends');
+  if (!members || !members.length) {
+    return [];
+  }
+
+  return members
+    .map(e => convert(e, context))
+    .reduce((acc, current) => acc.concat(current.members), []); 
 }
 
 function importConverterGeneral(path, context) /*: K.Import */ {

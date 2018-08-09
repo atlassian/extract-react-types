@@ -953,7 +953,7 @@ const TESTS = [
     `
   },
   {
-    name: 'TSParenthesizedType',
+    name: 'ts parenthesized type',
     typeSystem: 'typescript',
     code: `
       interface Props {
@@ -961,6 +961,26 @@ const TESTS = [
       }
 
       class Component extends React.Component<Props> {}
+    `
+  },
+  {
+    name: 'ts interface extend',
+    typeSystem: 'typescript',
+    code: `
+      import { Type } from './__fixtures__/types';
+      interface DefaultTypes {
+        b: number
+      }
+
+      interface Props extends DefaultTypes, Type {
+        a: string
+      }
+
+      class Component extends React.Component<Props> {
+        static defaultProps = {
+          b: 1
+        }
+      }
     `
   },
 ];
