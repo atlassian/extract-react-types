@@ -10,7 +10,6 @@ module.exports = function matchExported(
 ) {
   let exploded = explodeModule(file.path.node);
   let statements = explodedToStatements(exploded);
-
   let program = Object.assign({}, file.path.node, {
     body: statements
   });
@@ -36,7 +35,7 @@ module.exports = function matchExported(
   }
 
   let statement = file.path.get('body').find(item => {
-    if (!item.isDeclaration()) return false;
+    if (!item.isDeclaration() || item.isExportAllDeclaration()) return false;
 
     let id = null;
 

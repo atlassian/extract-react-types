@@ -1093,6 +1093,17 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
+    // If the moduleSpecific isn't a local/relative import don't load/resolve it.
+    // This is a workaround for export * not recursively being resolved.
+    if (moduleSpecifier.indexOf('.') !== 0) {
+      return {
+        kind: 'import',
+        importKind,
+        name,
+        moduleSpecifier
+      };
+    }
+
     let file = loadFileSync(filePath, context.parserOpts);
 
     let id;
