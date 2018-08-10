@@ -1,6 +1,16 @@
 // @flow
 'use strict';
 
+/*::
+type TestCase = {
+  name: string,
+  typeSystem: 'flow' | 'typescript',
+  code: string,
+  only?: boolean,
+  skip?: boolean
+}
+*/
+
 const extractReactTypes = require('./');
 const stripIndent = require('strip-indent');
 
@@ -985,19 +995,7 @@ const TESTS = [
   },
 ];
 
-const TESTS2 = [
-  {
-    name: 'flow type parameter declaration',
-    typeSystem: 'flow',
-    code: `
-      type Foo<T> = () => T;
-
-      class Component extends React.Component<{ a: Foo<string> }> {}
-  `
-  }
-];
-
-for (let testCase of TESTS) {
+for (let testCase /*: TestCase */ of TESTS) {
   let testFn;
 
   if (testCase.only) {

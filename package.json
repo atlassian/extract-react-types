@@ -27,7 +27,7 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
-    "flow-bin": "^0.53.1",
+    "flow-bin": "^0.78.0",
     "jest": "^21.2.1",
     "prettier": "^1.13.7"
   }
