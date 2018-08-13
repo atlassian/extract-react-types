@@ -2908,7 +2908,9 @@ Object {
         "kind": "object",
         "members": Array [
           Object {
-            "key": "",
+            "key": Object {
+              "kind": "string",
+            },
             "kind": "property",
             "optional": false,
             "value": Object {
