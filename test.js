@@ -993,6 +993,15 @@ const TESTS = [
       }
     `
   },
+  {
+    name: 'ts export all',
+    typeSystem: 'typescript',
+    code: `
+      import { C } from './__fixtures__/props';
+
+      class Component extends React.Component<C> {}
+    `
+  },
 ];
 
 for (let testCase /*: TestCase */ of TESTS) {

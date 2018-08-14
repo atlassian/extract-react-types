@@ -1017,10 +1017,6 @@ converters.TSIndexSignature = (path, context) /*: K.Property */ =>{
   };
 };
 
-converters.ImportDeclaration = (path, context) /*: K.Any */ => {
-  return { kind: 'any' };
-};
-
 converters.TSParenthesizedType = (path, context) => {
   return convert(path.get('typeAnnotation'), context);
 };
@@ -1108,17 +1104,6 @@ function importConverterGeneral(path, context) /*: K.Import */ {
       };
     }
 
-    // If the moduleSpecific isn't a local/relative import don't load/resolve it.
-    // This is a workaround for export * not recursively being resolved.
-    if (moduleSpecifier.indexOf('.') !== 0) {
-      return {
-        kind: 'import',
-        importKind,
-        name,
-        moduleSpecifier
-      };
-    }
-
     let file = loadFileSync(filePath, context.parserOpts);
 
     let id;
@@ -1129,52 +1114,112 @@ function importConverterGeneral(path, context) /*: K.Import */ {
     }
 
     let exported = matchExported(file, name);
-
+    
     if (!exported) {
-
-      // TODO: This needs to be recursive.
-      let exportAll = file.path.get('body')
-        .filter(item => item.isExportAllDeclaration())
-        .map(item => matchExported(resolveExportAllDeclaration(item, context), name))
-        .filter(Boolean)
-      ;
-
-      if (!exportAll.length) {
-      return {
-        kind: 'import',
-        importKind,
-        name,
-        moduleSpecifier
-      };
-    }
-
-      exported = exportAll[0];
+      exported = recursivelyResolveExportAll(file.path, context, name);
+      
+      if (!exported) {
+        return {
+          kind: 'import',
+          importKind,
+          name,
+          moduleSpecifier
+        };
+      }
     }
 
     return convert(exported, { ...context, replacementId: t.identifier(id) });
   }
 }
 
+function recursivelyResolveExportAll(path, context, name) {
+  let source = path
+    .get('body')
+    .filter(item => item.isExportAllDeclaration())
+    .map(item => resolveExportAllDeclaration(item, context))
+    .filter(Boolean);
+
+  const matchedDeclartion = source.reduce((acc, current) => {
+    if (acc) {
+      return acc;
+    }
+
+    return matchExported(current, name);
+  }, null);
+
+  if (matchedDeclartion) {
+    return matchedDeclartion;
+  }
+
+  return source.reduce((acc, current) => {
+    if (acc) {
+      return acc;
+    }
+
+    return recursivelyResolveExportAll(current.path, context, name);
+  }, null);
+}
+
 function resolveExportAllDeclaration(path, context) {
   let source = path.get('source');
 
-  // The parentPath is a reference to where we currently are. We want to
-  // get the source value, but resolving this first makes this easier.
-  let filePath = resolveImportFilePathSync(
-    source.parentPath,
-    context.resolveOptions
-  );
-
-  let actualPath = resolveSync(
-    nodePath.join(nodePath.dirname(filePath), source.node.value),
-    context.resolveOptions
-  );
-
-  return loadFileSync(actualPath, context.parserOpts);
+  try {
+    // The parentPath is a reference to where we currently are. We want to
+    // get the source value, but resolving this first makes this easier.
+    let filePath = resolveImportFilePathSync(
+      source.parentPath,
+      context.resolveOptions
+    );
+    
+    let actualPath = resolveSync(
+      nodePath.join(nodePath.dirname(filePath), source.node.value),
+      context.resolveOptions
+    );
+    
+    return loadFileSync(actualPath, context.parserOpts);
+  } catch(e) {
+    return null;
+  }
 }
 
 converters.ImportDefaultSpecifier = (path, context) /*: K.Import */ => {
   return importConverterGeneral(path, context);
+};
+
+converters.ImportDeclaration = (path, context) /*: K.Import */ => {
+  let importKind = path.node.importKind || 'value';
+  let moduleSpecifier = path.get('source').node.value;
+  let name = 'default';
+
+  if (!context.replacementId) {
+    return {
+      kind: 'import',
+      importKind,
+      name,
+      moduleSpecifier
+    };
+  }
+
+  let filePath = resolveImportFilePathSync(path, context.resolveOptions);
+
+  let actualPath = resolveSync(
+    nodePath.join(nodePath.dirname(filePath), moduleSpecifier),
+    context.resolveOptions
+  );
+
+  let file = loadFileSync(actualPath, context.parserOpts);
+  let exported = matchExported(file, context.replacementId.name);
+
+  if (!exported) {
+    return {
+      kind: 'import',
+      importKind,
+      name,
+      moduleSpecifier
+    };
+  }
+
+  return convert(exported, context);
 };
 
 converters.ExportSpecifier = (path, context) /*: K.ExportSpecifier */ => {
@@ -1195,18 +1240,6 @@ converters.ExportNamedDeclaration = (path, context) /*: K.Export */ => {
   if (path.get('source').node) {
     let source = path.get('source');
 
-    // The parentPath is a reference to where we currently are. We want to
-    // get the source value, but resolving this first makes this easier.
-    let filePath = resolveImportFilePathSync(
-      source.parentPath,
-      context.resolveOptions
-    );
-
-    let actualPath = resolveSync(
-      nodePath.join(nodePath.dirname(filePath), source.node.value),
-      context.resolveOptions
-    );
-
     if (specifiers.length !== 1) {
       return {
         kind: 'export',
@@ -1220,6 +1253,18 @@ converters.ExportNamedDeclaration = (path, context) /*: K.Export */ => {
     let file;
 
     try {
+      // The parentPath is a reference to where we currently are. We want to
+      // get the source value, but resolving this first makes this easier.
+      let filePath = resolveImportFilePathSync(
+        source.parentPath,
+        context.resolveOptions
+      );
+
+      let actualPath = resolveSync(
+        nodePath.join(nodePath.dirname(filePath), source.node.value),
+        context.resolveOptions
+      );
+
       file = loadFileSync(actualPath);
       // We need to calculate name from the specifiers, I think knowing that there
       // will always be one specifier
