@@ -685,13 +685,6 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
           foundPath.path.isImportNamespaceSpecifier() ||
           foundPath.path.isImportSpecifier())
         ) {
-          // Note:
-          // We cannot resolve the imported type properly at this time,
-          // so we'll return the name of the type for now.
-          // return {
-          //   kind: "id",
-          //   name,
-          // };
           return convert(foundPath.path, context);
         }
 
@@ -1338,20 +1331,6 @@ function extractReactTypes(
   });
 
   let file = createBabelFile(code, { parserOpts, filename });
-
-  // let ast = babel.parseSync(code, { parserOpts, filename });
-
-  // let file = new babel.File({
-  //   options: { parserOpts, filename },
-  //   passes: []
-  // }, { code, ast });
-
-  // try {
-  //   file.addCode(code);
-  //   file.parseCode(code);
-  // } catch (err) {
-  //   console.error(err);
-  // }
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
