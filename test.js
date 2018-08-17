@@ -997,9 +997,9 @@ const TESTS = [
     name: 'ts export all',
     typeSystem: 'typescript',
     code: `
-      import { C } from './__fixtures__/props';
+      import { NestedInterface1 } from './__fixtures__/props';
 
-      class Component extends React.Component<C> {}
+      class Component extends React.Component<NestedInterface1> {}
     `
   },
 ];

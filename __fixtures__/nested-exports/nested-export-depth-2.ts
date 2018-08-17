@@ -1,3 +1,3 @@
-export interface D {
-  g: string;
+export interface NestedInterfaceDepth2 {
+  nestedPropertyDepth2: string;
 }

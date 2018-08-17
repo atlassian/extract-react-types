@@ -3050,7 +3050,7 @@ Object {
           Object {
             "key": Object {
               "kind": "id",
-              "name": "d",
+              "name": "nestedProperty1",
             },
             "kind": "property",
             "optional": false,
@@ -3061,7 +3061,7 @@ Object {
           Object {
             "key": Object {
               "kind": "id",
-              "name": "e",
+              "name": "nestedProperty2",
             },
             "kind": "property",
             "optional": false,
