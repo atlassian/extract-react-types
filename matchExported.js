@@ -35,6 +35,7 @@ module.exports = function matchExported(
   }
 
   let statement = file.path.get('body').find(item => {
+    // Ignore export all & default declarations, since they do not have specifiers/ids.
     if (!item.isDeclaration() || item.isExportAllDeclaration()) return false;
 
     let id = null;

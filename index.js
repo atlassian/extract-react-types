@@ -1039,9 +1039,10 @@ function extendedTypesMembers(path, context) {
     return [];
   }
 
-  return members
-    .map(e => convert(e, context))
-    .reduce((acc, current) => acc.concat(current.members), []); 
+  return members.reduce((acc, current) => {
+    const converted = convert(current, context);
+    return acc.concat(converted.members);
+  }, []);
 }
 
 function importConverterGeneral(path, context) /*: K.Import */ {
@@ -1117,7 +1118,7 @@ function importConverterGeneral(path, context) /*: K.Import */ {
     
     if (!exported) {
       exported = recursivelyResolveExportAll(file.path, context, name);
-      
+
       if (!exported) {
         return {
           kind: 'import',
@@ -1161,22 +1162,15 @@ function recursivelyResolveExportAll(path, context, name) {
 }
 
 function resolveExportAllDeclaration(path, context) {
-  let source = path.get('source');
-
   try {
     // The parentPath is a reference to where we currently are. We want to
     // get the source value, but resolving this first makes this easier.
     let filePath = resolveImportFilePathSync(
-      source.parentPath,
+      path,
       context.resolveOptions
     );
     
-    let actualPath = resolveSync(
-      nodePath.join(nodePath.dirname(filePath), source.node.value),
-      context.resolveOptions
-    );
-    
-    return loadFileSync(actualPath, context.parserOpts);
+    return loadFileSync(filePath, context.parserOpts);
   } catch(e) {
     return null;
   }
@@ -1297,7 +1291,7 @@ converters.ImportSpecifier = (path, context) /*: K.Import */ => {
   return importConverterGeneral(path, context);
 };
 
-function convertMethodCall(path, context) {
+function convertMethodCall(path, context) /*: K.Func */ {
   const parameters = path.get('parameters').map(p => convertParameter(p, context));
   const returnType = convert(
     path.get('typeAnnotation'),
@@ -1349,26 +1343,27 @@ function extractReactTypes(
   code /*: string */,
   typeSystem /*: 'flow' | 'typescript' */,
   filename /*:? string */,
-  resolveOptions /*:? Object */ = {}
+  resolveOptions /*:? Object */
 ) {
   let plugins = ['jsx'];
+  if (!resolveOptions) resolveOptions = {};
 
-  if (resolveOptions && !resolveOptions.extensions) {
+  if (!resolveOptions.extensions) {
     // The resolve package that babel-file-loader uses only resolves .js files by default instead of the
     // default extension list of node (.js, .json and .node) so add .json back here.
     resolveOptions.extensions = ['.js', '.json'];
   }
 
-  if (typeSystem === "flow") plugins.push("flow");
-  else if (typeSystem === "typescript") {
+  if (typeSystem === 'flow') {
+    plugins.push('flow');
+  } else if (typeSystem === 'typescript') {
     plugins.push('typescript');
 
-    if (resolveOptions && resolveOptions.extensions) {
-      resolveOptions.extensions.push('.tsx');
-      resolveOptions.extensions.push('.ts');
-    }
+    resolveOptions.extensions.push('.tsx');
+    resolveOptions.extensions.push('.ts');
+  } else {
+    throw new Error('typeSystem must be either "flow" or "typescript"');
   }
-  else throw new Error('typeSystem must be either "flow" or "typescript"');
 
   let parserOpts = createBabylonOptions({
     stage: 2,

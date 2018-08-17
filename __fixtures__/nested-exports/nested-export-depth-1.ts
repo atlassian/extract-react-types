@@ -3,4 +3,4 @@ export interface C {
   e: string;
 }
 
-export * from './d';
+export * from './nested-export-depth-2';
