@@ -112,6 +112,7 @@ export const converters: { [string]: ?Function } = {
     if (simpleObj) {
       return <components.Type>{convert(type)}</components.Type>;
     }
+
     return (
       <span>
         <AddBrackets
@@ -123,9 +124,14 @@ export const converters: { [string]: ?Function } = {
             {type.members.map(prop => {
               if (prop.kind === 'spread') {
                 const nestedObj = resolveFromGeneric(prop.value);
-                return nestedObj.members.map(newProp =>
-                  prettyConvert(newProp, components, depth),
-                );
+                // Spreads almost always resolve to an object, but they can
+                // also resolve to an import. We just allow it to fall through
+                // to prettyConvert if there are no members
+                if (nestedObj.members) {
+                  return nestedObj.members.map(newProp =>
+                    prettyConvert(newProp, components, depth),
+                  );
+                }
               }
               return prettyConvert(prop, components, depth);
             })}
@@ -240,7 +246,8 @@ const prettyConvert = (
 
   const converter = converters[type.kind];
   if (!converter) {
-    return <components.Type>{convert(type)}</components.Type>;
+    const stringType = convert(type);
+    return <components.Type key={stringType}>{stringType}</components.Type>;
   }
   return converter(type, components, depth);
 };
