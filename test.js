@@ -997,9 +997,36 @@ const TESTS = [
     name: 'ts export all',
     typeSystem: 'typescript',
     code: `
-      import { NestedInterface1 } from './__fixtures__/props';
+      import { NestedInterface1 } from './__fixtures__/types';
 
       class Component extends React.Component<NestedInterface1> {}
+    `
+  },
+  {
+    name: 'ts recursive type',
+    typeSystem: 'typescript',
+    code: `
+      interface SiblingInterface {
+        property: string
+      }
+
+      interface RecursiveType {
+        properties: SiblingInterface
+        type: RecursiveType
+      }
+
+      class Component extends React.Component<RecursiveType> {}
+    `
+  },
+  {
+    name: 'flow recursive type',
+    typeSystem: 'flow',
+    code: `
+      type RecursiveType = {
+        props: RecursiveType
+      }
+
+      class Component extends React.Component<RecursiveType> {}
     `
   },
 ];

@@ -704,9 +704,17 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
         if (bindingPath.kind === 'module') {
           bindingPath = bindingPath.path;
         }
-        if (bindingPath.kind !== 'module') return convert(bindingPath, context);
+
+        // If path is a descendant of bindingPath and share the same name, this is a recursive type.
+        if (path.isDescendant(bindingPath) && bindingPath.get('id').node.name === name) {
+          return { kind: 'id', name };
+        }
+
+        if (bindingPath.kind !== 'module') {
+          return convert(bindingPath, context);
+        }
       } else {
-        return { kind: 'id', name: name };
+        return { kind: 'id', name };
       }
     } else if (kind === 'static' || kind === 'binding') {
       return { kind: 'id', name };
@@ -1162,18 +1170,15 @@ function recursivelyResolveExportAll(path, context, name) {
 }
 
 function resolveExportAllDeclaration(path, context) {
-  try {
-    // The parentPath is a reference to where we currently are. We want to
-    // get the source value, but resolving this first makes this easier.
-    let filePath = resolveImportFilePathSync(
-      path,
-      context.resolveOptions
-    );
-    
-    return loadFileSync(filePath, context.parserOpts);
-  } catch(e) {
-    return null;
-  }
+  let source = path.get('source');
+  // The parentPath is a reference to where we currently are. We want to
+  // get the source value, but resolving this first makes this easier.
+  let filePath = resolveImportFilePathSync(
+    source.parentPath,
+    context.resolveOptions
+  );
+
+  return loadFileSync(filePath, context.parserOpts);
 }
 
 converters.ImportDefaultSpecifier = (path, context) /*: K.Import */ => {
@@ -1195,13 +1200,7 @@ converters.ImportDeclaration = (path, context) /*: K.Import */ => {
   }
 
   let filePath = resolveImportFilePathSync(path, context.resolveOptions);
-
-  let actualPath = resolveSync(
-    nodePath.join(nodePath.dirname(filePath), moduleSpecifier),
-    context.resolveOptions
-  );
-
-  let file = loadFileSync(actualPath, context.parserOpts);
+  let file = loadFileSync(filePath, context.parserOpts);
   let exported = matchExported(file, context.replacementId.name);
 
   if (!exported) {

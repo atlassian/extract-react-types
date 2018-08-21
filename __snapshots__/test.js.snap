@@ -1304,6 +1304,42 @@ Object {
 }
 `;
 
+exports[`flow recursive type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "props",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "id",
+                "name": "RecursiveType",
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow string 1`] = `
 Object {
   "classes": Array [
@@ -3450,6 +3486,69 @@ Object {
                   },
                 },
               ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts recursive type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "properties",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "property",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "type",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "id",
+                "name": "RecursiveType",
+              },
             },
           },
         ],
