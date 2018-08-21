@@ -115,7 +115,7 @@ export type Func = {
   id?: Id | null,
   async?: boolean,
   generator?: boolean,
-  parameters: Param,
+  parameters: Array<Param>,
   returnType: AnyTypeKind | null
 };
 export type Union = { kind: "union", types: Array<AnyTypeKind> };
