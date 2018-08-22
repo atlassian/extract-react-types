@@ -149,6 +149,11 @@ export type Program = { kind: "program", classes: Array<Property> };
 export type ExportSpecifier = { kind: "exportSpecifier", local: Id, exported: Id };
 export type Export = { kind: "export", exports: Array<Id>, source?: String };
 
+export type This = {
+  kind: "custom",
+  value: "this"
+};
+
 export type AnyTypeKind =
   | Any
   | AssignmentPattern

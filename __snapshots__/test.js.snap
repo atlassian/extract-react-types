@@ -207,6 +207,49 @@ Object {
 }
 `;
 
+exports[`Should handle importing other ts files 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "id",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Should handle rest element 1`] = `
 Object {
   "classes": Array [
@@ -1261,6 +1304,42 @@ Object {
 }
 `;
 
+exports[`flow recursive type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "props",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "id",
+                "name": "RecursiveType",
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow string 1`] = `
 Object {
   "classes": Array [
@@ -1363,6 +1442,115 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow type alias declaration - 1 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "union",
+                "types": Array [
+                  Object {
+                    "kind": "generic",
+                    "typeParams": Object {
+                      "kind": "typeParams",
+                      "params": Array [
+                        Object {
+                          "kind": "any",
+                        },
+                      ],
+                    },
+                    "value": Object {
+                      "kind": "id",
+                      "name": "Element",
+                    },
+                  },
+                  Object {
+                    "kind": "arrayType",
+                    "type": Object {
+                      "kind": "generic",
+                      "typeParams": Object {
+                        "kind": "typeParams",
+                        "params": Array [
+                          Object {
+                            "kind": "any",
+                          },
+                        ],
+                      },
+                      "value": Object {
+                        "kind": "id",
+                        "name": "Element",
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow type comments 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "leadingComments": Array [
+              Object {
+                "raw": " Type comment for a ",
+                "type": "commentBlock",
+                "value": "Type comment for a",
+              },
+            ],
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
       },
     },
   ],
@@ -2650,7 +2838,15 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "any",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "any",
+          },
         },
       ],
       "name": Object {
@@ -2671,8 +2867,27 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "id",
-          "name": "Array",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
+                  "kind": "number",
+                },
+              ],
+            },
+            "value": Object {
+              "kind": "id",
+              "name": "Array",
+            },
+          },
         },
       ],
       "name": Object {
@@ -2693,13 +2908,65 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "boolean",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
         },
       ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts call signature declaration 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "string",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "x",
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "void",
+              },
+            },
+          },
+        ],
       },
     },
   ],
@@ -2714,7 +2981,15 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "void",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "void",
+          },
         },
       ],
       "name": Object {
@@ -2727,7 +3002,15 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "void",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "void",
+          },
         },
       ],
       "name": Object {
@@ -2748,14 +3031,81 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "id",
-          "name": "Color",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "union",
+              "types": Array [
+                Object {
+                  "kind": "id",
+                  "name": "Color.Red",
+                },
+                Object {
+                  "kind": "id",
+                  "name": "Color.Green",
+                },
+                Object {
+                  "kind": "id",
+                  "name": "Color.Blue",
+                },
+              ],
+            },
+          },
         },
       ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts export all 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "nestedProperty1",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "nestedProperty2",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
       },
     },
   ],
@@ -2770,19 +3120,38 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "function",
-          "parameters": Array [
-            Object {
-              "kind": "id",
-              "name": "string",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "string",
+                  },
+                },
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "boolean",
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "number",
+              },
             },
-            Object {
-              "kind": "id",
-              "name": "boolean",
-            },
-          ],
-          "returnType": Object {
-            "kind": "number",
           },
         },
       ],
@@ -2801,11 +3170,96 @@ exports[`ts interface 1`] = `
 Object {
   "classes": Array [
     Object {
-      "kind": "id",
+      "kind": "generic",
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "bar",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts interface extend 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "number",
+              "value": 1,
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "b",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "number",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "c",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
       },
     },
   ],
@@ -2820,23 +3274,76 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "union",
-          "types": Array [
-            Object {
-              "kind": "literal",
-              "value": "25",
-            },
-            Object {
-              "kind": "literal",
-              "value": 30,
-            },
-          ],
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "string",
+                "value": "25",
+              },
+              Object {
+                "kind": "string",
+                "value": 30,
+              },
+            ],
+          },
         },
       ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts method signature 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "on",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "id",
+                    "name": "x",
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "void",
+              },
+            },
+          },
+        ],
       },
     },
   ],
@@ -2858,18 +3365,50 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "object",
-          "members": Array [
-            Object {
-              "kind": "string",
-            },
-          ],
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "object",
+            "members": Array [
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "name",
+                },
+                "kind": "property",
+                "optional": false,
+                "value": Object {
+                  "kind": "string",
+                },
+              },
+            ],
+          },
         },
         Object {
-          "kind": "number",
+          "key": Object {
+            "kind": "id",
+            "name": "bar",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
         },
         Object {
-          "kind": "boolean",
+          "key": Object {
+            "kind": "id",
+            "name": "verified",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "boolean",
+          },
         },
       ],
       "name": Object {
@@ -2890,13 +3429,129 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "string",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": true,
+          "value": Object {
+            "kind": "string",
+          },
         },
       ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts parenthesized type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "object",
+              "members": Array [
+                Object {
+                  "key": Object {
+                    "kind": "id",
+                    "name": "b",
+                  },
+                  "kind": "property",
+                  "optional": false,
+                  "value": Object {
+                    "kind": "string",
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts recursive type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "properties",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "property",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "type",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "id",
+                "name": "RecursiveType",
+              },
+            },
+          },
+        ],
       },
     },
   ],
@@ -2911,7 +3566,15 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "string",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
         },
       ],
       "name": Object {
@@ -2932,21 +3595,215 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "tuple",
-          "types": Array [
-            Object {
-              "kind": "string",
-            },
-            Object {
-              "kind": "number",
-            },
-          ],
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "tuple",
+            "types": Array [
+              Object {
+                "kind": "string",
+              },
+              Object {
+                "kind": "number",
+              },
+            ],
+          },
         },
       ],
       "name": Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type alias 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type alias declaration - 1 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "union",
+                "types": Array [
+                  Object {
+                    "kind": "string",
+                    "value": "one",
+                  },
+                  Object {
+                    "kind": "string",
+                    "value": "two",
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type alias declaration - 2 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "union",
+                "types": Array [
+                  Object {
+                    "kind": "generic",
+                    "typeParams": Object {
+                      "kind": "typeParams",
+                      "params": Array [
+                        Object {
+                          "kind": "any",
+                        },
+                      ],
+                    },
+                    "value": Object {
+                      "kind": "id",
+                      "name": "React.ReactElement",
+                    },
+                  },
+                  Object {
+                    "kind": "arrayType",
+                    "type": Object {
+                      "kind": "generic",
+                      "typeParams": Object {
+                        "kind": "typeParams",
+                        "params": Array [
+                          Object {
+                            "kind": "any",
+                          },
+                        ],
+                      },
+                      "value": Object {
+                        "kind": "id",
+                        "name": "React.ReactElement",
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`ts type comments 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "a",
+            },
+            "kind": "property",
+            "leadingComments": Array [
+              Object {
+                "raw": " Type comment for a ",
+                "type": "commentBlock",
+                "value": "Type comment for a",
+              },
+            ],
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
       },
     },
   ],
@@ -2961,15 +3818,23 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "union",
-          "types": Array [
-            Object {
-              "kind": "number",
-            },
-            Object {
-              "kind": "string",
-            },
-          ],
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "union",
+            "types": Array [
+              Object {
+                "kind": "number",
+              },
+              Object {
+                "kind": "string",
+              },
+            ],
+          },
         },
       ],
       "name": Object {
@@ -2990,7 +3855,15 @@ Object {
       "kind": "object",
       "members": Array [
         Object {
-          "kind": "void",
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "void",
+          },
         },
       ],
       "name": Object {

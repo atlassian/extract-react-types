@@ -2,7 +2,7 @@
 const { explodeModule } = require('babel-explode-module');
 const { explodedToStatements } = require('babel-helper-simplify-module');
 const printAST = require('ast-pretty-print');
-const t = require('babel-types');
+const t = require('@babel/types');
 
 module.exports = function matchExported(
   file /* : Object */,
@@ -10,7 +10,6 @@ module.exports = function matchExported(
 ) {
   let exploded = explodeModule(file.path.node);
   let statements = explodedToStatements(exploded);
-
   let program = Object.assign({}, file.path.node, {
     body: statements
   });
@@ -36,7 +35,8 @@ module.exports = function matchExported(
   }
 
   let statement = file.path.get('body').find(item => {
-    if (!item.isDeclaration()) return false;
+    // Ignore export all & default declarations, since they do not have specifiers/ids.
+    if (!item.isDeclaration() || item.isExportAllDeclaration()) return false;
 
     let id = null;
 

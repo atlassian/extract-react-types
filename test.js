@@ -1,6 +1,16 @@
 // @flow
 'use strict';
 
+/*::
+type TestCase = {
+  name: string,
+  typeSystem: 'flow' | 'typescript',
+  code: string,
+  only?: boolean,
+  skip?: boolean
+}
+*/
+
 const extractReactTypes = require('./');
 const stripIndent = require('strip-indent');
 
@@ -840,10 +850,188 @@ const TESTS = [
 
       class Component extends React.Component<{ a: Foo<string> }> {}
   `
-  }
+  },
+  {
+    name: 'ts type comments',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        /* Type comment for a */
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'flow type comments',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        /* Type comment for a */
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts type alias',
+    typeSystem: 'typescript',
+    code: `
+      type Props = {
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts type alias declaration - 1',
+    typeSystem: 'typescript',
+    code: `
+      type LiteralType = 'one' | 'two';
+      interface Props {
+        a: LiteralType;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts type alias declaration - 2',
+    typeSystem: 'typescript',
+    code: `
+      type ReactElement = React.ReactElement<any> | React.ReactElement<any>[];
+      interface Props {
+        a: ReactElement;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'flow type alias declaration - 1',
+    typeSystem: 'flow',
+    code: `
+      import * as React from 'react';
+
+      type ReactElement = React.Element<any> | React.Element<any>[];
+      type Props = {
+        a: ReactElement,
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'Should handle importing other ts files',
+    typeSystem: 'typescript',
+    code: `
+      import { Props } from "./__fixtures__/props";
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
+    name: 'ts method signature',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        on(x: string): void;
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
+  {
+    name: 'ts call signature declaration',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        (x: string): void;
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
+  {
+    name: 'ts parenthesized type',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        a: ({ b: string })
+      }
+
+      class Component extends React.Component<Props> {}
+    `
+  },
+  {
+    name: 'ts interface extend',
+    typeSystem: 'typescript',
+    code: `
+      import { Type } from './__fixtures__/types';
+      interface DefaultTypes {
+        b: number
+      }
+
+      interface Props extends DefaultTypes, Type {
+        a: string
+      }
+
+      class Component extends React.Component<Props> {
+        static defaultProps = {
+          b: 1
+        }
+      }
+    `
+  },
+  {
+    name: 'ts export all',
+    typeSystem: 'typescript',
+    code: `
+      import { NestedInterface1 } from './__fixtures__/types';
+
+      class Component extends React.Component<NestedInterface1> {}
+    `
+  },
+  {
+    name: 'ts recursive type',
+    typeSystem: 'typescript',
+    code: `
+      interface SiblingInterface {
+        property: string
+      }
+
+      interface RecursiveType {
+        properties: SiblingInterface
+        type: RecursiveType
+      }
+
+      class Component extends React.Component<RecursiveType> {}
+    `
+  },
+  {
+    name: 'flow recursive type',
+    typeSystem: 'flow',
+    code: `
+      type RecursiveType = {
+        props: RecursiveType
+      }
+
+      class Component extends React.Component<RecursiveType> {}
+    `
+  },
 ];
 
-for (let testCase of TESTS) {
+for (let testCase /*: TestCase */ of TESTS) {
   let testFn;
 
   if (testCase.only) {
