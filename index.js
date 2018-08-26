@@ -1344,7 +1344,7 @@ function extractReactTypes(
   filename /*:? string */,
   resolveOptions /*:? Object */
 ) {
-  let plugins = ['jsx', 'decorators'];
+  let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: false }]];
   if (!resolveOptions) resolveOptions = {};
 
   if (!resolveOptions.extensions) {
