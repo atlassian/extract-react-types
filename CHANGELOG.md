@@ -1,5 +1,9 @@
 # extract-react-types
 
+## 0.14.2
+
+- fix decorator plugin implementation
+
 ## v0.14.1
 
 - add decorators plugin to the babel process.
