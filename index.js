@@ -10,7 +10,11 @@ module.exports = function extractReactTypesLoader(content /* : string */) {
 
   const resolveOpts = {
     pathFilter: (pkg, location, dist) => {
-      if (pkg['atlaskit:src'] && location.includes('node_modules')) {
+      if (
+        pkg['atlaskit:src'] &&
+        location.includes('node_modules') &&
+        location.includes(pkg.main)
+      ) {
         return location.replace(dist, pkg['atlaskit:src']);
       }
       return null;

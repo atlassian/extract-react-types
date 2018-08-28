@@ -3,6 +3,6 @@
   "version": "0.2.1",
   "main": "index.js",
   "dependencies": {
-    "extract-react-types": "^0.12.1"
+    "extract-react-types": "^0.14.2"
   }
 }
