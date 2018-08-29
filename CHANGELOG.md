@@ -1,5 +1,8 @@
 # extract-react-types-loader
 
+## 0.2.2
+- [patch] Upgrade extract-react-types to add TypeScript support. [c742e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c742e5a)
+
 ## 0.2.1
 - [patch] Remove console log [e16d2b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e16d2b6)
 
