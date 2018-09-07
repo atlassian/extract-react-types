@@ -222,16 +222,15 @@ const converters = {
   },
 
   call: (type /*: K.Call*/, mode /*: string */) /*:string*/ => {
-    let callSignature = ''
+    let callSignature = '';
     if (type.callee.referenceIdName) {
-      callSignature = type.callee.referenceIdName
+      callSignature = type.callee.referenceIdName;
     } else if (type.callee.id) {
-      callSignature = convert(type.callee.id)
+      callSignature = convert(type.callee.id);
     } else {
-      callSignature = convert(type.callee)
+      callSignature = convert(type.callee);
     }
-
-
+    // $FlowFixMe - this is incorrectly reading type.callee.referenceIdName as possibly not a string.
     return `${callSignature}(${mapConvertAndJoin(type.args)})`;
   },
 
@@ -306,6 +305,21 @@ const converters = {
       return `${type.moduleSpecifier}.${type.name}`;
     }
   },
+  export: (type /*: K.Export */, mode /*: string */) /*: string*/ => {
+    if (type.exports.length === 1) {
+      return convert(type.exports[0]);
+    } else {
+      console.warn(
+        `kind2string has received an export type with multiple exports, and have no way of printing this.
+The exports we found were: ${type.exports
+          .map(xport => convert(xport, mode))
+          .join(', ')}
+from file: ${convert(type.source, mode)}`,
+      );
+      return '';
+    }
+  },
+  exportSpecifier: (type, mode) => convert(type.exported),
 
   // TS
   tuple: (type /*: K.Tuple */, mode /*: string */) /*: string*/ =>

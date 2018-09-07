@@ -26,6 +26,7 @@ const getSingleTSPropTypes = defaultPropType => {
     `{}`,
     'typescript',
   )[0];
+
   return convert(propTypes);
 };
 
@@ -291,11 +292,11 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(prop);
       });
     });
-    describe('tuples', () => {
+    describe.only('tuples', () => {
       it('Resolves down to a string representation of a tuple', () => {
         let prop = `[string, number]`;
         let final = getSingleTSPropTypes(prop);
-        expect(final).toBe(prop);
+        expect(final).toBe(`a: [string, number]`);
       });
     });
   });
