@@ -292,7 +292,7 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(prop);
       });
     });
-    describe.only('tuples', () => {
+    describe('tuples', () => {
       it('Resolves down to a string representation of a tuple', () => {
         let prop = `[string, number]`;
         let final = getSingleTSPropTypes(prop);
