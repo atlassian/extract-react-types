@@ -1,5 +1,9 @@
 # pretty-proptypes
 
+## v0.4.0
+
+- pull in newer version of kind2string, adding support for 'export' and 'exportSpecifier' kinds.
+
 ## v0.3.0
 
 - Add arrayType converter
