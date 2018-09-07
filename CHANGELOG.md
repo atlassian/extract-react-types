@@ -1,5 +1,10 @@
 # extract-react-types
 
+## 0.14.3
+
+- call to `loadFileSync` in `ExportNamedDeclaration` was not being passed in the loaderOpts, causing an error in the parsing. Options are now passed through correctly.
+- Fix Id to have additional optional property.
+
 ## 0.14.2
 
 - fix decorator plugin implementation

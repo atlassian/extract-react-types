@@ -12,7 +12,7 @@ export type TypeParamsDeclaration = {
   kind: "typeParamsDeclaration",
   params: Array<AnyTypeKind>
 };
-export type Id = { kind: "id", name: string, type?: ?$Diff<AnyKind, Id> };
+export type Id = { kind: "id", name: string, type?: ?$Diff<AnyKind, Id>, referenceIdName?: string };
 export type TemplateLiteral = {
   kind: "templateLiteral",
   expressions: Array<AnyValueKind>,
