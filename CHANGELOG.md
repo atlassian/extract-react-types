@@ -1,5 +1,8 @@
 # extract-react-types
 
+## 0.14.4
+- `getProp` recursive function now relies on `resolveFromGeneric` to escape from intersections, allowing for nested interrsections to find props.
+
 ## 0.14.3
 
 - call to `loadFileSync` in `ExportNamedDeclaration` was not being passed in the loaderOpts, causing an error in the parsing. Options are now passed through correctly.
