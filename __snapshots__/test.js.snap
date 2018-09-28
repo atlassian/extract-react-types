@@ -2071,6 +2071,87 @@ Object {
 }
 `;
 
+exports[`nested intersection type with default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "intersection",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "types": Array [
+        Object {
+          "kind": "generic",
+          "value": Object {
+            "kind": "intersection",
+            "types": Array [
+              Object {
+                "kind": "generic",
+                "value": Object {
+                  "kind": "object",
+                  "members": Array [
+                    Object {
+                      "default": Object {
+                        "kind": "string",
+                        "value": "baz",
+                      },
+                      "key": Object {
+                        "kind": "id",
+                        "name": "bar",
+                      },
+                      "kind": "property",
+                      "optional": false,
+                      "value": Object {
+                        "kind": "string",
+                      },
+                    },
+                  ],
+                },
+              },
+              Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "foo",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        Object {
+          "kind": "object",
+          "members": Array [
+            Object {
+              "key": Object {
+                "kind": "id",
+                "name": "isDefaultChecked",
+              },
+              "kind": "property",
+              "optional": false,
+              "value": Object {
+                "kind": "boolean",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`new expression 1`] = `
 Object {
   "classes": Array [

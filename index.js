@@ -58,16 +58,9 @@ const resolveFromGeneric = type => {
 
 const getProp = (props, property) => {
   let prop;
-
   if (props.kind === 'intersection') {
     props.types.forEach(pr => {
-      if (pr.kind === 'generic') {
-        if (pr.value.kind === 'object') {
-          prop = getPropFromObject(pr.value, property) || prop;
-        }
-      } else if (pr.kind === 'object') {
-        prop = getPropFromObject(pr, property) || prop;
-      }
+      prop = getProp(resolveFromGeneric(pr), property) || prop;
     });
   } else if (props.kind === 'object') {
     prop = getPropFromObject(props, property);

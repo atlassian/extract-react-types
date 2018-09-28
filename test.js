@@ -219,6 +219,22 @@ const TESTS = [
   `
   },
   {
+    name: 'nested intersection type with default props',
+    typeSystem: 'flow',
+    code: `
+  type BaseProps = { bar: string }
+  type Props = BaseProps & { foo: string }
+
+  class Component extends React.Component<Props & {
+    isDefaultChecked: boolean,
+  }> {
+    static defaultProps = {
+      bar: 'baz',
+    }
+  }
+  `
+  },
+  {
     name: 'with spread in type annotation',
     typeSystem: 'flow',
     code: `
