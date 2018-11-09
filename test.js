@@ -248,6 +248,38 @@ const TESTS = [
   `
   },
   {
+    name: 'with spread in type annotation and default props',
+    typeSystem: 'flow',
+    code: `
+  type BaseProps = { foo: string }
+  type Props = {
+    ...BaseProps,
+    isDefaultChecked: boolean,
+  }
+  class Component extends React.Component<Props> {
+    static defaultProps = {
+      foo: 'abc',
+    };
+  }
+  `
+  },
+  {
+    name: 'with generic spread in type annotation and default props',
+    typeSystem: 'flow',
+    code: `
+  type BaseProps = { foo: string }
+  type Props = {
+    ...$Exact<BaseProps>,
+    isDefaultChecked: boolean,
+  }
+  class Component extends React.Component<Props> {
+    static defaultProps = {
+      foo: 'abc',
+    };
+  }
+  `
+  },
+  {
     name: 'flow array union',
     typeSystem: 'flow',
     code: `
