@@ -35,7 +35,9 @@ const getPropFromObject = (props, property) => {
 
   props.members.forEach(p => {
     if (p.kind === 'spread') {
-      let p2 = getPropFromObject(p.value.value, property);
+      let spreadArg = resolveFromGeneric(p.value);
+      if (!spreadArg || spreadArg.kind !== 'object') return;
+      let p2 = getPropFromObject(spreadArg, property);
       if (p2) prop = p2;
       // The kind of the object member must be the same as the kind of the property
     } else if (property.key.kind === 'id' && p.key.name === property.key.name) {
@@ -155,13 +157,7 @@ function convertReactComponentClass(path, context) {
     let ungeneric = resolveFromGeneric(classProperties);
     const prop = getProp(ungeneric, property);
     if (!prop) {
-      throw new Error(
-        JSON.stringify(
-          `could not find property to go with default of ${
-            property.key.value ? property.key.value : property.key.name
-          } in ${classProperties.name}`
-        )
-      );
+      return;
     }
     prop.default = property.value;
   });

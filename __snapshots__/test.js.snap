@@ -4033,6 +4033,72 @@ Object {
 }
 `;
 
+exports[`with generic spread in type annotation and default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "kind": "spread",
+            "value": Object {
+              "kind": "generic",
+              "typeParams": Object {
+                "kind": "typeParams",
+                "params": Array [
+                  Object {
+                    "kind": "generic",
+                    "value": Object {
+                      "kind": "object",
+                      "members": Array [
+                        Object {
+                          "key": Object {
+                            "kind": "id",
+                            "name": "foo",
+                          },
+                          "kind": "property",
+                          "optional": false,
+                          "value": Object {
+                            "kind": "string",
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+              "value": Object {
+                "kind": "id",
+                "name": "$Exact",
+              },
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`with spread in type annotation 1`] = `
 Object {
   "classes": Array [
