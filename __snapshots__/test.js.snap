@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`$Exact flow utility type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "bar",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "boolean",
+              "value": false,
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Assignment Pattern 1`] = `
 Object {
   "classes": Array [
@@ -4033,6 +4096,53 @@ Object {
 }
 `;
 
+exports[`with $Exact spread in type annotation and default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "abc",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`with generic spread in type annotation and default props 1`] = `
 Object {
   "classes": Array [
@@ -4072,11 +4182,18 @@ Object {
                       ],
                     },
                   },
+                  Object {
+                    "kind": "generic",
+                    "value": Object {
+                      "kind": "id",
+                      "name": "OtherProps",
+                    },
+                  },
                 ],
               },
               "value": Object {
                 "kind": "id",
-                "name": "$Exact",
+                "name": "$Diff",
               },
             },
           },
