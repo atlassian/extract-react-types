@@ -157,6 +157,11 @@ function convertReactComponentClass(path, context) {
     let ungeneric = resolveFromGeneric(classProperties);
     const prop = getProp(ungeneric, property);
     if (!prop) {
+      console.warn(
+        `Could not find property to go with default of ${
+          property.key.value ? property.key.value : property.key.name
+        } in ${classProperties.name} prop types`
+      );
       return;
     }
     prop.default = property.value;
@@ -505,13 +510,31 @@ converters.TypeParameter = (path, context) /*: K.TypeParam */ => {
   };
 };
 
-converters.GenericTypeAnnotation = (path, context) /*: K.Generic*/ => {
+// Converts utility types to a simpler representation
+function convertUtilityTypes(type /*: K.Generic*/) {
+  let result = { ...type };
+  if (type.value.name === '$Exact') {
+    // $Exact<T> can simply be converted to T
+    if (type.typeParams && type.typeParams.params && type.typeParams.params[0]) {
+      result = type.typeParams.params[0];
+    } else {
+      console.warn('Missing type parameter for $Exact type');
+    }
+  }
+
+  return result;
+}
+
+converters.GenericTypeAnnotation = (path, context) => {
   let result = {};
 
   result.kind = 'generic';
   result.value = convert(path.get('id'), context);
   if (path.node.typeParameters) {
     result.typeParams = convert(path.get('typeParameters'), context);
+  }
+  if (result.value.kind === 'id') {
+    result = convertUtilityTypes(result);
   }
   return result;
 };
