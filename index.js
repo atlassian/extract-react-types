@@ -344,10 +344,11 @@ converters.NewExpression = (path, context) /*: K.New*/ => {
 
 converters.TypeofTypeAnnotation = (path, context) /*: K.Typeof*/ => {
   let type = convert(path.get('argument'), { ...context, mode: 'value' });
+  let ungeneric = resolveFromGeneric(type);
   return {
     kind: 'typeof',
     type,
-    name: resolveFromGeneric(type).name
+    name: ungeneric.name || ungeneric.referenceIdName
   };
 };
 
