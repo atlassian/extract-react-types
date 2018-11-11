@@ -516,7 +516,11 @@ function convertUtilityTypes(type /*: K.Generic*/) {
   let result = { ...type };
   if (type.value.name === '$Exact') {
     // $Exact<T> can simply be converted to T
-    if (type.typeParams && type.typeParams.params && type.typeParams.params[0]) {
+    if (
+      type.typeParams &&
+      type.typeParams.params &&
+      type.typeParams.params[0]
+    ) {
       result = type.typeParams.params[0];
     } else {
       console.warn('Missing type parameter for $Exact type');
@@ -727,7 +731,11 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
         }
 
         if (bindingPath.kind !== 'module') {
-          return convert(bindingPath, context);
+          const convertedValue = convert(bindingPath, context);
+          return {
+            ...convertedValue,
+            referenceIdName: path.node.name
+          };
         }
       } else {
         return { kind: 'id', name };
