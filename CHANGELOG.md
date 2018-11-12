@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## v0.4.1
+
+Thanks [Michael Blaszczyk](https://github.com/Blasz) for these contributions!
+
+- Support spreading generic types that cannot be reduced down to objects
+- Move reduceToObj to kind2string and then update kind2string dependency
+
 ## v0.4.0
 
 - pull in newer version of kind2string, adding support for 'export' and 'exportSpecifier' kinds.

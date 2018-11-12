@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "emotion": "^9.1.1",
-    "kind2string": "^0.5.0",
+    "kind2string": "^0.5.1",
     "react-markings": "^1.2.0"
   },
   "files": [
