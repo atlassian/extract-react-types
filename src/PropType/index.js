@@ -1,8 +1,7 @@
 // @flow
 import React from "react";
-import convert, { getKind } from "kind2string";
+import convert, { getKind ,reduceToObj } from "kind2string";
 import Prop from "../Prop";
-import reduceToObj from "../reduceToObj";
 import allComponents, { type Components } from "../components";
 
 const renderPropType = (

@@ -1,5 +1,5 @@
 // @flow
-import reduceToObj from "./reduceToObj";
+import { reduceToObj } from "kind2string";
 import type { Kind } from "./types";
 
 const getPropTypes = (propTypesObj: Kind) => {
