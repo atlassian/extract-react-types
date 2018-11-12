@@ -291,8 +291,10 @@ const converters = {
 
   nullable: (type /*: K.Nullable */, mode /*: string */) /*: string*/ =>
     `?${convert(type.arguments)}`,
+  typeParam: (type /*: K.TypeParam */, mode /*: string */) /*: string*/ => `${type.name}`,
   typeParams: (type /*: K.TypeParams */, mode /*: string */) /*: string*/ =>
     `<${mapConvertAndJoin(type.params, ', ')}>`,
+  typeParamsDeclaration: (type /*: K.TypeParamsDeclaration */, mode /*: string */) /*: string*/ => `<${mapConvertAndJoin(type.params, ', ')}>`,
   typeof: (type /*: K.Typeof */, mode /*: string */) /*: string*/ => {
     return type.name ? `typeof ${type.name}` : `${type.type.kind}`;
   },

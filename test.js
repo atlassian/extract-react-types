@@ -299,9 +299,21 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(`a: [string, number]`);
       });
     });
+    describe('type params', () => {
+      it('should return a string representation of a function type with type params', () => {
+        let prop = '(<T>) => <T><string>';
+        let file = `
+        type Foo<T> = (bar: T) => T;
+        class Component extends React.Component<{ a: Foo<string> }> {}
+        `;
+        let res = extractReactTypes(file, 'flow');
+        let final = convert(res.classes[0].members[0].value);
+        expect(final).toBe(prop);
+      });
+    });
   });
   describe('arrayType', () => {
-    it('should convert the array syntix to a string', () => {
+    it('should convert the array syntax to a string', () => {
       let prop = `number[]`;
       let final = getSingleProp(prop);
       expect(final).toBe('Array of number');
