@@ -1,5 +1,19 @@
 # extract-react-types
 
+## 0.14.5
+
+- Do not throw an error when prop types contain a generic spread
+- Update generic converter to convert utility types - at this time only $Exact, with the intent to add more.
+    $Exact<T> is now converted to T directly to make object spreading
+    easier to work with as we do not care about exactness when spreading
+    from a prop documentation perspective.
+- Gitignore vscode metadata
+- Add referenceIdName to identifiers converted in type mode
+    This provides a name that can be used when wanting to print the name of
+    a generic or similar, which is what we're doing with the typeof node.
+- Update typeof to use referenceIdName if name does not exist
+
+
 ## 0.14.4
 - `getProp` recursive function now relies on `resolveFromGeneric` to escape from intersections, allowing for nested interrsections to find props.
 
