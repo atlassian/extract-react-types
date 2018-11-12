@@ -15,9 +15,14 @@ const renderPropType = (
   }
   if (propType.kind === "spread") {
     const furtherProps = reduceToObj(propType.value);
-    return furtherProps.map(p =>
-      renderPropType(p, { overrides, shouldCollapseProps, components })
-    );
+    if (Array.isArray(furtherProps) && furtherProps.length > 0) {
+      /* Only render the spread contents if they are a non-empty value, otherwise render the
+       * spread itself so we can see the spread of generics and other types that have not been
+       * converted into an object */
+      return furtherProps.map(p =>
+        renderPropType(p, { overrides, shouldCollapseProps, components })
+      );
+    }
   }
 
   let description;
@@ -38,12 +43,12 @@ const renderPropType = (
     return null;
   }
 
-  const name = convert(propType.key);
+  const name = propType.kind === 'spread' ? '...' : convert(propType.key);
   const OverrideComponent = overrides[name];
   const commonProps = {
     components,
     name,
-    key: convert(propType.key),
+    key: name,
     required: !propType.optional,
     type: getKind(propType.value),
     defaultValue: propType.default && convert(propType.default),
