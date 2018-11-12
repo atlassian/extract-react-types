@@ -4,7 +4,7 @@
 import * as K from 'extract-react-types'
 */
 
-import { resolveToLast, resolveFromGeneric } from './utils';
+import { resolveToLast, resolveFromGeneric, reduceToObj } from './utils';
 
 const unaryWhiteList = ['-', '+', '!'];
 
@@ -346,4 +346,4 @@ function convert(type /*: any */, mode /*: string*/ = 'value') {
 }
 
 export default convert;
-export { getKind, resolveFromGeneric };
+export { getKind, resolveFromGeneric, reduceToObj };
