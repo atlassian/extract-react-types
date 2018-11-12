@@ -1,5 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`$Exact flow utility type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "generic",
+              "value": Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "bar",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+                "referenceIdName": "BaseProps",
+              },
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "boolean",
+              "value": false,
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`Assignment Pattern 1`] = `
 Object {
   "classes": Array [
@@ -833,6 +898,7 @@ Object {
             "kind": "generic",
             "value": Object {
               "kind": "boolean",
+              "referenceIdName": "Foo",
             },
           },
         },
@@ -1167,10 +1233,12 @@ Object {
                 "kind": "import",
                 "moduleSpecifier": "react",
                 "name": "Node",
+                "referenceIdName": "Node",
               },
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1333,6 +1401,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "RecursiveType",
       },
     },
   ],
@@ -1405,6 +1474,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "ComponentProps",
       },
     },
   ],
@@ -1473,6 +1543,7 @@ Object {
               "kind": "generic",
               "value": Object {
                 "kind": "union",
+                "referenceIdName": "ReactElement",
                 "types": Array [
                   Object {
                     "kind": "generic",
@@ -1512,6 +1583,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1551,6 +1623,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1587,6 +1660,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1620,6 +1694,7 @@ Object {
             "value": Object {
               "kind": "function",
               "parameters": Array [],
+              "referenceIdName": "Foo",
               "returnType": Object {
                 "kind": "generic",
                 "value": Object {
@@ -1630,6 +1705,7 @@ Object {
                       "name": "T",
                     },
                   ],
+                  "referenceIdName": "T",
                 },
               },
             },
@@ -2000,6 +2076,7 @@ Object {
                 },
               },
             ],
+            "referenceIdName": "BaseProps",
           },
         },
         Object {
@@ -2086,6 +2163,7 @@ Object {
           "kind": "generic",
           "value": Object {
             "kind": "intersection",
+            "referenceIdName": "Props",
             "types": Array [
               Object {
                 "kind": "generic",
@@ -2108,6 +2186,7 @@ Object {
                       },
                     },
                   ],
+                  "referenceIdName": "BaseProps",
                 },
               },
               Object {
@@ -2666,6 +2745,7 @@ Object {
               "kind": "import",
               "moduleSpecifier": "react",
               "name": "Node",
+              "referenceIdName": "Node",
             },
           },
         },
@@ -2727,6 +2807,7 @@ Object {
               "kind": "import",
               "moduleSpecifier": "react",
               "name": "Node",
+              "referenceIdName": "Node",
             },
           },
         },
@@ -2795,6 +2876,7 @@ Object {
               "kind": "import",
               "moduleSpecifier": "react",
               "name": "Node",
+              "referenceIdName": "Node",
             },
           },
         },
@@ -2864,6 +2946,7 @@ Object {
               "kind": "import",
               "moduleSpecifier": "react",
               "name": "Node",
+              "referenceIdName": "Node",
             },
           },
         },
@@ -3048,6 +3131,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3122,6 +3206,7 @@ Object {
             "kind": "generic",
             "value": Object {
               "kind": "union",
+              "referenceIdName": "Color",
               "types": Array [
                 Object {
                   "kind": "id",
@@ -3283,6 +3368,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "ComponentProps",
       },
     },
   ],
@@ -3341,6 +3427,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3425,6 +3512,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3570,6 +3658,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3614,6 +3703,7 @@ Object {
                     },
                   },
                 ],
+                "referenceIdName": "SiblingInterface",
               },
             },
           },
@@ -3633,6 +3723,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "RecursiveType",
       },
     },
   ],
@@ -3731,6 +3822,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3762,6 +3854,7 @@ Object {
               "kind": "generic",
               "value": Object {
                 "kind": "union",
+                "referenceIdName": "LiteralType",
                 "types": Array [
                   Object {
                     "kind": "string",
@@ -3776,6 +3869,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3807,6 +3901,7 @@ Object {
               "kind": "generic",
               "value": Object {
                 "kind": "union",
+                "referenceIdName": "ReactElement",
                 "types": Array [
                   Object {
                     "kind": "generic",
@@ -3846,6 +3941,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3885,6 +3981,7 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -3973,7 +4070,7 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "typeof",
-            "name": undefined,
+            "name": "one",
             "type": Object {
               "kind": "generic",
               "value": Object {
@@ -4033,6 +4130,129 @@ Object {
 }
 `;
 
+exports[`with $Exact spread in type annotation and default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "abc",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`with generic spread in type annotation and default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "kind": "spread",
+            "value": Object {
+              "kind": "generic",
+              "typeParams": Object {
+                "kind": "typeParams",
+                "params": Array [
+                  Object {
+                    "kind": "generic",
+                    "value": Object {
+                      "kind": "object",
+                      "members": Array [
+                        Object {
+                          "key": Object {
+                            "kind": "id",
+                            "name": "foo",
+                          },
+                          "kind": "property",
+                          "optional": false,
+                          "value": Object {
+                            "kind": "string",
+                          },
+                        },
+                      ],
+                      "referenceIdName": "BaseProps",
+                    },
+                  },
+                  Object {
+                    "kind": "generic",
+                    "value": Object {
+                      "kind": "id",
+                      "name": "OtherProps",
+                    },
+                  },
+                ],
+              },
+              "value": Object {
+                "kind": "id",
+                "name": "$Diff",
+              },
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`with spread in type annotation 1`] = `
 Object {
   "classes": Array [
@@ -4069,6 +4289,55 @@ Object {
             },
           },
         ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`with spread in type annotation and default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "abc",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "foo",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "isDefaultChecked",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "boolean",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
       },
     },
   ],
