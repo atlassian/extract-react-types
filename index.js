@@ -5,7 +5,7 @@ const extractReactTypes = require('extract-react-types');
 
 module.exports = function extractReactTypesLoader(content /* : string */) {
   if (
-    ['staging', 'production'].includes(process.env.WEBSITE_ENV) &&
+    !['staging', 'production'].includes(process.env.WEBSITE_ENV) &&
     !process.env.FORCE_EXTRACT_REACT_TYPES
   ) {
     return 'module.exports = {}';
