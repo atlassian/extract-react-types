@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## v0.4.2
+
+- Use <Whitespace /> to mean the prop type can be selected separately to the prop name
+
+Thanks [Maciej Adamczak](https://github.com/macku) for 
+
 ## v0.4.1
 
 Thanks [Michael Blaszczyk](https://github.com/Blasz) for these contributions!
