@@ -26,7 +26,7 @@ const HeadingDefault = (props: { children: Node }) => (
 );
 
 const HeadingRequired = (props: { children: Node }) => (
-  <span
+  <code
     css={`
       color: ${colors.R500};
     `}
@@ -34,7 +34,7 @@ const HeadingRequired = (props: { children: Node }) => (
 );
 
 const HeadingType = (props: { children: Node }) => (
-  <span
+  <code
     css={`
       background: ${colors.N20};
       border-radius: ${borderRadius}px;
@@ -47,7 +47,7 @@ const HeadingType = (props: { children: Node }) => (
 );
 
 const HeadingName = (props: { children: Node }) => (
-  <span
+  <code
     css={`
       background: ${colors.B50};
       color: ${colors.B500};
@@ -60,6 +60,8 @@ const HeadingName = (props: { children: Node }) => (
   />
 );
 
+const Whitespace = () => ' ';
+
 type PropTypeHeadingProps = {
   name: any,
   required: boolean,
@@ -70,8 +72,8 @@ type PropTypeHeadingProps = {
 
 const PropTypeHeading = (props: PropTypeHeadingProps) => (
   <Heading>
-    <code>
       <HeadingName>{props.name}</HeadingName>
+      <Whitespace />
       <HeadingType>{props.type}</HeadingType>
       {props.defaultValue !== undefined && (
         <HeadingDefault> = {props.defaultValue}</HeadingDefault>
@@ -79,7 +81,6 @@ const PropTypeHeading = (props: PropTypeHeadingProps) => (
       {props.required && props.defaultValue === undefined ? (
         <HeadingRequired> required</HeadingRequired>
       ) : null}
-    </code>
   </Heading>
 );
 
