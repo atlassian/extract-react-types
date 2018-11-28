@@ -4093,6 +4093,26 @@ Object {
 }
 `;
 
+exports[`typescript indexed type 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "Component",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "name": "MyType['props']",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`unary operator 1`] = `
 Object {
   "classes": Array [

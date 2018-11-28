@@ -1109,6 +1109,17 @@ const TESTS = [
       class Component extends React.Component<RecursiveType> {}
     `
   },
+  {
+    name: 'typescript indexed type',
+    typeSystem: 'typescript',
+    code: `
+      type MyType = {
+        props: RecursiveType
+      }
+
+      class Component extends React.Component<MyType['props']> {}
+    `
+  },
 ];
 
 for (let testCase /*: TestCase */ of TESTS) {
