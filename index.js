@@ -826,6 +826,23 @@ converters.NullableTypeAnnotation = (path, context) /*: K.Nullable*/ => {
   };
 };
 
+converters.TSIndexedAccessType = (path, context) => {
+  const type = convert(path.get('objectType'), context);
+  const indexKey = path.get('indexType').node.literal.value;
+
+  if (type.kind === 'generic') {
+    return {
+      kind: 'generic',
+      value: {
+        kind: type.value.kind,
+        name: `${type.value.name}['${indexKey}']`
+      }
+    };
+  } else {
+    throw new Error(`Unsupported TSIndexedAccessType kind: ${type.kind}`)
+  }
+}
+
 converters.TSStringKeyword = (path) /*: K.String */ => {
   return { kind: 'string' };
 };
@@ -971,7 +988,7 @@ converters.TSQualifiedName = (path, context) /*: K.Id */ => {
 
   return {
     kind: 'id',
-    name: `${left.name}.${right.name}`
+    name: `${left.name || left.referenceIdName}.${right.name}`
   };
 };
 
