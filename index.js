@@ -831,6 +831,14 @@ converters.TSIndexedAccessType = (path, context) => {
   const indexKey = path.get('indexType').node.literal.value;
 
   if (type.kind === 'generic') {
+    if (type.value.members) {
+      const member = type.value.members.find((member) =>
+        member.key.name === indexKey
+      );
+      if (member) {
+        return member.value;
+      }
+    }
     return {
       kind: 'generic',
       value: {

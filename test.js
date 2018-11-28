@@ -1114,10 +1114,17 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
       type MyType = {
-        props: RecursiveType
+        props: number;
       }
 
-      class Component extends React.Component<MyType['props']> {}
+      class Component extends React.Component<{ foo: MyType['props'] }> {}
+    `
+  },
+  {
+    name: 'typescript indexed imported type',
+    typeSystem: 'typescript',
+    code: `
+      class Component extends React.Component<{ foo: ImportedType['props'] }> {}
     `
   },
 ];
