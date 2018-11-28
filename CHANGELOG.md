@@ -1,5 +1,9 @@
 # extract-react-types
 
+## 0.14.6
+
+- add support for TSIndexedAccessType and fix TSQualifiedName for imported types
+
 ## 0.14.5
 
 - Do not throw an error when prop types contain a generic spread
