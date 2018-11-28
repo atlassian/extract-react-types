@@ -835,7 +835,7 @@ converters.TSIndexedAccessType = (path, context) => {
       kind: 'generic',
       value: {
         kind: type.value.kind,
-        name: `${type.value.name}['${indexKey}']`
+        name: `${type.value.name || type.value.referenceIdName}['${indexKey}']`
       }
     };
   } else {
