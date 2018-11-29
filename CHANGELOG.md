@@ -1,5 +1,9 @@
 # extract-react-types
 
+## 0.14.7
+
+- add support for non-imported TS index access
+
 ## 0.14.6
 
 - add support for TSIndexedAccessType and fix TSQualifiedName for imported types
