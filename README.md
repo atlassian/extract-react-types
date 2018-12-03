@@ -52,5 +52,7 @@ Output:
 
 ## Related projects:
 
+- [extract-react-types-loader](https://www.npmjs.com/package/extract-react-types-loader)
 - [pretty-proptypes](https://github.com/Noviny/pretty-proptypes)
 - [kind2string](https://github.com/gwyneplaine/kind2string)
+
