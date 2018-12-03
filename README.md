@@ -53,3 +53,4 @@ Output:
 ## Related projects:
 
 - [pretty-proptypes](https://github.com/Noviny/pretty-proptypes)
+- [kind2string](https://github.com/gwyneplaine/kind2string)
