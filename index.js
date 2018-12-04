@@ -22,6 +22,20 @@ const { sync: resolveSync } = require('resolve');
 const matchExported = require('./matchExported');
 const converters = {};
 
+const startsWithCapital = ([letter]) => letter === letter.toUpperCase();
+
+const isArrowFunctionComponent = path =>
+  path.isArrowFunctionExpression() ||
+  (path.isVariableDeclarator() && path.get('init').isArrowFunctionExpression());
+
+const isFunctionComponent = path => {
+  return path.isFunctionDeclaration();
+};
+
+function isReactComponentFunction(path) {
+  return isArrowFunctionComponent(path) || isFunctionComponent(path);
+}
+
 const getPropFromObject = (props, property) => {
   let prop;
 
@@ -136,11 +150,64 @@ converters.Program = (path, context) /*: K.Program*/ => {
       let classProperties = convertReactComponentClass(path, context);
 
       result.classes.push(classProperties);
+    },
+    ExportDefaultDeclaration(exportPath) {
+      const isDefaultExport = path => {
+        return exportPath.get('declaration').isIdentifier()
+          ? path.get('id').node &&
+              path.get('id').node.name ===
+                exportPath.get('declaration').node.name
+          : true;
+      };
+      path.traverse({
+        'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
+          if (
+            isDefaultExport(functionPath) &&
+            isReactComponentFunction(functionPath)
+          ) {
+            let functionProperties = convertReactComponentFunction(
+              functionPath,
+              context
+            );
+            result.classes.push(functionProperties);
+          }
+        },
+        VariableDeclaration(variablePath) {
+          const declaration = variablePath.get('declarations.0');
+          if (
+            isDefaultExport(declaration) &&
+            isReactComponentFunction(declaration)
+          ) {
+            let functionProperties = convertReactComponentFunction(
+              declaration.get('init'),
+              context
+            );
+            result.classes.push(functionProperties);
+          }
+        },
+        ClassDeclaration(classPath) {
+          if (isDefaultExport(classPath) && isReactComponentClass(classPath)) {
+            let classProperties = convertReactComponentClass(
+              classPath,
+              context
+            );
+            result.classes.push(classProperties);
+          }
+        }
+      });
     }
   });
-
   return result;
 };
+
+function convertReactComponentFunction(path, context) {
+  let propType = path.get('params.0.typeAnnotation');
+  let functionProperties = convert(propType, {
+    ...context,
+    mode: 'type'
+  });
+  return functionProperties;
+}
 
 function convertReactComponentClass(path, context) {
   let params = path.get('superTypeParameters').get('params');
@@ -832,8 +899,8 @@ converters.TSIndexedAccessType = (path, context) => {
 
   if (type.kind === 'generic') {
     if (type.value.members) {
-      const member = type.value.members.find((member) =>
-        member.key.name === indexKey
+      const member = type.value.members.find(
+        member => member.key.name === indexKey
       );
       if (member) {
         return member.value;
@@ -847,9 +914,9 @@ converters.TSIndexedAccessType = (path, context) => {
       }
     };
   } else {
-    throw new Error(`Unsupported TSIndexedAccessType kind: ${type.kind}`)
+    throw new Error(`Unsupported TSIndexedAccessType kind: ${type.kind}`);
   }
-}
+};
 
 converters.TSStringKeyword = (path) /*: K.String */ => {
   return { kind: 'string' };

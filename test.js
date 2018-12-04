@@ -1127,6 +1127,73 @@ const TESTS = [
       class Component extends React.Component<{ foo: ImportedType['props'] }> {}
     `
   },
+  {
+    name: 'flow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      function Component(props: Props) {
+        return null;
+      }
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow inline function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      export default function Component(props: Props) {
+        return null;
+      }
+    `
+  },
+  {
+    name: 'flow inline anonymous function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      export default function(props: Props) {
+        return null;
+      }
+    `
+  },
+  {
+    name: 'flow arrow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      const Component = (props: Props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow inline arrow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      const Foo = (props: { age: number }) => null;
+
+      export default (props: Props) => null;
+    `
+  }
 ];
 
 for (let testCase /*: TestCase */ of TESTS) {

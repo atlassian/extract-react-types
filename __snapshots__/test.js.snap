@@ -802,6 +802,34 @@ Object {
 }
 `;
 
+exports[`flow arrow function component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow boolean 1`] = `
 Object {
   "classes": Array [
@@ -955,6 +983,34 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1235,6 +1291,90 @@ Object {
                 "name": "Node",
                 "referenceIdName": "Node",
               },
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow inline anonymous function component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow inline arrow function component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow inline function component 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
             },
           },
         ],
