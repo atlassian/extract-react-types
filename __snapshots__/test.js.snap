@@ -1262,6 +1262,34 @@ Object {
 }
 `;
 
+exports[`flow ignores other components 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow import { type } 1`] = `
 Object {
   "classes": Array [

@@ -1189,7 +1189,22 @@ const TESTS = [
         name: string
       }
 
-      const Foo = (props: { age: number }) => null;
+      export default (props: Props) => null;
+    `
+  },
+  {
+    name: 'flow ignores other components',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      class Component extends React.Component<{ foo: string[] }> {}
+
+      function Component(props: Props) {
+        return null;
+      }
 
       export default (props: Props) => null;
     `

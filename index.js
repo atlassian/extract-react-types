@@ -144,59 +144,89 @@ converters.Program = (path, context) /*: K.Program*/ => {
   result.kind = 'program';
   result.classes = [];
 
+  // try figure out what the default export is
   path.traverse({
-    ClassDeclaration(path) {
-      if (!isReactComponentClass(path)) return;
-      let classProperties = convertReactComponentClass(path, context);
-
-      result.classes.push(classProperties);
-    },
     ExportDefaultDeclaration(exportPath) {
-      const isDefaultExport = path => {
-        return exportPath.get('declaration').isIdentifier()
-          ? path.get('id').node &&
-              path.get('id').node.name ===
-                exportPath.get('declaration').node.name
-          : true;
-      };
-      path.traverse({
-        'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-          if (
-            isDefaultExport(functionPath) &&
-            isReactComponentFunction(functionPath)
-          ) {
-            let functionProperties = convertReactComponentFunction(
-              functionPath,
-              context
-            );
-            result.classes.push(functionProperties);
+      if (exportPath.get('declaration').isIdentifier()) {
+        const isDefaultExport = path =>
+          path.get('id').node &&
+          path.get('id').node.name === exportPath.get('declaration').node.name;
+        path.traverse({
+          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
+            if (
+              isDefaultExport(functionPath) &&
+              isReactComponentFunction(functionPath)
+            ) {
+              let functionProperties = convertReactComponentFunction(
+                functionPath,
+                context
+              );
+              result.classes.push(functionProperties);
+            }
+          },
+          VariableDeclaration(variablePath) {
+            const declaration = variablePath.get('declarations.0');
+            if (
+              isDefaultExport(declaration) &&
+              isReactComponentFunction(declaration)
+            ) {
+              let functionProperties = convertReactComponentFunction(
+                declaration.get('init'),
+                context
+              );
+              result.classes.push(functionProperties);
+            }
+          },
+          ClassDeclaration(classPath) {
+            if (
+              isDefaultExport(classPath) &&
+              isReactComponentClass(classPath)
+            ) {
+              let classProperties = convertReactComponentClass(
+                classPath,
+                context
+              );
+              result.classes.push(classProperties);
+            }
           }
-        },
-        VariableDeclaration(variablePath) {
-          const declaration = variablePath.get('declarations.0');
-          if (
-            isDefaultExport(declaration) &&
-            isReactComponentFunction(declaration)
-          ) {
-            let functionProperties = convertReactComponentFunction(
-              declaration.get('init'),
-              context
-            );
-            result.classes.push(functionProperties);
+        });
+      } else {
+        exportPath.traverse({
+          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
+            if (isReactComponentFunction(functionPath)) {
+              let functionProperties = convertReactComponentFunction(
+                functionPath,
+                context
+              );
+              result.classes.push(functionProperties);
+            }
+          },
+          ClassDeclaration(classPath) {
+            if (isReactComponentClass(classPath)) {
+              let classProperties = convertReactComponentClass(
+                classPath,
+                context
+              );
+              result.classes.push(classProperties);
+            }
           }
-        },
-        ClassDeclaration(classPath) {
-          if (isDefaultExport(classPath) && isReactComponentClass(classPath)) {
-            let classProperties = convertReactComponentClass(
-              classPath,
-              context
-            );
-            result.classes.push(classProperties);
-          }
-        }
-      });
+        });
+      }
     }
   });
+
+  // just extract the props from the first class in the file
+  if (result.classes.length === 0) {
+    path.traverse({
+      ClassDeclaration(path) {
+        if (!isReactComponentClass(path)) return;
+        let classProperties = convertReactComponentClass(path, context);
+
+        result.classes.push(classProperties);
+      }
+    });
+  }
+
   return result;
 };
 
