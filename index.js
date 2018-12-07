@@ -6,10 +6,14 @@ import * as K from './kinds'
 
 const nodePath = require('path');
 const createBabelFile = require('babel-file');
-const {
-  loadFileSync,
-  resolveImportFilePathSync
-} = require('babel-file-loader');
+let loadFileSync = () => {};
+let resolveImportFilePathSync = () => {};
+if (window === undefined) {
+  // all the node stuff
+  const babelFileLoader = require('babel-file-loader');
+  loadFileSync = babelFileLoader.loadFileSync;
+  resolveImportFilePathSync = babelFileLoader.resolveImportFilePathSync;
+}
 const { isFlowIdentifier } = require('babel-flow-identifiers');
 const { getTypeBinding } = require('babel-type-scopes');
 const { getIdentifierKind } = require('babel-identifiers');
