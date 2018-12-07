@@ -1018,6 +1018,85 @@ Object {
 }
 `;
 
+exports[`flow function component with default including spread 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "bob",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "a",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "something",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function component with default props 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "bob",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow function named params 1`] = `
 Object {
   "classes": Array [

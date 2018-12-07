@@ -1208,6 +1208,65 @@ const TESTS = [
 
       export default (props: Props) => null;
     `
+  },
+  {
+    name: 'flow function component with default props',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      const Component = (props: Props) => null;
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow function component with default including spread',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+        something: string
+      }
+
+      const abc = { something: 'a' }
+
+      const Component = (props: Props) => null;
+
+      Component.defaultProps = {
+        ...abc,
+        name: 'bob',
+      };
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow function with defaults not arrow',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+        something: string
+      }
+
+      const abc = { something: 'a' }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        ...abc,
+        name: 'bob',
+      };
+
+      export default Component;
+    `
   }
 ];
 

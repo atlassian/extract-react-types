@@ -119,7 +119,10 @@ const getDefaultProps = (path, context) => {
         defaultProps = convert(p, { ...context, mode: 'value' });
       }
     });
+  return verifyDefaultProps(defaultProps);
+};
 
+function verifyDefaultProps(defaultProps) {
   let defaultPropsArr = [];
 
   if (!defaultProps) {
@@ -137,7 +140,7 @@ const getDefaultProps = (path, context) => {
   } else {
     throw new Error(`Could not resolve default Props, ${defaultProps}`);
   }
-};
+}
 
 converters.Program = (path, context) /*: K.Program*/ => {
   let result = {};
@@ -236,7 +239,61 @@ function convertReactComponentFunction(path, context) {
     ...context,
     mode: 'type'
   });
-  return functionProperties;
+
+  let name = '';
+  if (
+    path.type === 'ArrowFunctionExpression' &&
+    path.parent &&
+    path.parent.type === 'VariableDeclarator'
+  ) {
+    name = path.parent.id.name;
+  } else if (
+    path.type === 'FunctionDeclaration' &&
+    path.node.id &&
+    path.node.id.name
+  ) {
+    name = path.node.id.name;
+  }
+
+  let defaultProps = [];
+
+  if (name) {
+    path.hub.file.path.traverse({
+      AssignmentExpression(assignmentPath) {
+        const a = convert(assignmentPath.get('left'), {
+          ...context,
+          mode: 'value'
+        });
+        if (a.object.referenceIdName === name) {
+          let initialConversion = convert(assignmentPath.get('right'), {
+            ...context,
+            mode: 'value'
+          });
+          defaultProps = initialConversion.members;
+        }
+      }
+    });
+  }
+
+  return addDefaultProps(functionProperties, defaultProps);
+}
+
+function addDefaultProps(props, defaultProps) {
+  defaultProps.forEach(property => {
+    let ungeneric = resolveFromGeneric(props);
+    const prop = getProp(ungeneric, property);
+    if (!prop) {
+      console.warn(
+        `Could not find property to go with default of ${
+          property.key.value ? property.key.value : property.key.name
+        } in ${props.name} prop types`
+      );
+      return;
+    }
+    prop.default = property.value;
+  });
+
+  return props;
 }
 
 function convertReactComponentClass(path, context) {
@@ -249,22 +306,7 @@ function convertReactComponentClass(path, context) {
     ...context,
     mode: 'value'
   });
-
-  defaultProps.forEach(property => {
-    let ungeneric = resolveFromGeneric(classProperties);
-    const prop = getProp(ungeneric, property);
-    if (!prop) {
-      console.warn(
-        `Could not find property to go with default of ${
-          property.key.value ? property.key.value : property.key.name
-        } in ${classProperties.name} prop types`
-      );
-      return;
-    }
-    prop.default = property.value;
-  });
-
-  return classProperties;
+  return addDefaultProps(classProperties, defaultProps);
 }
 
 converters.TaggedTemplateExpression = (
