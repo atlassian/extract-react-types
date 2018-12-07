@@ -8,7 +8,7 @@ const nodePath = require('path');
 const createBabelFile = require('babel-file');
 let loadFileSync = () => {};
 let resolveImportFilePathSync = () => {};
-if (window === undefined) {
+if (typeof window === 'undefined') {
   // all the node stuff
   const babelFileLoader = require('babel-file-loader');
   loadFileSync = babelFileLoader.loadFileSync;
