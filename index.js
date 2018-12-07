@@ -4,16 +4,10 @@ export type * from './kinds'
 import * as K from './kinds'
 */
 
+const noop = (..._ /*: Array<any> */)/*: any*/ => {}
+
 const nodePath = require('path');
 const createBabelFile = require('babel-file');
-let loadFileSync = () => {};
-let resolveImportFilePathSync = () => {};
-if (typeof window === 'undefined') {
-  // all the node stuff
-  const babelFileLoader = require('babel-file-loader');
-  loadFileSync = babelFileLoader.loadFileSync;
-  resolveImportFilePathSync = babelFileLoader.resolveImportFilePathSync;
-}
 const { isFlowIdentifier } = require('babel-flow-identifiers');
 const { getTypeBinding } = require('babel-type-scopes');
 const { getIdentifierKind } = require('babel-identifiers');
@@ -22,6 +16,17 @@ const createBabylonOptions = require('babylon-options');
 const t = require('@babel/types');
 const { normalizeComment } = require('babel-normalize-comments');
 const { sync: resolveSync } = require('resolve');
+
+// The below libraries use fs module thus do not work on browser
+// We are mocking below to enable this package to work on browser
+let loadFileSync = noop;
+let resolveImportFilePathSync = noop;
+if (typeof window === 'undefined') {
+  // all the node stuff
+  const babelFileLoader = require('babel-file-loader');
+  loadFileSync = babelFileLoader.loadFileSync;
+  resolveImportFilePathSync = babelFileLoader.resolveImportFilePathSync;
+}
 
 const matchExported = require('./matchExported');
 const converters = {};
