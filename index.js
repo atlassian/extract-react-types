@@ -22,7 +22,6 @@ const { sync: resolveSync } = require('resolve');
 const matchExported = require('./matchExported');
 const converters = {};
 
-const startsWithCapital = ([letter]) => letter === letter.toUpperCase();
 
 const isArrowFunctionComponent = path =>
   path.isArrowFunctionExpression() ||
