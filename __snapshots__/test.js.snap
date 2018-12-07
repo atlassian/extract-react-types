@@ -859,6 +859,39 @@ Object {
 }
 `;
 
+exports[`flow default class export 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "name": Object {
+        "kind": "id",
+        "name": "OnboardingModal",
+        "type": null,
+      },
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`flow different React component 1`] = `
 Object {
   "classes": Array [
@@ -935,6 +968,34 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow forwardRef default export 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
       },
     },
   ],
@@ -1314,6 +1375,53 @@ Object {
         "kind": "id",
         "name": "Component",
         "type": null,
+      },
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`flow function with defaults not arrow 1`] = `
+Object {
+  "classes": Array [
+    Object {
+      "kind": "generic",
+      "value": Object {
+        "kind": "object",
+        "members": Array [
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "bob",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "name",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+          Object {
+            "default": Object {
+              "kind": "string",
+              "value": "a",
+            },
+            "key": Object {
+              "kind": "id",
+              "name": "something",
+            },
+            "kind": "property",
+            "optional": false,
+            "value": Object {
+              "kind": "string",
+            },
+          },
+        ],
+        "referenceIdName": "Props",
       },
     },
   ],

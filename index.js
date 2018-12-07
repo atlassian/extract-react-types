@@ -195,15 +195,6 @@ converters.Program = (path, context) /*: K.Program*/ => {
         });
       } else {
         exportPath.traverse({
-          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-            if (isReactComponentFunction(functionPath)) {
-              let functionProperties = convertReactComponentFunction(
-                functionPath,
-                context
-              );
-              result.classes.push(functionProperties);
-            }
-          },
           ClassDeclaration(classPath) {
             if (isReactComponentClass(classPath)) {
               let classProperties = convertReactComponentClass(
@@ -211,6 +202,18 @@ converters.Program = (path, context) /*: K.Program*/ => {
                 context
               );
               result.classes.push(classProperties);
+            }
+          },
+          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
+            if (
+              result.classes.length === 0 &&
+              isReactComponentFunction(functionPath)
+            ) {
+              let functionProperties = convertReactComponentFunction(
+                functionPath,
+                context
+              );
+              result.classes.push(functionProperties);
             }
           }
         });

@@ -1267,6 +1267,39 @@ const TESTS = [
 
       export default Component;
     `
+  },
+  {
+    name: 'flow forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+      }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default React.forwardRef((props: Props, ref) => <Component {...props} ref={ref} />);
+    `
+  },
+  {
+    name: 'flow default class export',
+    typeSystem: 'flow',
+    code: `
+      import { Component } from 'react';
+      type Props = {
+        name: string,
+      }
+
+      export default class OnboardingModal extends Component<Props> {
+        onChange = () => {
+          console.log('hi');
+        }
+      }
+    `
   }
 ];
 
