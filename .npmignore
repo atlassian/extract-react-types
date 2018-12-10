@@ -1,0 +1,8 @@
+__fixtures__/**
+__/snapshots/**
+flow-typed/**
+.flowconfig
+.prettierrc
+.travis.yml
+test.js
+yarn.lock

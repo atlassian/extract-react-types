@@ -1,5 +1,13 @@
 # extract-react-types
 
+## 0.15.0
+
+- **breaking:** We have changed how we approach types in a file. We try and resolve default exports, rather than resolving all react class componets in the file. This causes two breaking changes:
+    - instead of an array of classes, `Program` now has a single `component` property.
+    - Because of this, anything that relied on the `classes` attribute is invalid.
+- **breaking** We now will attempt to resolve the default export before falling back its previous method of analyzing props (using the first component class in a file).
+- 🎉 FEATURE 🎉: `extract-react-types` now supports functional components as default exports. We will resolve both the props and the default props as a best effort. Huge thanks to [Peter Gleeson](https://github.com/petegleeson) for working on this.
+
 ## 0.14.7
 
 - add support for non-imported TS index access
