@@ -24,7 +24,7 @@ const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
     defaultProps = ${defaultProps}
   }`;
   let res = extractReactTypes(file, type);
-  return res.classes[0].members;
+  return res.component.members;
 };
 
 const getSingleDefault = defaultPropVal => {
@@ -145,5 +145,5 @@ test.skip('resolve generic of array with complex type', t => {
   let members = wrapper.find(components.Indent).at(0);
 });
 
-test.todo('intersection');
-test.todo('union');
+// test.todo('intersection');
+// test.todo('union');

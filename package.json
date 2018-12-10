@@ -39,7 +39,7 @@
     "babel-register": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "extract-react-types": "^0.14.3",
+    "extract-react-types": "^0.15.0",
     "flow-bin": "^0.69.0",
     "jsdom": "^11.7.0",
     "prettier": "^1.12.0",

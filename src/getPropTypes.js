@@ -1,15 +1,16 @@
 // @flow
-import { reduceToObj } from "kind2string";
-import type { Kind } from "./types";
+import { reduceToObj, resolveFromGeneric } from 'kind2string';
+import type { Kind } from './types';
 
 const getPropTypes = (propTypesObj: Kind) => {
+  let resolvedTypes = resolveFromGeneric(propTypesObj);
   let propTypes;
-  if (propTypesObj.kind === "object") {
-    propTypes = propTypesObj.members;
-  } else if (propTypesObj.kind === "intersection") {
-    propTypes = propTypesObj.types.reduce(
+  if (resolvedTypes.kind === 'object') {
+    propTypes = resolvedTypes.members;
+  } else if (resolvedTypes.kind === 'intersection') {
+    propTypes = resolvedTypes.types.reduce(
       (acc, type) => [...acc, ...reduceToObj(type)],
-      []
+      [],
     );
   }
   return propTypes;

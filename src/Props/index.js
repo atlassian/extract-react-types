@@ -26,43 +26,31 @@ type Inter = {
 };
 
 type DynamicPropsProps = {
-  components: Components,
+  components?: Components,
   heading?: string,
   shouldCollapseProps?: boolean,
   overrides?: {
     [string]: ComponentType<CommonProps>,
   },
   props: {
-    classes?: Array<{
-      kind: string,
-      value: Obj | Inter,
-    }>,
+    component?: Obj | Inter,
   },
 };
 
+const getProps = props => {
+  if (props && props.component) {
+    return getPropTypes(props.component);
+  }
+};
+
 export default class Props extends Component<DynamicPropsProps> {
-  getProps = () => {
-    let { props } = this.props;
-
-    const classes = props && props.classes;
-    if (!classes) return false;
-
-    const propTypesObj = classes[0] && classes[0].value;
-    if (!propTypesObj) return false;
-
-    const propTypes = getPropTypes(propTypesObj);
-    if (!propTypes) return false;
-
-    return propTypes;
-  };
-
   render() {
-    let { props, ...rest } = this.props;
-    let propTypes = this.getProps();
+    let { props, heading, ...rest } = this.props;
+    let propTypes = getProps(props);
     if (!propTypes) return null;
 
     return (
-      <PropsWrapper heading={this.props.heading}>
+      <PropsWrapper heading={heading}>
         {propTypes.map(propType => renderPropType(propType, rest))}
       </PropsWrapper>
     );
