@@ -1,5 +1,10 @@
 # pretty-proptypes
 
+## 0.5.0
+
+- Update to support 0.15.0 of `extract-react-types`
+- **breaking** The structure of the `Program` kind from `extract-react-types` has changed. `0.5.0` consumes and responds to that change, and will only work with later versions of `extract-react-types`.
+
 ## v0.4.2
 
 - Use <Whitespace /> to mean the prop type can be selected separately to the prop name
