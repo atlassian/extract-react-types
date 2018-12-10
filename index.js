@@ -6,10 +6,7 @@ import * as K from './kinds'
 
 const nodePath = require('path');
 const createBabelFile = require('babel-file');
-const {
-  loadFileSync,
-  resolveImportFilePathSync
-} = require('babel-file-loader');
+const { loadFileSync, resolveImportFilePathSync } = require('babel-file-loader');
 const { isFlowIdentifier } = require('babel-flow-identifiers');
 const { getTypeBinding } = require('babel-type-scopes');
 const { getIdentifierKind } = require('babel-identifiers');
@@ -39,9 +36,9 @@ const getPropFromObject = (props, property) => {
 
   if (!props.members) {
     throw new Error(
-      `Attempted to get property from non-object kind: ${
-        props.kind
-      }. Full object: ${JSON.stringify(props)}`
+      `Attempted to get property from non-object kind: ${props.kind}. Full object: ${JSON.stringify(
+        props
+      )}`
     );
   }
 
@@ -54,10 +51,7 @@ const getPropFromObject = (props, property) => {
       // The kind of the object member must be the same as the kind of the property
     } else if (property.key.kind === 'id' && p.key.name === property.key.name) {
       prop = p;
-    } else if (
-      property.key.kind === 'string' &&
-      p.key.value === property.key.value
-    ) {
+    } else if (property.key.kind === 'string' && p.key.value === property.key.value) {
       prop = p;
     }
   });
@@ -85,16 +79,13 @@ const getProp = (props, property) => {
 
 const isVariableOfMembers = defaultProps => {
   let defaultPropsIsVar =
-    defaultProps &&
-    defaultProps.value &&
-    defaultProps.value.kind === 'variable';
+    defaultProps && defaultProps.value && defaultProps.value.kind === 'variable';
   if (!defaultPropsIsVar) {
     return false;
   }
   let declarations = defaultProps.value.declarations;
 
-  let lastDeclarationIsObject =
-    declarations[declarations.length - 1].value.kind === 'object';
+  let lastDeclarationIsObject = declarations[declarations.length - 1].value.kind === 'object';
 
   if (lastDeclarationIsObject) {
     return true;
@@ -110,10 +101,7 @@ const getDefaultProps = (path, context) => {
     .get('body')
     .get('body')
     .find(p => {
-      if (
-        p.isClassProperty() &&
-        p.get('key').isIdentifier({ name: 'defaultProps' })
-      ) {
+      if (p.isClassProperty() && p.get('key').isIdentifier({ name: 'defaultProps' })) {
         defaultProps = convert(p, { ...context, mode: 'value' });
       }
     });
@@ -121,16 +109,11 @@ const getDefaultProps = (path, context) => {
 
   if (!defaultProps) {
     return [];
-  } else if (
-    defaultProps &&
-    defaultProps.value &&
-    defaultProps.value.kind === 'object'
-  ) {
+  } else if (defaultProps && defaultProps.value && defaultProps.value.kind === 'object') {
     return defaultProps.value.members;
   } else if (isVariableOfMembers(defaultProps)) {
-    return defaultProps.value.declarations[
-      defaultProps.value.declarations.length - 1
-    ].value.members;
+    return defaultProps.value.declarations[defaultProps.value.declarations.length - 1].value
+      .members;
   } else {
     throw new Error(`Could not resolve default Props, ${defaultProps}`);
   }
@@ -149,27 +132,18 @@ converters.Program = (path, context) /*: K.Program*/ => {
           path.get('id').node.name === exportPath.get('declaration').node.name;
         path.traverse({
           'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-            if (
-              isDefaultExport(functionPath) &&
-              isReactComponentFunction(functionPath)
-            ) {
+            if (isDefaultExport(functionPath) && isReactComponentFunction(functionPath)) {
               componentPath = functionPath;
             }
           },
           VariableDeclaration(variablePath) {
             const declaration = variablePath.get('declarations.0');
-            if (
-              isDefaultExport(declaration) &&
-              isReactComponentFunction(declaration)
-            ) {
+            if (isDefaultExport(declaration) && isReactComponentFunction(declaration)) {
               componentPath = declaration.get('init');
             }
           },
           ClassDeclaration(classPath) {
-            if (
-              isDefaultExport(classPath) &&
-              isReactComponentClass(classPath)
-            ) {
+            if (isDefaultExport(classPath) && isReactComponentClass(classPath)) {
               componentPath = classPath;
             }
           }
@@ -229,11 +203,7 @@ function convertReactComponentFunction(path, context) {
     path.parent.type === 'VariableDeclarator'
   ) {
     name = path.parent.id.name;
-  } else if (
-    path.type === 'FunctionDeclaration' &&
-    path.node.id &&
-    path.node.id.name
-  ) {
+  } else if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
     name = path.node.id.name;
   }
 
@@ -292,10 +262,7 @@ function convertReactComponentClass(path, context) {
   return addDefaultProps(classProperties, defaultProps);
 }
 
-converters.TaggedTemplateExpression = (
-  path,
-  context
-) /*: K.TemplateExpression*/ => {
+converters.TaggedTemplateExpression = (path, context) /*: K.TemplateExpression*/ => {
   return {
     kind: 'templateExpression',
     tag: convert(path.get('tag'), context)
@@ -389,10 +356,7 @@ converters.JSXAttribute = (path, context) /*: K.JSXAttribute*/ => {
   };
 };
 
-converters.JSXExpressionContainer = (
-  path,
-  context
-) /*: K.JSXExpressionContainer*/ => {
+converters.JSXExpressionContainer = (path, context) /*: K.JSXExpressionContainer*/ => {
   return {
     kind: 'JSXExpressionContainer',
     expression: convert(path.get('expression'), context)
@@ -413,10 +377,7 @@ converters.JSXIdentifier = (path, context) /*: K.JSXIdentifier*/ => {
   };
 };
 
-converters.JSXMemberExpression = (
-  path,
-  context
-) /*: K.JSXMemberExpression*/ => {
+converters.JSXMemberExpression = (path, context) /*: K.JSXMemberExpression*/ => {
   return {
     kind: 'JSXMemberExpression',
     object: convert(path.get('object'), context),
@@ -528,9 +489,7 @@ converters.MemberExpression = (path, context) /*: K.MemberExpression*/ => {
 
 function isTsIdentifier(path) {
   if (
-    ['TSExpressionWithTypeArguments', 'TSTypeReference'].indexOf(
-      path.parentPath.type
-    ) !== -1 &&
+    ['TSExpressionWithTypeArguments', 'TSTypeReference'].indexOf(path.parentPath.type) !== -1 &&
     getIdentifierKind(path) === 'reference'
   ) {
     return true;
@@ -616,10 +575,7 @@ converters.TypeParameterInstantiation = (path, context) /*: K.TypeParams*/ => {
   };
 };
 
-converters.TypeParameterDeclaration = (
-  path,
-  context
-) /*: K.TypeParamsDeclaration */ => {
+converters.TypeParameterDeclaration = (path, context) /*: K.TypeParamsDeclaration */ => {
   return {
     kind: 'typeParamsDeclaration',
     params: path.get('params').map(p => convert(p, context))
@@ -638,11 +594,7 @@ function convertUtilityTypes(type /*: K.Generic*/) {
   let result = { ...type };
   if (type.value.name === '$Exact') {
     // $Exact<T> can simply be converted to T
-    if (
-      type.typeParams &&
-      type.typeParams.params &&
-      type.typeParams.params[0]
-    ) {
+    if (type.typeParams && type.typeParams.params && type.typeParams.params[0]) {
       result = type.typeParams.params[0];
     } else {
       console.warn('Missing type parameter for $Exact type');
@@ -766,9 +718,7 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
         }
 
         if (foundPath === null || foundPath === undefined) {
-          throw new Error(
-            `Unable to resolve binding path for: ${bindingPath.type}`
-          );
+          throw new Error(`Unable to resolve binding path for: ${bindingPath.type}`);
         }
         const convertedValue = convert(foundPath, context);
         return {
@@ -845,10 +795,7 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
         }
 
         // If path is a descendant of bindingPath and share the same name, this is a recursive type.
-        if (
-          path.isDescendant(bindingPath) &&
-          bindingPath.get('id').node.name === name
-        ) {
+        if (path.isDescendant(bindingPath) && bindingPath.get('id').node.name === name) {
           return { kind: 'id', name };
         }
 
@@ -873,10 +820,7 @@ converters.TypeAlias = (path, context) => {
   return convert(path.get('right'), context);
 };
 
-converters.IntersectionTypeAnnotation = (
-  path,
-  context
-) /*: K.Intersection*/ => {
+converters.IntersectionTypeAnnotation = (path, context) /*: K.Intersection*/ => {
   const types = path.get('types').map(p => convert(p, context));
   return { kind: 'intersection', types };
 };
@@ -954,9 +898,7 @@ converters.TSIndexedAccessType = (path, context) => {
 
   if (type.kind === 'generic') {
     if (type.value.members) {
-      const member = type.value.members.find(
-        member => member.key.name === indexKey
-      );
+      const member = type.value.members.find(member => member.key.name === indexKey);
       if (member) {
         return member.value;
       }
@@ -1052,9 +994,7 @@ converters.TSTupleType = (path, context) /*: K.Tuple*/ => {
 };
 
 converters.TSFunctionType = (path, context) /*: K.Generic */ => {
-  const parameters = path
-    .get('parameters')
-    .map(p => convertParameter(p, context));
+  const parameters = path.get('parameters').map(p => convertParameter(p, context));
   const returnType = convert(path.get('typeAnnotation'), context);
 
   return {
@@ -1149,10 +1089,7 @@ converters.TSArrayType = (path, context) /*: K.ArrayType */ => {
   };
 };
 
-converters.TSTypeParameterInstantiation = (
-  path,
-  context
-) /*: K.TypeParams */ => {
+converters.TSTypeParameterInstantiation = (path, context) /*: K.TypeParams */ => {
   return {
     kind: 'typeParams',
     params: path.get('params').map(param => convert(param, context))
@@ -1192,9 +1129,7 @@ converters.TSIndexSignature = (path, context) /*: K.Property */ => {
     kind: 'property',
     key: {
       kind: 'id',
-      name: `[${convert(id, context).name}: ${
-        convert(id.get('typeAnnotation'), context).kind
-      }]`
+      name: `[${convert(id, context).name}: ${convert(id.get('typeAnnotation'), context).kind}]`
     },
     value: convert(path.get('typeAnnotation'), context)
   };
@@ -1256,10 +1191,7 @@ function importConverterGeneral(path, context) /*: K.Import */ {
     let filePath;
 
     try {
-      filePath = resolveImportFilePathSync(
-        path.parentPath,
-        context.resolveOptions
-      );
+      filePath = resolveImportFilePathSync(path.parentPath, context.resolveOptions);
     } catch (e) {
       return {
         kind: 'import',
@@ -1348,10 +1280,7 @@ function resolveExportAllDeclaration(path, context) {
   let source = path.get('source');
   // The parentPath is a reference to where we currently are. We want to
   // get the source value, but resolving this first makes this easier.
-  let filePath = resolveImportFilePathSync(
-    source.parentPath,
-    context.resolveOptions
-  );
+  let filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
 
   return loadFileSync(filePath, context.parserOpts);
 }
@@ -1423,10 +1352,7 @@ converters.ExportNamedDeclaration = (path, context) /*: K.Export */ => {
     try {
       // The parentPath is a reference to where we currently are. We want to
       // get the source value, but resolving this first makes this easier.
-      let filePath = resolveImportFilePathSync(
-        source.parentPath,
-        context.resolveOptions
-      );
+      let filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
 
       let actualPath = resolveSync(
         nodePath.join(nodePath.dirname(filePath), source.node.value),
@@ -1466,9 +1392,7 @@ converters.ImportSpecifier = (path, context) /*: K.Import */ => {
 };
 
 function convertMethodCall(path, context) /*: K.Func */ {
-  const parameters = path
-    .get('parameters')
-    .map(p => convertParameter(p, context));
+  const parameters = path.get('parameters').map(p => convertParameter(p, context));
   const returnType = convert(path.get('typeAnnotation'), context);
 
   return {
@@ -1502,9 +1426,7 @@ function attachComments(source, dest) {
 
 function convert(path, context) {
   if (typeof path.get !== 'function')
-    throw new Error(
-      `Did not pass a NodePath to convert() ${JSON.stringify(path)}`
-    );
+    throw new Error(`Did not pass a NodePath to convert() ${JSON.stringify(path)}`);
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
   let result = converter(path, context);
