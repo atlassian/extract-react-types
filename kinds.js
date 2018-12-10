@@ -144,7 +144,7 @@ export type Import = {
   external?: boolean
 };
 
-export type Program = { kind: "program", classes: Array<Property> };
+export type Program = { kind: "program", component?: Property };
 
 export type ExportSpecifier = { kind: "exportSpecifier", local: Id, exported: Id };
 export type Export = { kind: "export", exports: Array<Id>, source?: String };

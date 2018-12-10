@@ -22,7 +22,6 @@ const { sync: resolveSync } = require('resolve');
 const matchExported = require('./matchExported');
 const converters = {};
 
-
 const isArrowFunctionComponent = path =>
   path.isArrowFunctionExpression() ||
   (path.isVariableDeclarator() && path.get('init').isArrowFunctionExpression());
@@ -118,10 +117,6 @@ const getDefaultProps = (path, context) => {
         defaultProps = convert(p, { ...context, mode: 'value' });
       }
     });
-  return verifyDefaultProps(defaultProps);
-};
-
-function verifyDefaultProps(defaultProps) {
   let defaultPropsArr = [];
 
   if (!defaultProps) {
@@ -139,12 +134,11 @@ function verifyDefaultProps(defaultProps) {
   } else {
     throw new Error(`Could not resolve default Props, ${defaultProps}`);
   }
-}
+};
 
+// This is the entry point. Program will only be found once.
 converters.Program = (path, context) /*: K.Program*/ => {
-  let result = {};
-  result.kind = 'program';
-  result.classes = [];
+  let componentPath;
 
   // try figure out what the default export is
   path.traverse({
@@ -159,11 +153,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
               isDefaultExport(functionPath) &&
               isReactComponentFunction(functionPath)
             ) {
-              let functionProperties = convertReactComponentFunction(
-                functionPath,
-                context
-              );
-              result.classes.push(functionProperties);
+              componentPath = functionPath;
             }
           },
           VariableDeclaration(variablePath) {
@@ -172,11 +162,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
               isDefaultExport(declaration) &&
               isReactComponentFunction(declaration)
             ) {
-              let functionProperties = convertReactComponentFunction(
-                declaration.get('init'),
-                context
-              );
-              result.classes.push(functionProperties);
+              componentPath = declaration.get('init');
             }
           },
           ClassDeclaration(classPath) {
@@ -184,35 +170,20 @@ converters.Program = (path, context) /*: K.Program*/ => {
               isDefaultExport(classPath) &&
               isReactComponentClass(classPath)
             ) {
-              let classProperties = convertReactComponentClass(
-                classPath,
-                context
-              );
-              result.classes.push(classProperties);
+              componentPath = classPath;
             }
           }
         });
       } else {
         exportPath.traverse({
           ClassDeclaration(classPath) {
-            if (isReactComponentClass(classPath)) {
-              let classProperties = convertReactComponentClass(
-                classPath,
-                context
-              );
-              result.classes.push(classProperties);
+            if (!componentPath && isReactComponentClass(classPath)) {
+              componentPath = classPath;
             }
           },
           'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-            if (
-              result.classes.length === 0 &&
-              isReactComponentFunction(functionPath)
-            ) {
-              let functionProperties = convertReactComponentFunction(
-                functionPath,
-                context
-              );
-              result.classes.push(functionProperties);
+            if (!componentPath && isReactComponentFunction(functionPath)) {
+              componentPath = functionPath;
             }
           }
         });
@@ -221,21 +192,30 @@ converters.Program = (path, context) /*: K.Program*/ => {
   });
 
   // just extract the props from the first class in the file
-  if (result.classes.length === 0) {
+  if (!componentPath) {
     path.traverse({
       ClassDeclaration(path) {
-        if (!isReactComponentClass(path)) return;
-        let classProperties = convertReactComponentClass(path, context);
-
-        result.classes.push(classProperties);
+        if (!componentPath && isReactComponentClass(path)) {
+          componentPath = path;
+        }
       }
     });
   }
 
-  return result;
+  let component;
+  if (componentPath) {
+    if (componentPath.type === 'ClassDeclaration') {
+      component = convertReactComponentClass(componentPath, context);
+    } else {
+      component = convertReactComponentFunction(componentPath, context);
+    }
+  }
+
+  return { kind: 'program', component };
 };
 
 function convertReactComponentFunction(path, context) {
+  // we have a function, assume the props are the first parameter
   let propType = path.get('params.0.typeAnnotation');
   let functionProperties = convert(propType, {
     ...context,
@@ -261,12 +241,13 @@ function convertReactComponentFunction(path, context) {
 
   if (name) {
     path.hub.file.path.traverse({
+      // look for MyComponent.defaultProps = ...
       AssignmentExpression(assignmentPath) {
-        const a = convert(assignmentPath.get('left'), {
+        const component = convert(assignmentPath.get('left'), {
           ...context,
           mode: 'value'
         });
-        if (a.object.referenceIdName === name) {
+        if (component.object.referenceIdName === name) {
           let initialConversion = convert(assignmentPath.get('right'), {
             ...context,
             mode: 'value'
