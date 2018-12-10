@@ -1127,6 +1127,180 @@ const TESTS = [
       class Component extends React.Component<{ foo: ImportedType['props'] }> {}
     `
   },
+  {
+    name: 'flow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      function Component(props: Props) {
+        return null;
+      }
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow inline function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      export default function Component(props: Props) {
+        return null;
+      }
+    `
+  },
+  {
+    name: 'flow inline anonymous function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      export default function(props: Props) {
+        return null;
+      }
+    `
+  },
+  {
+    name: 'flow arrow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      const Component = (props: Props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow inline arrow function component',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      export default (props: Props) => null;
+    `
+  },
+  {
+    name: 'flow ignores other components',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      class Component extends React.Component<{ foo: string[] }> {}
+
+      function Component(props: Props) {
+        return null;
+      }
+
+      export default (props: Props) => null;
+    `
+  },
+  {
+    name: 'flow function component with default props',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string
+      }
+
+      const Component = (props: Props) => null;
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow function component with default including spread',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+        something: string
+      }
+
+      const abc = { something: 'a' }
+
+      const Component = (props: Props) => null;
+
+      Component.defaultProps = {
+        ...abc,
+        name: 'bob',
+      };
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow function with defaults not arrow',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+        something: string
+      }
+
+      const abc = { something: 'a' }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        ...abc,
+        name: 'bob',
+      };
+
+      export default Component;
+    `
+  },
+  {
+    name: 'flow forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+      }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default React.forwardRef((props: Props, ref) => <Component {...props} ref={ref} />);
+    `
+  },
+  {
+    name: 'flow default class export',
+    typeSystem: 'flow',
+    code: `
+      import { Component } from 'react';
+      type Props = {
+        name: string,
+      }
+
+      export default class OnboardingModal extends Component<Props> {
+        onChange = () => {
+          console.log('hi');
+        }
+      }
+    `
+  }
 ];
 
 for (let testCase /*: TestCase */ of TESTS) {
