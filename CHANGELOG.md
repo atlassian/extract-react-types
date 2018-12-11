@@ -1,5 +1,10 @@
 # extract-react-types-loader
 
+## 0.3.0
+- [minor] [882a85c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/882a85c):
+
+  - Use version 0.15.0 of extract-react-types - the breaking change cannot be absorbed by changes in this package.
+
 ## 0.2.2
 - [patch] Upgrade extract-react-types to add TypeScript support. [c742e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c742e5a)
 
