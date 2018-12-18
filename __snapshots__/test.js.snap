@@ -821,6 +821,36 @@ Object {
 }
 `;
 
+exports[`flow class with this expression 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "number",
+            "value": 1,
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`flow default class export 1`] = `
 Object {
   "component": Object {
