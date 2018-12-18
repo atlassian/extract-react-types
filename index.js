@@ -213,11 +213,8 @@ function convertReactComponentFunction(path, context) {
     path.hub.file.path.traverse({
       // look for MyComponent.defaultProps = ...
       AssignmentExpression(assignmentPath) {
-        const component = convert(assignmentPath.get('left'), {
-          ...context,
-          mode: 'value'
-        });
-        if (component.object.referenceIdName === name) {
+        const left = assignmentPath.get('left.object');
+        if (left.isIdentifier() && left.node.name === name) {
           let initialConversion = convert(assignmentPath.get('right'), {
             ...context,
             mode: 'value'

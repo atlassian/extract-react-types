@@ -1300,6 +1300,36 @@ const TESTS = [
         }
       }
     `
+  },
+  {
+    name: 'flow class with this expression',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+    
+    class FieldInner extends React.Component<Props> {
+      unregisterField = () => {};
+    
+      componentDidMount() {
+        this.unregisterField = this.register();
+      }
+    
+      componentWillUnmount() {
+        this.unregisterField();
+      }
+    }
+    
+    const Field = (props: Props) => <FieldInner {...props} />;
+    
+    Field.defaultProps = {
+      ok: 1
+    };
+    
+    export default Field;
+    
+    `
   }
 ];
 
