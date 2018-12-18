@@ -1,5 +1,9 @@
 # extract-react-types
 
+## 0.15.1
+
+- **bug fix** We were calling `convert` in our initial function setup. We have switched to using nodes instead so we do not run convert on all assignment expressions.
+
 ## 0.15.0
 
 - **breaking:** We have changed how we approach types in a file. We try and resolve default exports, rather than resolving all react class componets in the file. This causes two breaking changes:
