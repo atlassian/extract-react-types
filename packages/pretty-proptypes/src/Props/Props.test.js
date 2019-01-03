@@ -1,5 +1,4 @@
 // @flow
-import test from 'ava';
 import React from 'react';
 import { mount, configure } from 'enzyme';
 import extractReactTypes from 'extract-react-types';
@@ -15,23 +14,20 @@ const MyComponent = (props: { simpleProp: string }) => null;
 export default MyComponent;
 `;
 
-test('should visualise props from extract-types-loader', t => {
+test('should visualise props from extract-types-loader', () => {
   const wrapper = mount(
-    <Props
-      props={extractReactTypes(file, 'flow')}
-      heading="FormFooter Props"
-    />,
+    <Props props={extractReactTypes(file, 'flow')} heading="FormFooter Props" />
   );
 
   const prop = wrapper.find('Prop');
 
-  t.is(prop.length, 1);
-  t.is(prop.prop('name'), 'simpleProp');
-  t.is(prop.prop('required'), true);
-  t.is(prop.prop('type'), 'string');
+  expect(prop.length).toBe(1);
+  expect(prop.prop('name')).toBe('simpleProp');
+  expect(prop.prop('required')).toBe(true);
+  expect(prop.prop('type')).toBe('string');
 });
 
-test('simple facts about two props', t => {
+test('simple facts about two props', () => {
   const file2 = `
 const MyComponent = (props: { simpleProp: string, secondProp?: number }) => null;
 
@@ -39,19 +35,16 @@ export default MyComponent;
 `;
 
   const wrapper = mount(
-    <Props
-      props={extractReactTypes(file2, 'flow')}
-      heading="FormFooter Props"
-    />,
+    <Props props={extractReactTypes(file2, 'flow')} heading="FormFooter Props" />
   );
 
   const prop = wrapper.find('Prop');
-  t.is(prop.length, 2);
+  expect(prop.length).toBe(2);
 });
 
-test('renders no children when passed on props', t => {
+test('renders no children when passed on props', () => {
   // $FlowFixMe
   const wrapper = mount(<Props heading="empty" />);
 
-  t.is(wrapper.children().length, 0);
+  expect(wrapper.children().length).toBe(0);
 });

@@ -1,5 +1,5 @@
 // @flow
-import test from 'ava';
+
 import { shallow, mount, configure } from 'enzyme';
 import React from 'react';
 import prettyConvert, { TypeMinWidth } from './converters';
@@ -15,7 +15,7 @@ let getSimplePropKind = (obj = {}) => ({
   kind: 'property',
   key: { kind: 'id', name: 'prop1' },
   value: simpleStringKind,
-  ...obj,
+  ...obj
 });
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
@@ -36,110 +36,102 @@ const getSingleProp = defaultPropType => {
   return propTypes.value;
 };
 
-test('return an empty string when no type is given', t => {
+test('return an empty string when no type is given', () => {
   // $FlowFixMe - deliberately passing in undefined here
   let res = prettyConvert(undefined, components);
-  t.is(res, '');
+  expect(res).toBe('');
 });
 
-test('fallback to kind2string type when no converter is found', t => {
+test('fallback to kind2string type when no converter is found', () => {
   // $FlowFixMe - we are deliberately testing a null case here
   let wrapper = shallow(prettyConvert({ kind: 'sunshine' }, components));
 
   // $FlowFixMe - deliberately no children
   let other = shallow(<components.Type />);
 
-  t.is(wrapper.html(), other.html());
+  expect(wrapper.html()).toBe(other.html());
 });
 
-test('prettyConvert string value type', t => {
+test('prettyConvert string value type', () => {
   let kind = simpleStringKind;
   let wrapper = shallow(prettyConvert(kind, components));
-  let other = shallow(
-    <components.StringType>"{kind.value}"</components.StringType>,
-  );
+  let other = shallow(<components.StringType>"{kind.value}"</components.StringType>);
 
-  t.is(wrapper.html(), other.html());
+  expect(wrapper.html()).toBe(other.html());
 });
 
-test('prettyConvert string type type', t => {
+test('prettyConvert string type type', () => {
   let wrapper = shallow(prettyConvert({ kind: 'string' }, components));
   let other = shallow(<components.Type>string</components.Type>);
 
-  t.is(wrapper.html(), other.html());
+  expect(wrapper.html()).toBe(other.html());
 });
 
-test('prettyConvert nullable value', t => {
+test('prettyConvert nullable value', () => {
   let kind = {
     kind: 'nullable',
-    arguments: { kind: 'string' },
+    arguments: { kind: 'string' }
   };
   let wrapper = shallow(prettyConvert(kind, components));
   let other = shallow(<components.Type>string</components.Type>);
-  t.is(wrapper.html(), other.html());
+  expect(wrapper.html()).toBe(other.html());
 });
 
-test('prettyConvert simple property', t => {
+test('prettyConvert simple property', () => {
   let simplePropKind = getSimplePropKind();
   let wrapper = shallow(prettyConvert(simplePropKind, components));
 
-  t.is(wrapper.find(components.Required).length, 1);
-  t.true(
-    wrapper.containsMatchingElement(
-      <components.Type>{simplePropKind.key.name}</components.Type>,
-    ),
-  );
-  t.true(wrapper.text().includes(simplePropKind.value.kind));
+  expect(wrapper.find(components.Required).length).toBe(1);
+  expect(
+    wrapper.containsMatchingElement(<components.Type>{simplePropKind.key.name}</components.Type>)
+  ).toBeTruthy();
+  expect(wrapper.text().includes(simplePropKind.value.kind)).toBeTruthy();
 });
 
-test('optional property', t => {
-  let wrapper = shallow(
-    prettyConvert(getSimplePropKind({ optional: true }), components),
-  );
-  t.falsy(wrapper.find(components.Required).length);
+test('optional property', () => {
+  let wrapper = shallow(prettyConvert(getSimplePropKind({ optional: true }), components));
+  expect(wrapper.find(components.Required).length).toBeFalsy();
 });
 
-test('optional property', t => {
-  let wrapper = shallow(
-    prettyConvert(getSimplePropKind({ optional: true }), components),
-  );
-  t.falsy(wrapper.find(components.Required).length);
+test('optional property', () => {
+  let wrapper = shallow(prettyConvert(getSimplePropKind({ optional: true }), components));
+  expect(wrapper.find(components.Required).length).toBeFalsy();
 });
 
-test('simple object', t => {
+test('simple object', () => {
   let values = getSingleDefault(`{ a: 'something', b: 'elsewhere' }`);
   let wrapper = shallow(prettyConvert(values, components));
 
   let indent = wrapper.find(components.Indent);
-  t.is(indent.length, 1);
-  t.is(indent.find(TypeMinWidth).length, 2);
+  expect(indent.length).toBe(1);
+  expect(indent.find(TypeMinWidth).length).toBe(2);
 });
 
-test('object with nested object', t => {
+test('object with nested object', () => {
   let values = getSingleDefault(`{ a: 'something', b: { c: 'elsewhere' }}`);
   let wrapper = shallow(prettyConvert(values, components));
   let indent = wrapper.find(components.Indent);
-  t.is(indent.length, 2);
+  expect(indent.length).toBe(2);
 });
 
-test('resolve generic of array', t => {
+test('resolve generic of array', () => {
   let values = getSingleProp(`Array<string>`);
   let wrapper = shallow(prettyConvert(values, components));
-  t.true(
+  expect(
     wrapper
       .find(components.TypeMeta)
       .at(0)
       .html()
-      .includes('Array'),
-  );
-  t.true(wrapper.html().includes('string'));
+      .includes('Array')
+  ).toBeTruthy();
+  expect(wrapper.html().includes('string')).toBeTruthy();
 });
 
-test.skip('object with spread object', t => {
+test.skip('object with spread object', () => {
   let values = getSingleDefault(`{ ...something, c: 'something' }`);
   let wrapper = shallow(prettyConvert(values, components));
 });
-test.skip('resolve generic of array with complex type', t => {
+test.skip('resolve generic of array with complex type', () => {
   let values = getSingleProp(`Array<{ b: string, c: number }>`);
   let wrapper = shallow(prettyConvert(values, components));
   let members = wrapper.find(components.Indent).at(0);
