@@ -25,8 +25,14 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
-    "flow-bin": "0.61.0",
-    "jest": "^21.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.69.0",
+    "jest": "^23.6.0",
     "prettier": "^1.13.7"
   }
 }
