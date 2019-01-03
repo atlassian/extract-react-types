@@ -10,7 +10,7 @@ const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
     defaultProps = ${defaultProps}
   }`;
   let res = extractReactTypes(file, type);
-  return res.classes[0].members;
+  return res.component.members;
 };
 
 const getSingleDefault = defaultPropVal => {
@@ -21,11 +21,7 @@ const getSingleProp = defaultPropType => {
   return convert(propTypes.value);
 };
 const getSingleTSPropTypes = defaultPropType => {
-  const propTypes = assembleERTAST(
-    `{ a: ${defaultPropType} }`,
-    `{}`,
-    'typescript',
-  )[0];
+  const propTypes = assembleERTAST(`{ a: ${defaultPropType} }`, `{}`, 'typescript')[0];
 
   return convert(propTypes);
 };
@@ -34,15 +30,15 @@ const base = {
   kind: 'memberExpression',
   property: {
     kind: 'id',
-    name: 'a',
-  },
+    name: 'a'
+  }
 };
 const flatMemberExpressionId = {
   ...base,
   object: {
     kind: 'id',
-    name: 'testObject',
-  },
+    name: 'testObject'
+  }
 };
 const flatMemberExpressionObject = {
   ...base,
@@ -53,44 +49,44 @@ const flatMemberExpressionObject = {
         kind: 'property',
         key: {
           kind: 'id',
-          name: 'redHerring',
+          name: 'redHerring'
         },
         value: {
           kind: 'number',
-          value: NaN,
-        },
+          value: NaN
+        }
       },
       {
         kind: 'property',
         key: {
           kind: 'string',
-          value: 'a',
+          value: 'a'
         },
         value: {
           kind: 'number',
-          value: 34,
-        },
-      },
-    ],
-  },
+          value: 34
+        }
+      }
+    ]
+  }
 };
 const ErroneousMemberExpression = {
   ...base,
   object: flatMemberExpressionObject,
   property: {
     kind: 'id',
-    name: 'badprop',
-  },
+    name: 'badprop'
+  }
 };
 
 const nestedMemberExpressionId = {
   ...base,
-  object: flatMemberExpressionId,
+  object: flatMemberExpressionId
 };
 
 const nestedMemberExpressionObject = {
   ...base,
-  object: flatMemberExpressionObject,
+  object: flatMemberExpressionObject
 };
 
 describe('kind 2 string tests', () => {
@@ -307,7 +303,7 @@ describe('kind 2 string tests', () => {
         class Component extends React.Component<{ a: Foo<string> }> {}
         `;
         let res = extractReactTypes(file, 'flow');
-        let final = convert(res.classes[0].members[0].value);
+        let final = convert(res.component.members[0].value);
         expect(final).toBe(prop);
       });
     });
@@ -324,7 +320,7 @@ describe('kind 2 string tests', () => {
       let file = `
         import { Component } from 'react';
         class Something extends React.Component<{ a: Component }> {}`;
-      let res = extractReactTypes(file, 'flow').classes[0].members[0].value;
+      let res = extractReactTypes(file, 'flow').component.members[0].value;
       let converted = convert(res);
       expect(converted).toBe('react.Component');
     });
