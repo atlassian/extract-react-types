@@ -1,12 +1,16 @@
 {
-  "name": "extract-react-types",
+  "name": "extract-react-types-mono-repo",
   "version": "0.0.0",
+  "scripts": {
+    "changeset": "bolt build-releases changeset"
+  },
   "bolt": {
     "workspaces": [
       "packages/*"
     ]
   },
   "dependencies": {
+    "@atlaskit/build-releases": "^3.0.3",
     "@babel/core": "7.0.0-beta.56",
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
