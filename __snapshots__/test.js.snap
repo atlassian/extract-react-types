@@ -371,6 +371,13 @@ Object {
 }
 `;
 
+exports[`TypeCastExpression 1`] = `
+Object {
+  "component": undefined,
+  "kind": "program",
+}
+`;
+
 exports[`array expression 1`] = `
 Object {
   "component": Object {

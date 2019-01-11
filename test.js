@@ -829,6 +829,13 @@ const TESTS = [
     `
   },
   {
+    name: 'TypeCastExpression',
+    typeSystem: 'flow',
+    code: `
+      const inputRef = (React.createRef(): {current: ?HTMLInputElement});
+    `
+  },
+  {
     name: 'non-standard key',
     typeSystem: 'flow',
     code: `
@@ -1308,27 +1315,27 @@ const TESTS = [
     type Props = {
       ok: number
     }
-    
+
     class FieldInner extends React.Component<Props> {
       unregisterField = () => {};
-    
+
       componentDidMount() {
         this.unregisterField = this.register();
       }
-    
+
       componentWillUnmount() {
         this.unregisterField();
       }
     }
-    
+
     const Field = (props: Props) => <FieldInner {...props} />;
-    
+
     Field.defaultProps = {
       ok: 1
     };
-    
+
     export default Field;
-    
+
     `
   }
 ];
