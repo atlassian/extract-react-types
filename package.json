@@ -1,8 +1,8 @@
 {
-  "name": "extract-react-types",
-  "version": "0.15.1",
+  "name": "@uber-web-ui/extract-react-types",
+  "version": "1.0.0",
   "main": "index.js",
-  "repository": "atlassian/extract-react-types",
+  "repository": "uber-web/extract-react-types",
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
   "scripts": {
