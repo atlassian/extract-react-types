@@ -24,12 +24,28 @@ const isArrowFunctionComponent = path =>
   (path.isVariableDeclarator() && path.get('init').isArrowFunctionExpression());
 
 const isFunctionComponent = path => {
-  return path.isFunctionDeclaration();
+  return (
+    path.isFunctionDeclaration() ||
+    path.isFunctionExpression() ||
+    (path.isVariableDeclarator() && path.get('init').isFunctionExpression())
+  );
 };
 
 function isReactComponentFunction(path) {
   return isArrowFunctionComponent(path) || isFunctionComponent(path);
 }
+
+const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
+  if (path.parentPath && path.parentPath.isCallExpression()) {
+    const callee = path.parentPath.get('callee');
+    if (callee.isIdentifier() && callee.node.name === type) {
+      return true;
+    }
+    if (callee.isMemberExpression() && callee.matchesPattern(`React.${type}`)) {
+      return true;
+    }
+  }
+};
 
 const getPropFromObject = (props, property) => {
   let prop;
@@ -127,19 +143,44 @@ converters.Program = (path, context) /*: K.Program*/ => {
   path.traverse({
     ExportDefaultDeclaration(exportPath) {
       if (exportPath.get('declaration').isIdentifier()) {
+        const declarationName = exportPath.get('declaration').node.name;
+
         const isDefaultExport = path =>
-          path.get('id').node &&
-          path.get('id').node.name === exportPath.get('declaration').node.name;
+          path.get('id').node && path.get('id').node.name === declarationName;
+
+        const isParentVariableDeclaratorDefaultExport = path => {
+          const isParentVariableDeclarator = path.parentPath.isVariableDeclarator();
+          if (isParentVariableDeclarator) {
+            return isDefaultExport(path.parentPath);
+          }
+        };
+
         path.traverse({
-          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-            if (isDefaultExport(functionPath) && isReactComponentFunction(functionPath)) {
+          FunctionDeclaration(functionPath) {
+            if (isDefaultExport(functionPath) && functionPath.isFunctionDeclaration()) {
               componentPath = functionPath;
             }
           },
-          VariableDeclaration(variablePath) {
-            const declaration = variablePath.get('declarations.0');
-            if (isDefaultExport(declaration) && isReactComponentFunction(declaration)) {
-              componentPath = declaration.get('init');
+          'FunctionExpression|ArrowFunctionExpression'(functionPath) {
+            if (
+              isParentVariableDeclaratorDefaultExport(functionPath) &&
+              isReactComponentFunction(functionPath)
+            ) {
+              componentPath = functionPath;
+            } else {
+              const isParentForwardRef = isParentSpecialReactComponentType(
+                functionPath,
+                'forwardRef'
+              );
+              if (
+                (isParentForwardRef || isParentSpecialReactComponentType(functionPath, 'memo')) &&
+                (isParentVariableDeclaratorDefaultExport(functionPath.parentPath) ||
+                  (isParentForwardRef &&
+                    isParentSpecialReactComponentType(functionPath.parentPath, 'memo') &&
+                    isParentVariableDeclaratorDefaultExport(functionPath.parentPath.parentPath)))
+              ) {
+                componentPath = functionPath;
+              }
             }
           },
           ClassDeclaration(classPath) {
@@ -155,9 +196,21 @@ converters.Program = (path, context) /*: K.Program*/ => {
               componentPath = classPath;
             }
           },
-          'FunctionDeclaration|ArrowFunctionExpression'(functionPath) {
-            if (!componentPath && isReactComponentFunction(functionPath)) {
+          FunctionDeclaration(functionPath) {
+            if (!componentPath && functionPath.isFunctionDeclaration()) {
               componentPath = functionPath;
+            }
+          },
+          'FunctionExpression|ArrowFunctionExpression'(functionPath) {
+            if (!componentPath) {
+              if (isReactComponentFunction(functionPath)) {
+                componentPath = functionPath;
+              } else if (
+                isParentSpecialReactComponentType(functionPath, 'forwardRef') ||
+                isParentSpecialReactComponentType(functionPath, 'memo')
+              ) {
+                componentPath = functionPath;
+              }
             }
           }
         });
@@ -197,14 +250,14 @@ function convertReactComponentFunction(path, context) {
   });
 
   let name = '';
-  if (
-    path.type === 'ArrowFunctionExpression' &&
-    path.parent &&
-    path.parent.type === 'VariableDeclarator'
-  ) {
-    name = path.parent.id.name;
-  } else if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
+  if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
     name = path.node.id.name;
+  } else {
+    const variableDeclarator = path.findParent(path => path.isVariableDeclarator());
+
+    if (variableDeclarator) {
+      name = variableDeclarator.node.id.name;
+    }
   }
 
   let defaultProps = [];
