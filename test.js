@@ -1445,7 +1445,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow forwardRef unnamed',
+    name: 'flow forwardRef default export',
     typeSystem: 'flow',
     code: `
     type Props = {
@@ -1458,7 +1458,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow memo unnamed',
+    name: 'flow memo default export',
     typeSystem: 'flow',
     code: `
     type Props = {
@@ -1471,7 +1471,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow memo wrapping forwardRef unnamed',
+    name: 'flow memo wrapping forwardRef default export',
     typeSystem: 'flow',
     code: `
     type Props = {

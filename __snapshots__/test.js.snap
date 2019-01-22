@@ -1044,7 +1044,7 @@ Object {
 }
 `;
 
-exports[`flow forwardRef unnamed 1`] = `
+exports[`flow forwardRef default export 2`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1725,7 +1725,7 @@ Object {
 }
 `;
 
-exports[`flow memo unnamed 1`] = `
+exports[`flow memo default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1777,7 +1777,7 @@ Object {
 }
 `;
 
-exports[`flow memo wrapping forwardRef unnamed 1`] = `
+exports[`flow memo wrapping forwardRef default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",

@@ -19,17 +19,11 @@ const { sync: resolveSync } = require('resolve');
 const matchExported = require('./matchExported');
 const converters = {};
 
-const isArrowFunctionComponent = path =>
-  path.isArrowFunctionExpression() ||
-  (path.isVariableDeclarator() && path.get('init').isArrowFunctionExpression());
+const isArrowFunctionComponent = path => path.isArrowFunctionExpression();
 
-const isFunctionComponent = path => {
-  return (
-    path.isFunctionDeclaration() ||
-    path.isFunctionExpression() ||
-    (path.isVariableDeclarator() && path.get('init').isFunctionExpression())
-  );
-};
+const isFunctionComponent = path => path.isFunctionExpression();
+
+const isFunctionDeclarationComponent = path => path.isFunctionDeclaration();
 
 function isReactComponentFunction(path) {
   return isArrowFunctionComponent(path) || isFunctionComponent(path);
@@ -157,7 +151,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
 
         path.traverse({
           FunctionDeclaration(functionPath) {
-            if (isDefaultExport(functionPath) && functionPath.isFunctionDeclaration()) {
+            if (isDefaultExport(functionPath) && isFunctionDeclarationComponent(functionPath)) {
               componentPath = functionPath;
             }
           },
