@@ -19,16 +19,6 @@ const { sync: resolveSync } = require('resolve');
 const matchExported = require('./matchExported');
 const converters = {};
 
-const isArrowFunctionComponent = path => path.isArrowFunctionExpression();
-
-const isFunctionComponent = path => path.isFunctionExpression();
-
-const isFunctionDeclarationComponent = path => path.isFunctionDeclaration();
-
-function isReactComponentFunction(path) {
-  return isArrowFunctionComponent(path) || isFunctionComponent(path);
-}
-
 const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
   if (path.parentPath && path.parentPath.isCallExpression()) {
     const callee = path.parentPath.get('callee');
@@ -151,15 +141,12 @@ converters.Program = (path, context) /*: K.Program*/ => {
 
         path.traverse({
           FunctionDeclaration(functionPath) {
-            if (isDefaultExport(functionPath) && isFunctionDeclarationComponent(functionPath)) {
+            if (isDefaultExport(functionPath)) {
               componentPath = functionPath;
             }
           },
           'FunctionExpression|ArrowFunctionExpression'(functionPath) {
-            if (
-              isParentVariableDeclaratorDefaultExport(functionPath) &&
-              isReactComponentFunction(functionPath)
-            ) {
+            if (isParentVariableDeclaratorDefaultExport(functionPath)) {
               componentPath = functionPath;
             } else {
               const isParentForwardRef = isParentSpecialReactComponentType(
@@ -190,21 +177,9 @@ converters.Program = (path, context) /*: K.Program*/ => {
               componentPath = classPath;
             }
           },
-          FunctionDeclaration(functionPath) {
-            if (!componentPath && functionPath.isFunctionDeclaration()) {
-              componentPath = functionPath;
-            }
-          },
-          'FunctionExpression|ArrowFunctionExpression'(functionPath) {
+          'FunctionExpression|ArrowFunctionExpression|FunctionDeclaration'(functionPath) {
             if (!componentPath) {
-              if (isReactComponentFunction(functionPath)) {
-                componentPath = functionPath;
-              } else if (
-                isParentSpecialReactComponentType(functionPath, 'forwardRef') ||
-                isParentSpecialReactComponentType(functionPath, 'memo')
-              ) {
-                componentPath = functionPath;
-              }
+              componentPath = functionPath;
             }
           }
         });
