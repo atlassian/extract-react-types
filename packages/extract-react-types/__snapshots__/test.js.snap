@@ -772,6 +772,7 @@ exports[`flow arrow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -825,6 +826,7 @@ exports[`flow class with this expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Field",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1016,6 +1018,7 @@ exports[`flow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1042,6 +1045,7 @@ exports[`flow function component with default including spread 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1087,6 +1091,7 @@ exports[`flow function component with default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1331,6 +1336,7 @@ exports[`flow function with defaults not arrow 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1510,6 +1516,7 @@ exports[`flow inline function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "Component",
     "value": Object {
       "kind": "object",
       "members": Array [

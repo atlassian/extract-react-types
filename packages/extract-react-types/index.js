@@ -223,6 +223,7 @@ function convertReactComponentFunction(path, context) {
         }
       }
     });
+    functionProperties.name = name;
   }
 
   return addDefaultProps(functionProperties, defaultProps);
