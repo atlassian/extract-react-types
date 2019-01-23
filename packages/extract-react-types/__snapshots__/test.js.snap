@@ -655,6 +655,58 @@ Object {
 }
 `;
 
+exports[`flow React.forwardRef 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow React.memo 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`flow any 1`] = `
 Object {
   "component": Object {
@@ -942,6 +994,32 @@ Object {
 }
 `;
 
+exports[`flow forwardRef 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`flow forwardRef default export 1`] = `
 Object {
   "component": Object {
@@ -964,6 +1042,39 @@ Object {
       "referenceIdName": "Props",
     },
   },
+  "kind": "program",
+}
+`;
+
+exports[`flow forwardRef default export 2`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow func that is not valid 1`] = `
+Object {
+  "component": undefined,
   "kind": "program",
 }
 `;
@@ -1108,6 +1219,32 @@ Object {
           "optional": false,
           "value": Object {
             "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow function expression 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
           },
         },
       ],
@@ -1563,6 +1700,110 @@ Object {
       "kind": "id",
       "name": "Component",
       "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow memo 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow memo default export 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow memo wrapping forwardRef 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`flow memo wrapping forwardRef default export 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "number",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
     },
   },
   "kind": "program",

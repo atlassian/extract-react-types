@@ -1,0 +1,16 @@
+{
+  "releases": [{ "name": "extract-react-types", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "extract-react-types-loader",
+      "type": "patch",
+      "dependencies": ["extract-react-types"]
+    },
+    { "name": "kind2string", "type": "patch", "dependencies": ["extract-react-types"] },
+    {
+      "name": "pretty-proptypes",
+      "type": "patch",
+      "dependencies": ["kind2string", "extract-react-types"]
+    }
+  ]
+}

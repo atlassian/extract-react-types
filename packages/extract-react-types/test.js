@@ -1330,6 +1330,158 @@ const TESTS = [
     export default Field;
     
     `
+  },
+  {
+    name: 'flow forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = forwardRef((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+
+    
+    `
+  },
+  {
+    name: 'flow React.forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = React.forwardRef((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow function expression',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = function(props: Props) {
+
+    }
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow React.memo',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = memo((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow memo',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = React.memo((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow func that is not valid',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = something((props: Props, ref) => {
+
+    })
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow memo wrapping forwardRef',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    const SomeComponent = memo(forwardRef((props: Props, ref) => {
+
+    }))
+
+    export default SomeComponent
+    
+    `
+  },
+  {
+    name: 'flow forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default forwardRef((props: Props, ref) => {
+
+    })
+    `
+  },
+  {
+    name: 'flow memo default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default memo((props: Props, ref) => {
+
+    })
+    `
+  },
+  {
+    name: 'flow memo wrapping forwardRef default export',
+    typeSystem: 'flow',
+    code: `
+    type Props = {
+      ok: number
+    }
+
+    export default memo(forwardRef((props: Props, ref) => {
+
+    }))
+    `
   }
 ];
 
