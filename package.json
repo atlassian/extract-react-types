@@ -2,6 +2,7 @@
   "name": "extract-react-types-mono-repo",
   "version": "0.0.0",
   "scripts": {
+    "test": "jest",
     "changeset": "bolt build-releases changeset"
   },
   "bolt": {
@@ -40,7 +41,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
-    "babel-register": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.69.0",
