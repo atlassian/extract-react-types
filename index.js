@@ -153,12 +153,22 @@ converters.Program = (path, context) /*: K.Program*/ => {
                 functionPath,
                 'forwardRef'
               );
+              const isParentForwardRefOrMemo =
+                isParentForwardRef || isParentSpecialReactComponentType(functionPath, 'memo');
+
+              // check for React.forwardRef(() => {}) and React.memo(() => {})
               if (
-                (isParentForwardRef || isParentSpecialReactComponentType(functionPath, 'memo')) &&
-                (isParentVariableDeclaratorDefaultExport(functionPath.parentPath) ||
-                  (isParentForwardRef &&
-                    isParentSpecialReactComponentType(functionPath.parentPath, 'memo') &&
-                    isParentVariableDeclaratorDefaultExport(functionPath.parentPath.parentPath)))
+                isParentForwardRefOrMemo &&
+                isParentVariableDeclaratorDefaultExport(functionPath.parentPath)
+              ) {
+                componentPath = functionPath;
+                return;
+              }
+              // check for React.memo(React.forwardRef(() => {}))
+              if (
+                isParentForwardRef &&
+                isParentSpecialReactComponentType(functionPath.parentPath, 'memo') &&
+                isParentVariableDeclaratorDefaultExport(functionPath.parentPath.parentPath)
               ) {
                 componentPath = functionPath;
               }
