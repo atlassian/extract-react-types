@@ -187,7 +187,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
               componentPath = classPath;
             }
           },
-          'FunctionExpression|ArrowFunctionExpression|FunctionDeclaration'(functionPath) {
+          'FunctionDeclaration|ArrowFunctionExpression|FunctionExpression'(functionPath) {
             if (!componentPath) {
               componentPath = functionPath;
             }
