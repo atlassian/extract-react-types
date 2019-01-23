@@ -1,0 +1,10 @@
+{
+  "presets": ["env", "react", "flow"],
+  "plugins": [
+    "emotion",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-runtime",
+    "syntax-dynamic-import"
+  ]
+}
