@@ -1,3 +1,15 @@
 node_modules
+
+**/dist
+
+# ignore all logs
 *.log
+
+# ignore editor generated files
 .vscode
+.idea
+.iml
+
+
+# ignore yarn.locks generated in packages
+packages/**/**/yarn.lock
