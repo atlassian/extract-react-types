@@ -7,7 +7,7 @@
   "repository": "gwyneplaine/kind2string",
   "scripts": {
     "build": "babel src -d dist --ignore __tests__/",
-    "prepublish": "yarn build && yarn test",
+    "prepublish": "yarn build",
     "dev": "yarn build --watch"
   },
   "files": [
