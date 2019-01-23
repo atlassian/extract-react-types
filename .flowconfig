@@ -1,4 +1,5 @@
 [ignore]
+.*/packages/kind2string/.*
 
 [include]
 
@@ -7,3 +8,4 @@
 [lints]
 
 [options]
+emoji=true

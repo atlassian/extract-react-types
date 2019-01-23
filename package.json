@@ -1,21 +1,16 @@
 {
-  "name": "extract-react-types",
-  "version": "0.15.1",
-  "main": "index.js",
-  "repository": "atlassian/extract-react-types",
-  "author": "James Kyle <me@thejameskyle.com>",
-  "license": "Apache-2.0",
+  "name": "extract-react-types-mono-repo",
+  "version": "0.0.0",
   "scripts": {
-    "test": "jest"
+    "changeset": "bolt build-releases changeset"
   },
-  "keywords": [
-    "react",
-    "flow",
-    "typescript",
-    "prop-types",
-    "documentation"
-  ],
+  "bolt": {
+    "workspaces": [
+      "packages/*"
+    ]
+  },
   "dependencies": {
+    "@atlaskit/build-releases": "^3.0.3",
     "@babel/core": "7.0.0-beta.56",
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
@@ -31,11 +26,29 @@
     "babel-type-scopes": "^1.1.0",
     "babylon": "^7.0.0-beta.22",
     "babylon-options": "^2.0.1",
+    "emotion": "^9.1.1",
+    "react-markings": "^1.2.0",
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
-    "flow-bin": "0.61.0",
-    "jest": "^21.2.1",
-    "prettier": "^1.13.7"
+    "babel-cli": "^6.26.0",
+    "babel-plugin-emotion": "^9.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "flow-bin": "^0.69.0",
+    "jest": "^23.6.0",
+    "jsdom": "^11.7.0",
+    "prettier": "^1.13.7",
+    "react": "^16.3.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.3.1"
   }
 }
