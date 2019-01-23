@@ -5,9 +5,6 @@
   "repository": "atlassian/extract-react-types",
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
-  "scripts": {
-    "test": "jest"
-  },
   "keywords": [
     "react",
     "flow",
