@@ -659,6 +659,7 @@ exports[`flow React.forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -685,6 +686,7 @@ exports[`flow React.memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -998,6 +1000,7 @@ exports[`flow forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1233,6 +1236,7 @@ exports[`flow function expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1710,6 +1714,7 @@ exports[`flow memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1762,6 +1767,7 @@ exports[`flow memo wrapping forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
+    "name": "SomeComponent",
     "value": Object {
       "kind": "object",
       "members": Array [
