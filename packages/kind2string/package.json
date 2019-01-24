@@ -6,9 +6,8 @@
   "author": "Atlassian",
   "repository": "gwyneplaine/kind2string",
   "scripts": {
-    "test": "yarn jest",
     "build": "babel src -d dist --ignore __tests__/",
-    "prepublish": "yarn build && yarn test",
+    "prepublish": "yarn build",
     "dev": "yarn build --watch"
   },
   "files": [
