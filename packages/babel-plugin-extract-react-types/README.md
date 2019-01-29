@@ -26,3 +26,7 @@ import Props from 'pretty-proptypes';
 
 ReactDOM.render(<Props component={SomeComponent} />, document.getElementById('root'));
 ```
+
+## Inspiration
+
+- [babel-plugin-react-docgen](https://github.com/storybooks/babel-plugin-react-docgen)
