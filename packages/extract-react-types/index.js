@@ -20,8 +20,12 @@ const matchExported = require('./matchExported');
 const converters = {};
 
 const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
-  if (path.parentPath && path.parentPath.isCallExpression()) {
-    const callee = path.parentPath.get('callee');
+  return isSpecialReactComponentType(path.parentPath, type);
+};
+
+const isSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
+  if (path && path.isCallExpression()) {
+    const callee = path.get('callee');
     if (callee.isIdentifier() && callee.node.name === type) {
       return true;
     }
@@ -29,6 +33,7 @@ const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/
       return true;
     }
   }
+  return false;
 };
 
 const getPropFromObject = (props, property) => {
@@ -121,100 +126,22 @@ const getDefaultProps = (path, context) => {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context) /*: K.Program*/ => {
-  let componentPath;
-
-  // try figure out what the default export is
-  path.traverse({
-    ExportDefaultDeclaration(exportPath) {
-      if (exportPath.get('declaration').isIdentifier()) {
-        const declarationName = exportPath.get('declaration').node.name;
-
-        const isDefaultExport = path =>
-          path.get('id').node && path.get('id').node.name === declarationName;
-
-        const isParentVariableDeclaratorDefaultExport = path => {
-          const isParentVariableDeclarator = path.parentPath.isVariableDeclarator();
-          if (isParentVariableDeclarator) {
-            return isDefaultExport(path.parentPath);
-          }
-        };
-
-        path.traverse({
-          FunctionDeclaration(functionPath) {
-            if (isDefaultExport(functionPath)) {
-              componentPath = functionPath;
-            }
-          },
-          'FunctionExpression|ArrowFunctionExpression'(functionPath) {
-            if (isParentVariableDeclaratorDefaultExport(functionPath)) {
-              componentPath = functionPath;
-            } else {
-              const isParentForwardRef = isParentSpecialReactComponentType(
-                functionPath,
-                'forwardRef'
-              );
-              const isParentForwardRefOrMemo =
-                isParentForwardRef || isParentSpecialReactComponentType(functionPath, 'memo');
-
-              // check for React.forwardRef(() => {}) and React.memo(() => {})
-              if (
-                isParentForwardRefOrMemo &&
-                isParentVariableDeclaratorDefaultExport(functionPath.parentPath)
-              ) {
-                componentPath = functionPath;
-                return;
-              }
-              // check for React.memo(React.forwardRef(() => {}))
-              if (
-                isParentForwardRef &&
-                isParentSpecialReactComponentType(functionPath.parentPath, 'memo') &&
-                isParentVariableDeclaratorDefaultExport(functionPath.parentPath.parentPath)
-              ) {
-                componentPath = functionPath;
-              }
-            }
-          },
-          ClassDeclaration(classPath) {
-            if (isDefaultExport(classPath) && isReactComponentClass(classPath)) {
-              componentPath = classPath;
-            }
-          }
-        });
-      } else {
-        exportPath.traverse({
-          ClassDeclaration(classPath) {
-            if (!componentPath && isReactComponentClass(classPath)) {
-              componentPath = classPath;
-            }
-          },
-          'FunctionDeclaration|ArrowFunctionExpression|FunctionExpression'(functionPath) {
-            if (!componentPath) {
-              componentPath = functionPath;
-            }
-          }
-        });
-      }
-    }
-  });
+  let components = findExportedComponents(path, 'default', context);
+  // components[0] could be undefined
+  let component;
+  if (components[0]) {
+    component = components[0].component;
+  }
 
   // just extract the props from the first class in the file
-  if (!componentPath) {
+  if (!component) {
     path.traverse({
       ClassDeclaration(path) {
-        if (!componentPath && isReactComponentClass(path)) {
-          componentPath = path;
+        if (!component && isReactComponentClass(path)) {
+          component = convertReactComponentClass(path, context);
         }
       }
     });
-  }
-
-  let component;
-  if (componentPath) {
-    if (componentPath.type === 'ClassDeclaration') {
-      component = convertReactComponentClass(componentPath, context);
-    } else {
-      component = convertReactComponentFunction(componentPath, context);
-    }
   }
 
   return { kind: 'program', component };
@@ -255,7 +182,11 @@ function convertReactComponentFunction(path, context) {
         }
       }
     });
-    functionProperties.name = name;
+    functionProperties.name = {
+      kind: 'id',
+      name,
+      type: null
+    };
   }
 
   return addDefaultProps(functionProperties, defaultProps);
@@ -1464,8 +1395,7 @@ function convert(path, context) {
   return result;
 }
 
-function extractReactTypes(
-  code /*: string */,
+function getContext(
   typeSystem /*: 'flow' | 'typescript' */,
   filename /*:? string */,
   resolveOptions /*:? Object */
@@ -1495,8 +1425,148 @@ function extractReactTypes(
     plugins
   });
 
+  return { resolveOptions, parserOpts };
+}
+
+function extractReactTypes(
+  code /*: string */,
+  typeSystem /*: 'flow' | 'typescript' */,
+  filename /*:? string */,
+  inputResolveOptions /*:? Object */
+) {
+  let { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
+
   let file = createBabelFile(code, { parserOpts, filename });
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
 module.exports = extractReactTypes;
+
+function findExports(
+  path,
+  exportsToFind /*: 'all' | 'default' */
+) /*: Array<{ name: string | null, path: any }> */ {
+  let moduleExports = path.get('body').filter(bodyPath =>
+    // we only check for named and default exports here, we don't want export all
+    exportsToFind === 'default'
+      ? bodyPath.isExportDefaultDeclaration()
+      : (bodyPath.isExportNamedDeclaration() &&
+          bodyPath.node.source === null &&
+          bodyPath.node.exportKind === 'value') ||
+        bodyPath.isExportDefaultDeclaration()
+  );
+
+  let formattedExports = [];
+
+  moduleExports.forEach(exportPath => {
+    if (exportPath.isExportDefaultDeclaration()) {
+      let declaration = exportPath.get('declaration');
+      if (declaration.isIdentifier()) {
+        let binding = path.scope.bindings[declaration.node.name].path;
+        if (binding.isVariableDeclarator()) {
+          binding = binding.get('init');
+        }
+        formattedExports.push({
+          name: declaration.node.name,
+          path: binding
+        });
+      } else {
+        let name = null;
+        if (
+          (declaration.isClassDeclaration() || declaration.isFunctionDeclaration()) &&
+          declaration.node.id !== null
+        ) {
+          name = declaration.node.id.name;
+        }
+        formattedExports.push({ name, path: declaration });
+      }
+    } else {
+      let declaration = exportPath.get('declaration');
+      let specifiers = exportPath.get('specifiers');
+      if (specifiers.length === 0) {
+        if (declaration.isFunctionDeclaration() || declaration.isClassDeclaration()) {
+          let identifier = declaration.node.id;
+          formattedExports.push({
+            name: identifier === null ? null : identifier.name,
+            path: declaration
+          });
+        }
+        if (declaration.isVariableDeclaration()) {
+          declaration.get('declarations').forEach(declarator => {
+            formattedExports.push({
+              name: declarator.node.id.name,
+              path: declarator.get('init')
+            });
+          });
+        }
+      } else {
+        specifiers.forEach(specifier => {
+          let name = specifier.node.local.name;
+          let binding = path.scope.bindings[name].path;
+          if (binding.isVariableDeclarator()) {
+            binding = binding.get('init');
+          }
+          formattedExports.push({
+            name,
+            path: binding
+          });
+        });
+      }
+    }
+  });
+  return formattedExports;
+}
+
+function findExportedComponents(programPath, componentsToFind /*: 'all' | 'default' */, context) {
+  let components = [];
+  let exportPaths = findExports(programPath, componentsToFind);
+  exportPaths.forEach(({ path, name }) => {
+    if (
+      path.isFunctionExpression() ||
+      path.isArrowFunctionExpression() ||
+      path.isFunctionDeclaration()
+    ) {
+      let component = convertReactComponentFunction(path, context);
+      components.push({ name, path, component });
+      return;
+    }
+    if (path.isClass()) {
+      let component = convertReactComponentClass(path, context);
+      components.push({ name, path, component });
+      return;
+    }
+    let isMemo = isSpecialReactComponentType(path, 'memo');
+    if (isMemo || isSpecialReactComponentType(path, 'forwardRef')) {
+      let firstArg = path.get('arguments')[0];
+      if (firstArg) {
+        if (firstArg.isFunctionExpression() || firstArg.isArrowFunctionExpression()) {
+          let component = convertReactComponentFunction(firstArg, context);
+          components.push({ name, path, component });
+          return;
+        }
+        if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
+          let innerFirstArg = firstArg.get('arguments')[0];
+          if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
+            let component = convertReactComponentFunction(innerFirstArg, context);
+            components.push({ name, path, component });
+            return;
+          }
+        }
+      }
+    }
+  });
+  return components;
+}
+
+module.exports.findExportedComponents = (
+  programPath /*: any */,
+  typeSystem /*: 'flow' | 'typescript' */,
+  filename /*:? string */,
+  resolveOptions /*:? Object */
+) => {
+  return findExportedComponents(
+    programPath,
+    'all',
+    getContext(typeSystem, filename, resolveOptions)
+  );
+};

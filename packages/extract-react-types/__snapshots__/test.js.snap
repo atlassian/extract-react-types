@@ -659,7 +659,11 @@ exports[`flow React.forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -686,7 +690,11 @@ exports[`flow React.memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -826,7 +834,11 @@ exports[`flow arrow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -880,7 +892,11 @@ exports[`flow class with this expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Field",
+    "name": Object {
+      "kind": "id",
+      "name": "Field",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1000,7 +1016,11 @@ exports[`flow forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1132,7 +1152,11 @@ exports[`flow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1159,7 +1183,11 @@ exports[`flow function component with default including spread 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1205,7 +1233,11 @@ exports[`flow function component with default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1236,7 +1268,11 @@ exports[`flow function expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1477,7 +1513,11 @@ exports[`flow function with defaults not arrow 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1657,7 +1697,11 @@ exports[`flow inline function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "Component",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1714,7 +1758,11 @@ exports[`flow memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [
@@ -1767,7 +1815,11 @@ exports[`flow memo wrapping forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
-    "name": "SomeComponent",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
     "value": Object {
       "kind": "object",
       "members": Array [

@@ -13,6 +13,9 @@
   "dependencies": {
     "@atlaskit/build-releases": "^3.0.3",
     "@babel/core": "7.0.0-beta.56",
+    "@babel/plugin-syntax-flow": "^7.2.0",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-syntax-typescript": "^7.2.0",
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
@@ -45,6 +48,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.69.0",
     "jest": "^23.6.0",
+    "jest-in-case": "^1.0.2",
     "jsdom": "^11.7.0",
     "prettier": "^1.13.7",
     "react": "^16.3.1",
