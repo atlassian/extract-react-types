@@ -270,10 +270,7 @@ jestInCase(
         require.resolve('./index'),
         require.resolve('@babel/plugin-syntax-jsx'),
         require.resolve('@babel/plugin-syntax-flow')
-      ],
-      babelrc: false,
-      configFile: false,
-      filename: 'index.js'
+      ]
     }).code;
     expect(transformedCode).toMatchSnapshot();
   },
@@ -303,10 +300,7 @@ jestInCase(
         require.resolve('./index'),
         require.resolve('@babel/plugin-syntax-jsx'),
         require.resolve('@babel/plugin-syntax-typescript')
-      ],
-      babelrc: false,
-      configFile: false,
-      filename: 'index.ts'
+      ]
     }).code;
     expect(transformedCode).toMatchSnapshot();
   },
