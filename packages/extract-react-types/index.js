@@ -1452,7 +1452,10 @@ function findExports(
       ? bodyPath.isExportDefaultDeclaration()
       : (bodyPath.isExportNamedDeclaration() &&
           bodyPath.node.source === null &&
-          bodyPath.node.exportKind === 'value') ||
+          // exportKind is 'value' or 'type' in flow
+          (bodyPath.node.exportKind === 'value' ||
+            // exportKind is undefined in typescript
+            bodyPath.node.exportKind === undefined)) ||
         bodyPath.isExportDefaultDeclaration()
   );
 

@@ -732,8 +732,52 @@ SomeComponent.___types = {
 };"
 `;
 
-exports[`typescript basic 1`] = `
+exports[`typescript default 1`] = `
+"export default class SomeComponent extends React.Component<{
+  foo: boolean;
+}> {}
+SomeComponent.___types = {
+  \\"kind\\": \\"object\\",
+  \\"members\\": [{
+    \\"kind\\": \\"property\\",
+    \\"optional\\": false,
+    \\"key\\": {
+      \\"kind\\": \\"id\\",
+      \\"name\\": \\"foo\\"
+    },
+    \\"value\\": {
+      \\"kind\\": \\"boolean\\"
+    }
+  }],
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`typescript named 1`] = `
 "export class SomeComponent extends React.Component<{
   foo: boolean;
-}> {}"
+}> {}
+SomeComponent.___types = {
+  \\"kind\\": \\"object\\",
+  \\"members\\": [{
+    \\"kind\\": \\"property\\",
+    \\"optional\\": false,
+    \\"key\\": {
+      \\"kind\\": \\"id\\",
+      \\"name\\": \\"foo\\"
+    },
+    \\"value\\": {
+      \\"kind\\": \\"boolean\\"
+    }
+  }],
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
 `;

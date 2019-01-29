@@ -262,15 +262,6 @@ let flowCases = [
   }
 ];
 
-let tsCases = [
-  {
-    name: 'basic',
-    code: `export class SomeComponent extends React.Component<{ foo: boolean }> {
-
-    }`
-  }
-];
-
 jestInCase(
   'flow',
   ({ code }) => {
@@ -288,6 +279,21 @@ jestInCase(
   },
   flowCases
 );
+
+let tsCases = [
+  {
+    name: 'named',
+    code: `export class SomeComponent extends React.Component<{ foo: boolean }> {
+
+    }`
+  },
+  {
+    name: 'default',
+    code: `export default class SomeComponent extends React.Component<{ foo: boolean }> {
+
+    }`
+  }
+];
 
 jestInCase(
   'typescript',
