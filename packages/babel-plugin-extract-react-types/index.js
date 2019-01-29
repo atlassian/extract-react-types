@@ -5,8 +5,7 @@ module.exports = babel => {
   return {
     visitor: {
       Program(programPath, state) {
-        let parserPlugins = state.file.opts.parserOpts.plugins;
-        let typeSystem = parserPlugins
+        let typeSystem = state.file.opts.parserOpts.plugins
           .map(plugin => (Array.isArray(plugin) ? plugin[0] : plugin))
           .find(plugin => plugin === 'flow' || plugin === 'typescript');
 
