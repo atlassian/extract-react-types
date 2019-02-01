@@ -14,7 +14,7 @@ const STARTING_CODE = {
 class Button extends React.Component<ButtonPropType>{
 
 }`,
-  typeSystem: 'flow',
+  typeSystem: 'flow'
 };
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
     code: STARTING_CODE.code,
     dataForPropTypes: ert(STARTING_CODE.code, STARTING_CODE.typeSystem),
     typeSystem: STARTING_CODE.typeSystem,
-    error: null,
+    error: null
   };
 
   updateCode = code => {
@@ -30,11 +30,11 @@ class App extends Component {
       const ast = ert(code, this.state.typeSystem);
       this.setState({
         dataForPropTypes: ast,
-        error: null,
+        error: null
       });
     } catch (error) {
       this.setState({
-        error,
+        error
       });
       window.error = error;
     }
@@ -43,9 +43,9 @@ class App extends Component {
   handleSelectChange = event => {
     this.setState(
       {
-        typeSystem: event.target.value,
+        typeSystem: event.target.value
       },
-      () => this.updateCode(this.state.code),
+      () => this.updateCode(this.state.code)
     );
   };
 
@@ -75,9 +75,7 @@ class App extends Component {
             />
           </div>
           <div className="block proptypes">
-            {dataForPropTypes && (
-              <PrettyProps className="block" props={dataForPropTypes} />
-            )}
+            {dataForPropTypes && <PrettyProps className="block" props={dataForPropTypes} />}
           </div>
         </div>
         {error && <pre className="error-container">{error.stack}</pre>}

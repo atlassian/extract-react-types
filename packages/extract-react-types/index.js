@@ -6,9 +6,9 @@ import * as K from './kinds'
 
 const nodePath = require('path');
 const createBabelFile = require('babel-file');
-//const { loadFileSync, resolveImportFilePathSync } = require('babel-file-loader');
-const loadFileSync = () => {}
-const resolveImportFilePathSync = () => {}
+const { loadFileSync, resolveImportFilePathSync } = require('babel-file-loader');
+//const loadFileSync = () => {}
+//const resolveImportFilePathSync = () => {}
 const { isFlowIdentifier } = require('babel-flow-identifiers');
 const { getTypeBinding } = require('babel-type-scopes');
 const { getIdentifierKind } = require('babel-identifiers');
