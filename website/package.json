@@ -2,11 +2,11 @@
     "name": "website",
     "version": "0.0.0",
     "devDependencies": {
-        "@babel/core": "^7",
+        "@babel/core": "^7.2.0",
         "@babel/plugin-proposal-class-properties": "^7.3.0",
         "@babel/preset-env": "^7.3.1",
         "@babel/preset-react": "^7.0.0",
-        "@babel/types": "^7.0.0-beta.56",
+        "@babel/types": "^7.3.0",
         "babel-loader": "^8.0.5",
         "css-loader": "^2.1.0",
         "html-webpack-plugin": "^3.2.0",
@@ -20,8 +20,9 @@
         "start:dev": "webpack-dev-server"
     },
     "dependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.3.0",
         "extract-react-types": "^0.15.1",
-        "pretty-proptypes": "^0.5.0"
+        "pretty-proptypes": "^0.5.0",
+        "react": "^16.3.1",
+        "react-dom": "^16.3.1"
     }
 }
