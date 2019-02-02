@@ -7,15 +7,16 @@
   },
   "bolt": {
     "workspaces": [
-      "packages/*",
-      "website"
+      "packages/extract-react-types",
+      "packages/kind2string"
     ]
   },
   "dependencies": {
     "@atlaskit/build-releases": "^3.0.3",
-    "@babel/core": "^7",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/types": "^7.0.0-beta.56",
+    "@babel/types": "^7.3.0",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
     "babel-explode-module": "^3.0.0",
@@ -27,7 +28,6 @@
     "babel-normalize-comments": "^1.0.1",
     "babel-react-components": "^1.1.0",
     "babel-type-scopes": "^1.1.0",
-    "babylon": "^7.0.0-beta.22",
     "babylon-options": "^2.0.1",
     "emotion": "^9.1.1",
     "react-codemirror": "^1.0.0",
@@ -36,17 +36,15 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
+    "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-emotion": "^9.1.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.0",
     "enzyme": "^3.3.0",

@@ -54,11 +54,9 @@ const converters = {
 */
   string: (type /*: K.String*/, mode /*: string */) /*:string*/ =>
     type.value != null ? `"${type.value.toString()}"` : type.kind,
-  custom: (type /*:any*/, mode /*: string */) /*:string*/ =>
-    type.value.toString(),
+  custom: (type /*:any*/, mode /*: string */) /*:string*/ => type.value.toString(),
   any: (type /*: K.Any*/, mode /*: string */) /*:string*/ => type.kind,
-  void: (type /*: K.Void */, mode /*: string */) /*: 'undefined' */ =>
-    'undefined',
+  void: (type /*: K.Void */, mode /*: string */) /*: 'undefined' */ => 'undefined',
   literal: (type /*: any */, mode /*: string */) /*: string*/ => `${type.kind}`,
   mixed: (type /*: K.Mixed*/, mode /*: string */) /*:string*/ => type.kind,
   null: (type /*: K.Null */, mode /*: string */) /*: 'null' */ => 'null',
@@ -78,27 +76,18 @@ const converters = {
   JSXExpressionContainer: (type /*:any*/, mode /*: string */) /*:string*/ => {
     return `{${convert(type.expression)}}`;
   },
-  JSXOpeningElement: (
-    type /*JSXOpeningElement*/,
-    mode /*: string */,
-  ) /*:string*/ => {
+  JSXOpeningElement: (type /*JSXOpeningElement*/, mode /*: string */) /*:string*/ => {
     return `${convert(type.name)} ${mapConvertAndJoin(type.attributes, ' ')}`;
   },
   JSXElement: (type /*: K.JSXElement */, mode /*: string */) /*:string*/ => {
     return `<${convert(type.value)} />`;
   },
 
-  JSXIdentifier: (
-    type /*: K.JSXIdentifier */,
-    mode /*: string */,
-  ) /*:string*/ => {
+  JSXIdentifier: (type /*: K.JSXIdentifier */, mode /*: string */) /*:string*/ => {
     return `${type.value}`;
   },
 
-  JSXAttribute: (
-    type /*: K.JSXAttribute */,
-    mode /*: string */,
-  ) /*:string*/ => {
+  JSXAttribute: (type /*: K.JSXAttribute */, mode /*: string */) /*:string*/ => {
     return `${convert(type.name)}=${convert(type.value)}`;
   },
 
@@ -117,10 +106,7 @@ const converters = {
     TODO: Make this resolve members in a unique way that will allow us to
     handle property keys with no assigned value
   */
-  objectPattern: (
-    type /*: K.ObjectPattern */,
-    mode /*: string */,
-  ) /*: string */ => {
+  objectPattern: (type /*: K.ObjectPattern */, mode /*: string */) /*: string */ => {
     // ({ a, b }) => undefined ({a: a, b: b}) => undefined
     // ({ a = 2, b }) => undefined  ({a: a = 2, b: b })=> undefined
     return `{ ${mapConvertAndJoin(type.members)} }`;
@@ -130,10 +116,7 @@ const converters = {
     return `...${convert(type.argument)}`;
   },
 
-  assignmentPattern: (
-    type /*: K.AssignmentPattern */,
-    mode /*: string */,
-  ) /*:string*/ => {
+  assignmentPattern: (type /*: K.AssignmentPattern */, mode /*: string */) /*:string*/ => {
     return `${convert(type.left)} = ${convert(type.right)}`;
   },
 
@@ -156,9 +139,7 @@ const converters = {
 
   property: (type /*: K.Property */, mode /*: string */) /*:string*/ => {
     const sameId =
-      type.key.kind === 'id' &&
-      type.value.kind === 'id' &&
-      type.key.name === type.value.name;
+      type.key.kind === 'id' && type.value.kind === 'id' && type.key.name === type.value.name;
 
     const assignmentSameId =
       type.value.kind === 'assignmentPattern' &&
@@ -182,10 +163,7 @@ const converters = {
     return `{ ${mapConvertAndJoin(type.members)} }`;
   },
 
-  memberExpression: (
-    type /*: K.MemberExpression*/,
-    mode /*: string */,
-  ) /*:string*/ => {
+  memberExpression: (type /*: K.MemberExpression*/, mode /*: string */) /*:string*/ => {
     const object = resolveToLast(type.object);
     const property = convert(type.property);
 
@@ -248,17 +226,11 @@ const converters = {
     return convert(val.id);
   },
 
-  templateExpression: (
-    type /*: K.TemplateExpression */,
-    mode /*: string */,
-  ) /*: string */ => {
+  templateExpression: (type /*: K.TemplateExpression */, mode /*: string */) /*: string */ => {
     return `${convert(type.tag)}`;
   },
 
-  templateLiteral: (
-    type /*: K.TemplateLiteral */,
-    mode /*: string */,
-  ) /*: string */ => {
+  templateLiteral: (type /*: K.TemplateLiteral */, mode /*: string */) /*: string */ => {
     let str = type.quasis.reduce(function(newStr, v, i) {
       let quasi = convert(v);
       newStr = `${newStr}${quasi}`;
@@ -271,10 +243,7 @@ const converters = {
     return `\`${str}\``;
   },
 
-  templateElement: (
-    type /*: K.TemplateElement */,
-    mode /*: string */,
-  ) /*: string */ => {
+  templateElement: (type /*: K.TemplateElement */, mode /*: string */) /*: string */ => {
     return type.value.cooked.toString();
   },
   class: (type /*: K.ClassKind */, mode /*: string */) /*: string */ => {
@@ -294,7 +263,8 @@ const converters = {
   typeParam: (type /*: K.TypeParam */, mode /*: string */) /*: string*/ => `${type.name}`,
   typeParams: (type /*: K.TypeParams */, mode /*: string */) /*: string*/ =>
     `<${mapConvertAndJoin(type.params, ', ')}>`,
-  typeParamsDeclaration: (type /*: K.TypeParamsDeclaration */, mode /*: string */) /*: string*/ => `<${mapConvertAndJoin(type.params, ', ')}>`,
+  typeParamsDeclaration: (type /*: K.TypeParamsDeclaration */, mode /*: string */) /*: string*/ =>
+    `<${mapConvertAndJoin(type.params, ', ')}>`,
   typeof: (type /*: K.Typeof */, mode /*: string */) /*: string*/ => {
     return type.name ? `typeof ${type.name}` : `${type.type.kind}`;
   },
@@ -313,10 +283,8 @@ const converters = {
     } else {
       console.warn(
         `kind2string has received an export type with multiple exports, and have no way of printing this.
-The exports we found were: ${type.exports
-          .map(xport => convert(xport, mode))
-          .join(', ')}
-from file: ${convert(type.source, mode)}`,
+The exports we found were: ${type.exports.map(xport => convert(xport, mode)).join(', ')}
+from file: ${convert(type.source, mode)}`
       );
       return '';
     }
@@ -325,10 +293,14 @@ from file: ${convert(type.source, mode)}`,
 
   // TS
   tuple: (type /*: K.Tuple */, mode /*: string */) /*: string*/ =>
-    `[${mapConvertAndJoin(type.types)}]`,
+    `[${mapConvertAndJoin(type.types)}]`
 };
 
 function convert(type /*: any */, mode /*: string*/ = 'value') {
+  console.log({
+    type,
+    mode
+  });
   if (!type) {
     console.error('No type argument has been passed in');
     return '';
