@@ -4,6 +4,7 @@ import 'codemirror/lib/codemirror.css';
 import PrettyProps from 'pretty-proptypes';
 import ert from 'extract-react-types';
 import './App.css';
+import { compress } from './uriUtils';
 
 const STARTING_CODE = {
   code: `type ButtonPropType = {
@@ -26,6 +27,7 @@ class App extends Component {
   };
 
   updateCode = code => {
+    console.log(compress(code));
     try {
       const ast = ert(code, this.state.typeSystem);
       this.setState({
