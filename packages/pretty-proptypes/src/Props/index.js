@@ -12,17 +12,17 @@ import renderPropType from '../PropType';
 
 type Obj = {
   kind: 'object',
-  members: Array<any>,
+  members: Array<any>
 };
 
 type Gen = {
   kind: 'generic',
-  value: any,
+  value: any
 };
 
 type Inter = {
   kind: 'intersection',
-  types: Array<Obj | Gen>,
+  types: Array<Obj | Gen>
 };
 
 type DynamicPropsProps = {
@@ -30,11 +30,12 @@ type DynamicPropsProps = {
   heading?: string,
   shouldCollapseProps?: boolean,
   overrides?: {
-    [string]: ComponentType<CommonProps>,
+    [string]: ComponentType<CommonProps>
   },
-  props: {
-    component?: Obj | Inter,
+  props?: {
+    component?: Obj | Inter
   },
+  component?: ComponentType<any>
 };
 
 const getProps = props => {
@@ -45,7 +46,18 @@ const getProps = props => {
 
 export default class Props extends Component<DynamicPropsProps> {
   render() {
-    let { props, heading, ...rest } = this.props;
+    let { props, heading, component, ...rest } = this.props;
+    if (component) {
+      if (component.___types) {
+        props = { type: 'program', component: component.___types };
+      } else {
+        console.error(
+          'A component was passed to <Props> but it does not have types attached.\n' +
+            'babel-plugin-extract-react-types may not be correctly installed.\n' +
+            '<Props> will fallback to the props prop to display types.'
+        );
+      }
+    }
     let propTypes = getProps(props);
     if (!propTypes) return null;
 
