@@ -11,6 +11,14 @@ pretty-proptypes can display props from two sources.
 
 - Using `babel-plugin-extract-react-types` and passing the component to `Props`
 
+`.babelrc`
+
+```json
+{
+  "plugins": ["babel-plugin-extract-react-types"]
+}
+```
+
 ```js
 import MyCoolComponent from '../MyCoolComponent';
 

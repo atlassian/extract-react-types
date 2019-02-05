@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-yarn add babel-plugin-extract-react-types
+yarn add babel-plugin-extract-react-types pretty-proptypes
 ```
 
 ## Usage
@@ -19,12 +19,10 @@ yarn add babel-plugin-extract-react-types
 ```
 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
 import SomeComponent from 'somewhere';
 import Props from 'pretty-proptypes';
 
-ReactDOM.render(<Props component={SomeComponent} />, document.getElementById('root'));
+<Props heading="My Component" component={SomeComponent} />;
 ```
 
 ## Inspiration
