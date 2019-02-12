@@ -47,7 +47,6 @@ export default class Props extends Component<DynamicPropsProps> {
   render() {
     let { props, heading, ...rest } = this.props;
     let propTypes = getProps(props);
-    console.log(propTypes);
     if (!propTypes) return null;
 
     return (
