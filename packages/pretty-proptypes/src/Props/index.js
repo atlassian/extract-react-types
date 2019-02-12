@@ -12,17 +12,17 @@ import renderPropType from '../PropType';
 
 type Obj = {
   kind: 'object',
-  members: Array<any>,
+  members: Array<any>
 };
 
 type Gen = {
   kind: 'generic',
-  value: any,
+  value: any
 };
 
 type Inter = {
   kind: 'intersection',
-  types: Array<Obj | Gen>,
+  types: Array<Obj | Gen>
 };
 
 type DynamicPropsProps = {
@@ -30,11 +30,11 @@ type DynamicPropsProps = {
   heading?: string,
   shouldCollapseProps?: boolean,
   overrides?: {
-    [string]: ComponentType<CommonProps>,
+    [string]: ComponentType<CommonProps>
   },
   props: {
-    component?: Obj | Inter,
-  },
+    component?: Obj | Inter
+  }
 };
 
 const getProps = props => {
@@ -47,6 +47,7 @@ export default class Props extends Component<DynamicPropsProps> {
   render() {
     let { props, heading, ...rest } = this.props;
     let propTypes = getProps(props);
+    console.log(propTypes);
     if (!propTypes) return null;
 
     return (

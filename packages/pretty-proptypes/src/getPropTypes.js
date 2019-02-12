@@ -8,10 +8,7 @@ const getPropTypes = (propTypesObj: Kind) => {
   if (resolvedTypes.kind === 'object') {
     propTypes = resolvedTypes.members;
   } else if (resolvedTypes.kind === 'intersection') {
-    propTypes = resolvedTypes.types.reduce(
-      (acc, type) => [...acc, ...reduceToObj(type)],
-      [],
-    );
+    propTypes = resolvedTypes.types.reduce((acc, type) => [...acc, ...reduceToObj(type)], []);
   }
   return propTypes;
 };

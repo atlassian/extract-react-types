@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "test": "jest",
-    "changeset": "bolt build-releases changeset"
+    "changeset": "bolt build-releases changeset",
+    "dev:pretty-proptypes": "bolt w pretty-proptypes run dev"
   },
   "bolt": {
     "workspaces": [
