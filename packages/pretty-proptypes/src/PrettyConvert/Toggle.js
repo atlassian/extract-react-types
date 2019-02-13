@@ -7,9 +7,9 @@ const Collapse = ({
   innerRef,
   ...props
 }: {
-  height: string,
+  height: number,
   isCollapsed: boolean,
-  innerRef: ElementRef
+  innerRef: ElementRef<*>
 }) => (
   <div
     ref={innerRef}

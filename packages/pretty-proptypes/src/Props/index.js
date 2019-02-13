@@ -1,7 +1,8 @@
 // @flow
 import React, { Component, type ComponentType } from 'react';
 
-import type { Components, CommonProps } from '../types';
+import type { Components } from '../components';
+import type { CommonProps } from '../types';
 import PropsWrapper from './Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
