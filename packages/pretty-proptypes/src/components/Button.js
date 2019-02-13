@@ -3,6 +3,7 @@ import React from 'react';
 
 const Button = (props: { isCollapsed: boolean }) => (
   <button
+    type="button"
     css={`
       background: linear-gradient(to bottom, #1f8be6 0%, #1178ce 100%) #1385e5;
       border-width: 1px;

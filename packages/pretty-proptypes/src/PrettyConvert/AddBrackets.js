@@ -2,12 +2,30 @@
 import React, { Component, Fragment, type Node } from 'react';
 import { colors } from '../components/constants';
 
-const StateBit = ({ isHovered, onMouseEnter, onMouseLeave, onClick, children }) => (
-  <span
+const StateBit = ({
+  isHovered,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+  children
+}: {
+  isHovered: boolean,
+  onMouseEnter: () => mixed,
+  onMouseLeave: () => mixed,
+  onClick: () => mixed,
+  children: Node
+}) => (
+  <button
+    type="button"
     onClick={onClick}
     css={`
       background-color: ${isHovered ? colors.P300 : colors.N20};
       color: ${isHovered ? 'white' : colors.subtleText};
+      border: 0;
+      fonts-size: 14px;
+      fonts-family: sans-serif;
+      line-height: 20px;
+      width: auto;
       margin: 2px 0;
       padding: 0 0.2em;
       :hover {
@@ -18,7 +36,7 @@ const StateBit = ({ isHovered, onMouseEnter, onMouseLeave, onClick, children }) 
     onMouseLeave={onMouseLeave}
   >
     {children}
-  </span>
+  </button>
 );
 
 type Props = {

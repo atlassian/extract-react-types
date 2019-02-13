@@ -1,8 +1,7 @@
 // @flow
 import React, { Component, type Node } from 'react';
-import convert, { resolveFromGeneric } from 'kind2string';
+import { resolveFromGeneric } from 'kind2string';
 import { gridSize } from '../components/constants';
-import Button from '../components/Button';
 import allComponents, { type Components } from '../components';
 import Toggle from './Toggle';
 import prettyConvert, { SIMPLE_TYPES } from './converters';

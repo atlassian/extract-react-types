@@ -1,8 +1,9 @@
 // @flow
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
 import Prop from '../Prop';
-import allComponents, { type Components } from '../components';
+import allComponents from '../components';
 
 const renderPropType = (
   propType: any,

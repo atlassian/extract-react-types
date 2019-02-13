@@ -2,7 +2,6 @@
 const { explodeModule } = require('babel-explode-module');
 const { explodedToStatements } = require('babel-helper-simplify-module');
 const printAST = require('ast-pretty-print');
-const t = require('@babel/types');
 
 module.exports = function matchExported(file /* : Object */, exportName /*: string */) {
   let exploded = explodeModule(file.path.node);

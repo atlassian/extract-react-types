@@ -16,13 +16,15 @@ const Wrapper = (props: { children: Node }) => (
   />
 );
 
-const H2 = (props: { children: Node }) => (
+const H2 = ({ children, ...rest }: { children: Node }) => (
   <h2
     css={`
       margintop: 1em;
     `}
-    {...props}
-  />
+    {...rest}
+  >
+    {children}
+  </h2>
 );
 
 const PropsWrapper = ({ children, heading }: { children: Node, heading?: string }) => (

@@ -2,7 +2,7 @@
 import React, { type Node } from 'react';
 import { colors, gridSize, borderRadius } from '../components/constants';
 
-const Heading = (props: { children: Node }) => (
+const Heading = ({ children, ...rest }: { children: Node }) => (
   <h3
     css={`
       border-bottom: 2px solid ${colors.N20};
@@ -12,8 +12,10 @@ const Heading = (props: { children: Node }) => (
       margin: 0 0 ${gridSize}px 0;
       padding-bottom: ${gridSize}px;
     `}
-    {...props}
-  />
+    {...rest}
+  >
+    {children}
+  </h3>
 );
 
 const HeadingDefault = (props: { children: Node }) => (
@@ -30,6 +32,7 @@ const HeadingRequired = (props: { children: Node }) => (
     css={`
       color: ${colors.R500};
     `}
+    {...props}
   />
 );
 

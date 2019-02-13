@@ -11,6 +11,8 @@ type TestCase = {
 */
 
 const stripIndent = require('strip-indent');
+const cases = require('jest-in-case');
+
 const extractReactTypes = require('./');
 
 const TESTS = [
@@ -1484,21 +1486,13 @@ const TESTS = [
   }
 ];
 
-for (let testCase /*: TestCase */ of TESTS) {
-  let testFn;
-
-  if (testCase.only) {
-    testFn = test.only;
-  } else if (testCase.skip) {
-    testFn = test.skip;
-  } else {
-    testFn = test;
-  }
-
-  testFn(testCase.name, () => {
+cases(
+  '',
+  testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename);
     expect(result).toMatchSnapshot();
-  });
-}
+  },
+  TESTS
+);

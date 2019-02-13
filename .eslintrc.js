@@ -89,6 +89,9 @@ module.exports = {
     'consistent-return': 'off',
     'no-else-return': 'off',
     'react/jsx-curly-brace-presence': 'off',
-    'import/no-useless-path-segments': 'off'
+    'import/no-useless-path-segments': 'off',
+    'react/sort-comp': 'off',
+    'no-use-before-define': 'off',
+    'no-restricted-syntax': 'off'
   }
 };

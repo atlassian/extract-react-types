@@ -2,7 +2,6 @@
 import convert from './src';
 
 const extractReactTypes = require('extract-react-types');
-const k2s = require('./dist');
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   let file = `
@@ -174,12 +173,14 @@ describe('kind 2 string tests', () => {
     });
     describe('templateLiteral', () => {
       it('should resolve to same string', () => {
+        /* eslint-disable-next-line no-template-curly-in-string */
         let str = '`abc${a}de`';
         let reId = getSingleDefault(str);
         let final = convert(reId);
         expect(final).toBe(str);
       });
       it('should resolve excaped characters', () => {
+        /* eslint-disable-next-line no-template-curly-in-string */
         let str = '`abc${a}de\n`';
         let reId = getSingleDefault(str);
         let final = convert(reId);

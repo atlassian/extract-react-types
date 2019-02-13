@@ -1,9 +1,12 @@
 // @flow
-import React, { type Node, Fragment, Component } from 'react';
+
+// TODO: Remove this eslint-disable
+/* eslint-disable */
+import React, { type Node } from 'react';
 import convert, { resolveFromGeneric } from 'kind2string';
 import type { Components } from '../components';
 import AddBrackets from './AddBrackets';
-import { colors, borderRadius } from '../components/constants';
+import { colors } from '../components/constants';
 /*::
 import * as K from 'extract-react-types'
 */

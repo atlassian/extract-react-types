@@ -1,5 +1,12 @@
 // @flow
 
+// We explicitly want to be able to have mode in these functions,
+// even in instances where we don't use it.
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+
+/* eslint-disable no-undef */
+
 /*::
 import * as K from 'extract-react-types'
 */
@@ -175,7 +182,7 @@ const converters = {
     switch (object.kind) {
       case 'id':
         return `${convert(type.object)}.${property}`;
-      case 'object':
+      case 'object': {
         const mem = object.members.find(m => {
           if (typeof m.key !== 'string') {
             // Issue here is that convert(key) can result in either a String type or an Id type,
@@ -191,6 +198,7 @@ const converters = {
           console.error(`${property} not found in ${convert(object)}`);
           return 'undefined';
         }
+      }
       case 'import':
         return `${convert(type.object)}.${property}`;
       default:
@@ -231,14 +239,15 @@ const converters = {
   },
 
   templateLiteral: (type /*: K.TemplateLiteral */, mode /*: string */) /*: string */ => {
-    let str = type.quasis.reduce(function(newStr, v, i) {
+    let str = type.quasis.reduce((newStr, v, i) => {
       let quasi = convert(v);
-      newStr = `${newStr}${quasi}`;
+      let newStrClone = newStr;
+      newStrClone = `${newStrClone}${quasi}`;
       if (type.expressions[i]) {
         let exp = convert(type.expressions[i]);
-        newStr = `${newStr}\${${exp}}`;
+        newStrClone = `${newStrClone}\${${exp}}`;
       }
-      return newStr;
+      return newStrClone;
     }, '');
     return `\`${str}\``;
   },

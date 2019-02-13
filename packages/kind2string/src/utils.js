@@ -7,6 +7,7 @@ export function resolveToLast(type /*: MemberExpression | Obj | Id*/) {
     case 'memberExpression':
       return resolveToLast(type.object);
     default:
+      /* eslint-disable-next-line no-console */
       console.error(`Unexpected initial type of member expression`, JSON.stringify(type));
       break;
   }
@@ -37,7 +38,7 @@ export function reduceToObj(type) {
   } else if (type.kind === 'intersection') {
     return type.types.reduce((acc, i) => [...acc, ...reduceToObj(i)], []);
   }
-
+  /* eslint-disable-next-line no-console */
   console.warn('was expecting to reduce to an object and could not', type);
   return [];
 }

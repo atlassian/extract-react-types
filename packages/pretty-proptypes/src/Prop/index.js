@@ -4,7 +4,6 @@ import md from 'react-markings';
 import { gridSize } from '../components/constants';
 import PrettyPropType from '../PrettyConvert';
 import PropTypeHeading from './Heading';
-import type { Components } from '../components';
 import type { CommonProps } from '../types';
 
 const PropTypeWrapper = (props: { children: Node }) => (
