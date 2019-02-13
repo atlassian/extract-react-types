@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node } from 'react';
+import React from 'react';
 
 const Button = (props: { isCollapsed: boolean }) => (
   <button
