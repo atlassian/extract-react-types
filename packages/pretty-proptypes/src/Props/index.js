@@ -46,6 +46,9 @@ export default class Props extends Component<DynamicPropsProps> {
   render() {
     let { props, heading, component, ...rest } = this.props;
     if (component) {
+      /* $FlowFixMe the component prop is typed as a component because
+         that's what people pass to Props and the ___types property shouldn't
+         exist in the components types so we're just going to ignore this error */
       if (component.___types) {
         props = { type: 'program', component: component.___types };
       } else {
