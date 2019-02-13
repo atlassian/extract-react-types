@@ -1,7 +1,16 @@
 // @flow
-import React, { Component, type Node, type ElementRef } from "react";
+import React, { Component, type Node, type ElementRef } from 'react';
 
-const Collapse = ({ height, isCollapsed, innerRef, ...props }) => (
+const Collapse = ({
+  height,
+  isCollapsed,
+  innerRef,
+  ...props
+}: {
+  height: number,
+  isCollapsed: boolean,
+  innerRef: ElementRef<*>
+}) => (
   <div
     ref={innerRef}
     css={`

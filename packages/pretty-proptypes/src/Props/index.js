@@ -1,11 +1,8 @@
 // @flow
-import React, { Component, type Node, type ComponentType } from 'react';
-import { gridSize } from '../components/constants';
-import convert, { getKind } from 'kind2string';
+import React, { Component, type ComponentType } from 'react';
 
-import Prop from '../Prop';
-import { type CommonProps } from '../types';
-import allComponents, { type Components } from '../components';
+import type { Components } from '../components';
+import type { CommonProps } from '../types';
 import PropsWrapper from './Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
@@ -42,6 +39,7 @@ const getProps = props => {
   if (props && props.component) {
     return getPropTypes(props.component);
   }
+  return null;
 };
 
 export default class Props extends Component<DynamicPropsProps> {

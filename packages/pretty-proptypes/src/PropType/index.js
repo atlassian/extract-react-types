@@ -1,8 +1,9 @@
 // @flow
-import React from "react";
-import convert, { getKind ,reduceToObj } from "kind2string";
-import Prop from "../Prop";
-import allComponents, { type Components } from "../components";
+/* eslint-disable no-param-reassign */
+import React from 'react';
+import convert, { getKind, reduceToObj } from 'kind2string';
+import Prop from '../Prop';
+import allComponents from '../components';
 
 const renderPropType = (
   propType: any,
@@ -13,7 +14,7 @@ const renderPropType = (
   } else {
     components = { ...allComponents, ...components };
   }
-  if (propType.kind === "spread") {
+  if (propType.kind === 'spread') {
     const furtherProps = reduceToObj(propType.value);
     if (Array.isArray(furtherProps) && furtherProps.length > 0) {
       /* Only render the spread contents if they are a non-empty value, otherwise render the
@@ -27,10 +28,7 @@ const renderPropType = (
 
   let description;
   if (propType.leadingComments) {
-    description = propType.leadingComments.reduce(
-      (acc, { value }) => acc.concat(`\n${value}`),
-      ""
-    );
+    description = propType.leadingComments.reduce((acc, { value }) => acc.concat(`\n${value}`), '');
   }
 
   if (!propType.value) {
@@ -52,16 +50,12 @@ const renderPropType = (
     required: !propType.optional,
     type: getKind(propType.value),
     defaultValue: propType.default && convert(propType.default),
-    description: description,
+    description,
     shouldCollapse: shouldCollapseProps,
     typeValue: propType.value
   };
 
-  return overrides[name] ? (
-    <OverrideComponent {...commonProps} />
-  ) : (
-    <Prop {...commonProps} />
-  );
+  return overrides[name] ? <OverrideComponent {...commonProps} /> : <Prop {...commonProps} />;
 };
 
 export default renderPropType;

@@ -7,13 +7,25 @@ const StateBit = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
-  children,
+  children
+}: {
+  isHovered: boolean,
+  onMouseEnter: () => mixed,
+  onMouseLeave: () => mixed,
+  onClick: () => mixed,
+  children: Node
 }) => (
-  <span
+  <button
+    type="button"
     onClick={onClick}
     css={`
       background-color: ${isHovered ? colors.P300 : colors.N20};
       color: ${isHovered ? 'white' : colors.subtleText};
+      border: 0;
+      fonts-size: 14px;
+      fonts-family: sans-serif;
+      line-height: 20px;
+      width: auto;
       margin: 2px 0;
       padding: 0 0.2em;
       :hover {
@@ -24,24 +36,24 @@ const StateBit = ({
     onMouseLeave={onMouseLeave}
   >
     {children}
-  </span>
+  </button>
 );
 
 type Props = {
   openBracket: string,
   closeBracket: string,
-  children: Node,
+  children: Node
 };
 
 type State = {
   isHovered: boolean,
-  isShown: boolean,
+  isShown: boolean
 };
 
 export default class AddBrackets extends Component<Props, State> {
   static defaultProps = {
     openBracket: '(',
-    closeBracket: ')',
+    closeBracket: ')'
   };
 
   state = { isHovered: false, isShown: true };

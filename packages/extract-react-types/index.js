@@ -17,6 +17,7 @@ const { normalizeComment } = require('babel-normalize-comments');
 const { sync: resolveSync } = require('resolve');
 
 const matchExported = require('./matchExported');
+
 const converters = {};
 
 const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
@@ -102,15 +103,14 @@ const isVariableOfMembers = defaultProps => {
 const getDefaultProps = (path, context) => {
   let defaultProps = null;
 
-  path
+  let foundDefaults = path
     .get('body')
     .get('body')
-    .find(p => {
-      if (p.isClassProperty() && p.get('key').isIdentifier({ name: 'defaultProps' })) {
-        defaultProps = convert(p, { ...context, mode: 'value' });
-      }
-    });
-  let defaultPropsArr = [];
+    .find(p => p.isClassProperty() && p.get('key').isIdentifier({ name: 'defaultProps' }));
+
+  if (foundDefaults) {
+    defaultProps = convert(foundDefaults, { ...context, mode: 'value' });
+  }
 
   if (!defaultProps) {
     return [];
@@ -136,9 +136,9 @@ converters.Program = (path, context) /*: K.Program*/ => {
   // just extract the props from the first class in the file
   if (!component) {
     path.traverse({
-      ClassDeclaration(path) {
-        if (!component && isReactComponentClass(path)) {
-          component = convertReactComponentClass(path, context);
+      ClassDeclaration(scopedPath) {
+        if (!component && isReactComponentClass(scopedPath)) {
+          component = convertReactComponentClass(scopedPath, context);
         }
       }
     });
@@ -159,7 +159,7 @@ function convertReactComponentFunction(path, context) {
   if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
     name = path.node.id.name;
   } else {
-    const variableDeclarator = path.findParent(path => path.isVariableDeclarator());
+    const variableDeclarator = path.findParent(scopedPath => scopedPath.isVariableDeclarator());
 
     if (variableDeclarator) {
       name = variableDeclarator.node.id.name;
@@ -197,6 +197,7 @@ function addDefaultProps(props, defaultProps) {
     let ungeneric = resolveFromGeneric(props);
     const prop = getProp(ungeneric, property);
     if (!prop) {
+      /* eslint-disable-next-line no-console */
       console.warn(
         `Could not find property to go with default of ${
           property.key.value ? property.key.value : property.key.name
@@ -230,6 +231,7 @@ converters.TaggedTemplateExpression = (path, context) /*: K.TemplateExpression*/
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TemplateElement = (path, context) /*: K.TemplateElement*/ => {
   return {
     kind: 'templateElement',
@@ -331,6 +333,7 @@ converters.JSXElement = (path, context) /*: K.JSXElement*/ => {
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.JSXIdentifier = (path, context) /*: K.JSXIdentifier*/ => {
   return {
     kind: 'JSXIdentifier',
@@ -404,22 +407,27 @@ converters.ObjectProperty = (path, context) /*: K.Property*/ => {
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.ExistentialTypeParam = (path, context) /*: K.Exists*/ => {
   return { kind: 'exists' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.StringLiteral = (path, context) /*: K.String*/ => {
   return { kind: 'string', value: path.node.value };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.NumericLiteral = (path, context) /*: K.Number*/ => {
   return { kind: 'number', value: path.node.value };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.NullLiteral = (path, context) /*: K.Null*/ => {
   return { kind: 'null' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.BooleanLiteral = (path, context) /*: K.Boolean*/ => {
   return { kind: 'boolean', value: path.node.value };
 };
@@ -507,6 +515,7 @@ converters.TypeAnnotation = (path, context) => {
   return convert(path.get('typeAnnotation'), context);
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.ExistsTypeAnnotation = (path, context) /*: K.Exists*/ => {
   return { kind: 'exists' };
 };
@@ -543,6 +552,7 @@ converters.TypeParameterDeclaration = (path, context) /*: K.TypeParamsDeclaratio
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TypeParameter = (path, context) /*: K.TypeParam */ => {
   return {
     kind: 'typeParam',
@@ -558,6 +568,7 @@ function convertUtilityTypes(type /*: K.Generic*/) {
     if (type.typeParams && type.typeParams.params && type.typeParams.params[0]) {
       result = type.typeParams.params[0];
     } else {
+      /* eslint-disable-next-line no-console */
       console.warn('Missing type parameter for $Exact type');
     }
   }
@@ -653,7 +664,6 @@ converters.Identifier = (path, context) /*: K.Id*/ => {
   let name = path.node.name;
 
   if (context.mode === 'value') {
-    let res = {};
     if (kind === 'reference') {
       let binding = path.scope.getBinding(name);
 
@@ -790,18 +800,22 @@ converters.QualifiedTypeIdentifier = (path, context) => {
   return convert(path.get('id'), context);
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.VoidTypeAnnotation = (path) /*: K.Void*/ => {
   return { kind: 'void' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.BooleanTypeAnnotation = (path) /*: K.Boolean*/ => {
   return { kind: 'boolean' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.BooleanLiteralTypeAnnotation = (path) /*: K.Boolean*/ => {
   return { kind: 'boolean', value: path.node.value };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.NullLiteralTypeAnnotation = (path) /*: K.Null*/ => {
   return { kind: 'null' };
 };
@@ -815,14 +829,17 @@ converters.NumberLiteralTypeAnnotation = (path) /*: K.Number*/ => {
   return { kind: 'number', value: path.node.value };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.MixedTypeAnnotation = (path) /*: K.Mixed*/ => {
   return { kind: 'mixed' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.AnyTypeAnnotation = (path) /*: K.Any*/ => {
   return { kind: 'any' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.NumberTypeAnnotation = (path) /*: K.Number*/ => {
   return { kind: 'number' };
 };
@@ -842,6 +859,7 @@ converters.FunctionTypeAnnotation = (path, context) /*: K.Func*/ => {
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.StringTypeAnnotation = (path) /*: K.String */ => {
   return { kind: 'string' };
 };
@@ -859,7 +877,7 @@ converters.TSIndexedAccessType = (path, context) => {
 
   if (type.kind === 'generic') {
     if (type.value.members) {
-      const member = type.value.members.find(member => member.key.name === indexKey);
+      const member = type.value.members.find(scopedMember => scopedMember.key.name === indexKey);
       if (member) {
         return member.value;
       }
@@ -876,22 +894,27 @@ converters.TSIndexedAccessType = (path, context) => {
   }
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSStringKeyword = (path) /*: K.String */ => {
   return { kind: 'string' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSNumberKeyword = (path) /*: K.Number */ => {
   return { kind: 'number' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSBooleanKeyword = (path) /*: K.Boolean */ => {
   return { kind: 'boolean' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSVoidKeyword = (path) /*: K.Void */ => {
   return { kind: 'void' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSUndefinedKeyword = (path, context) /*: K.Void */ => {
   return { kind: 'void' };
 };
@@ -945,6 +968,7 @@ converters.TSUnionType = (path, context) /*: K.Union*/ => {
   return { kind: 'union', types };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSAnyKeyword = (path) /*: K.Any*/ => {
   return { kind: 'any' };
 };
@@ -1039,6 +1063,7 @@ converters.TSEnumMember = (path, context) => {
   return convert(path.get('id'), context);
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSArray = (path, context) /*: K.Any */ => {
   return { kind: 'any' };
 };
@@ -1057,10 +1082,12 @@ converters.TSTypeParameterInstantiation = (path, context) /*: K.TypeParams */ =>
   };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.ImportNamespaceSpecifier = (path, context) /*: K.Any */ => {
   return { kind: 'any' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.undefined = (path, context) /*: K.Any */ => {
   return { kind: 'any' };
 };
@@ -1100,14 +1127,17 @@ converters.TSParenthesizedType = (path, context) => {
   return convert(path.get('typeAnnotation'), context);
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSObjectKeyword = (path, context) /*: K.Obj */ => {
   return { kind: 'object', members: [] };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSNullKeyword = (path, context) /*: K.Null */ => {
   return { kind: 'null' };
 };
 
+/* eslint-disable-next-line no-unused-vars */
 converters.TSThisType = (path, context) /*:K.This */ => {
   return { kind: 'custom', value: 'this' };
 };
@@ -1401,6 +1431,7 @@ function getContext(
   resolveOptions /*:? Object */
 ) {
   let plugins = ['jsx'];
+  /* eslint-disable-next-line no-param-reassign */
   if (!resolveOptions) resolveOptions = {};
 
   if (!resolveOptions.extensions) {

@@ -1,8 +1,7 @@
 // @flow
 import React, { Component, type Node } from 'react';
+import { resolveFromGeneric } from 'kind2string';
 import { gridSize } from '../components/constants';
-import Button from '../components/Button';
-import convert, { resolveFromGeneric } from 'kind2string';
 import allComponents, { type Components } from '../components';
 import Toggle from './Toggle';
 import prettyConvert, { SIMPLE_TYPES } from './converters';
@@ -25,12 +24,12 @@ const Wrapper = (props: { children: Node }) => (
 type PrettyPropTypeProps = {
   typeValue: Object,
   shouldCollapse?: boolean,
-  components: Components,
+  components: Components
 };
 
 export default class PrettyPropType extends Component<PrettyPropTypeProps, *> {
   static defaultProps = {
-    components: allComponents,
+    components: allComponents
   };
 
   render() {
@@ -41,10 +40,7 @@ export default class PrettyPropType extends Component<PrettyPropTypeProps, *> {
       type = resolveFromGeneric(type);
     }
     if (SIMPLE_TYPES.includes(type.kind)) return null;
-    if (
-      type.kind === 'nullable' &&
-      SIMPLE_TYPES.includes(type.arguments.kind)
-    ) {
+    if (type.kind === 'nullable' && SIMPLE_TYPES.includes(type.arguments.kind)) {
       return null;
     }
 
@@ -53,10 +49,7 @@ export default class PrettyPropType extends Component<PrettyPropTypeProps, *> {
         beginClosed
         afterCollapse={(isCollapsed, toggleCollapse) => (
           <div>
-            <components.Button
-              isCollapsed={isCollapsed}
-              onClick={toggleCollapse}
-            >
+            <components.Button isCollapsed={isCollapsed} onClick={toggleCollapse}>
               {isCollapsed ? 'Expand Prop Shape' : 'Hide Prop Shape'}
             </components.Button>
           </div>

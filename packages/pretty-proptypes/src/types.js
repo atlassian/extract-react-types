@@ -11,5 +11,5 @@ export type CommonProps = {
   typeValue: Kind,
   type: string,
   shouldCollapse?: boolean,
-  components: Components,
+  components: Components
 };

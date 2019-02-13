@@ -1,8 +1,8 @@
 // @flow
-import React, { type Node } from "react";
+import React, { type Node } from 'react';
 
 const ReadmeDescription = (props: { children: Node }) =>
-  typeof props.children === "string" ? (
+  typeof props.children === 'string' ? (
     <p {...props} />
   ) : (
     <div

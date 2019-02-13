@@ -1,12 +1,11 @@
 // @flow
 
-import { shallow, mount, configure } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import React from 'react';
-import prettyConvert, { TypeMinWidth } from './converters';
-import components from '../components';
 import Adapter from 'enzyme-adapter-react-16';
 import extractReactTypes from 'extract-react-types';
-import convert from 'kind2string';
+import components from '../components';
+import prettyConvert, { TypeMinWidth } from './converters';
 
 configure({ adapter: new Adapter() });
 
@@ -55,6 +54,7 @@ test('fallback to kind2string type when no converter is found', () => {
 test('prettyConvert string value type', () => {
   let kind = simpleStringKind;
   let wrapper = shallow(prettyConvert(kind, components));
+  /* eslint-disable-next-line react/no-unescaped-entities */
   let other = shallow(<components.StringType>"{kind.value}"</components.StringType>);
 
   expect(wrapper.html()).toBe(other.html());
@@ -86,11 +86,6 @@ test('prettyConvert simple property', () => {
     wrapper.containsMatchingElement(<components.Type>{simplePropKind.key.name}</components.Type>)
   ).toBeTruthy();
   expect(wrapper.text().includes(simplePropKind.value.kind)).toBeTruthy();
-});
-
-test('optional property', () => {
-  let wrapper = shallow(prettyConvert(getSimplePropKind({ optional: true }), components));
-  expect(wrapper.find(components.Required).length).toBeFalsy();
 });
 
 test('optional property', () => {
@@ -130,11 +125,13 @@ test('resolve generic of array', () => {
 test.skip('object with spread object', () => {
   let values = getSingleDefault(`{ ...something, c: 'something' }`);
   let wrapper = shallow(prettyConvert(values, components));
+  expect(wrapper).toBe('something');
 });
 test.skip('resolve generic of array with complex type', () => {
   let values = getSingleProp(`Array<{ b: string, c: number }>`);
   let wrapper = shallow(prettyConvert(values, components));
   let members = wrapper.find(components.Indent).at(0);
+  expect(members).toBe('something');
 });
 
 // test.todo('intersection');
