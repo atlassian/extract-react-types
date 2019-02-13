@@ -84,6 +84,8 @@ module.exports = {
     'react/default-props-match-prop-types': 'off',
 
     // Allowing importing from dev deps (for stories and tests)
-    'import/no-extraneous-dependencies': 'off'
+    'import/no-extraneous-dependencies': 'off',
+    'spaced-comment': 'off',
+    'consistent-return': 'off'
   }
 };
