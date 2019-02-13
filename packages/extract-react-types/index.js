@@ -17,6 +17,7 @@ const { normalizeComment } = require('babel-normalize-comments');
 const { sync: resolveSync } = require('resolve');
 
 const matchExported = require('./matchExported');
+
 const converters = {};
 
 const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
@@ -145,7 +146,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
               componentPath = functionPath;
             }
           },
-          'FunctionExpression|ArrowFunctionExpression'(functionPath) {
+          'FunctionExpression|ArrowFunctionExpression': function(functionPath) {
             if (isParentVariableDeclaratorDefaultExport(functionPath)) {
               componentPath = functionPath;
             } else {
@@ -187,7 +188,7 @@ converters.Program = (path, context) /*: K.Program*/ => {
               componentPath = classPath;
             }
           },
-          'FunctionDeclaration|ArrowFunctionExpression|FunctionExpression'(functionPath) {
+          'FunctionDeclaration|ArrowFunctionExpression|FunctionExpression': function(functionPath) {
             if (!componentPath) {
               componentPath = functionPath;
             }

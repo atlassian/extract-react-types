@@ -2,13 +2,7 @@
 import React, { Component, Fragment, type Node } from 'react';
 import { colors } from '../components/constants';
 
-const StateBit = ({
-  isHovered,
-  onMouseEnter,
-  onMouseLeave,
-  onClick,
-  children,
-}) => (
+const StateBit = ({ isHovered, onMouseEnter, onMouseLeave, onClick, children }) => (
   <span
     onClick={onClick}
     css={`
@@ -30,18 +24,18 @@ const StateBit = ({
 type Props = {
   openBracket: string,
   closeBracket: string,
-  children: Node,
+  children: Node
 };
 
 type State = {
   isHovered: boolean,
-  isShown: boolean,
+  isShown: boolean
 };
 
 export default class AddBrackets extends Component<Props, State> {
   static defaultProps = {
     openBracket: '(',
-    closeBracket: ')',
+    closeBracket: ')'
   };
 
   state = { isHovered: false, isShown: true };

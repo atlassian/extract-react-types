@@ -1,6 +1,6 @@
 // @flow
-import React, { type Node } from "react";
-import { gridSize } from "../components/constants";
+import React, { type Node } from 'react';
+import { gridSize } from '../components/constants';
 
 const Wrapper = (props: { children: Node }) => (
   <div
@@ -25,17 +25,9 @@ const H2 = (props: { children: Node }) => (
   />
 );
 
-const PropsWrapper = ({
-  children,
-  heading
-}: {
-  children: Node,
-  heading?: string
-}) => (
+const PropsWrapper = ({ children, heading }: { children: Node, heading?: string }) => (
   <Wrapper>
-    {typeof heading === "string" && heading.length === 0 ? null : (
-      <H2>{heading || "Props"}</H2>
-    )}
+    {typeof heading === 'string' && heading.length === 0 ? null : <H2>{heading || 'Props'}</H2>}
     {children}
   </Wrapper>
 );

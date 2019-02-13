@@ -1,8 +1,8 @@
 // @flow
-const k2s = require('./dist');
 import convert from './src';
 
 const extractReactTypes = require('extract-react-types');
+const k2s = require('./dist');
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   let file = `

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type Node, type ElementRef } from "react";
+import React, { Component, type Node, type ElementRef } from 'react';
 
 const Collapse = ({ height, isCollapsed, innerRef, ...props }) => (
   <div

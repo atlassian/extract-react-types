@@ -16,7 +16,7 @@ const components = {
   TypeMeta,
   Description,
   Button,
-  FunctionType,
+  FunctionType
 };
 
 export default components;
@@ -30,5 +30,5 @@ export type Components = {
   TypeMeta: ComponentType<any>,
   Description: ComponentType<any>,
   Button: ComponentType<any>,
-  FunctionType: ComponentType<any>,
+  FunctionType: ComponentType<any>
 };

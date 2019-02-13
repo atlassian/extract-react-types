@@ -67,20 +67,18 @@ type PropTypeHeadingProps = {
   required: boolean,
   type: any,
   // This is probably giving up
-  defaultValue?: any,
+  defaultValue?: any
 };
 
 const PropTypeHeading = (props: PropTypeHeadingProps) => (
   <Heading>
-      <HeadingName>{props.name}</HeadingName>
-      <Whitespace />
-      <HeadingType>{props.type}</HeadingType>
-      {props.defaultValue !== undefined && (
-        <HeadingDefault> = {props.defaultValue}</HeadingDefault>
-      )}
-      {props.required && props.defaultValue === undefined ? (
-        <HeadingRequired> required</HeadingRequired>
-      ) : null}
+    <HeadingName>{props.name}</HeadingName>
+    <Whitespace />
+    <HeadingType>{props.type}</HeadingType>
+    {props.defaultValue !== undefined && <HeadingDefault> = {props.defaultValue}</HeadingDefault>}
+    {props.required && props.defaultValue === undefined ? (
+      <HeadingRequired> required</HeadingRequired>
+    ) : null}
   </Heading>
 );
 

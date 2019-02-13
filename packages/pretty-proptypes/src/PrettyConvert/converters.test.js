@@ -2,11 +2,11 @@
 
 import { shallow, mount, configure } from 'enzyme';
 import React from 'react';
-import prettyConvert, { TypeMinWidth } from './converters';
-import components from '../components';
 import Adapter from 'enzyme-adapter-react-16';
 import extractReactTypes from 'extract-react-types';
 import convert from 'kind2string';
+import components from '../components';
+import prettyConvert, { TypeMinWidth } from './converters';
 
 configure({ adapter: new Adapter() });
 

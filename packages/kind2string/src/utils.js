@@ -7,10 +7,7 @@ export function resolveToLast(type /*: MemberExpression | Obj | Id*/) {
     case 'memberExpression':
       return resolveToLast(type.object);
     default:
-      console.error(
-        `Unexpected initial type of member expression`,
-        JSON.stringify(type),
-      );
+      console.error(`Unexpected initial type of member expression`, JSON.stringify(type));
       break;
   }
 }
@@ -34,9 +31,7 @@ export function reduceToObj(type) {
     // Only attempt to reduce generic if it has a reducable value
     // Unreducable generics that have an identifier value, e.g. ElementConfig, are still valid
     // so we return early to avoid the console warn below
-    return reducableKinds.includes(type.value.kind)
-      ? reduceToObj(type.value)
-      : [];
+    return reducableKinds.includes(type.value.kind) ? reduceToObj(type.value) : [];
   } else if (type.kind === 'object') {
     return type.members;
   } else if (type.kind === 'intersection') {

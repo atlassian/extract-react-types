@@ -15,5 +15,5 @@ export const colors = {
   R75: '#FFBDAD',
   R50: '#FFEBE6',
   P300: '#6554C0',
-  T300: '#00B8D9',
+  T300: '#00B8D9'
 };

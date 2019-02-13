@@ -1,5 +1,4 @@
 // @flow
-'use strict';
 
 /*::
 type TestCase = {
@@ -11,8 +10,8 @@ type TestCase = {
 }
 */
 
-const extractReactTypes = require('./');
 const stripIndent = require('strip-indent');
+const extractReactTypes = require('./');
 
 const TESTS = [
   {

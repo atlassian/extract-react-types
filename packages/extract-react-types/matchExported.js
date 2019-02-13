@@ -4,10 +4,7 @@ const { explodedToStatements } = require('babel-helper-simplify-module');
 const printAST = require('ast-pretty-print');
 const t = require('@babel/types');
 
-module.exports = function matchExported(
-  file /* : Object */,
-  exportName /*: string */
-) {
+module.exports = function matchExported(file /* : Object */, exportName /*: string */) {
   let exploded = explodeModule(file.path.node);
   let statements = explodedToStatements(exploded);
   let program = Object.assign({}, file.path.node, {

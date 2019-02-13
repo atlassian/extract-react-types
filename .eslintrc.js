@@ -86,6 +86,9 @@ module.exports = {
     // Allowing importing from dev deps (for stories and tests)
     'import/no-extraneous-dependencies': 'off',
     'spaced-comment': 'off',
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    'no-else-return': 'off',
+    'react/jsx-curly-brace-presence': 'off',
+    'import/no-useless-path-segments': 'off'
   }
 };

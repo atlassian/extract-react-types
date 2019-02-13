@@ -1,5 +1,3 @@
-'use strict';
-
 export interface Location {
   line: number;
   column: number;

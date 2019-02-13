@@ -1,8 +1,8 @@
 // @flow
 import React, { Component, type ComponentType, type Node } from 'react';
+import md from 'react-markings';
 import { gridSize } from '../components/constants';
 import PrettyPropType from '../PrettyConvert';
-import md from 'react-markings';
 import PropTypeHeading from './Heading';
 import type { Components } from '../components';
 import type { CommonProps } from '../types';
@@ -17,37 +17,23 @@ const PropTypeWrapper = (props: { children: Node }) => (
 );
 
 type PropProps = CommonProps & {
-  shapeComponent: ComponentType<CommonProps>,
+  shapeComponent: ComponentType<CommonProps>
 };
 
 export default class Prop extends Component<PropProps> {
   static defaultProps = {
-    shapeComponent: (props: CommonProps) => <PrettyPropType {...props} />,
+    shapeComponent: (props: CommonProps) => <PrettyPropType {...props} />
   };
 
   render() {
     let { shapeComponent: ShapeComponent, ...commonProps } = this.props;
 
-    let {
-      defaultValue,
-      description,
-      name,
-      required,
-      type,
-      components,
-    } = commonProps;
+    let { defaultValue, description, name, required, type, components } = commonProps;
 
     return (
       <PropTypeWrapper>
-        <PropTypeHeading
-          name={name}
-          required={required}
-          type={type}
-          defaultValue={defaultValue}
-        />
-        {description && (
-          <components.Description>{md([description])}</components.Description>
-        )}
+        <PropTypeHeading name={name} required={required} type={type} defaultValue={defaultValue} />
+        {description && <components.Description>{md([description])}</components.Description>}
         <ShapeComponent {...commonProps} />
       </PropTypeWrapper>
     );
