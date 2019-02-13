@@ -1,0 +1,1 @@
+- Add component prop to Props component

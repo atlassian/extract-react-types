@@ -7,6 +7,26 @@ information for consumers.
 
 ## Core usage pattern
 
+pretty-proptypes can display props from two sources.
+
+- Using `babel-plugin-extract-react-types` and passing the component to `Props`
+
+`.babelrc`
+
+```json
+{
+  "plugins": ["babel-plugin-extract-react-types"]
+}
+```
+
+```js
+import MyCoolComponent from '../MyCoolComponent';
+
+<Props heading="My Cool Component" component={MyCoolComponent} />;
+```
+
+- Directly passing a component's props to `Props` with `extract-react-types-loader` or getting types from `extract-react-types` and writing it to a file
+
 ```js
 <Props
   heading="My Cool Component"
@@ -19,12 +39,12 @@ from comments before the type definitions, and will render markdown syntax using
 
 ## Quick Tips
 
-* Using [extract-react-types-loader](https://www.npmjs.com/package/extract-react-types-loader)
+- Using [babel-plugin-extract-react-types](https://www.npmjs.com/package/babel-plugin-extract-react-types)
   is definitely the easiest way to get this information from your components, however
-  you can prebuild this data with `extract-react-types` and read it from a file if
+  you can use `extract-react-types-loader` or prebuild this data with `extract-react-types` and read it from a file if
   you prefer.
-* When using `extract-react-types`, it currently looks only at the default export
-  of a file, with the assumption that it is a react class component.
+- When using `extract-react-types` directly or `extract-react-types-loader`, they will currently only look at the default export
+  of a file. `babel-plugin-extract-types` will look at the default export as well as named exports.
 
 ## Customisation Props
 
@@ -43,12 +63,12 @@ be hidden, and require being expanded.
 Accepts an object that allows you to override particular style components within
 our prop definition. The currently modifiable components are:
 
-* Indent
-* Outline
-* Required
-* Type
-* StringType
-* TypeMeta
+- Indent
+- Outline
+- Required
+- Type
+- StringType
+- TypeMeta
 
 Any that are not passed in will use the default component.
 
