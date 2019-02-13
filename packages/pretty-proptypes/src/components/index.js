@@ -1,11 +1,11 @@
 // @flow
 import type { ComponentType } from 'react';
-import { default as Indent } from './Indent';
-import { default as Outline } from './Outline';
-import { default as Required } from './Required';
-import { default as Description } from './Description';
-import { default as Button } from './Button';
-import { default as Type, StringType, TypeMeta, FunctionType } from './Type';
+import Indent from './Indent';
+import Outline from './Outline';
+import Required from './Required';
+import Description from './Description';
+import Button from './Button';
+import Type, { StringType, TypeMeta, FunctionType } from './Type';
 
 const components = {
   Indent,
@@ -16,7 +16,7 @@ const components = {
   TypeMeta,
   Description,
   Button,
-  FunctionType,
+  FunctionType
 };
 
 export default components;
@@ -30,5 +30,5 @@ export type Components = {
   TypeMeta: ComponentType<any>,
   Description: ComponentType<any>,
   Button: ComponentType<any>,
-  FunctionType: ComponentType<any>,
+  FunctionType: ComponentType<any>
 };

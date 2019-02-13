@@ -1,9 +1,12 @@
 // @flow
-import React, { type Node, Fragment, Component } from 'react';
+
+// TODO: Remove this eslint-disable
+/* eslint-disable */
+import React, { type Node } from 'react';
 import convert, { resolveFromGeneric } from 'kind2string';
 import type { Components } from '../components';
 import AddBrackets from './AddBrackets';
-import { colors, borderRadius } from '../components/constants';
+import { colors } from '../components/constants';
 /*::
 import * as K from 'extract-react-types'
 */
@@ -19,7 +22,7 @@ export const SIMPLE_TYPES = [
   'custom',
   'any',
   'void',
-  'mixed',
+  'mixed'
 ];
 
 function printComplexType(type, components, depth) {
@@ -56,18 +59,11 @@ export const converters: { [string]: ?Function } = {
         index < type.types.length - 1
           ? [
               ...acc,
-              <span key={index}>
-                {prettyConvert(intersectionType, components)}
-              </span>,
-              <div key={`divider-${index}`}>&</div>,
+              <span key={index}>{prettyConvert(intersectionType, components)}</span>,
+              <div key={`divider-${index}`}>&</div>
             ]
-          : [
-              ...acc,
-              <span key={index}>
-                {prettyConvert(intersectionType, components)}
-              </span>,
-            ],
-      [],
+          : [...acc, <span key={index}>{prettyConvert(intersectionType, components)}</span>],
+      []
     ),
   string: (type: K.String, components: Components) => {
     if (type.value != null) {
@@ -106,8 +102,7 @@ export const converters: { [string]: ?Function } = {
     if (type.members.length === 0) {
       return <components.Type>Object</components.Type>;
     }
-    let simpleObj =
-      type.members.filter(mem => !SIMPLE_TYPES.includes(mem.kind)).length === 0;
+    let simpleObj = type.members.filter(mem => !SIMPLE_TYPES.includes(mem.kind)).length === 0;
 
     if (simpleObj) {
       return <components.Type>{convert(type)}</components.Type>;
@@ -115,11 +110,7 @@ export const converters: { [string]: ?Function } = {
 
     return (
       <span>
-        <AddBrackets
-          BracketStyler={components.TypeMeta}
-          openBracket="{"
-          closeBracket="}"
-        >
+        <AddBrackets BracketStyler={components.TypeMeta} openBracket="{" closeBracket="}">
           <components.Indent>
             {type.members.map(prop => {
               if (prop.kind === 'spread') {
@@ -129,7 +120,7 @@ export const converters: { [string]: ?Function } = {
                 // to prettyConvert if there are no members
                 if (nestedObj.members) {
                   return nestedObj.members.map(newProp =>
-                    prettyConvert(newProp, components, depth),
+                    prettyConvert(newProp, components, depth)
                   );
                 }
               }
@@ -144,40 +135,28 @@ export const converters: { [string]: ?Function } = {
     return (
       <span>
         <components.TypeMeta>Array</components.TypeMeta>
-        <AddBrackets
-          BracketStyler={components.TypeMeta}
-          openBracket="<"
-          closeBracket=">"
-        >
-          <components.Indent>
-            {prettyConvert(type.type, components, depth)}
-          </components.Indent>
+        <AddBrackets BracketStyler={components.TypeMeta} openBracket="<" closeBracket=">">
+          <components.Indent>{prettyConvert(type.type, components, depth)}</components.Indent>
         </AddBrackets>
       </span>
-    )
+    );
   },
   property: (type: K.Property, components: Components, depth: number) => (
     <div key={convert(type.key)}>
-    {type.key && (
-      <TypeMinWidth>
-        <components.Type>{convert(type.key)}</components.Type>
-      </TypeMinWidth>
-    )}
+      {type.key && (
+        <TypeMinWidth>
+          <components.Type>{convert(type.key)}</components.Type>
+        </TypeMinWidth>
+      )}
       {type.value.kind !== 'generic' ? ` ${type.value.kind}` : ' '}
-      {type.optional ? null : (
-        <components.Required> required</components.Required>
-      )}{' '}
+      {type.optional ? null : <components.Required> required</components.Required>}{' '}
       {printComplexType(type.value, components, depth)}
     </div>
   ),
   union: (type: K.Union, components: Components, depth: number) => (
     <span>
       <components.TypeMeta>One of </components.TypeMeta>
-      <AddBrackets
-        BracketStyler={components.TypeMeta}
-        openBracket="<"
-        closeBracket=">"
-      >
+      <AddBrackets BracketStyler={components.TypeMeta} openBracket="<" closeBracket=">">
         <components.Indent>
           {type.types.map((t, index, array) => (
             <div key={index}>
@@ -190,12 +169,11 @@ export const converters: { [string]: ?Function } = {
     </span>
   ),
   function: (type: K.Func, components: Components, depth: number) => {
-    let simpleReturn =
-      type.returnType && SIMPLE_TYPES.includes(type.returnType.kind);
+    let simpleReturn = type.returnType && SIMPLE_TYPES.includes(type.returnType.kind);
 
     let simpleParameters =
-      type.parameters.filter(param => SIMPLE_TYPES.includes(param.value.kind))
-        .length === type.parameters.length;
+      type.parameters.filter(param => SIMPLE_TYPES.includes(param.value.kind)).length ===
+      type.parameters.length;
 
     if (simpleParameters && simpleReturn) {
       return (
@@ -211,13 +189,11 @@ export const converters: { [string]: ?Function } = {
           <AddBrackets BracketStyler={components.FunctionType}>
             {type.parameters.map((param, index, array) => [
               prettyConvert(param, components, depth),
-              array.length - 1 === index ? '' : ', ',
+              array.length - 1 === index ? '' : ', '
             ])}
           </AddBrackets>
           <Arrow />
-          {type.returnType
-            ? prettyConvert(type.returnType, components, depth)
-            : 'undefined'}
+          {type.returnType ? prettyConvert(type.returnType, components, depth) : 'undefined'}
         </span>
       );
     } else {
@@ -235,29 +211,18 @@ export const converters: { [string]: ?Function } = {
             </components.Indent>
           </AddBrackets>
           <Arrow />
-          {type.returnType
-            ? prettyConvert(type.returnType, components, depth)
-            : 'undefined'}
+          {type.returnType ? prettyConvert(type.returnType, components, depth) : 'undefined'}
         </span>
       );
     }
   },
   param: (type: K.Param, components, depth) => {
-    return (
-      <span key={convert(type.value)}>
-        {prettyConvert(type.value, components, depth)}
-      </span>
-    );
+    return <span key={convert(type.value)}>{prettyConvert(type.value, components, depth)}</span>;
   },
-  typeof: (type: K.Typeof, components, depth) =>
-    prettyConvert(type.type, components, depth),
+  typeof: (type: K.Typeof, components, depth) => prettyConvert(type.type, components, depth)
 };
 
-const prettyConvert = (
-  type: K.AnyKind,
-  components: Components,
-  depth: number = 1,
-) => {
+const prettyConvert = (type: K.AnyKind, components: Components, depth: number = 1) => {
   if (!type) {
     return '';
   }

@@ -1,28 +1,25 @@
 // @flow
-import React, { Component, type Node, type ComponentType } from 'react';
-import { gridSize } from '../components/constants';
-import convert, { getKind } from 'kind2string';
+import React, { Component, type ComponentType } from 'react';
 
-import Prop from '../Prop';
-import { type CommonProps } from '../types';
-import allComponents, { type Components } from '../components';
+import type { Components } from '../components';
+import type { CommonProps } from '../types';
 import PropsWrapper from './Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
 
 type Obj = {
   kind: 'object',
-  members: Array<any>,
+  members: Array<any>
 };
 
 type Gen = {
   kind: 'generic',
-  value: any,
+  value: any
 };
 
 type Inter = {
   kind: 'intersection',
-  types: Array<Obj | Gen>,
+  types: Array<Obj | Gen>
 };
 
 type DynamicPropsProps = {
@@ -30,17 +27,18 @@ type DynamicPropsProps = {
   heading?: string,
   shouldCollapseProps?: boolean,
   overrides?: {
-    [string]: ComponentType<CommonProps>,
+    [string]: ComponentType<CommonProps>
   },
   props: {
-    component?: Obj | Inter,
-  },
+    component?: Obj | Inter
+  }
 };
 
 const getProps = props => {
   if (props && props.component) {
     return getPropTypes(props.component);
   }
+  return null;
 };
 
 export default class Props extends Component<DynamicPropsProps> {

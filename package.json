@@ -1,9 +1,13 @@
 {
   "name": "extract-react-types-mono-repo",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
-    "changeset": "bolt build-releases changeset"
+    "changeset": "bolt build-releases changeset",
+    "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
+    "lint": "yarn eslint \"./**/*.js\"",
+    "check": "yarn lint && yarn test && yarn flow"
   },
   "bolt": {
     "workspaces": [
@@ -16,6 +20,7 @@
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
+    "babel-eslint": "^10.0.1",
     "babel-explode-module": "^3.0.0",
     "babel-file": "^3.0.0",
     "babel-file-loader": "^2.0.0",
@@ -28,6 +33,15 @@
     "babylon": "^7.0.0-beta.22",
     "babylon-options": "^2.0.1",
     "emotion": "^9.1.1",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.2.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest-in-case": "^1.0.2",
     "react-markings": "^1.2.0",
     "strip-indent": "^2.0.0"
   },
