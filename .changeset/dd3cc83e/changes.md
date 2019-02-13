@@ -1,0 +1,1 @@
+- Add babel-plugin-extract-react-types
