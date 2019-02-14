@@ -12,7 +12,7 @@ If a config option isn't present here, we will fall back to the defaults.
 
 const changesetOptions = {
   // If true, we will automatically commit the changeset when the command is run
-  commit: false,
+  commit: false
 };
 
 // This function takes information about a changeset to generate an entry for it in your
@@ -31,7 +31,11 @@ const getReleaseLine = async (changeset, versionType) => {
     .map(l => `  ${l}`.trimRight())
     .join('\n');
 
-  return `- [${versionType}] ${changeset.commit}:\n\n${indentedSummary}`;
+  return `- [${versionType}] [${
+    changeset.commit
+  }](https://github.com/atlassian/extract-react-types/commit/${
+    changeset.commit
+  }):\n\n${indentedSummary}`;
 };
 
 // This function takes information about what dependencies we are updating in the package.
@@ -47,11 +51,14 @@ const getDependencyReleaseLine = async (changesets, dependenciesUpdated) => {
   if (dependenciesUpdated.length === 0) return '';
 
   const changesetLinks = changesets.map(
-    changeset => `- Updated dependencies [${changeset.commit}]:`,
+    changeset =>
+      `- Updated dependencies [${
+        changeset.commit
+      }](https://github.com/atlassian/extract-react-types/commit/${changeset.commit}):`
   );
 
   const updatedDepenenciesList = dependenciesUpdated.map(
-    dependency => `  - ${dependency.name}@${dependency.version}`,
+    dependency => `  - ${dependency.name}@${dependency.version}`
   );
 
   return [...changesetLinks, ...updatedDepenenciesList].join('\n');
@@ -67,16 +74,16 @@ const versionOptions = {
   // A function that returns a string. It takes in options about a change. This allows you to customise your changelog entries
   getReleaseLine,
   // A function that returns a string. It takes in options about when a pacakge is updated because
-  getDependencyReleaseLine,
+  getDependencyReleaseLine
 };
 
 const publishOptions = {
   // This sets whether unpublished packages are public by default. We err on the side of caution here.
-  public: false,
+  public: true
 };
 
 module.exports = {
   versionOptions,
   changesetOptions,
-  publishOptions,
+  publishOptions
 };

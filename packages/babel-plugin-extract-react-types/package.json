@@ -3,8 +3,18 @@
   "version": "0.0.5",
   "main": "index.js",
   "license": "MIT",
+  "repository": "atlassian/extract-react-types",
+  "description": "Plugin to allow pretty-proptypes to more easily pull in component data",
+
   "files": [
     "index.js"
+  ],
+  "keywords": [
+    "react",
+    "flow",
+    "typescript",
+    "prop-types",
+    "documentation"
   ],
   "author": "Mitchell Hamilton",
   "dependencies": {

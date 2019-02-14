@@ -20,10 +20,6 @@ const matchExported = require('./matchExported');
 
 const converters = {};
 
-const isParentSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
-  return isSpecialReactComponentType(path.parentPath, type);
-};
-
 const isSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
   if (path && path.isCallExpression()) {
     const callee = path.get('callee');
@@ -1583,7 +1579,6 @@ function findExportedComponents(programPath, componentsToFind /*: 'all' | 'defau
           if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
             let component = convertReactComponentFunction(innerFirstArg, context);
             components.push({ name, path, component });
-            return;
           }
         }
       }

@@ -1,7 +1,8 @@
 {
   "name": "pretty-proptypes",
   "version": "0.5.0",
-  "description": "prettily render prop types from extract-react-types data",
+  "description": "prettily render prop types from react components",
+  "repository": "atlassian/extract-react-types",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist --ignore *.test.js",
@@ -37,10 +38,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "extract-react-types": "^0.15.0",
-    "flow-bin": "^0.69.0",
-    "jest": "^23.6.0",
     "jsdom": "^11.7.0",
-    "prettier": "^1.13.7",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.3.1"

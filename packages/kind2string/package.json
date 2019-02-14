@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "author": "Atlassian",
-  "repository": "gwyneplaine/kind2string",
+  "repository": "atlassian/extract-react-types",
+  "description": "Utility to ensure extract-react-types output can be rendered without errors",
   "scripts": {
     "build": "babel src -d dist --ignore __tests__/",
     "prepublish": "yarn build",
@@ -14,16 +15,7 @@
     "dist"
   ],
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "extract-react-types": "^0.15.1",
-    "flow-bin": "^0.69.0",
-    "jest": "^23.6.0",
-    "prettier": "^1.13.7"
+    "extract-react-types": "^0.15.1"
   },
   "dependencies": {}
 }
