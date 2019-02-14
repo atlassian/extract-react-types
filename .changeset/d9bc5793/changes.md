@@ -1,1 +1,0 @@
-- Support memo, forwardRef and function expressions

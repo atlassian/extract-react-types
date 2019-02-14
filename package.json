@@ -5,8 +5,8 @@
   "scripts": {
     "test": "jest",
     "changeset": "bolt build-releases changeset",
-    "version": "bolt build-releases version",
-    "publish": "yarn build && yarn check && build-releases publish --public",
+    "version-all": "bolt build-releases version",
+    "publish-all": "yarn build && yarn check && build-releases publish --public",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",
     "check": "yarn lint && yarn test && yarn flow"

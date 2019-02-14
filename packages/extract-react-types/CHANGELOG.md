@@ -1,5 +1,15 @@
 # extract-react-types
 
+## 0.16.0
+- [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+  - Add findExportedComponents function
+
+- [minor] [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+  - Add name to function components like class components
+
+- [minor] [6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
+  - Support memo, forwardRef and function expressions
+
 ## 0.15.1
 
 - **bug fix** We were calling `convert` in our initial function setup. We have switched to using nodes instead so we do not run convert on all assignment expressions.

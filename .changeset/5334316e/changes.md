@@ -1,1 +1,0 @@
-- Add name to function components like class components

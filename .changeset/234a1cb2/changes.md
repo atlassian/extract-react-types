@@ -1,1 +1,0 @@
-- Fix the dev mode data to align with new structure for ERT 0.15, as previously no render was occurring

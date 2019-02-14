@@ -35,7 +35,7 @@ const getReleaseLine = async (changeset, versionType) => {
     changeset.commit
   }](https://github.com/atlassian/extract-react-types/commit/${
     changeset.commit
-  }):\n\n${indentedSummary}`;
+  }):\n${indentedSummary}\n`;
 };
 
 // This function takes information about what dependencies we are updating in the package.

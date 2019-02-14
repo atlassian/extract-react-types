@@ -1,5 +1,15 @@
 # pretty-proptypes
 
+## 0.6.0
+- [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+  - Add component prop to Props component
+
+- Updated dependencies [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+- Updated dependencies [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+- Updated dependencies [6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
+  - kind2string@0.5.2
+  - extract-react-types@0.16.0
+
 ## 0.5.0
 
 - Update to support 0.15.0 of `extract-react-types`

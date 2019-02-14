@@ -1,5 +1,14 @@
 # extract-react-types-loader
 
+## 0.3.1
+- [patch] [3299e3a](https://github.com/atlassian/extract-react-types/commit/3299e3a):
+  - Fix the dev mode data to align with new structure for ERT 0.15, as previously no render was occurring
+
+- Updated dependencies [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+- Updated dependencies [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+- Updated dependencies [6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
+  - extract-react-types@0.16.0
+
 ## 0.3.0
 - [minor] [882a85c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/882a85c):
 
