@@ -23,12 +23,13 @@ module.exports = babel => {
                     t.assignmentExpression(
                       '=',
                       t.memberExpression(t.identifier(name), t.identifier('___types')),
-                      babel.parse('(' + JSON.stringify(component) + ')').program.body[0].expression
+                      babel.parse(`(${JSON.stringify(component)})`).program.body[0].expression
                     )
                   )
                 );
               }
             });
+            /* eslint-disable no-empty */
           } catch (e) {}
         }
       }

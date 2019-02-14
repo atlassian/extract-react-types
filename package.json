@@ -6,10 +6,10 @@
     "test": "jest",
     "changeset": "bolt build-releases changeset",
     "version-all": "bolt build-releases version",
-    "publish-all": "yarn build && yarn check && build-releases publish --public",
+    "publish-all": "yarn validate && build-releases publish --public",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",
-    "check": "yarn lint && yarn test && yarn flow"
+    "validate": "yarn lint && yarn test && yarn flow"
   },
   "bolt": {
     "workspaces": [

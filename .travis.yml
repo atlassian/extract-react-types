@@ -5,6 +5,7 @@ node_js:
 cache: yarn
 script: |
   yarn bolt
-  yarn flow check
   if [[ $? != 0 ]]; then exit 1; fi
+  yarn lint
   yarn test
+  yarn flow

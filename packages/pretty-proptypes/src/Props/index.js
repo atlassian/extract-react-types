@@ -1,4 +1,7 @@
 // @flow
+
+/* eslint-disable no-underscore-dangle */
+
 import React, { Component, type ComponentType } from 'react';
 
 import type { Components } from '../components';
@@ -52,6 +55,7 @@ export default class Props extends Component<DynamicPropsProps> {
       if (component.___types) {
         props = { type: 'program', component: component.___types };
       } else {
+        /* eslint-disable-next-line no-console */
         console.error(
           'A component was passed to <Props> but it does not have types attached.\n' +
             'babel-plugin-extract-react-types may not be correctly installed.\n' +
