@@ -1,10 +1,14 @@
 {
   "name": "extract-react-types",
   "version": "0.15.1",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "atlassian/extract-react-types",
+  "description": "Parse prop-types from react components using typescript or flow",
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
+  "files": [
+    "src"
+  ],
   "keywords": [
     "react",
     "flow",
