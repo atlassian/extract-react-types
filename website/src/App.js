@@ -4,7 +4,7 @@ import 'codemirror/lib/codemirror.css';
 import PrettyProps from 'pretty-proptypes';
 import ert from 'extract-react-types';
 import './App.css';
-import { compress } from './uriUtils';
+import * as uriUtils from './uriUtils';
 
 const STARTING_CODE = {
   code: `type ButtonPropType = {
@@ -20,20 +20,23 @@ class Button extends React.Component<ButtonPropType>{
 
 class App extends Component {
   state = {
-    code: STARTING_CODE.code,
+    code:
+      uriUtils.parseQuery().code_lz !== undefined
+        ? uriUtils.decompress(uriUtils.parseQuery().code_lz)
+        : STARTING_CODE.code,
     dataForPropTypes: ert(STARTING_CODE.code, STARTING_CODE.typeSystem),
     typeSystem: STARTING_CODE.typeSystem,
     error: null
   };
 
   updateCode = code => {
-    console.log(compress(code));
     try {
       const ast = ert(code, this.state.typeSystem);
       this.setState({
         dataForPropTypes: ast,
         error: null
       });
+      uriUtils.updateQuery({ code: uriUtils.compress(code) });
     } catch (error) {
       this.setState({
         error
