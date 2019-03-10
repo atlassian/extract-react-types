@@ -189,6 +189,10 @@ function convertReactComponentFunction(path, context) {
 }
 
 function addDefaultProps(props, defaultProps) {
+  if (!defaultProps) {
+    return props;
+  }
+
   defaultProps.forEach(property => {
     let ungeneric = resolveFromGeneric(props);
     const prop = getProp(ungeneric, property);
@@ -1426,7 +1430,7 @@ function getContext(
   filename /*:? string */,
   resolveOptions /*:? Object */
 ) {
-  let plugins = ['jsx'];
+  let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
   /* eslint-disable-next-line no-param-reassign */
   if (!resolveOptions) resolveOptions = {};
 
