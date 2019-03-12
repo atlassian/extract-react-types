@@ -3645,6 +3645,37 @@ Object {
 }
 `;
 
+exports[`ts custom prop 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Badge",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "texture",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "BadgeProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts different React components 1`] = `
 Object {
   "component": Object {

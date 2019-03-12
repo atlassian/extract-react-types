@@ -375,6 +375,21 @@ const TESTS = [
   `
   },
   {
+    name: 'ts custom prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: string;
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+    
+    Badge.f = [];
+
+    export default Badge;
+  `
+  },
+  {
     name: 'ts boolean',
     typeSystem: 'typescript',
     code: `
