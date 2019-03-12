@@ -390,6 +390,24 @@ const TESTS = [
   `
   },
   {
+    name: 'ts decorators',
+    typeSystem: 'typescript',
+    code: `
+    @ObjectType()
+    export class Theme extends React.Component<{}, {}> {
+      @Field(_ => ID)
+      public id!: string;
+    
+      @Field(_ => Textures)
+      public fonts!: Textures;
+
+      render() {}
+    }
+
+    export default Theme;
+  `
+  },
+  {
     name: 'ts boolean',
     typeSystem: 'typescript',
     code: `

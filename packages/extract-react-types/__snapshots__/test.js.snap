@@ -3676,6 +3676,21 @@ Object {
 }
 `;
 
+exports[`ts decorators 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [],
+    "name": Object {
+      "kind": "id",
+      "name": "Theme",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts different React components 1`] = `
 Object {
   "component": Object {
