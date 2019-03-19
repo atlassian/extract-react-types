@@ -882,11 +882,14 @@ converters.TSIndexedAccessType = (path, context) => {
         return member.value;
       }
     }
+
+    const name = type.value.name || type.value.referenceIdName;
+
     return {
       kind: 'generic',
       value: {
         kind: type.value.kind,
-        name: `${type.value.name || type.value.referenceIdName}['${indexKey}']`
+        name: `${name.name || name}['${indexKey}']`
       }
     };
   } else {

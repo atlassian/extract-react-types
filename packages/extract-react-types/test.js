@@ -390,6 +390,19 @@ const TESTS = [
   `
   },
   {
+    name: 'ts nested prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: Texture["src"];
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+
+    export default Badge;
+  `
+  },
+  {
     name: 'ts decorators',
     typeSystem: 'typescript',
     code: `

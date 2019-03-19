@@ -4035,6 +4035,41 @@ Object {
 }
 `;
 
+exports[`ts nested prop 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Badge",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "texture",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "Texture['src']",
+            },
+          },
+        },
+      ],
+      "referenceIdName": "BadgeProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts no react component 1`] = `
 Object {
   "component": undefined,
