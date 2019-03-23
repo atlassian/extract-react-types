@@ -956,6 +956,7 @@ converters.TSTypeReference = (path, context) /*: K.Generic */ => {
     return {
       kind: 'generic',
       typeParams: convert(typeParameters, context),
+      key: convert(path.get('key'), context),
       value: convert(path.get('typeName'), context)
     };
   }

@@ -403,6 +403,22 @@ const TESTS = [
   `
   },
   {
+    name: 'ts array prop',
+    typeSystem: 'typescript',
+    code: `
+    interface ScheduleProps {
+      intervals: Array<{
+        begin: Interval["begin"];
+        end: Interval["end"];
+      }>;
+    }
+
+    function Schedule({ intervals }: ScheduleProps) {}
+
+    export default Schedule;
+  `
+  },
+  {
     name: 'ts decorators',
     typeSystem: 'typescript',
     code: `

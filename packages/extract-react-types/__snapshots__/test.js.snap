@@ -3549,6 +3549,9 @@ Object {
         "kind": "property",
         "optional": false,
         "value": Object {
+          "key": Object {
+            "kind": "any",
+          },
           "kind": "generic",
           "typeParams": Object {
             "kind": "typeParams",
@@ -3569,6 +3572,84 @@ Object {
       "kind": "id",
       "name": "Component",
       "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`ts array prop 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Schedule",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "intervals",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "key": Object {
+              "kind": "any",
+            },
+            "kind": "generic",
+            "typeParams": Object {
+              "kind": "typeParams",
+              "params": Array [
+                Object {
+                  "kind": "object",
+                  "members": Array [
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "begin",
+                      },
+                      "kind": "property",
+                      "optional": false,
+                      "value": Object {
+                        "kind": "generic",
+                        "value": Object {
+                          "kind": "id",
+                          "name": "Interval['begin']",
+                        },
+                      },
+                    },
+                    Object {
+                      "key": Object {
+                        "kind": "id",
+                        "name": "end",
+                      },
+                      "kind": "property",
+                      "optional": false,
+                      "value": Object {
+                        "kind": "generic",
+                        "value": Object {
+                          "kind": "id",
+                          "name": "Interval['end']",
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            "value": Object {
+              "kind": "id",
+              "name": "Array",
+            },
+          },
+        },
+      ],
+      "referenceIdName": "ScheduleProps",
     },
   },
   "kind": "program",
@@ -4437,6 +4518,9 @@ Object {
               "referenceIdName": "ReactElement",
               "types": Array [
                 Object {
+                  "key": Object {
+                    "kind": "any",
+                  },
                   "kind": "generic",
                   "typeParams": Object {
                     "kind": "typeParams",
@@ -4454,6 +4538,9 @@ Object {
                 Object {
                   "kind": "arrayType",
                   "type": Object {
+                    "key": Object {
+                      "kind": "any",
+                    },
                     "kind": "generic",
                     "typeParams": Object {
                       "kind": "typeParams",
