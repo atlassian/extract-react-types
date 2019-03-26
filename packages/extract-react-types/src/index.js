@@ -189,6 +189,10 @@ function convertReactComponentFunction(path, context) {
 }
 
 function addDefaultProps(props, defaultProps) {
+  if (!defaultProps) {
+    return props;
+  }
+
   defaultProps.forEach(property => {
     let ungeneric = resolveFromGeneric(props);
     const prop = getProp(ungeneric, property);
@@ -878,11 +882,14 @@ converters.TSIndexedAccessType = (path, context) => {
         return member.value;
       }
     }
+
+    const name = type.value.name || type.value.referenceIdName;
+
     return {
       kind: 'generic',
       value: {
         kind: type.value.kind,
-        name: `${type.value.name || type.value.referenceIdName}['${indexKey}']`
+        name: `${name.name || name}['${indexKey}']`
       }
     };
   } else {
@@ -949,6 +956,7 @@ converters.TSTypeReference = (path, context) /*: K.Generic */ => {
     return {
       kind: 'generic',
       typeParams: convert(typeParameters, context),
+      key: convert(path.get('key'), context),
       value: convert(path.get('typeName'), context)
     };
   }
@@ -1426,7 +1434,7 @@ function getContext(
   filename /*:? string */,
   resolveOptions /*:? Object */
 ) {
-  let plugins = ['jsx'];
+  let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
   /* eslint-disable-next-line no-param-reassign */
   if (!resolveOptions) resolveOptions = {};
 
@@ -1447,6 +1455,7 @@ function getContext(
     throw new Error('typeSystem must be either "flow" or "typescript"');
   }
 
+  /* $FlowFixMe - need to update types in babylon-options */
   let parserOpts = createBabylonOptions({
     stage: 2,
     plugins

@@ -375,6 +375,68 @@ const TESTS = [
   `
   },
   {
+    name: 'ts custom prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: string;
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+    
+    Badge.f = [];
+
+    export default Badge;
+  `
+  },
+  {
+    name: 'ts nested prop',
+    typeSystem: 'typescript',
+    code: `
+    interface BadgeProps {
+      texture: Texture["src"];
+    }
+    
+    function Badge({ texture }: BadgeProps) {}
+
+    export default Badge;
+  `
+  },
+  {
+    name: 'ts array prop',
+    typeSystem: 'typescript',
+    code: `
+    interface ScheduleProps {
+      intervals: Array<{
+        begin: Interval["begin"];
+        end: Interval["end"];
+      }>;
+    }
+
+    function Schedule({ intervals }: ScheduleProps) {}
+
+    export default Schedule;
+  `
+  },
+  {
+    name: 'ts decorators',
+    typeSystem: 'typescript',
+    code: `
+    @ObjectType()
+    export class Theme extends React.Component<{}, {}> {
+      @Field(_ => ID)
+      public id!: string;
+    
+      @Field(_ => Textures)
+      public fonts!: Textures;
+
+      render() {}
+    }
+
+    export default Theme;
+  `
+  },
+  {
     name: 'ts boolean',
     typeSystem: 'typescript',
     code: `
