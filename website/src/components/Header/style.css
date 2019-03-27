@@ -1,0 +1,23 @@
+.side-bar {
+    background: linear-gradient(270deg, #6738ff, #c3ffbf);
+    color: #6554c0;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+  }
+  
+  .side-bar h1 {
+    display: inline-block;
+    text-shadow: 7px 6px 20px #6a4fc6;
+    margin: 5px;
+  }
+  
+  .side-bar .header-controls {
+    color: #c0feba;
+  }
+  
+  .side-bar .header-controls select {
+    margin-left: 10px;
+  }

@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactMarkdown from 'react-markdown';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import '@atlaskit/css-reset';
 
-import docs from '../DOCS';
 import Header from './components/Header';
 import Home from './pages/home';
 import PackageDoc from './pages/PackageDoc';

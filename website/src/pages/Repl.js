@@ -56,18 +56,6 @@ class App extends Component {
     const { code, dataForPropTypes, error } = this.state;
     return (
       <Fragment>
-        <div className="side-bar">
-          <h1>Pretty proptypes</h1>
-          <div className="header-controls">
-            <label>
-              Type system:
-              <select onChange={this.handleSelectChange}>
-                <option value="flow">Flow</option>
-                <option value="typescript">TypeScript</option>
-              </select>
-            </label>
-          </div>
-        </div>
         <div className="container">
           <div className="block">
             <CodeMirror

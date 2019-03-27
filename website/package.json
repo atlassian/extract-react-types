@@ -2,6 +2,7 @@
     "name": "website",
     "version": "0.0.0",
     "dependencies": {
+        "@atlaskit/css-reset": "^3.0.6",
         "bolt": "^0.22.6",
         "css-loader": "^2.1.1",
         "extract-react-types": "^0.16.0",
