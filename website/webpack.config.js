@@ -14,13 +14,37 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /(babel-file-loader)/,
+        use: 'null-loader'
+      },
+      {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /DOCS/,
+        use: {
+          loader: 'docs-loader'
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin()]
+  node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty'
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  resolveLoader: {
+    modules: ['node_modules', path.resolve(__dirname, 'loaders')]
+  }
 };
