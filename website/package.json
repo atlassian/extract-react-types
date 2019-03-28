@@ -2,6 +2,7 @@
     "name": "website",
     "version": "0.0.0",
     "dependencies": {
+        "@atlaskit/code": "^9.0.0",
         "@atlaskit/css-reset": "^3.0.6",
         "bolt": "^0.22.6",
         "css-loader": "^2.1.1",
@@ -12,7 +13,8 @@
         "react-codemirror": "^1.0.0",
         "react-dom": "^16.3.1",
         "react-markdown": "^4.0.6",
-        "react-router-dom": "^5.0.0"
+        "react-router-dom": "^5.0.0",
+        "styled-components": "^4.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.4.0",

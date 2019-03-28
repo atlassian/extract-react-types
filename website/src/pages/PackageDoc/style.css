@@ -1,21 +1,45 @@
+.package-documentation {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 main {
-    display: flex;
+  display: flex;
+  padding: 20px 0;
+  width: 100%;
+  justify-content: center;
 }
-article{
-    margin-left: 20px;
-    padding: 0 20px;
-    border-left: 1px solid #ededed;
-}
-
-sidebar ul {
-    list-style: none;
-    font-size: 1.5em;
-}
-
-sidebar ul li a {
-    color: #102b4f;
+article {
+  border-left: 1px solid #ededed;
+  margin-left: 20px;
+  padding: 0 20px;
+  width: 800px;
 }
 
-sidebar ul li.active a {
-    font-weight: 500;
+article h1 {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+article h1::before {
+  position: absolute;
+  content: '';
+  bottom: 5%;
+  left: 0px;
+  width: 30%;
+  height: 3px;
+  background: linear-gradient(270deg, #6738ff, #c3ffbf);
+}
+
+section ul {
+  list-style: none;
+  font-size: 1.5em;
+}
+
+section ul li a {
+  color: #8d8d8d;
+}
+
+section ul li.active a {
+  color: #102b4f;
 }
