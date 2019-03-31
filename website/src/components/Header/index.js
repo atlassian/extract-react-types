@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 export default ({ location }) => {
-  const ifPathNameEqualTo = pathName => {
-    console.log(location);
-    return location && location.pathname === pathName;
-  };
+  const ifPathNameEqualTo = pathName => location && location.pathname === pathName;
   return (
     <nav>
-      <h1>Extract React Types</h1>
+      <Link to="/">
+        <h1>Extract React Types</h1>
+      </Link>
       <div className="header-controls">
         {/* <label>
           Type system:

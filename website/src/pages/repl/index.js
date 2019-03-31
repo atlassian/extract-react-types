@@ -3,8 +3,8 @@ import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
 import PrettyProps from 'pretty-proptypes';
 import ert from 'extract-react-types';
-import './App.css';
-import * as uriUtils from './uriUtils';
+import './style.css';
+import * as uriUtils from './utils/uriUtils';
 
 const STARTING_CODE = {
   code: `type ButtonPropType = {

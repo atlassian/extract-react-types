@@ -6,7 +6,7 @@ import '@atlaskit/css-reset';
 import Header from './components/Header';
 import Home from './pages/home';
 import PackageDoc from './pages/PackageDoc';
-import Repl from './pages/Repl';
+import Repl from './pages/repl';
 
 const App = () => (
   <Router>

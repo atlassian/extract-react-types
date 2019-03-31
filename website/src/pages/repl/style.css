@@ -1,6 +1,7 @@
 .container {
     display: flex;
     height: calc(100vh - 80px);
+    overflow: scroll;
   }
   
   .container .block {
@@ -16,8 +17,6 @@
   .container .block .ReactCodeMirror {
     height: 100%;
   }
-  
-
   
   .error-container {
     position: absolute;
