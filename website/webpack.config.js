@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -43,7 +44,12 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Extract react types'
+    }),
+    new CopyPlugin([{ from: '_redirects', to: '_redirects', toType: 'file', }])
+  ],
   resolveLoader: {
     modules: ['node_modules', path.resolve(__dirname, 'loaders')]
   }
