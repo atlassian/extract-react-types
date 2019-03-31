@@ -8,8 +8,8 @@ import * as uriUtils from './utils/uriUtils';
 
 const STARTING_CODE = {
   code: `type ButtonPropType = {
-    /* This is*/
-  label: string
+    /* Handler to be called on click of the button*/
+  onClick: () => void
 }
 class Button extends React.Component<ButtonPropType>{
 }`,
