@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import '@atlaskit/css-reset';
 
 import Header from './components/Header';
-import Home from './pages/home';
+// import Home from './pages/home';
 import PackageDoc from './pages/PackageDoc';
 import Repl from './pages/repl';
 

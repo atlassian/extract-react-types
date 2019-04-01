@@ -11,9 +11,13 @@ const kebabToTitleCase = string =>
   string
     .replace(/.md$/, '')
     .replace(/^[0-9]*/, '')
-    .replace(/-([a-z])/g, s => ` ${s[1]}`);
+    .replace(/-([a-z])/g, s => ` ${s[1].toUpperCase()}`);
 
-const CodeBlock = ({ value }) => <AkCodeBlock text={value} />;
+const CodeBlock = ({ value }) => (
+  <div style={{ marginTop: '10px' }}>
+    <AkCodeBlock text={value} />
+  </div>
+);
 
 export default function PackageDoc({ location }) {
   let params = new URLSearchParams(location.search);
@@ -26,7 +30,15 @@ export default function PackageDoc({ location }) {
           <h2>Documentation</h2>
           <ul>
             {Object.keys(staticDocs).map(docTitle => (
-              <li key={docTitle} className={docName && docName === docTitle ? 'active' : ''}>
+              <li
+                key={docTitle}
+                className={
+                  (docName && docName === docTitle) ||
+                  (docName == null && docTitle === '01-getting-started.md')
+                    ? 'active'
+                    : ''
+                }
+              >
                 <Link to={{ pathname: '/', search: `package=${docTitle}` }}>
                   {kebabToTitleCase(docTitle)}
                 </Link>
