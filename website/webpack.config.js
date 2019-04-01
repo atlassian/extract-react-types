@@ -46,9 +46,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Extract react types'
+      title: 'Extract react types',
+      template: 'public/index.html'
     }),
-    new CopyPlugin([{ from: '_redirects', to: '_redirects', toType: 'file', }])
+    new CopyPlugin([{ from: '_redirects', to: '_redirects', toType: 'file' }])
   ],
   resolveLoader: {
     modules: ['node_modules', path.resolve(__dirname, 'loaders')]
