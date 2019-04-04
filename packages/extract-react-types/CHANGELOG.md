@@ -1,5 +1,15 @@
 # extract-react-types
 
+## 0.16.1
+- [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
+  - Add converter for typeCastExpression
+
+- [patch] [6769531](https://github.com/atlassian/extract-react-types/commit/6769531):
+  - Decorators should work again
+  - Allow default props to be missing
+  - Return correct names for nested properties in an object
+  - Add `key` field to arrays (missing previously)
+
 ## 0.16.0
 - [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
   - Add findExportedComponents function

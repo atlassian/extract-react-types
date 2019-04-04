@@ -1,5 +1,9 @@
 # pretty-proptypes
 
+## 0.5.3
+- [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
+  - Add converter for typeCastExpression
+
 ## 0.5.2
 - Updated dependencies [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
 - Updated dependencies [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):

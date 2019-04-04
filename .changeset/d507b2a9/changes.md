@@ -1,4 +1,0 @@
-- Decorators should work again
-- Allow default props to be missing
-- Return correct names for nested properties in an object
-- Add `key` field to arrays (missing previously)
