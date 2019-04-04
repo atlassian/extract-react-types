@@ -336,6 +336,20 @@ describe('kind 2 string tests', () => {
       expect(converted).toBe('foo');
     });
   });
+  describe('typecastExpression', () => {
+    let file = `
+    type Props = { bar: string }
+  
+    class Component extends React.Component<Props> {
+      static defaultProps = {
+        bar: (ascii: string),
+      }
+    }
+    `;
+    let res = extractReactTypes(file, 'flow').component.value.members[0].default;
+    let converted = convert(res);
+    expect(converted).toBe('ascii');
+  });
   describe('utilities', () => {
     describe('resolveLast', () => {});
   });

@@ -22,6 +22,10 @@ export type Rest = {
   kind: "rest",
   argument: Id
 };
+export type TypeCastExpression = {
+  kind: "typeCastExpression",
+  expression: Id
+};
 export type TemplateExpression = { kind: "templateExpression", tag: Id };
 export type AssignmentPattern = {
   kind: "assignmentPattern",

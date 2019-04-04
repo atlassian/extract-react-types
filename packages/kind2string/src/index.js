@@ -76,7 +76,9 @@ const converters = {
   id: (type /*: K.Id*/, mode /*: string */) /*:string*/ => {
     return type.name;
   },
-
+  typeCastExpression: (type /*: K.TypeCastExpression*/, mode /*: string */) /*:string*/ => {
+    return convert(type.expression);
+  },
   JSXMemberExpression: (type /*:any*/, mode /*: string */) /*:string*/ => {
     return `${convert(type.object)}.${convert(type.property)}`;
   },
