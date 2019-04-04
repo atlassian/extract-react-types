@@ -417,6 +417,10 @@ converters.StringLiteral = (path, context) /*: K.String*/ => {
   return { kind: 'string', value: path.node.value };
 };
 
+converters.TypeCastExpression = (path, context) /*: K.TypeCastExpression*/ => {
+  return { kind: 'typeCastExpression', expression: convert(path.get('expression'), context) };
+};
+
 /* eslint-disable-next-line no-unused-vars */
 converters.NumericLiteral = (path, context) /*: K.Number*/ => {
   return { kind: 'number', value: path.node.value };

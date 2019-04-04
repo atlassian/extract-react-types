@@ -169,6 +169,45 @@ Object {
 }
 `;
 
+exports[`Flow TypeCastExpression 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "expression": Object {
+              "kind": "id",
+              "name": "ascii",
+              "type": null,
+            },
+            "kind": "typeCastExpression",
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "bar",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`NullLiteralTypeAnnotation 1`] = `
 Object {
   "component": Object {

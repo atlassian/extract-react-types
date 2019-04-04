@@ -1545,6 +1545,19 @@ const TESTS = [
 
     }))
     `
+  },
+  {
+    name: 'Flow TypeCastExpression',
+    typeSystem: 'flow',
+    code: `
+    type Props = { bar: string }
+  
+    class Component extends React.Component<Props> {
+      static defaultProps = {
+        bar: (ascii: string),
+      }
+    }
+    `
   }
 ];
 
