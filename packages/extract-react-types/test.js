@@ -26,6 +26,41 @@ const TESTS = [
   `
   },
   {
+    name: 'LogicalExpression and',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ and: string }> {
+      static defaultProps = {
+        and: true && 'something',
+      }
+    }
+    
+  `
+  },
+  {
+    name: 'LogicalExpression or',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ or: string }> {
+      static defaultProps = {
+        or: 'me' || 'you',
+      }
+    }
+    
+  `
+  },
+  {
+    name: 'LogicalExpression or complicated',
+    typeSystem: 'flow',
+    code: `
+    class Button extends React.Component<{ or: string }> {
+      static defaultProps = {
+        or: 'me' || 'you' || 'someone else' && 'impossible state',
+      }
+    }
+  `
+  },
+  {
     name: 'flow string',
     typeSystem: 'flow',
     code: `

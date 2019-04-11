@@ -42,6 +42,13 @@ export type ArrayType = {
   type: AnyTypeKind,
 }
 
+export type LogicalExpression = {
+  kind: "logicalExpression",
+  operator: string,
+  left: AnyValueKind,
+  right: AnyValueKind
+};
+
 export type Obj = { kind: "object", members: Array<Property> };
 export type Property = {
   kind: "property",
@@ -211,6 +218,8 @@ export type AnyValueKind =
   | String
   | TemplateExpression
   | TemplateLiteral
-  | Variable;
+  | Variable
+  | LogicalExpression;
+
 export type AnyKind = AnyTypeKind | AnyValueKind | Program;
 */

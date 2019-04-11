@@ -67,7 +67,9 @@ const converters = {
   literal: (type /*: any */, mode /*: string */) /*: string*/ => `${type.kind}`,
   mixed: (type /*: K.Mixed*/, mode /*: string */) /*:string*/ => type.kind,
   null: (type /*: K.Null */, mode /*: string */) /*: 'null' */ => 'null',
-
+  logicalExpression: (type, mode /*: string */) /*:string*/ => {
+    return `${convert(type.left)} ${type.operator} ${convert(type.right)}`;
+  },
   unary: (type /*: K.Unary*/, mode /*: string */) /*:string*/ => {
     let space = unaryWhiteList.includes(type.operator) ? '' : ' ';
     return `${type.operator}${space}${convert(type.argument)}`;

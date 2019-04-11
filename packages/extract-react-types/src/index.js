@@ -248,6 +248,15 @@ converters.TemplateLiteral = (path, context) /*: K.TemplateLiteral*/ => {
   };
 };
 
+converters.LogicalExpression = (path, context) => {
+  return {
+    kind: 'logicalExpression',
+    operator: path.node.operator,
+    left: convert(path.get('left'), context),
+    right: convert(path.get('right'), context),
+  };
+};
+
 converters.RestElement = (path, context) /*: K.Rest */ => {
   return {
     kind: 'rest',

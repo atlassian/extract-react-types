@@ -208,6 +208,139 @@ Object {
 }
 `;
 
+exports[`LogicalExpression and 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "default": Object {
+          "kind": "logicalExpression",
+          "left": Object {
+            "kind": "boolean",
+            "value": true,
+          },
+          "operator": "&&",
+          "right": Object {
+            "kind": "string",
+            "value": "something",
+          },
+        },
+        "key": Object {
+          "kind": "id",
+          "name": "and",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Button",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`LogicalExpression or 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "default": Object {
+          "kind": "logicalExpression",
+          "left": Object {
+            "kind": "string",
+            "value": "me",
+          },
+          "operator": "||",
+          "right": Object {
+            "kind": "string",
+            "value": "you",
+          },
+        },
+        "key": Object {
+          "kind": "id",
+          "name": "or",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Button",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`LogicalExpression or complicated 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "default": Object {
+          "kind": "logicalExpression",
+          "left": Object {
+            "kind": "logicalExpression",
+            "left": Object {
+              "kind": "string",
+              "value": "me",
+            },
+            "operator": "||",
+            "right": Object {
+              "kind": "string",
+              "value": "you",
+            },
+          },
+          "operator": "||",
+          "right": Object {
+            "kind": "logicalExpression",
+            "left": Object {
+              "kind": "string",
+              "value": "someone else",
+            },
+            "operator": "&&",
+            "right": Object {
+              "kind": "string",
+              "value": "impossible state",
+            },
+          },
+        },
+        "key": Object {
+          "kind": "id",
+          "name": "or",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Button",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`NullLiteralTypeAnnotation 1`] = `
 Object {
   "component": Object {
