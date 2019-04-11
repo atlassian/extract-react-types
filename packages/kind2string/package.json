@@ -1,7 +1,7 @@
 {
   "name": "kind2string",
   "version": "0.5.3",
-  "main": "dist/index.js",
+  "main": "dist/kind2string.cjs.js",
   "license": "MIT",
   "author": "Atlassian",
   "repository": "atlassian/extract-react-types",
@@ -17,5 +17,6 @@
   "devDependencies": {
     "extract-react-types": "^0.16.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "module": "dist/kind2string.esm.js"
 }
