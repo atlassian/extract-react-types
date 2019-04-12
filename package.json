@@ -21,7 +21,10 @@
     ]
   },
   "preconstruct": {
-    "packages": ["packages/kind2string", "packages/pretty-proptypes"]
+    "packages": [
+      "packages/kind2string",
+      "packages/pretty-proptypes"
+    ]
   },
   "dependencies": {
     "@atlaskit/build-releases": "^3.0.3",
@@ -73,7 +76,7 @@
     "jest": "^23.6.0",
     "jest-in-case": "^1.0.2",
     "jsdom": "^11.7.0",
-    "preconstruct": "^0.0.57",
+    "preconstruct": "^0.0.58",
     "prettier": "^1.13.7",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
