@@ -3,12 +3,8 @@
   "version": "0.6.0",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "babel src -d dist --ignore *.test.js",
-    "prepublish": "yarn build",
-    "dev": "yarn build --watch"
-  },
+  "main": "dist/pretty-proptypes.cjs.js",
+  "module": "dist/pretty-proptypes.esm.js",
   "keywords": [
     "extract-react-types",
     "react",

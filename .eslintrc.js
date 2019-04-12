@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     // Error on prettier violations
     'prettier/prettier': 'error',
-
+    'import/no-unresolved': 'off',
     'prefer-const': 'off',
 
     // New eslint style rules that is not disabled by prettier:
