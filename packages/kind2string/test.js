@@ -350,6 +350,19 @@ describe('kind 2 string tests', () => {
     let converted = convert(res);
     expect(converted).toBe('ascii');
   });
+  describe('logicalExpression', () => {
+    it('should work', () => {
+      let file = `class Button extends React.Component<{ or: string }> {
+        static defaultProps = {
+          or: 'me' || 'you' || 'someone else' && 'impossible state',
+        }
+      }`;
+
+      let res = extractReactTypes(file, 'flow').component.members[0].default;
+      let converted = convert(res);
+      expect(converted).toBe('"me" || "you" || "someone else" && "impossible state"');
+    });
+  });
   describe('utilities', () => {
     describe('resolveLast', () => {});
   });
