@@ -1,5 +1,6 @@
 [ignore]
 .*/packages/kind2string/.*
+.*/node_modules/preconstruct/src/prompt.js
 
 [include]
 
