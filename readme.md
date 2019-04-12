@@ -11,4 +11,4 @@ Packages:
 
 ## Contribute
 
-Pull requests, issues and comments welcome
+Pull requests, issues and comments welcome.
