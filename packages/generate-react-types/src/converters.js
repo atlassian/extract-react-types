@@ -6,6 +6,12 @@ const id = (ertNode, convert) => t.identifier(ertNode.name);
 
 const boolean = (ertNode, convert) => t.tsBooleanKeyword();
 
+const generic = (ertNode, convert) => convert(ertNode.value);
+
+const object = (ertNode, convert) => {
+  return t.tsTypeLiteral(ertNode.members.map(n => convert(n, convert)));
+};
+
 const program = (ertNode, convert) => {
   if (ertNode.component) {
     return t.program([
@@ -17,13 +23,11 @@ const program = (ertNode, convert) => {
         {
           ...t.variableDeclaration('var', [
             t.variableDeclarator({
-              ...t.identifier(ertNode.component.name.name),
+              ...convert(ertNode.component.name, convert),
               typeAnnotation: t.tsTypeAnnotation(
                 t.tsTypeReference(
                   t.tsQualifiedName(t.identifier('React'), t.identifier('ComponentType')),
-                  t.tsTypeParameterInstantiation([
-                    t.tsTypeLiteral(ertNode.component.members.map(n => convert(n, convert)))
-                  ])
+                  t.tsTypeParameterInstantiation([convert(ertNode.component, convert)])
                 )
               )
             })
@@ -38,14 +42,22 @@ const program = (ertNode, convert) => {
 };
 
 const property = (ertNode, convert) => {
-  return t.tsPropertySignature(convert(ertNode.key), t.tsTypeAnnotation(convert(ertNode.value)));
+  return {
+    ...t.tsPropertySignature(convert(ertNode.key), t.tsTypeAnnotation(convert(ertNode.value))),
+    optional: !!ertNode.default
+  };
 };
+
+const string = (ertNode, convert) => t.tsStringKeyword();
 
 const tsConverters = {
   boolean,
+  id,
+  generic,
+  object,
   program,
   property,
-  id
+  string
 };
 
 // eslint-disable-next-line import/prefer-default-export
