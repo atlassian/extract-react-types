@@ -37,7 +37,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
     "@babel/runtime": "^7.4.4",
-    "@babel/types": "^7.0.0-beta.56",
+    "@babel/types": "^7.4.0",
     "@changesets/cli": "^1.1.0",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
