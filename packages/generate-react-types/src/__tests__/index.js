@@ -6,7 +6,7 @@ const strip = x => stripIndent(x).trim();
 
 test('generate ts definition for flow boolean', () => {
   let code = `
-    class Component extends React.Component<{ foo: boolean }> {
+    export class Component extends React.Component<{ foo: boolean }> {
       // ...
     }
   `;
@@ -39,9 +39,10 @@ test('generate ts definition for flow default props', () => {
   expect(result).toEqual(
     strip(`
     import React from "react";
-    export declare var Component: React.ComponentType<{
+    declare var Component: React.ComponentType<{
       name?: string;
     }>;
+    export default Component;
   `)
   );
 });
