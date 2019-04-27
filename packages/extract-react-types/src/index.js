@@ -30,6 +30,14 @@ const isSpecialReactComponentType = (path, type: 'memo' | 'forwardRef') => {
   return false;
 };
 
+const isReactComponentFunction = path => {
+  // TODO: make this function determine React components more accurately
+  return (
+    t.isFunction(path) &&
+    (isSpecialReactComponentType(path.parentPath, 'forwardRef') || path.get('params').length === 1)
+  );
+};
+
 const getPropFromObject = (props, property) => {
   let prop;
 
@@ -119,25 +127,18 @@ const getDefaultProps = (path, context) => {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context): K.Program => {
-  let components = exportedComponents(path, 'default', context);
-  // components[0] could be undefined
-  let component;
-  if (components[0]) {
-    component = components[0].component;
-  }
-
-  // just extract the props from the first class in the file
-  if (!component) {
-    path.traverse({
-      ClassDeclaration(scopedPath) {
-        if (!component && isReactComponentClass(scopedPath)) {
-          component = convertReactComponentClass(scopedPath, context);
-        }
-      }
-    });
-  }
-
-  return { kind: 'program', component };
+  return {
+    kind: 'program',
+    exports: path
+      .get('body')
+      .filter(t.isExportDeclaration)
+      .map(expPath =>
+        convert(expPath, {
+          ...context,
+          mode: 'value'
+        })
+      )
+  };
 };
 
 function convertReactComponentFunction(path, context) {
@@ -282,15 +283,26 @@ converters.ObjectPattern = (path, context): K.ObjectPattern => {
   };
 };
 
-converters.ClassDeclaration = (path, context): K.ClassKind => {
-  if (!isReactComponentClass(path)) {
+converters.ClassDeclaration = (path, context): K.ClassKind | K.Component => {
+  if (isReactComponentClass(path)) {
+    let params = path.get('superTypeParameters').get('params');
+    let props = params[0];
+    let defaultProps = getDefaultProps(path, context);
+
+    let classProperties = convert(props, { ...context, mode: 'type' });
     return {
-      kind: 'class',
-      name: convert(path.get('id'), context)
+      kind: 'component',
+      props: addDefaultProps(classProperties, defaultProps),
+      name: convert(path.get('id'), {
+        ...context,
+        mode: 'value'
+      })
     };
-  } else {
-    return convertReactComponentClass(path, context);
   }
+  return {
+    kind: 'class',
+    name: convert(path.get('id'), context)
+  };
 };
 
 converters.SpreadElement = (path, context): K.Spread => {
@@ -486,27 +498,74 @@ function convertParameter(param, context): K.Param {
   };
 }
 
-function convertFunction(path, context): K.Func {
-  const parameters = path.get('params').map(p => convertParameter(p, context));
-  let returnType = null;
-  let id = null;
+function convertFunction(path, context): K.Func | K.Component {
+  if (isReactComponentFunction(path)) {
+    // we have a function, assume the props are the first parameter
+    let propType = path.get('params.0.typeAnnotation');
+    let functionProperties = convert(propType, {
+      ...context,
+      mode: 'type'
+    });
 
-  if (path.node.returnType) {
-    returnType = convert(path.get('returnType'), context);
+    let name = '';
+    if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
+      name = path.node.id.name;
+    } else {
+      const variableDeclarator = path.findParent(scopedPath => scopedPath.isVariableDeclarator());
+
+      if (variableDeclarator) {
+        name = variableDeclarator.node.id.name;
+      }
+    }
+
+    let defaultProps = [];
+
+    if (name) {
+      path.hub.file.path.traverse({
+        // look for MyComponent.defaultProps = ...
+        AssignmentExpression(assignmentPath) {
+          const left = assignmentPath.get('left.object');
+          if (left.isIdentifier() && left.node.name === name) {
+            let initialConversion = convert(assignmentPath.get('right'), {
+              ...context,
+              mode: 'value'
+            });
+            defaultProps = initialConversion.members;
+          }
+        }
+      });
+    }
+    return {
+      kind: 'component',
+      props: addDefaultProps(functionProperties, defaultProps),
+      name: {
+        name,
+        kind: 'id',
+        type: null
+      }
+    };
+  } else {
+    const parameters = path.get('params').map(p => convertParameter(p, context));
+    let returnType = null;
+    let id = null;
+
+    if (path.node.returnType) {
+      returnType = convert(path.get('returnType'), context);
+    }
+
+    if (path.node.id) {
+      id = convert(path.get('id'), context);
+    }
+
+    return {
+      kind: 'function',
+      id,
+      async: path.node.async,
+      generator: path.node.generator,
+      parameters,
+      returnType
+    };
   }
-
-  if (path.node.id) {
-    id = convert(path.get('id'), context);
-  }
-
-  return {
-    kind: 'function',
-    id,
-    async: path.node.async,
-    generator: path.node.generator,
-    parameters,
-    returnType
-  };
 }
 
 converters.FunctionDeclaration = (path, context) => {
@@ -1322,6 +1381,13 @@ converters.ImportDeclaration = (path, context): K.Import => {
   }
 
   return convert(exported, context);
+};
+
+converters.ExportDefaultDeclaration = (path, context): K.DefaultExport => {
+  return {
+    kind: 'defaultExport',
+    value: convert(path.get('declaration'), context)
+  };
 };
 
 converters.ExportSpecifier = (path, context): K.ExportSpecifier => {
