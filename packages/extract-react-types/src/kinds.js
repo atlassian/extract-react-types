@@ -129,6 +129,11 @@ export type Func = {
   parameters: Array<Param>,
   returnType: AnyTypeKind | null
 };
+export type Component = {
+  kind: 'component',
+  props: AnyTypeKind,
+  name?: Id
+};
 export type Union = { kind: 'union', types: Array<AnyTypeKind> };
 export type Generic = {
   kind: 'generic',
@@ -155,10 +160,24 @@ export type Import = {
   external?: boolean
 };
 
-export type Program = { kind: 'program', component?: Property };
+export type Program = {
+  kind: 'program',
+  exports: (DefaultExport | NamedExport)[]
+};
 
 export type ExportSpecifier = { kind: 'exportSpecifier', local: Id, exported: Id };
 export type Export = { kind: 'export', exports: Array<Id>, source?: String };
+export type DefaultExport = {
+  kind: 'defaultExport',
+  value: AnyValueKind,
+  source?: String
+};
+
+export type NamedExport = {
+  kind: 'namedExport',
+  value: AnyValueKind,
+  source?: String
+};
 
 export type This = {
   kind: 'custom',
