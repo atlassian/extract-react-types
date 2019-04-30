@@ -22,16 +22,18 @@
   },
   "preconstruct": {
     "packages": [
+      "packages/extract-react-types",
       "packages/kind2string",
       "packages/pretty-proptypes"
     ]
   },
   "dependencies": {
     "@atlaskit/build-releases": "^3.0.3",
-    "@babel/core": "7.0.0-beta.56",
+    "@babel/core": "^7.4.4",
     "@babel/plugin-syntax-flow": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
+    "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
@@ -61,6 +63,11 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-emotion": "^9.1.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -72,7 +79,7 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "flow-bin": "^0.97.0",
+    "flow-bin": "^0.98.0",
     "jest": "^23.6.0",
     "jest-in-case": "^1.0.2",
     "jsdom": "^11.7.0",
