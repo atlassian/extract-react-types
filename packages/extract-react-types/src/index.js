@@ -1,21 +1,19 @@
 // @flow
+import nodePath from 'path';
+import createBabelFile from 'babel-file';
+import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
+import { isFlowIdentifier } from 'babel-flow-identifiers';
+import { getTypeBinding } from 'babel-type-scopes';
+import { getIdentifierKind } from 'babel-identifiers';
+import { isReactComponentClass } from 'babel-react-components';
+import createBabylonOptions from 'babylon-options';
+import t from '@babel/types';
+import { normalizeComment } from 'babel-normalize-comments';
+import { sync as resolveSync } from 'resolve';
+import matchExported from './matchExported';
 import * as K from './kinds';
 
 export type * from './kinds';
-
-const nodePath = require('path');
-const createBabelFile = require('babel-file');
-const { loadFileSync, resolveImportFilePathSync } = require('babel-file-loader');
-const { isFlowIdentifier } = require('babel-flow-identifiers');
-const { getTypeBinding } = require('babel-type-scopes');
-const { getIdentifierKind } = require('babel-identifiers');
-const { isReactComponentClass } = require('babel-react-components');
-const createBabylonOptions = require('babylon-options');
-const t = require('@babel/types');
-const { normalizeComment } = require('babel-normalize-comments');
-const { sync: resolveSync } = require('resolve');
-
-const matchExported = require('./matchExported');
 
 const converters = {};
 

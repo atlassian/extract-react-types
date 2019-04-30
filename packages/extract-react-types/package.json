@@ -33,9 +33,11 @@
     "babel-type-scopes": "^1.1.0",
     "babylon": "^7.0.0-beta.22",
     "babylon-options": "^2.0.1",
+    "resolve": "^1.10.1",
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
+    "babel-jest": "^24.7.1",
     "flow-bin": "^0.98.0",
     "jest": "^23.6.0",
     "prettier": "^1.13.7"
