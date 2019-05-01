@@ -1426,7 +1426,7 @@ converters.ExportSpecifier = (path, context): K.ExportSpecifier => {
   };
 };
 
-converters.ExportNamedDeclaration = (path, context): K.Export => {
+converters.ExportNamedDeclaration = (path, context): K.NamedExports => {
   let specifiers = path.get('specifiers');
   // This needs to be in all of them --- let source = path.get('source');
 
@@ -1435,8 +1435,8 @@ converters.ExportNamedDeclaration = (path, context): K.Export => {
 
     if (specifiers.length !== 1) {
       return {
-        kind: 'export',
-        exports: specifiers.map(s => convert(s, context)),
+        kind: 'exports',
+        value: specifiers.map(s => convert(s, context)),
         source: convert(source, context)
       };
     }
@@ -1464,21 +1464,21 @@ converters.ExportNamedDeclaration = (path, context): K.Export => {
         return convert(resolvedValue, context);
       }
       return {
-        kind: 'export',
-        exports: specifiers.map(s => convert(s, context)),
+        kind: 'namedExports',
+        values: specifiers.map(s => convert(s, context)),
         source: convert(source, context)
       };
     } catch (e) {
       return {
-        kind: 'export',
-        exports: specifiers.map(s => convert(s, context)),
+        kind: 'namedExports',
+        values: specifiers.map(s => convert(s, context)),
         source: convert(source, context)
       };
     }
   } else {
     return {
-      kind: 'export',
-      exports: specifiers.map(s => convert(s, context))
+      kind: 'namedExports',
+      values: specifiers.map(s => convert(s, context))
     };
   }
 };
