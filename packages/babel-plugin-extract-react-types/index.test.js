@@ -1,6 +1,5 @@
-// @flow
-import { transformSync } from '@babel/core';
-import jestInCase from 'jest-in-case';
+const { transformSync } = require('@babel/core');
+const jestInCase = require('jest-in-case');
 
 let flowCases = [
   {
