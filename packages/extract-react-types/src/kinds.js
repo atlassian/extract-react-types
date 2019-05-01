@@ -165,17 +165,15 @@ export type Program = {
   body: AnyKind[]
 };
 
-export type ExportSpecifier = { kind: 'exportSpecifier', local: Id, exported: Id };
-export type Export = { kind: 'export', exports: Array<Id>, source?: String };
 export type DefaultExport = {
   kind: 'defaultExport',
   value: AnyValueKind,
   source?: String
 };
 
-export type NamedExport = {
-  kind: 'namedExport',
-  value: AnyValueKind,
+export type NamedExports = {
+  kind: 'namedExports',
+  values: AnyValueKind[],
   source?: String
 };
 

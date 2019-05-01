@@ -1595,13 +1595,34 @@ const TESTS = [
   }
 ];
 
+const newTests = [
+  {
+    name: 'flow plain object ',
+    typeSystem: 'flow',
+    code: `
+    export const obj = {
+      hello: 'hello',
+      my: 1
+    }
+    `
+  },
+  {
+    name: 'flow functional component',
+    typeSystem: 'flow',
+    code: `
+    export const Foo = (props: {}) => "hi";
+    export const Bar = (props: {}) => 1
+    `
+  }
+];
+
 cases(
   '',
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
-    let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: true });
+    let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: false });
     expect(result).toMatchSnapshot();
   },
-  TESTS
+  newTests
 );
