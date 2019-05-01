@@ -1,6 +1,7 @@
 // @flow
 import { explodeModule } from 'babel-explode-module';
 import { explodedToStatements } from 'babel-helper-simplify-module';
+// $FlowFixMe
 import printAST from 'ast-pretty-print';
 
 export default function matchExported(file /* : Object */, exportName /*: string */) {
