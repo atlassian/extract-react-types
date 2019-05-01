@@ -1,0 +1,1 @@
+- Added build step to extract-react-types. The only change is for cjs consumers using the `extractReactTypes` function. Before: `require('extract-react-types')` Now: `require('extract-react-types').default`.
