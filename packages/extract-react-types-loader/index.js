@@ -1,7 +1,7 @@
 // @flow
 
 const path = require('path');
-const extractReactTypes = require('extract-react-types');
+const extractReactTypes = require('extract-react-types').default;
 
 const devProps = {
   component: {
