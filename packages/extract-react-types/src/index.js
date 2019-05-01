@@ -17,7 +17,7 @@ export type * from './kinds';
 
 const converters = {};
 
-const isSpecialReactComponentType = (path, type /*:'memo' | 'forwardRef'*/) => {
+const isSpecialReactComponentType = (path, type: 'memo' | 'forwardRef') => {
   if (path && path.isCallExpression()) {
     const callee = path.get('callee');
     if (callee.isIdentifier() && callee.node.name === type) {
@@ -1439,11 +1439,7 @@ function convert(path, context) {
   return result;
 }
 
-function getContext(
-  typeSystem: 'flow' | 'typescript',
-  filename /*:? string */,
-  resolveOptions /*:? Object */
-) {
+function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolveOptions?: Object) {
   let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
   /* eslint-disable-next-line no-param-reassign */
   if (!resolveOptions) resolveOptions = {};
@@ -1477,8 +1473,8 @@ function getContext(
 function extractReactTypes(
   code: string,
   typeSystem: 'flow' | 'typescript',
-  filename /*:? string */,
-  inputResolveOptions /*:? Object */
+  filename?: string,
+  inputResolveOptions?: Object
 ) {
   let { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
 
@@ -1607,8 +1603,8 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
 export const findExportedComponents = (
   programPath: any,
   typeSystem: 'flow' | 'typescript',
-  filename /*:? string */,
-  resolveOptions /*:? Object */
+  filename?: string,
+  resolveOptions?: Object
 ) => exportedComponents(programPath, 'all', getContext(typeSystem, filename, resolveOptions));
 
 export default extractReactTypes;
