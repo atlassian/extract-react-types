@@ -127,18 +127,43 @@ const getDefaultProps = (path, context) => {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context): K.Program => {
-  return {
-    kind: 'program',
-    exports: path
-      .get('body')
-      .filter(t.isExportDeclaration)
-      .map(expPath =>
-        convert(expPath, {
-          ...context,
-          mode: 'value'
-        })
-      )
-  };
+  if (context.extractFirst) {
+    let components = exportedComponents(path, 'default', context);
+    // components[0] could be undefined
+    let component;
+    if (components[0]) {
+      component = components[0].component;
+    }
+
+    // just extract the props from the first class in the file
+    if (!component) {
+      path.traverse({
+        ClassDeclaration(scopedPath) {
+          if (!component && isReactComponentClass(scopedPath)) {
+            component = convertReactComponentClass(scopedPath, context);
+          }
+        }
+      });
+    }
+
+    return {
+      kind: 'program',
+      body: component ? [component] : []
+    };
+  } else {
+    return {
+      kind: 'program',
+      body: path
+        .get('body')
+        .filter(t.isExportDeclaration)
+        .map(expPath =>
+          convert(expPath, {
+            ...context,
+            mode: 'value'
+          })
+        )
+    };
+  }
 };
 
 function convertReactComponentFunction(path, context) {
@@ -1540,12 +1565,12 @@ function extractReactTypes(
   code: string,
   typeSystem: 'flow' | 'typescript',
   filename?: string,
-  inputResolveOptions?: Object
+  options?: Object = {}
 ) {
-  let { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
+  let { resolveOptions, parserOpts } = getContext(typeSystem, filename, options);
 
   let file = createBabelFile(code, { parserOpts, filename });
-  return convert(file.path, { resolveOptions, parserOpts });
+  return convert(file.path, { resolveOptions, parserOpts, extractFirst: !!options.extractFirst });
 }
 
 function findExports(

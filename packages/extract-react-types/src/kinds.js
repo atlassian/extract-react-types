@@ -162,7 +162,7 @@ export type Import = {
 
 export type Program = {
   kind: 'program',
-  exports: (DefaultExport | NamedExport)[]
+  body: AnyKind[]
 };
 
 export type ExportSpecifier = { kind: 'exportSpecifier', local: Id, exported: Id };

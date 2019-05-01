@@ -1299,7 +1299,7 @@ const TESTS = [
 
       class Component extends React.Component<{ foo: string[] }> {}
 
-      function FunComponent(props: Props) {
+      function Component(props: Props) {
         return null;
       }
 
@@ -1600,7 +1600,7 @@ cases(
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
-    let result = extractReactTypes(code, testCase.typeSystem, __filename);
+    let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: true });
     expect(result).toMatchSnapshot();
   },
   TESTS
