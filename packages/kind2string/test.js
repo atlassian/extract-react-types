@@ -1,7 +1,6 @@
 // @flow
+import extractReactTypes from 'extract-react-types';
 import convert from './src';
-
-const extractReactTypes = require('extract-react-types');
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   let file = `

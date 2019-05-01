@@ -1,0 +1,999 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flow React.memo 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = React.memo(function (props) {
+  return null;
+});
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow arrow function 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+
+var SomeComponent = function SomeComponent(props) {
+  return null;
+};
+
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow arrow function export default identifier 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = void 0;
+
+var SomeComponent = function SomeComponent(props) {
+  return null;
+};
+
+var _default = SomeComponent;
+exports[\\"default\\"] = _default;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow arrow function then export 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+
+var SomeComponent = function SomeComponent(props) {
+  return null;
+};
+
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow class 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(SomeComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return SomeComponent;
+}(React.Component);
+
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow class declaration export default identifier 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(SomeComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return SomeComponent;
+}(React.Component);
+
+var _default = SomeComponent;
+exports[\\"default\\"] = _default;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow class declaration then export 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(SomeComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return SomeComponent;
+}(React.Component);
+
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow default class 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(SomeComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return SomeComponent;
+}(React.Component);
+
+exports[\\"default\\"] = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow default function declaration 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(SomeComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return SomeComponent;
+}(React.Component);
+
+exports[\\"default\\"] = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow export default function declaration 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = SomeComponent;
+
+function SomeComponent(props) {
+  return null;
+}
+
+;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow forwardRef 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = forwardRef(function (props) {
+  return null;
+});
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow forwardRef function expression 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = forwardRef(function (props) {
+  return null;
+});
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow forwardRef memo arrow function 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = memo(forwardRef(function (props) {
+  return null;
+}));
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow forwardRef memo function expression 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = memo(forwardRef(function (props) {
+  return null;
+}));
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow function declaration 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = SomeComponent;
+
+function SomeComponent(props) {
+  return null;
+}
+
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`flow memo 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+var SomeComponent = memo(function (props) {
+  return null;
+});
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`typescript default 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports[\\"default\\"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  return SomeComponent;
+}(React.Component);
+
+exports[\\"default\\"] = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"object\\",
+  \\"members\\": [{
+    \\"kind\\": \\"property\\",
+    \\"optional\\": false,
+    \\"key\\": {
+      \\"kind\\": \\"id\\",
+      \\"name\\": \\"foo\\"
+    },
+    \\"value\\": {
+      \\"kind\\": \\"boolean\\"
+    }
+  }],
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;
+
+exports[`typescript named 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.SomeComponent = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var SomeComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(SomeComponent, _React$Component);
+
+  function SomeComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, SomeComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(SomeComponent).apply(this, arguments));
+  }
+
+  return SomeComponent;
+}(React.Component);
+
+exports.SomeComponent = SomeComponent;
+SomeComponent.___types = {
+  \\"kind\\": \\"object\\",
+  \\"members\\": [{
+    \\"kind\\": \\"property\\",
+    \\"optional\\": false,
+    \\"key\\": {
+      \\"kind\\": \\"id\\",
+      \\"name\\": \\"foo\\"
+    },
+    \\"value\\": {
+      \\"kind\\": \\"boolean\\"
+    }
+  }],
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"SomeComponent\\",
+    \\"type\\": null
+  }
+};"
+`;

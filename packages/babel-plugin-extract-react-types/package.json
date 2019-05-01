@@ -17,13 +17,14 @@
   ],
   "author": "Mitchell Hamilton",
   "dependencies": {
-    "extract-react-types": "^0.16.0"
+    "extract-react-types": "^0.16.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/plugin-syntax-flow": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
+    "babel-jest": "^24.7.1",
     "jest-in-case": "^1.0.2"
   }
 }

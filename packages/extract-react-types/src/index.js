@@ -7,7 +7,7 @@ import { getTypeBinding } from 'babel-type-scopes';
 import { getIdentifierKind } from 'babel-identifiers';
 import { isReactComponentClass } from 'babel-react-components';
 import createBabylonOptions from 'babylon-options';
-import t from '@babel/types';
+import * as t from '@babel/types';
 import { normalizeComment } from 'babel-normalize-comments';
 import { sync as resolveSync } from 'resolve';
 import matchExported from './matchExported';
@@ -119,7 +119,7 @@ const getDefaultProps = (path, context) => {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context): K.Program => {
-  let components = findExportedComponents(path, 'default', context);
+  let components = exportedComponents(path, 'default', context);
   // components[0] could be undefined
   let component;
   if (components[0]) {
@@ -1486,8 +1486,6 @@ function extractReactTypes(
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
-module.exports = extractReactTypes;
-
 function findExports(
   path,
   exportsToFind: 'all' | 'default'
@@ -1566,7 +1564,7 @@ function findExports(
   return formattedExports;
 }
 
-function findExportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
+function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
   let components = [];
   let exportPaths = findExports(programPath, componentsToFind);
   exportPaths.forEach(({ path, name }) => {
@@ -1606,15 +1604,11 @@ function findExportedComponents(programPath, componentsToFind: 'all' | 'default'
   return components;
 }
 
-module.exports.findExportedComponents = (
+export const findExportedComponents = (
   programPath: any,
   typeSystem: 'flow' | 'typescript',
   filename /*:? string */,
   resolveOptions /*:? Object */
-) => {
-  return findExportedComponents(
-    programPath,
-    'all',
-    getContext(typeSystem, filename, resolveOptions)
-  );
-};
+) => exportedComponents(programPath, 'all', getContext(typeSystem, filename, resolveOptions));
+
+export default extractReactTypes;

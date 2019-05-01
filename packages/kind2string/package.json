@@ -11,6 +11,7 @@
     "dist"
   ],
   "devDependencies": {
+    "babel-jest": "^24.7.1",
     "extract-react-types": "^0.16.1"
   },
   "dependencies": {

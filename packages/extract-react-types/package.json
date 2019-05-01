@@ -39,7 +39,7 @@
   "devDependencies": {
     "babel-jest": "^24.7.1",
     "flow-bin": "^0.98.0",
-    "jest": "^23.6.0",
+    "jest": "^24.7.1",
     "prettier": "^1.13.7"
   }
 }
