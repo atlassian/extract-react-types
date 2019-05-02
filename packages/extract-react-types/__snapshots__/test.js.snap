@@ -1,128 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`$Exact flow utility type 1`] = `
+exports[`flow functional component 1`] = `
 Object {
-  "component": Object {
-    "kind": "generic",
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
+  "body": Array [
+    Object {
+      "exports": Array [],
+      "kind": "export",
     },
-    "value": Object {
-      "kind": "object",
-      "members": Array [
-        Object {
-          "key": Object {
-            "kind": "id",
-            "name": "foo",
-          },
-          "kind": "property",
-          "optional": false,
-          "value": Object {
-            "kind": "generic",
-            "value": Object {
-              "kind": "object",
-              "members": Array [
-                Object {
-                  "key": Object {
-                    "kind": "id",
-                    "name": "bar",
-                  },
-                  "kind": "property",
-                  "optional": false,
-                  "value": Object {
-                    "kind": "string",
-                  },
-                },
-              ],
-              "referenceIdName": "BaseProps",
-            },
-          },
-        },
-        Object {
-          "default": Object {
-            "kind": "boolean",
-            "value": false,
-          },
-          "key": Object {
-            "kind": "id",
-            "name": "isDefaultChecked",
-          },
-          "kind": "property",
-          "optional": false,
-          "value": Object {
-            "kind": "boolean",
-          },
-        },
-      ],
-      "referenceIdName": "Props",
+    Object {
+      "exports": Array [],
+      "kind": "export",
     },
-  },
+  ],
   "kind": "program",
 }
 `;
 
-exports[`Assignment Pattern 1`] = `
+exports[`flow plain object  1`] = `
 Object {
-  "component": Object {
-    "kind": "object",
-    "members": Array [
-      Object {
-        "default": Object {
-          "async": false,
-          "generator": false,
-          "id": null,
-          "kind": "function",
-          "parameters": Array [
-            Object {
-              "kind": "param",
-              "type": null,
-              "value": Object {
-                "kind": "assignmentPattern",
-                "left": Object {
-                  "kind": "id",
-                  "name": "b",
-                  "type": null,
-                },
-                "right": Object {
-                  "kind": "number",
-                  "value": 3,
-                },
-              },
-            },
-          ],
-          "returnType": Object {
-            "kind": "number",
-          },
-        },
-        "key": Object {
-          "kind": "id",
-          "name": "a",
-        },
-        "kind": "property",
-        "optional": false,
-        "value": Object {
-          "kind": "function",
-          "parameters": Array [
-            Object {
-              "kind": "param",
-              "type": null,
-              "value": Object {
-                "kind": "number",
-              },
-            },
-          ],
-          "returnType": Object {
-            "kind": "number",
-          },
-        },
-      },
-    ],
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
+  "body": Array [
+    Object {
+      "exports": Array [],
+      "kind": "export",
     },
   },
   "kind": "program",
