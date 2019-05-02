@@ -1470,7 +1470,7 @@ function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolv
   return { resolveOptions, parserOpts };
 }
 
-function extractReactTypes(
+export function extractReactTypes(
   code: string,
   typeSystem: 'flow' | 'typescript',
   filename?: string,
@@ -1606,5 +1606,3 @@ export const findExportedComponents = (
   filename?: string,
   resolveOptions?: Object
 ) => exportedComponents(programPath, 'all', getContext(typeSystem, filename, resolveOptions));
-
-export default extractReactTypes;

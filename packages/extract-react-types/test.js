@@ -12,7 +12,7 @@ type TestCase = {
 
 import stripIndent from 'strip-indent';
 import cases from 'jest-in-case';
-import extractReactTypes from './src';
+import { extractReactTypes } from './src';
 
 const TESTS = [
   {
