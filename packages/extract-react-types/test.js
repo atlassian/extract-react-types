@@ -33,7 +33,6 @@ const TESTS = [
         and: true && 'something',
       }
     }
-    
   `
   },
   {
@@ -45,7 +44,6 @@ const TESTS = [
         or: 'me' || 'you',
       }
     }
-    
   `
   },
   {
@@ -203,7 +201,6 @@ const TESTS = [
       bar: boolean
     };
     class Component extends React.Component<ComponentProps> {
-
     }
   `
   },
@@ -212,13 +209,10 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     import * as React from 'react';
-
     type Props = {
       children: React.Node,
     };
-
     class Component extends React.Component<Props> {
-
     }
   `
   },
@@ -228,7 +222,6 @@ const TESTS = [
     code: `
     export type Foo = boolean;
     class Component extends React.Component<{ foo: Foo }> {
-
     }
   `
   },
@@ -237,7 +230,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{foo: number & string}> {
-
     }
   `
   },
@@ -246,7 +238,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
   type BaseProps = { bar: string }
-
   class Component extends React.Component<BaseProps & {
     isDefaultChecked: boolean,
   }> {
@@ -259,7 +250,6 @@ const TESTS = [
     code: `
   type BaseProps = { bar: string }
   type Props = BaseProps & { foo: string }
-
   class Component extends React.Component<Props & {
     isDefaultChecked: boolean,
   }> {
@@ -385,10 +375,8 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     import {Component} from 'react';
-
     class FooComponent extends Component<{ foo?: number }> {
     }
-
     class BarComponent extends React.Component<{ foo?: number }> {
     }
   `
@@ -398,13 +386,10 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     import React, { type Node } from 'react';
-
     type Props = {
       children: Node,
     };
-
     class Component extends React.Component<Props> {
-
     }
   `
   },
@@ -415,11 +400,8 @@ const TESTS = [
     interface BadgeProps {
       texture: string;
     }
-    
     function Badge({ texture }: BadgeProps) {}
-    
     Badge.f = [];
-
     export default Badge;
   `
   },
@@ -430,9 +412,7 @@ const TESTS = [
     interface BadgeProps {
       texture: Texture["src"];
     }
-    
     function Badge({ texture }: BadgeProps) {}
-
     export default Badge;
   `
   },
@@ -446,9 +426,7 @@ const TESTS = [
         end: Interval["end"];
       }>;
     }
-
     function Schedule({ intervals }: ScheduleProps) {}
-
     export default Schedule;
   `
   },
@@ -460,13 +438,10 @@ const TESTS = [
     export class Theme extends React.Component<{}, {}> {
       @Field(_ => ID)
       public id!: string;
-    
       @Field(_ => Textures)
       public fonts!: Textures;
-
       render() {}
     }
-
     export default Theme;
   `
   },
@@ -475,7 +450,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{ foo: boolean }> {
-
     }
   `
   },
@@ -484,7 +458,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{ foo: string }> {
-
     }
   `
   },
@@ -493,7 +466,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {
-
     }
   `
   },
@@ -505,7 +477,6 @@ const TESTS = [
       foo: string;
       bar: number;
     }
-
     class Component extends React.Component<ComponentProps> {
       // ...
     }
@@ -552,7 +523,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: '25' | 30}> {
-
     }
   `
   },
@@ -561,7 +531,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo?: string}> {
-
     }
   `
   },
@@ -570,7 +539,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: void}> {
-
     }
   `
   },
@@ -579,7 +547,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends Foo<{foo: void}> {
-
     }
   `
   },
@@ -588,13 +555,9 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     import {Component} from 'react';
-
     class FooComponent extends Component<{foo: void}> {
-
     }
-
     class BarComponent extends React.Component<{foo: void}> {
-
     }
   `
   },
@@ -603,7 +566,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     class Component extends React.Component<{foo: [string, number]}> {
-
     }
   `
   },
@@ -613,7 +575,6 @@ const TESTS = [
     code: `
     enum Color {Red, Green, Blue};
     class Component extends React.Component<{foo: Color}> {
-
     }
   `
   },
@@ -692,7 +653,6 @@ const TESTS = [
     name: 'spread element ',
     typeSystem: 'flow',
     code: `
-
     const something = { a: true }
     class Component extends React.Component<{ a: boolean, b: boolean }> {
       defaultProps = {
@@ -707,7 +667,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     import something from 'somewhere'
-
     class Component extends React.Component<{ a: any, b: boolean }> {
       defaultProps = {
         a: { ...something },
@@ -960,7 +919,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
       function sayHello() { return 'hello'; };
-
       class Component extends React.Component<{ a: string }> {
         defaultProps = {
           a: sayHello(),
@@ -1002,7 +960,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
       import { name, version } from "./__fixtures__/test";
-
       class Component extends React.Component<{ a: string }> {
         defaultProps = {
           a: name,
@@ -1015,7 +972,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
       const one = 1;
-
       class Component extends React.Component<{ a: typeof one }> {}
   `
   },
@@ -1024,7 +980,6 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
       type Foo<T> = () => T;
-
       class Component extends React.Component<{ a: Foo<string> }> {}
   `
   },
@@ -1036,7 +991,6 @@ const TESTS = [
         /* Type comment for a */
         a: string;
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1049,7 +1003,6 @@ const TESTS = [
         /* Type comment for a */
         a: string;
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1061,7 +1014,6 @@ const TESTS = [
       type Props = {
         a: string;
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1074,7 +1026,6 @@ const TESTS = [
       interface Props {
         a: LiteralType;
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1087,7 +1038,6 @@ const TESTS = [
       interface Props {
         a: ReactElement;
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1097,12 +1047,10 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
       import * as React from 'react';
-
       type ReactElement = React.Element<any> | React.Element<any>[];
       type Props = {
         a: ReactElement,
       }
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1112,7 +1060,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
       import { Props } from "./__fixtures__/props";
-
       class Component extends React.Component<Props> {
       }
     `
@@ -1124,7 +1071,6 @@ const TESTS = [
       interface Props {
         on(x: string): void;
       }
-
       class Component extends React.Component<Props> {}
     `
   },
@@ -1135,7 +1081,6 @@ const TESTS = [
       interface Props {
         (x: string): void;
       }
-
       class Component extends React.Component<Props> {}
     `
   },
@@ -1146,7 +1091,6 @@ const TESTS = [
       interface Props {
         a: ({ b: string })
       }
-
       class Component extends React.Component<Props> {}
     `
   },
@@ -1158,11 +1102,9 @@ const TESTS = [
       interface DefaultTypes {
         b: number
       }
-
       interface Props extends DefaultTypes, Type {
         a: string
       }
-
       class Component extends React.Component<Props> {
         static defaultProps = {
           b: 1
@@ -1175,7 +1117,6 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
       import { NestedInterface1 } from './__fixtures__/types';
-
       class Component extends React.Component<NestedInterface1> {}
     `
   },
@@ -1186,12 +1127,10 @@ const TESTS = [
       interface SiblingInterface {
         property: string
       }
-
       interface RecursiveType {
         properties: SiblingInterface
         type: RecursiveType
       }
-
       class Component extends React.Component<RecursiveType> {}
     `
   },
@@ -1202,7 +1141,6 @@ const TESTS = [
       type RecursiveType = {
         props: RecursiveType
       }
-
       class Component extends React.Component<RecursiveType> {}
     `
   },
@@ -1213,7 +1151,6 @@ const TESTS = [
       type MyType = {
         props: number;
       }
-
       class Component extends React.Component<{ foo: MyType['props'] }> {}
     `
   },
@@ -1231,11 +1168,9 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       function Component(props: Props) {
         return null;
       }
-
       export default Component;
     `
   },
@@ -1246,7 +1181,6 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       export default function Component(props: Props) {
         return null;
       }
@@ -1259,7 +1193,6 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       export default function(props: Props) {
         return null;
       }
@@ -1272,9 +1205,7 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       const Component = (props: Props) => null;
-
       export default Component;
     `
   },
@@ -1285,7 +1216,6 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       export default (props: Props) => null;
     `
   },
@@ -1296,13 +1226,10 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       class Component extends React.Component<{ foo: string[] }> {}
-
       function Component(props: Props) {
         return null;
       }
-
       export default (props: Props) => null;
     `
   },
@@ -1313,13 +1240,10 @@ const TESTS = [
       type Props = {
         name: string
       }
-
       const Component = (props: Props) => null;
-
       Component.defaultProps = {
         name: 'bob',
       };
-
       export default Component;
     `
   },
@@ -1331,16 +1255,12 @@ const TESTS = [
         name: string,
         something: string
       }
-
       const abc = { something: 'a' }
-
       const Component = (props: Props) => null;
-
       Component.defaultProps = {
         ...abc,
         name: 'bob',
       };
-
       export default Component;
     `
   },
@@ -1352,16 +1272,12 @@ const TESTS = [
         name: string,
         something: string
       }
-
       const abc = { something: 'a' }
-
       function Component (props: Props) {};
-
       Component.defaultProps = {
         ...abc,
         name: 'bob',
       };
-
       export default Component;
     `
   },
@@ -1372,13 +1288,10 @@ const TESTS = [
       type Props = {
         name: string,
       }
-
       function Component (props: Props) {};
-
       Component.defaultProps = {
         name: 'bob',
       };
-
       export default React.forwardRef((props: Props, ref) => <Component {...props} ref={ref} />);
     `
   },
@@ -1390,7 +1303,6 @@ const TESTS = [
       type Props = {
         name: string,
       }
-
       export default class OnboardingModal extends Component<Props> {
         onChange = () => {
           console.log('hi');
@@ -1405,27 +1317,20 @@ const TESTS = [
     type Props = {
       ok: number
     }
-    
     class FieldInner extends React.Component<Props> {
       unregisterField = () => {};
-    
       componentDidMount() {
         this.unregisterField = this.register();
       }
-    
       componentWillUnmount() {
         this.unregisterField();
       }
     }
-    
     const Field = (props: Props) => <FieldInner {...props} />;
-    
     Field.defaultProps = {
       ok: 1
     };
-    
     export default Field;
-    
     `
   },
   {
@@ -1435,14 +1340,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = forwardRef((props: Props, ref) => {
-
     })
-
     export default SomeComponent
-
-    
     `
   },
   {
@@ -1452,13 +1352,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = React.forwardRef((props: Props, ref) => {
-
     })
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1468,13 +1364,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = function(props: Props) {
-
     }
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1484,13 +1376,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = memo((props: Props, ref) => {
-
     })
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1500,13 +1388,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = React.memo((props: Props, ref) => {
-
     })
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1516,13 +1400,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = something((props: Props, ref) => {
-
     })
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1532,13 +1412,9 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     const SomeComponent = memo(forwardRef((props: Props, ref) => {
-
     }))
-
     export default SomeComponent
-    
     `
   },
   {
@@ -1548,9 +1424,7 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     export default forwardRef((props: Props, ref) => {
-
     })
     `
   },
@@ -1561,9 +1435,7 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     export default memo((props: Props, ref) => {
-
     })
     `
   },
@@ -1574,9 +1446,7 @@ const TESTS = [
     type Props = {
       ok: number
     }
-
     export default memo(forwardRef((props: Props, ref) => {
-
     }))
     `
   },
@@ -1585,19 +1455,15 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     type Props = { bar: string }
-  
     class Component extends React.Component<Props> {
       static defaultProps = {
         bar: (ascii: string),
       }
     }
     `
-  }
-];
-
-const newTests = [
+  },
   {
-    name: 'flow plain object ',
+    name: 'Flow plain object ',
     typeSystem: 'flow',
     code: `
     export const obj = {
@@ -1607,11 +1473,28 @@ const newTests = [
     `
   },
   {
-    name: 'flow functional component',
+    name: 'Flow functional component',
     typeSystem: 'flow',
     code: `
     export const Foo = (props: {}) => "hi";
     export const Bar = (props: {}) => 1
+    `
+  },
+  {
+    name: 'Flow named export functional component',
+    typeSystem: 'flow',
+    code: `
+    const Thing = (props: {}) => "thing";
+    export { Thing };
+    `
+  },
+  {
+    name: 'Flow export type',
+    typeSystem: 'flow',
+    code: `
+    export type FooType = {
+      key: string
+    }
     `
   }
 ];
@@ -1621,8 +1504,19 @@ cases(
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
+    let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: true });
+    expect(result).toMatchSnapshot();
+  },
+  TESTS
+);
+
+cases(
+  'with extractFirst = false',
+  testCase => {
+    let code = stripIndent(testCase.code);
+    // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: false });
     expect(result).toMatchSnapshot();
   },
-  newTests
+  TESTS
 );

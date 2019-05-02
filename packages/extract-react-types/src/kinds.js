@@ -165,6 +165,8 @@ export type Program = {
   body: AnyKind[]
 };
 
+export type ExportSpecifier = { kind: 'exportSpecifier', local: Id, exported: Id };
+
 export type DefaultExport = {
   kind: 'defaultExport',
   value: AnyValueKind,

@@ -1435,8 +1435,8 @@ converters.ExportNamedDeclaration = (path, context): K.NamedExports => {
 
     if (specifiers.length !== 1) {
       return {
-        kind: 'exports',
-        value: specifiers.map(s => convert(s, context)),
+        kind: 'namedExports',
+        values: specifiers.map(s => convert(s, context)),
         source: convert(source, context)
       };
     }
@@ -1476,10 +1476,18 @@ converters.ExportNamedDeclaration = (path, context): K.NamedExports => {
       };
     }
   } else {
-    return {
-      kind: 'namedExports',
-      values: specifiers.map(s => convert(s, context))
-    };
+    let declaration = path.get('declaration');
+    if (!declaration.node) {
+      return {
+        kind: 'namedExports',
+        values: specifiers.map(s => convert(s, context))
+      };
+    } else {
+      return {
+        kind: 'namedExports',
+        values: [convert(declaration, context)]
+      };
+    }
   }
 };
 
