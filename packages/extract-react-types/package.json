@@ -7,7 +7,8 @@
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "keywords": [
     "react",
