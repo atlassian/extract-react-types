@@ -7,7 +7,7 @@
     "changeset": "bolt build-releases changeset",
     "version-all": "bolt build-releases version",
     "publish-changed": "yarn validate && build-releases publish --public",
-    "postinstall": "npx preconstruct dev",
+    "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",
     "validate": "yarn lint && yarn test && yarn flow",
