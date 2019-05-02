@@ -127,21 +127,36 @@ const getDefaultProps = (path, context) => {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context): K.Program => {
+  const exportedNodes = path
+    .get('body')
+    .filter(t.isExportDeclaration)
+    .map(expPath =>
+      convert(expPath, {
+        ...context,
+        mode: 'value'
+      })
+    );
+
   if (context.extractFirst) {
-    let components = exportedComponents(path, 'default', context);
-    // components[0] could be undefined
-    let component;
-    if (components[0]) {
-      component = components[0].component;
-    }
+    const findComponent = (node: K.AnyKind): ?K.Component => {
+      if (node.kind === 'component') {
+        return node;
+      } else if (node.kind === 'defaultExport') {
+        return findComponent(node.value);
+      } else if (node.kind === 'namedExports') {
+        return node.values.find(findComponent);
+      } else if (node.kind === 'variable') {
+        return node.declarations.find(findComponent);
+      }
+      return undefined;
+    };
+    let [component] = exportedNodes.map(findComponent);
 
     // just extract the props from the first class in the file
     if (!component) {
       path.traverse({
         ClassDeclaration(scopedPath) {
-          if (!component && isReactComponentClass(scopedPath)) {
-            component = convertReactComponentClass(scopedPath, context);
-          }
+          component = convert(scopedPath, context);
         }
       });
     }
@@ -150,20 +165,8 @@ converters.Program = (path, context): K.Program => {
       kind: 'program',
       body: component ? [component] : []
     };
-  } else {
-    return {
-      kind: 'program',
-      body: path
-        .get('body')
-        .filter(t.isExportDeclaration)
-        .map(expPath =>
-          convert(expPath, {
-            ...context,
-            mode: 'value'
-          })
-        )
-    };
   }
+  return exportedNodes;
 };
 
 function convertReactComponentFunction(path, context) {

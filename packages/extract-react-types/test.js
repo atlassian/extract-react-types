@@ -1461,41 +1461,6 @@ const TESTS = [
       }
     }
     `
-  },
-  {
-    name: 'Flow plain object ',
-    typeSystem: 'flow',
-    code: `
-    export const obj = {
-      hello: 'hello',
-      my: 1
-    }
-    `
-  },
-  {
-    name: 'Flow functional component',
-    typeSystem: 'flow',
-    code: `
-    export const Foo = (props: {}) => "hi";
-    export const Bar = (props: {}) => 1
-    `
-  },
-  {
-    name: 'Flow named export functional component',
-    typeSystem: 'flow',
-    code: `
-    const Thing = (props: {}) => "thing";
-    export { Thing };
-    `
-  },
-  {
-    name: 'Flow export type',
-    typeSystem: 'flow',
-    code: `
-    export type FooType = {
-      key: string
-    }
-    `
   }
 ];
 
@@ -1505,17 +1470,6 @@ cases(
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: true });
-    expect(result).toMatchSnapshot();
-  },
-  TESTS
-);
-
-cases(
-  'with extractFirst = false',
-  testCase => {
-    let code = stripIndent(testCase.code);
-    // Pass in file name so we can resolve imports to files in __fixtures__
-    let result = extractReactTypes(code, testCase.typeSystem, __filename, { extractFirst: false });
     expect(result).toMatchSnapshot();
   },
   TESTS
