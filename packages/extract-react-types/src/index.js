@@ -139,16 +139,13 @@ converters.Program = (path, context): K.Program => {
 
   if (context.extractFirst) {
     const findComponent = (node: K.AnyKind): ?K.Component => {
-      if (node.kind === 'component') {
-        return node;
-      } else if (node.kind === 'defaultExport') {
-        return findComponent(node.value);
-      } else if (node.kind === 'namedExports') {
-        return node.values.find(findComponent);
-      } else if (node.kind === 'variable') {
-        return node.declarations.find(findComponent);
-      }
-      return undefined;
+      const kinds = {
+        component: (n: K.Component) => n,
+        defaultExport: (n: K.DefaultExport) => findComponent(n.value),
+        namedExports: (n: K.NamedExports) => n.values.find(findComponent),
+        variable: (n: K.Variable) => n.declarations.find(findComponent)
+      };
+      return kinds[node.kind] ? kinds[node.kind](node) : undefined;
     };
     let [component] = exportedNodes.map(findComponent);
 
@@ -166,7 +163,10 @@ converters.Program = (path, context): K.Program => {
       body: component ? [component] : []
     };
   }
-  return exportedNodes;
+  return {
+    kind: 'program',
+    body: exportedNodes
+  };
 };
 
 function convertReactComponentFunction(path, context) {
