@@ -12,7 +12,7 @@ module.exports = babel => {
         if (typeSystem) {
           try {
             let components = findExportedComponents(programPath, typeSystem, state.file.filename);
-            components.forEach(({ name, component }) => {
+            components.forEach(({ name, props }) => {
               // TODO: handle when name is null
               // it will only happen when it's the default export
               // generate something like this
@@ -22,8 +22,9 @@ module.exports = babel => {
                   t.expressionStatement(
                     t.assignmentExpression(
                       '=',
-                      t.memberExpression(t.identifier(name), t.identifier('___types')),
-                      babel.parse(`(${JSON.stringify(component)})`).program.body[0].expression
+                      t.memberExpression(t.identifier(name.name), t.identifier('___types')),
+                      babel.parse(`(${JSON.stringify({ ...props, name })})`).program.body[0]
+                        .expression
                     )
                   )
                 );

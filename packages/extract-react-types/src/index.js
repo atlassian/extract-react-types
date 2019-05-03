@@ -567,8 +567,8 @@ function convertFunction(path, context): K.Func | K.Component {
       kind: 'component',
       props: addDefaultProps(functionProperties, defaultProps),
       name: {
-        name,
         kind: 'id',
+        name,
         type: null
       }
     };
@@ -768,7 +768,9 @@ converters.Identifier = (path, context): K.Id => {
         let bindingPath = binding.path;
         let foundPath = null;
 
-        if (bindingPath.isVariableDeclaration()) {
+        if (bindingPath.isClassDeclaration()) {
+          foundPath = bindingPath;
+        } else if (bindingPath.isVariableDeclaration()) {
           foundPath = bindingPath.get('declarators').find(p => {
             return p.node.name === name;
           });
@@ -1584,127 +1586,162 @@ export function extractReactTypes(
   return convert(file.path, { resolveOptions, parserOpts, extractFirst: !!options.extractFirst });
 }
 
-function findExports(
-  path,
-  exportsToFind: 'all' | 'default'
-): Array<{ name: string | null, path: any }> {
-  let moduleExports = path.get('body').filter(bodyPath =>
-    // we only check for named and default exports here, we don't want export all
-    exportsToFind === 'default'
-      ? bodyPath.isExportDefaultDeclaration()
-      : (bodyPath.isExportNamedDeclaration() &&
-          bodyPath.node.source === null &&
-          // exportKind is 'value' or 'type' in flow
-          (bodyPath.node.exportKind === 'value' ||
-            // exportKind is undefined in typescript
-            bodyPath.node.exportKind === undefined)) ||
-        bodyPath.isExportDefaultDeclaration()
-  );
+// function findExports(
+//   path,
+//   exportsToFind: 'all' | 'default'
+// ): Array<{ name: string | null, path: any }> {
+//   let moduleExports = path.get('body').filter(bodyPath =>
+//     // we only check for named and default exports here, we don't want export all
+//     exportsToFind === 'default'
+//       ? bodyPath.isExportDefaultDeclaration()
+//       : (bodyPath.isExportNamedDeclaration() &&
+//           bodyPath.node.source === null &&
+//           // exportKind is 'value' or 'type' in flow
+//           (bodyPath.node.exportKind === 'value' ||
+//             // exportKind is undefined in typescript
+//             bodyPath.node.exportKind === undefined)) ||
+//         bodyPath.isExportDefaultDeclaration()
+//   );
 
-  let formattedExports = [];
+//   let formattedExports = [];
 
-  moduleExports.forEach(exportPath => {
-    if (exportPath.isExportDefaultDeclaration()) {
-      let declaration = exportPath.get('declaration');
-      if (declaration.isIdentifier()) {
-        let binding = path.scope.bindings[declaration.node.name].path;
-        if (binding.isVariableDeclarator()) {
-          binding = binding.get('init');
-        }
-        formattedExports.push({
-          name: declaration.node.name,
-          path: binding
-        });
-      } else {
-        let name = null;
-        if (
-          (declaration.isClassDeclaration() || declaration.isFunctionDeclaration()) &&
-          declaration.node.id !== null
-        ) {
-          name = declaration.node.id.name;
-        }
-        formattedExports.push({ name, path: declaration });
-      }
-    } else {
-      let declaration = exportPath.get('declaration');
-      let specifiers = exportPath.get('specifiers');
-      if (specifiers.length === 0) {
-        if (declaration.isFunctionDeclaration() || declaration.isClassDeclaration()) {
-          let identifier = declaration.node.id;
-          formattedExports.push({
-            name: identifier === null ? null : identifier.name,
-            path: declaration
-          });
-        }
-        if (declaration.isVariableDeclaration()) {
-          declaration.get('declarations').forEach(declarator => {
-            formattedExports.push({
-              name: declarator.node.id.name,
-              path: declarator.get('init')
-            });
-          });
-        }
-      } else {
-        specifiers.forEach(specifier => {
-          let name = specifier.node.local.name;
-          let binding = path.scope.bindings[name].path;
-          if (binding.isVariableDeclarator()) {
-            binding = binding.get('init');
-          }
-          formattedExports.push({
-            name,
-            path: binding
-          });
-        });
-      }
-    }
-  });
-  return formattedExports;
-}
+//   moduleExports.forEach(exportPath => {
+//     if (exportPath.isExportDefaultDeclaration()) {
+//       let declaration = exportPath.get('declaration');
+//       if (declaration.isIdentifier()) {
+//         let binding = path.scope.bindings[declaration.node.name].path;
+//         if (binding.isVariableDeclarator()) {
+//           binding = binding.get('init');
+//         }
+//         formattedExports.push({
+//           name: declaration.node.name,
+//           path: binding
+//         });
+//       } else {
+//         let name = null;
+//         if (
+//           (declaration.isClassDeclaration() || declaration.isFunctionDeclaration()) &&
+//           declaration.node.id !== null
+//         ) {
+//           name = declaration.node.id.name;
+//         }
+//         formattedExports.push({ name, path: declaration });
+//       }
+//     } else {
+//       let declaration = exportPath.get('declaration');
+//       let specifiers = exportPath.get('specifiers');
+//       if (specifiers.length === 0) {
+//         if (declaration.isFunctionDeclaration() || declaration.isClassDeclaration()) {
+//           let identifier = declaration.node.id;
+//           formattedExports.push({
+//             name: identifier === null ? null : identifier.name,
+//             path: declaration
+//           });
+//         }
+//         if (declaration.isVariableDeclaration()) {
+//           declaration.get('declarations').forEach(declarator => {
+//             formattedExports.push({
+//               name: declarator.node.id.name,
+//               path: declarator.get('init')
+//             });
+//           });
+//         }
+//       } else {
+//         specifiers.forEach(specifier => {
+//           let name = specifier.node.local.name;
+//           let binding = path.scope.bindings[name].path;
+//           if (binding.isVariableDeclarator()) {
+//             binding = binding.get('init');
+//           }
+//           formattedExports.push({
+//             name,
+//             path: binding
+//           });
+//         });
+//       }
+//     }
+//   });
+//   return formattedExports;
+// }
 
-function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
-  let components = [];
-  let exportPaths = findExports(programPath, componentsToFind);
-  exportPaths.forEach(({ path, name }) => {
-    if (
-      path.isFunctionExpression() ||
-      path.isArrowFunctionExpression() ||
-      path.isFunctionDeclaration()
-    ) {
-      let component = convertReactComponentFunction(path, context);
-      components.push({ name, path, component });
-      return;
-    }
-    if (path.isClass()) {
-      let component = convertReactComponentClass(path, context);
-      components.push({ name, path, component });
-      return;
-    }
-    let isMemo = isSpecialReactComponentType(path, 'memo');
-    if (isMemo || isSpecialReactComponentType(path, 'forwardRef')) {
-      let firstArg = path.get('arguments')[0];
-      if (firstArg) {
-        if (firstArg.isFunctionExpression() || firstArg.isArrowFunctionExpression()) {
-          let component = convertReactComponentFunction(firstArg, context);
-          components.push({ name, path, component });
-          return;
-        }
-        if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
-          let innerFirstArg = firstArg.get('arguments')[0];
-          if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
-            let component = convertReactComponentFunction(innerFirstArg, context);
-            components.push({ name, path, component });
-          }
-        }
-      }
-    }
-  });
-  return components;
-}
+// function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
+//   let exportedNodes = convert(programPath);
+//   const findComponent = (node: K.AnyKind): ?K.Component => {
+//     const kinds = {
+//       component: (n: K.Component) => n,
+//       defaultExport: (n: K.DefaultExport) => findComponent(n.value),
+//       namedExports: (n: K.NamedExports) => n.values.find(findComponent),
+//       variable: (n: K.Variable) => n.declarations.find(findComponent)
+//     };
+//     return kinds[node.kind] ? kinds[node.kind](node) : undefined;
+//   };
+//   let components = exportedNodes.map(findComponent);
+//   return components;
+
+// let exportPaths = findExports(programPath, componentsToFind);
+// exportPaths.forEach(({ path, name }) => {
+//   if (
+//     path.isFunctionExpression() ||
+//     path.isArrowFunctionExpression() ||
+//     path.isFunctionDeclaration()
+//   ) {
+//     let component = convertReactComponentFunction(path, context);
+//     components.push({ name, path, component });
+//     return;
+//   }
+//   if (path.isClass()) {
+//     let component = convertReactComponentClass(path, context);
+//     components.push({ name, path, component });
+//     return;
+//   }
+//   let isMemo = isSpecialReactComponentType(path, 'memo');
+//   if (isMemo || isSpecialReactComponentType(path, 'forwardRef')) {
+//     let firstArg = path.get('arguments')[0];
+//     if (firstArg) {
+//       if (firstArg.isFunctionExpression() || firstArg.isArrowFunctionExpression()) {
+//         let component = convertReactComponentFunction(firstArg, context);
+//         components.push({ name, path, component });
+//         return;
+//       }
+//       if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
+//         let innerFirstArg = firstArg.get('arguments')[0];
+//         if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
+//           let component = convertReactComponentFunction(innerFirstArg, context);
+//           components.push({ name, path, component });
+//         }
+//       }
+//     }
+//   }
+// });
+// return components;
+// }
 
 export const findExportedComponents = (
   programPath: any,
   typeSystem: 'flow' | 'typescript',
   filename?: string,
   resolveOptions?: Object
-) => exportedComponents(programPath, 'all', getContext(typeSystem, filename, resolveOptions));
+): K.Component[] => {
+  let context = getContext(typeSystem, filename, resolveOptions);
+  let program = convert(programPath, context);
+  // console.log(program.body[0].values[0]);
+  const findComponent = (node: K.AnyKind): ?K.Component => {
+    const toComponent = (c: ?K.Component, n: K.AnyKind) => c || findComponent(n);
+    const kinds = {
+      call: (n: K.Call) => n.args.reduce(toComponent, undefined),
+      component: (n: K.Component) => n,
+      defaultExport: (n: K.DefaultExport) => findComponent(n.value),
+      exportSpecifier: (n: K.ExportSpecifier) => findComponent(n.local),
+      initial: (n: K.Initial) => findComponent(n.value),
+      namedExports: (n: K.NamedExports) => {
+        return n.values.reduce(toComponent, undefined);
+      },
+      variable: (n: K.Variable) => {
+        return n.declarations.reduce(toComponent, undefined);
+      }
+    };
+    return kinds[node.kind] ? kinds[node.kind](node) : undefined;
+  };
+  let components = program.body.map(findComponent).filter(Boolean);
+  return components;
+};
