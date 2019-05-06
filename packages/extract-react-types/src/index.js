@@ -1152,7 +1152,7 @@ converters.TSNullKeyword = (path, context): K.Null => {
 };
 
 /* eslint-disable-next-line no-unused-vars */
-converters.TSThisType = (path, context) /*:K.This */ => {
+converters.TSThisType = (path, context): K.This => {
   return { kind: 'custom', value: 'this' };
 };
 
