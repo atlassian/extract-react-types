@@ -13,3 +13,6 @@ node_modules
 
 # ignore yarn.locks generated in packages
 packages/**/**/yarn.lock
+
+# don't ignore anything in our test fixtures
+!/packages/generate-react-types/src/__fixtures__/packages/lozenge/node_modules
