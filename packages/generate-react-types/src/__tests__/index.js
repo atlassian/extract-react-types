@@ -51,7 +51,7 @@ test('generate ts definition for flow default props', () => {
 
 test('generates ts definitions for flow package', () => {
   let packagePath = resolve(__dirname, '../__fixtures__/packages/lozenge');
-  let code = readFileSync(resolve(packagePath, 'index.js'), 'utf8');
-  let result = generateReactTypes(code, 'typescript', resolve(packagePath, 'index.js'));
+  let code = readFileSync(resolve(packagePath, './Lozenge/index.js'), 'utf8');
+  let result = generateReactTypes(code, 'typescript', resolve(packagePath, './Lozenge/index.js'));
   expect(result).toEqual(readFileSync(resolve(packagePath, 'index.d.ts'), 'utf8'));
 });
