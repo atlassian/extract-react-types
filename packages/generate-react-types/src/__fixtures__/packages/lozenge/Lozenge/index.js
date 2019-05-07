@@ -4,7 +4,7 @@
 
 import { type ThemeProp } from '@atlaskit/theme';
 import React, { PureComponent, type Node } from 'react';
-import { type ThemeAppearance, type ThemeProps, type ThemeTokens } from '../theme';
+import { type ThemeAppearance, type LozengeThemeProps, type LozengeThemeTokens } from '../theme';
 
 type Props = {
   /** The appearance type. */
@@ -16,7 +16,7 @@ type Props = {
   /** max-width of lozenge container. Default to 200px. */
   maxWidth: number | string,
   /** The theme the component should use. */
-  theme?: ThemeProp<ThemeTokens, ThemeProps>
+  theme?: ThemeProp<LozengeThemeTokens, LozengeThemeProps>
 };
 
 export default class Lozenge extends PureComponent<Props> {

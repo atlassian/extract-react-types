@@ -83,8 +83,8 @@ const tsConverters = {
     };
   },
 
-  string: () => {
-    return t.tsStringKeyword();
+  string: ertNode => {
+    return ertNode.value ? t.tsLiteralType(t.stringLiteral(ertNode.value)) : t.tsStringKeyword();
   },
 
   typeParamsDeclaration(ertNode, convert) {

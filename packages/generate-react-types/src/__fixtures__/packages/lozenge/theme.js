@@ -8,7 +8,13 @@ export type ThemeAppearance =
   | 'success'
   | {};
 
-export type ThemeProps = {
+export type LozengeThemeTokens = {
+  backgroundColor: string,
+  maxWidth: number | string,
+  textColor: string
+};
+
+export type LozengeThemeProps = {
   appearance: ThemeAppearance | {},
   isBold: boolean,
   maxWidth: number | string
