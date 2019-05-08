@@ -3,7 +3,7 @@
 import { shallow, configure } from 'enzyme';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
-import extractReactTypes from 'extract-react-types';
+import { extractReactTypes } from 'extract-react-types';
 import components from '../components';
 import prettyConvert, { TypeMinWidth } from './converters';
 

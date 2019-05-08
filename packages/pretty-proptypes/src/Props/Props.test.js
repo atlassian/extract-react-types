@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount, configure } from 'enzyme';
-import extractReactTypes from 'extract-react-types';
+import { extractReactTypes } from 'extract-react-types';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Props from './';

@@ -10,10 +10,9 @@ type TestCase = {
 }
 */
 
-const stripIndent = require('strip-indent');
-const cases = require('jest-in-case');
-
-const extractReactTypes = require('./');
+import stripIndent from 'strip-indent';
+import cases from 'jest-in-case';
+import { extractReactTypes } from './src';
 
 const TESTS = [
   {
@@ -1300,7 +1299,7 @@ const TESTS = [
 
       class Component extends React.Component<{ foo: string[] }> {}
 
-      function Component(props: Props) {
+      function FunComponent(props: Props) {
         return null;
       }
 

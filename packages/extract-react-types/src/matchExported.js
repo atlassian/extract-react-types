@@ -1,9 +1,10 @@
 // @flow
-const { explodeModule } = require('babel-explode-module');
-const { explodedToStatements } = require('babel-helper-simplify-module');
-const printAST = require('ast-pretty-print');
+import { explodeModule } from 'babel-explode-module';
+import { explodedToStatements } from 'babel-helper-simplify-module';
+// $FlowFixMe
+import printAST from 'ast-pretty-print';
 
-module.exports = function matchExported(file /* : Object */, exportName /*: string */) {
+export default function matchExported(file: Object, exportName: string) {
   let exploded = explodeModule(file.path.node);
   let statements = explodedToStatements(exploded);
   let program = Object.assign({}, file.path.node, {
@@ -56,4 +57,4 @@ module.exports = function matchExported(file /* : Object */, exportName /*: stri
   });
 
   return statement || null;
-};
+}
