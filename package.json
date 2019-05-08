@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "changeset": "bolt build-releases changeset",
-    "version-all": "bolt build-releases version",
-    "publish-changed": "yarn validate && build-releases publish --public",
+    "changeset": "changeset",
+    "bump": "changeset bump",
+    "release": "changeset release --public",
     "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",
@@ -32,13 +32,13 @@
     "^.+\\.jsx?$": "babel-jest"
   },
   "dependencies": {
-    "@atlaskit/build-releases": "^3.0.3",
     "@babel/core": "^7.4.4",
     "@babel/plugin-syntax-flow": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
     "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
+    "@changesets/cli": "^1.1.0",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
     "babel-eslint": "^10.0.1",

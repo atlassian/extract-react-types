@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-extract-react-types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "license": "MIT",
   "repository": "atlassian/extract-react-types",
@@ -17,7 +17,7 @@
   ],
   "author": "Mitchell Hamilton",
   "dependencies": {
-    "extract-react-types": "^0.16.0"
+    "extract-react-types": "^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

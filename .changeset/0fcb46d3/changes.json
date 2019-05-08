@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "kind2string", "type": "patch" },
-    { "name": "pretty-proptypes", "type": "patch" }
-  ],
-  "dependents": []
-}

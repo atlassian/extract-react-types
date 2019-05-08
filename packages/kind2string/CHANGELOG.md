@@ -1,5 +1,16 @@
 # pretty-proptypes
 
+## 0.5.4
+### Patch Changes
+
+- [patch] [287e4b4](https://github.com/atlassian/extract-react-types/commit/287e4b4):
+  - Updated build to use preconstruct (this shouldn't affect usage, but calling this out just in case)
+- [patch] [4b3b4a4](https://github.com/atlassian/extract-react-types/commit/4b3b4a4):
+  - Add logicalExpression converter
+
+- Updated dependencies [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
+  - extract-react-types@0.17.0
+
 ## 0.5.3
 - [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
   - Add converter for typeCastExpression
