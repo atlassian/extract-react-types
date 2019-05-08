@@ -2,28 +2,84 @@
 import * as t from '@babel/types';
 import generate from '@babel/generator';
 
+type ErtNode = { [string]: any };
+
+type BabelNode = { [string]: any };
+
+type Substitution = { [id: string]: ErtNode };
+
+const addSubst = (subst: Substitution, id: string, value: ErtNode): Substitution => ({
+  ...subst,
+  [id]: value
+});
+
+const hasSubst = (subst: Substitution, id: string) => !!subst[id];
+
+const getSubst = (subst: Substitution, id: string) => subst[id];
+
+type State = {
+  substitutions: Substitution
+};
+
+const initialState = () => ({
+  substitutions: {}
+});
+
+type Converter = (ErtNode, State, Converter) => BabelNode;
+
 const tsConverters = {
   boolean: () => t.tsBooleanKeyword(),
 
-  function(ertNode, convert) {
+  function(ertNode, state, convert) {
     // TODO: can't decide whether this is a function type or function value
     return t.tsFunctionType(
       // t.tsTypeParameterDeclaration([]),
       null,
-      ertNode.parameters.map(p => convert(p, convert)),
-      t.tsTypeAnnotation(convert(ertNode.returnType))
+      ertNode.parameters.map(p => convert(p, state)),
+      t.tsTypeAnnotation(convert(ertNode.returnType, state))
     );
   },
 
-  generic(ertNode, convert) {
-    return convert(ertNode.value);
+  generic(ertNode, state, convert) {
+    // // Replace with these types
+    // console.log(JSON.stringify(ertNode, null, 2));
+    if (ertNode.typeParams) {
+      // console.log('hello', ertNode.value.parameters[1].value);
+      // console.log(ertNode.typeParams);
+      // console.log(state.substitutions);
+      console.log(
+        'subst',
+        ertNode.typeParams.params.reduce(
+          (subst, tyParam, i) =>
+            console.log('param', ertNode.value.parameters[1].value) ||
+            addSubst(subst, ertNode.value.parameters[i].value.referenceIdName, tyParam),
+          state.substitutions
+        )
+      );
+      return convert(ertNode.value, {
+        ...state,
+        substitutions: ertNode.typeParams.params.reduce(
+          (subst, tyParam, i) =>
+            addSubst(subst, ertNode.value.parameters[i].value.referenceIdName, tyParam),
+          state.substitutions
+        )
+      });
+    }
+    // do I need to replace myself?
+    if (hasSubst(state.substitutions, ertNode)) {
+      return {
+        ...t.identifier('TODO'),
+        typeAnnotation: t.tsTypeAnnotation(convert(getSubst(state.substitutions, ertNode), state))
+      };
+    }
+    return convert(ertNode.value, state);
   },
 
   id(ertNode) {
     return t.identifier(ertNode.name);
   },
 
-  import(ertNode, convert) {
+  import(ertNode, state, convert) {
     if (ertNode.moduleSpecifier === 'react') {
       return t.tsTypeReference(
         t.tsQualifiedName(t.identifier('React'), t.identifier(ertNode.referenceIdName))
@@ -36,18 +92,18 @@ const tsConverters = {
     return t.tsNumberKeyword();
   },
 
-  object: (ertNode, convert) => {
-    return t.tsTypeLiteral(ertNode.members.map(n => convert(n, convert)));
+  object: (ertNode, state, convert) => {
+    return t.tsTypeLiteral(ertNode.members.map(m => convert(m, state)));
   },
 
-  param(ertNode, convert) {
+  param(ertNode, state, convert) {
     return {
       ...t.identifier('TODO'),
-      typeAnnotation: t.tsTypeAnnotation(convert(ertNode.value))
+      typeAnnotation: t.tsTypeAnnotation(convert(ertNode.value, state))
     };
   },
 
-  program: (ertNode, convert) => {
+  program: (ertNode, state, convert) => {
     if (ertNode.component) {
       return t.program([
         t.importDeclaration(
@@ -58,11 +114,11 @@ const tsConverters = {
           {
             ...t.variableDeclaration('var', [
               t.variableDeclarator({
-                ...convert(ertNode.component.name, convert),
+                ...convert(ertNode.component.name, state),
                 typeAnnotation: t.tsTypeAnnotation(
                   t.tsTypeReference(
                     t.tsQualifiedName(t.identifier('React'), t.identifier('ComponentType')),
-                    t.tsTypeParameterInstantiation([convert(ertNode.component, convert)])
+                    t.tsTypeParameterInstantiation([convert(ertNode.component, state)])
                   )
                 )
               })
@@ -76,9 +132,12 @@ const tsConverters = {
     return t.program([]);
   },
 
-  property: (ertNode, convert) => {
+  property: (ertNode, state, convert) => {
     return {
-      ...t.tsPropertySignature(convert(ertNode.key), t.tsTypeAnnotation(convert(ertNode.value))),
+      ...t.tsPropertySignature(
+        convert(ertNode.key, state),
+        t.tsTypeAnnotation(convert(ertNode.value, state))
+      ),
       optional: !!ertNode.default
     };
   },
@@ -87,30 +146,30 @@ const tsConverters = {
     return ertNode.value ? t.tsLiteralType(t.stringLiteral(ertNode.value)) : t.tsStringKeyword();
   },
 
-  typeParamsDeclaration(ertNode, convert) {
-    return convert(ertNode.params.find(p => p.name === ertNode.referenceIdName));
+  typeParamsDeclaration(ertNode, state, convert) {
+    return convert(ertNode.params.find(p => p.name === ertNode.referenceIdName), state);
   },
 
-  typeParam(ertNode, convert) {
+  typeParam(ertNode, state, convert) {
     return t.tsTypeReference(t.identifier(ertNode.name));
   },
 
-  union: (ertNode, convert) => {
-    const types = ertNode.types.map(type => convert(type, convert));
+  union: (ertNode, state, convert) => {
+    const types = ertNode.types.map(ty => convert(ty, state));
     return t.tsUnionType(types);
   }
 };
 
 // eslint-disable-next-line import/prefer-default-export
 export const convertToTs = ertNode => {
-  let convert = node => {
+  let convert = (node, state) => {
     if (node.kind in tsConverters) {
-      return tsConverters[node.kind](node, convert);
+      return tsConverters[node.kind](node, state, convert);
     }
     // eslint-disable-next-line no-console
     console.error(node);
     throw `Cannot process type: ${node.kind} right now`;
   };
 
-  return generate(convert(ertNode)).code;
+  return generate(convert(ertNode, initialState())).code;
 };
