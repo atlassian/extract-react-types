@@ -42,35 +42,18 @@ const tsConverters = {
 
   generic(ertNode, state, convert) {
     // // Replace with these types
-    // console.log(JSON.stringify(ertNode, null, 2));
     if (ertNode.typeParams) {
-      // console.log('hello', ertNode.value.parameters[1].value);
-      // console.log(ertNode.typeParams);
-      // console.log(state.substitutions);
-      console.log(
-        'subst',
-        ertNode.typeParams.params.reduce(
-          (subst, tyParam, i) =>
-            console.log('param', ertNode.value.parameters[1].value) ||
-            addSubst(subst, ertNode.value.parameters[i].value.referenceIdName, tyParam),
-          state.substitutions
-        )
-      );
       return convert(ertNode.value, {
         ...state,
         substitutions: ertNode.typeParams.params.reduce(
-          (subst, tyParam, i) =>
-            addSubst(subst, ertNode.value.parameters[i].value.referenceIdName, tyParam),
+          (subst, tyParam, i) => addSubst(subst, ertNode.value.typeParams.params[i].name, tyParam),
           state.substitutions
         )
       });
     }
     // do I need to replace myself?
-    if (hasSubst(state.substitutions, ertNode)) {
-      return {
-        ...t.identifier('TODO'),
-        typeAnnotation: t.tsTypeAnnotation(convert(getSubst(state.substitutions, ertNode), state))
-      };
+    if (hasSubst(state.substitutions, ertNode.value.referenceIdName)) {
+      return convert(getSubst(state.substitutions, ertNode.value.referenceIdName), state);
     }
     return convert(ertNode.value, state);
   },
