@@ -548,9 +548,9 @@ converters.UnionTypeAnnotation = (path, context): K.Union => {
   return { kind: 'union', types };
 };
 
-converters.TypeParameterInstantiation = (path, context): K.TypeParams => {
+converters.TypeParameterInstantiation = (path, context): K.TypeParamsInstantiation => {
   return {
-    kind: 'typeParams',
+    kind: 'typeParamsInstantiation',
     params: path.get('params').map(p => convert(p, context))
   };
 };
@@ -797,8 +797,13 @@ converters.Identifier = (path, context): K.Id => {
   throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
 
-converters.TypeAlias = (path, context) => {
-  return convert(path.get('right'), context);
+converters.TypeAlias = (path, context): K.TypeAlias => {
+  return {
+    kind: 'typeAlias',
+    id: convert(path.get('id'), context),
+    typeParams: path.node.typeParameters ? convert(path.get('typeParameters'), context) : null,
+    right: convert(path.get('right'), context)
+  };
 };
 
 converters.IntersectionTypeAnnotation = (path, context): K.Intersection => {
@@ -1089,9 +1094,9 @@ converters.TSArrayType = (path, context): K.ArrayType => {
   };
 };
 
-converters.TSTypeParameterInstantiation = (path, context): K.TypeParams => {
+converters.TSTypeParameterInstantiation = (path, context): K.TypeParamsInstantiation => {
   return {
-    kind: 'typeParams',
+    kind: 'typeParamsInstantiation',
     params: path.get('params').map(param => convert(param, context))
   };
 };
