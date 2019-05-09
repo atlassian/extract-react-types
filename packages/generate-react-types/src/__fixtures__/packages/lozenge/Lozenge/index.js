@@ -8,13 +8,13 @@ import { type ThemeAppearance, type LozengeThemeProps, type LozengeThemeTokens }
 
 type Props = {
   /** The appearance type. */
-  appearance: ThemeAppearance,
+  appearance?: ThemeAppearance,
   /** Elements to be rendered inside the lozenge. This should ideally be just a word or two. */
   children?: Node,
   /** Determines whether to apply the bold style or not. */
-  isBold: boolean,
+  isBold?: boolean,
   /** max-width of lozenge container. Default to 200px. */
-  maxWidth: number | string,
+  maxWidth?: number | string,
   /** The theme the component should use. */
   theme?: ThemeProp<LozengeThemeTokens, LozengeThemeProps>
 };
