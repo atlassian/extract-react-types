@@ -1592,20 +1592,6 @@ const TESTS = [
       }
     }
     `
-  },
-  {
-    name: 'Flow function generic',
-    typeSystem: 'flow',
-    code: `
-    export type ThemeProp<ThemeTokens = {}, ThemeProps = *> = (
-      (ThemeProps) => ThemeTokens,
-      ThemeProps
-    ) => ThemeTokens;
-
-    class Component extends React.Component<{ 
-      theme: ThemeProp<{ bg: string}, { hover: boolean }>
-    }> {};
-    `
   }
 ];
 

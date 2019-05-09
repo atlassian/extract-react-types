@@ -5,16 +5,7 @@ export type Param = {
   value: AnyKind,
   type: AnyKind | null
 };
-
-export type TypeAlias = {
-  id: Id,
-  typeParams: Array<TypeParam> | null,
-  right: AnyTypeKind
-};
-export type TypeParamsInstantiation = {
-  kind: 'typeParamsInstantiation',
-  params: Array<AnyTypeKind>
-};
+export type TypeParams = { kind: 'typeParams', params: Array<AnyTypeKind> };
 export type TypeParam = { kind: 'typeParam', name: string };
 export type TypeParamsDeclaration = {
   kind: 'typeParamsDeclaration',
@@ -142,7 +133,7 @@ export type Union = { kind: 'union', types: Array<AnyTypeKind> };
 export type Generic = {
   kind: 'generic',
   value: AnyTypeKind,
-  typeParams?: TypeParamsInstantiation
+  typeParams?: TypeParams
 };
 export type Initial = { kind: 'initial', id: Id, value: AnyValueKind };
 export type Variable = { kind: 'variable', declarations: Array<Initial> };
@@ -196,9 +187,7 @@ export type AnyTypeKind =
   | String
   | Tuple
   | Typeof
-  | TypeParamsInstantiation
-  | TypeParamsDeclaration
-  | TypeAlias
+  | TypeParams
   | Unary
   | Union
   | Void;
