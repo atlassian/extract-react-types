@@ -208,6 +208,181 @@ Object {
 }
 `;
 
+exports[`Flow function generic 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "theme",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "generic",
+          "typeParams": Object {
+            "kind": "typeParamsInstantiation",
+            "params": Array [
+              Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "bg",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "string",
+                    },
+                  },
+                ],
+              },
+              Object {
+                "kind": "object",
+                "members": Array [
+                  Object {
+                    "key": Object {
+                      "kind": "id",
+                      "name": "hover",
+                    },
+                    "kind": "property",
+                    "optional": false,
+                    "value": Object {
+                      "kind": "boolean",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+          "value": Object {
+            "id": Object {
+              "kind": "id",
+              "name": "ThemeProp",
+            },
+            "referenceIdName": "ThemeProp",
+            "right": Object {
+              "kind": "function",
+              "parameters": Array [
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "function",
+                    "parameters": Array [
+                      Object {
+                        "kind": "param",
+                        "type": null,
+                        "value": Object {
+                          "kind": "generic",
+                          "value": Object {
+                            "kind": "typeParamsDeclaration",
+                            "params": Array [
+                              Object {
+                                "kind": "typeParam",
+                                "name": "ThemeTokens",
+                              },
+                              Object {
+                                "kind": "typeParam",
+                                "name": "ThemeProps",
+                              },
+                            ],
+                            "referenceIdName": "ThemeProps",
+                          },
+                        },
+                      },
+                    ],
+                    "returnType": Object {
+                      "kind": "generic",
+                      "value": Object {
+                        "kind": "typeParamsDeclaration",
+                        "params": Array [
+                          Object {
+                            "kind": "typeParam",
+                            "name": "ThemeTokens",
+                          },
+                          Object {
+                            "kind": "typeParam",
+                            "name": "ThemeProps",
+                          },
+                        ],
+                        "referenceIdName": "ThemeTokens",
+                      },
+                    },
+                  },
+                },
+                Object {
+                  "kind": "param",
+                  "type": null,
+                  "value": Object {
+                    "kind": "generic",
+                    "value": Object {
+                      "kind": "typeParamsDeclaration",
+                      "params": Array [
+                        Object {
+                          "kind": "typeParam",
+                          "name": "ThemeTokens",
+                        },
+                        Object {
+                          "kind": "typeParam",
+                          "name": "ThemeProps",
+                        },
+                      ],
+                      "referenceIdName": "ThemeProps",
+                    },
+                  },
+                },
+              ],
+              "returnType": Object {
+                "kind": "generic",
+                "value": Object {
+                  "kind": "typeParamsDeclaration",
+                  "params": Array [
+                    Object {
+                      "kind": "typeParam",
+                      "name": "ThemeTokens",
+                    },
+                    Object {
+                      "kind": "typeParam",
+                      "name": "ThemeProps",
+                    },
+                  ],
+                  "referenceIdName": "ThemeTokens",
+                },
+              },
+            },
+            "type": "typeAlias",
+            "typeParams": Object {
+              "kind": "typeParamsDeclaration",
+              "params": Array [
+                Object {
+                  "kind": "typeParam",
+                  "name": "ThemeTokens",
+                },
+                Object {
+                  "kind": "typeParam",
+                  "name": "ThemeProps",
+                },
+              ],
+            },
+          },
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`LogicalExpression and 1`] = `
 Object {
   "component": Object {
