@@ -146,6 +146,10 @@ const tsConverters = {
     return ertNode.value ? t.tsLiteralType(t.stringLiteral(ertNode.value)) : t.tsStringKeyword();
   },
 
+  typeAlias(ertNode, state, convert) {
+    return convert(ertNode.right, state);
+  },
+
   typeParamsDeclaration(ertNode, state, convert) {
     return convert(ertNode.params.find(p => p.name === ertNode.referenceIdName), state);
   },

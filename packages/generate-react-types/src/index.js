@@ -1,5 +1,5 @@
 // @flow
-import extractReactTypes from 'extract-react-types';
+import { extractReactTypes } from 'extract-react-types';
 import { convertToTs } from './converters';
 
 const target = {
