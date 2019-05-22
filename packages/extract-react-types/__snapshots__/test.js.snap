@@ -1215,6 +1215,15 @@ Object {
 }
 `;
 
+exports[`flow forwardRef callable type arguments 1`] = `
+Object {
+  "component": Object {
+    "kind": "any",
+  },
+  "kind": "program",
+}
+`;
+
 exports[`flow forwardRef default export 1`] = `
 Object {
   "component": Object {

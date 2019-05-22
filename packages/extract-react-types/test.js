@@ -1383,6 +1383,23 @@ const TESTS = [
     `
   },
   {
+    name: 'flow forwardRef callable type arguments',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+      }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default React.forwardRef<Props, HTMLElement>((props, ref) => <Component {...props} ref={ref} />);
+    `
+  },
+  {
     name: 'flow default class export',
     typeSystem: 'flow',
     code: `
