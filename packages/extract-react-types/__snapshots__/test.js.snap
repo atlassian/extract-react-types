@@ -1218,7 +1218,24 @@ Object {
 exports[`flow forwardRef callable type arguments 1`] = `
 Object {
   "component": Object {
-    "kind": "any",
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "name",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
   },
   "kind": "program",
 }
