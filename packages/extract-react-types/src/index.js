@@ -1451,7 +1451,7 @@ function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolv
   }
 
   if (typeSystem === 'flow') {
-    plugins.push('flow');
+    plugins.push(['flow', { all: true }]);
   } else if (typeSystem === 'typescript') {
     plugins.push('typescript');
 

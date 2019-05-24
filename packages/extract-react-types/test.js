@@ -33,7 +33,7 @@ const TESTS = [
         and: true && 'something',
       }
     }
-    
+
   `
   },
   {
@@ -45,7 +45,7 @@ const TESTS = [
         or: 'me' || 'you',
       }
     }
-    
+
   `
   },
   {
@@ -415,9 +415,9 @@ const TESTS = [
     interface BadgeProps {
       texture: string;
     }
-    
+
     function Badge({ texture }: BadgeProps) {}
-    
+
     Badge.f = [];
 
     export default Badge;
@@ -430,7 +430,7 @@ const TESTS = [
     interface BadgeProps {
       texture: Texture["src"];
     }
-    
+
     function Badge({ texture }: BadgeProps) {}
 
     export default Badge;
@@ -460,7 +460,7 @@ const TESTS = [
     export class Theme extends React.Component<{}, {}> {
       @Field(_ => ID)
       public id!: string;
-    
+
       @Field(_ => Textures)
       public fonts!: Textures;
 
@@ -1383,6 +1383,23 @@ const TESTS = [
     `
   },
   {
+    name: 'flow forwardRef callable type arguments',
+    typeSystem: 'flow',
+    code: `
+      type Props = {
+        name: string,
+      }
+
+      function Component (props: Props) {};
+
+      Component.defaultProps = {
+        name: 'bob',
+      };
+
+      export default React.forwardRef<Props, HTMLElement>((props: Props, ref) => <Component {...props} ref={ref} />);
+    `
+  },
+  {
     name: 'flow default class export',
     typeSystem: 'flow',
     code: `
@@ -1405,27 +1422,27 @@ const TESTS = [
     type Props = {
       ok: number
     }
-    
+
     class FieldInner extends React.Component<Props> {
       unregisterField = () => {};
-    
+
       componentDidMount() {
         this.unregisterField = this.register();
       }
-    
+
       componentWillUnmount() {
         this.unregisterField();
       }
     }
-    
+
     const Field = (props: Props) => <FieldInner {...props} />;
-    
+
     Field.defaultProps = {
       ok: 1
     };
-    
+
     export default Field;
-    
+
     `
   },
   {
@@ -1442,7 +1459,7 @@ const TESTS = [
 
     export default SomeComponent
 
-    
+
     `
   },
   {
@@ -1458,7 +1475,7 @@ const TESTS = [
     })
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1474,7 +1491,7 @@ const TESTS = [
     }
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1490,7 +1507,7 @@ const TESTS = [
     })
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1506,7 +1523,7 @@ const TESTS = [
     })
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1522,7 +1539,7 @@ const TESTS = [
     })
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1538,7 +1555,7 @@ const TESTS = [
     }))
 
     export default SomeComponent
-    
+
     `
   },
   {
@@ -1585,7 +1602,7 @@ const TESTS = [
     typeSystem: 'flow',
     code: `
     type Props = { bar: string }
-  
+
     class Component extends React.Component<Props> {
       static defaultProps = {
         bar: (ascii: string),
