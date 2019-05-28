@@ -1,5 +1,15 @@
 # pretty-proptypes
 
+## 0.6.1
+### Patch Changes
+
+- [patch] [287e4b4](https://github.com/atlassian/extract-react-types/commit/287e4b4):
+  - Updated build to use preconstruct (this shouldn't affect usage, but calling this out just in case)
+
+- Updated dependencies [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
+  - kind2string@0.5.4
+  - extract-react-types@0.17.0
+
 ## 0.6.0
 - [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
   - Add component prop to Props component

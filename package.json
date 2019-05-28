@@ -4,9 +4,10 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "changeset": "bolt build-releases changeset",
-    "version-all": "bolt build-releases version",
-    "publish-changed": "yarn validate && build-releases publish --public",
+    "changeset": "changeset",
+    "bump": "changeset bump",
+    "release": "changeset release --public",
+    "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",
     "validate": "yarn lint && yarn test && yarn flow",
@@ -22,18 +23,23 @@
   },
   "preconstruct": {
     "packages": [
+      "packages/extract-react-types",
       "packages/kind2string",
       "packages/pretty-proptypes"
     ]
   },
+  "transform": {
+    "^.+\\.jsx?$": "babel-jest"
+  },
   "dependencies": {
     "@aparna036/babel-explode-module": "^2.0.1",
-    "@atlaskit/build-releases": "^3.0.3",
-    "@babel/core": "7.0.0-beta.56",
+    "@babel/core": "^7.4.4",
     "@babel/plugin-syntax-flow": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
+    "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
+    "@changesets/cli": "^1.1.0",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
     "babel-eslint": "^10.0.1",
@@ -58,10 +64,17 @@
     "eslint-plugin-react": "^7.12.4",
     "jest-in-case": "^1.0.2",
     "react-markings": "^1.2.0",
+    "resolve": "^1.10.1",
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^24.7.1",
     "babel-plugin-emotion": "^9.1.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -72,11 +85,11 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "flow-bin": "^0.69.0",
-    "jest": "^23.6.0",
+    "flow-bin": "^0.98.0",
+    "jest": "^24.7.1",
     "jest-in-case": "^1.0.2",
     "jsdom": "^11.7.0",
-    "preconstruct": "^0.0.58",
+    "preconstruct": "^0.0.64",
     "prettier": "^1.13.7",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",

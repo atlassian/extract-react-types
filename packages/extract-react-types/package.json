@@ -1,12 +1,13 @@
 {
   "name": "extract-react-types",
-  "version": "0.16.1",
-  "main": "src/index.js",
+  "version": "0.17.0",
+  "main": "dist/extract-react-types.cjs.js",
   "repository": "atlassian/extract-react-types",
   "description": "Parse prop-types from react components using typescript or flow",
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "Apache-2.0",
   "files": [
+    "dist",
     "src"
   ],
   "keywords": [
@@ -18,7 +19,8 @@
   ],
   "dependencies": {
     "@aparna036/babel-explode-module": "^2.0.1",
-    "@babel/core": "7.0.0-beta.56",
+    "@babel/core": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
@@ -32,11 +34,13 @@
     "babel-type-scopes": "^1.1.0",
     "babylon": "^7.0.0-beta.22",
     "babylon-options": "^2.0.1",
+    "resolve": "^1.10.1",
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
-    "flow-bin": "^0.69.0",
-    "jest": "^23.6.0",
+    "babel-jest": "^24.7.1",
+    "flow-bin": "^0.98.0",
+    "jest": "^24.7.1",
     "prettier": "^1.13.7"
   }
 }

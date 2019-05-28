@@ -1,5 +1,25 @@
 # extract-react-types
 
+## 0.17.0
+### Minor Changes
+
+- [minor] [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
+  Changes default export of `extract-react-types` to a named export. See below for changes.
+
+  ```diff
+  -import extractReactTypes from 'extract-react-types';
+  +import { extractReactTypes } from 'extract-react-types';
+  // or in cjs
+  -const extractReactTypes = require('extract-react-types');
+  +const { extractReactTypes } = require('extract-react-types');
+  ```
+
+
+### Patch Changes
+
+- [patch] [4b3b4a4](https://github.com/atlassian/extract-react-types/commit/4b3b4a4):
+  - Add logicalExpression converter
+
 ## 0.16.1
 - [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
   - Add converter for typeCastExpression

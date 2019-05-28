@@ -42,7 +42,7 @@ const StateBit = ({
 type Props = {
   openBracket: string,
   closeBracket: string,
-  children: Node
+  children: Node | void
 };
 
 type State = {

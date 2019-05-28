@@ -1,5 +1,9 @@
 [ignore]
 .*/packages/kind2string/.*
+.*/node_modules/pretty-format2/.*
+.*/node_modules/ast-pretty-print/.*
+.*/node_modules/pretty-format-ast/.*
+
 
 [include]
 
