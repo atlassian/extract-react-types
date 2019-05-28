@@ -27,6 +27,7 @@
     ]
   },
   "dependencies": {
+    "@aparna036/babel-explode-module": "^2.0.1",
     "@atlaskit/build-releases": "^3.0.3",
     "@babel/core": "7.0.0-beta.56",
     "@babel/plugin-syntax-flow": "^7.2.0",
@@ -36,7 +37,6 @@
     "ast-pretty-print": "^2.0.1",
     "babel-errors": "^1.1.1",
     "babel-eslint": "^10.0.1",
-    "babel-explode-module": "^3.0.0",
     "babel-file": "^3.0.0",
     "babel-file-loader": "^2.0.0",
     "babel-flow-identifiers": "^1.1.3",

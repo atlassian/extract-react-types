@@ -1,0 +1,1 @@
+- Added support for module resolutions in the extract react types loader

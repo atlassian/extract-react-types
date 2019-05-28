@@ -51,7 +51,9 @@ module.exports = function extractReactTypesLoader(content /* : string */) {
         return location.replace(dist, pkg['atlaskit:src']);
       }
       return null;
-    }
+    },
+    /*This is here for instances where there are paths which are not packages */
+    moduleDirectory: ['node_modules', 'src']
   };
 
   const types = extractReactTypes(content, typeSystem, filename, resolveOpts);
