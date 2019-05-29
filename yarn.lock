@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@aparna036/babel-explode-module@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@aparna036/babel-explode-module/-/babel-explode-module-2.0.1.tgz#a6584580466b3256390fbd17fb2a6d9aab8b237f"
+  integrity sha512-0E7h/wnIyH2ReiS2+S9FchNcssVQclrFgOBKdpQR5iiwrZq5pAkSz8R2IKy0qaJNLPvIucSaL3rLHQenlC8RPw==
+  dependencies:
+    "@babel/types" "^7.0.0-beta.56"
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -1304,12 +1311,6 @@ babel-explode-module@^1.4.0:
   resolved "https://registry.yarnpkg.com/babel-explode-module/-/babel-explode-module-1.4.0.tgz#b20076f0ee5ff28e8f16baa3146fe136a27c6504"
   dependencies:
     babel-types "^6.24.1"
-
-babel-explode-module@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/babel-explode-module/-/babel-explode-module-3.0.0.tgz#5989f6db02d205ca538f514ba0b9108d43590f6d"
-  dependencies:
-    "@babel/types" "^7.0.0-beta.56"
 
 babel-file-loader@^2.0.0:
   version "2.0.0"

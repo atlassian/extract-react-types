@@ -1,5 +1,5 @@
 // @flow
-import { explodeModule } from 'babel-explode-module';
+import { explodeModule } from '@aparna036/babel-explode-module';
 import { explodedToStatements } from 'babel-helper-simplify-module';
 // $FlowFixMe
 import printAST from 'ast-pretty-print';
