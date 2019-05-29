@@ -1,5 +1,17 @@
 # extract-react-types
 
+## 0.18.0
+### Minor Changes
+
+- [minor] [907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
+  sets 'all' option in flow parser to true
+
+### Patch Changes
+
+- [patch] [e4c1b4b](https://github.com/atlassian/extract-react-types/commit/e4c1b4b):
+  - Changed the babel-explode-module to be referenced from @aparna036/babel-explode-module which has the opaque type
+    variable declaration support.
+
 ## 0.17.0
 ### Minor Changes
 

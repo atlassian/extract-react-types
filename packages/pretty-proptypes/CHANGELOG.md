@@ -1,5 +1,10 @@
 # pretty-proptypes
 
+## 0.6.2
+- Updated dependencies [907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
+  - kind2string@0.5.5
+  - extract-react-types@0.18.0
+
 ## 0.6.1
 ### Patch Changes
 

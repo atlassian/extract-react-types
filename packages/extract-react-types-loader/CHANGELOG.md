@@ -1,5 +1,16 @@
 # extract-react-types-loader
 
+## 0.3.3
+### Patch Changes
+
+- [patch] [e4c1b4b](https://github.com/atlassian/extract-react-types/commit/e4c1b4b):
+  - Added support for loading modules from src as well as node_modules
+
+
+
+- Updated dependencies [907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
+  - extract-react-types@0.18.0
+
 ## 0.3.2
 - Updated dependencies [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
   - extract-react-types@0.17.0
