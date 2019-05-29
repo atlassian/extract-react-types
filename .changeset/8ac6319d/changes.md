@@ -1,1 +1,0 @@
-sets 'all' option in flow parser to true
