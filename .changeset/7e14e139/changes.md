@@ -1,1 +1,0 @@
-Implement stub for TSConditionalType
