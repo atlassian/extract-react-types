@@ -1,21 +1,30 @@
 # extract-react-types
 
-## 0.18.0
+## 0.19.0
+
 ### Minor Changes
 
-- [minor] [907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
+- [minor][d232e30](https://github.com/atlassian/extract-react-types/commit/d232e30):
+  Implement stub for TSConditionalType
+
+## 0.18.0
+
+### Minor Changes
+
+- [minor][907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
   sets 'all' option in flow parser to true
 
 ### Patch Changes
 
-- [patch] [e4c1b4b](https://github.com/atlassian/extract-react-types/commit/e4c1b4b):
+- [patch][e4c1b4b](https://github.com/atlassian/extract-react-types/commit/e4c1b4b):
   - Changed the babel-explode-module to be referenced from @aparna036/babel-explode-module which has the opaque type
     variable declaration support.
 
 ## 0.17.0
+
 ### Minor Changes
 
-- [minor] [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
+- [minor][e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
   Changes default export of `extract-react-types` to a named export. See below for changes.
 
   ```diff
@@ -26,30 +35,34 @@
   +const { extractReactTypes } = require('extract-react-types');
   ```
 
-
 ### Patch Changes
 
-- [patch] [4b3b4a4](https://github.com/atlassian/extract-react-types/commit/4b3b4a4):
+- [patch][4b3b4a4](https://github.com/atlassian/extract-react-types/commit/4b3b4a4):
   - Add logicalExpression converter
 
 ## 0.16.1
-- [patch] [e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
+
+- [patch][e401ba8](https://github.com/atlassian/extract-react-types/commit/e401ba8):
+
   - Add converter for typeCastExpression
 
-- [patch] [6769531](https://github.com/atlassian/extract-react-types/commit/6769531):
+- [patch][6769531](https://github.com/atlassian/extract-react-types/commit/6769531):
   - Decorators should work again
   - Allow default props to be missing
   - Return correct names for nested properties in an object
   - Add `key` field to arrays (missing previously)
 
 ## 0.16.0
-- [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+
+- [minor][277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+
   - Add findExportedComponents function
 
-- [minor] [8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+- [minor][8f04dad](https://github.com/atlassian/extract-react-types/commit/8f04dad):
+
   - Add name to function components like class components
 
-- [minor] [6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
+- [minor][6bc521c](https://github.com/atlassian/extract-react-types/commit/6bc521c):
   - Support memo, forwardRef and function expressions
 
 ## 0.15.1
@@ -59,8 +72,8 @@
 ## 0.15.0
 
 - **breaking:** We have changed how we approach types in a file. We try and resolve default exports, rather than resolving all react class componets in the file. This causes two breaking changes:
-    - instead of an array of classes, `Program` now has a single `component` property.
-    - Because of this, anything that relied on the `classes` attribute is invalid.
+  - instead of an array of classes, `Program` now has a single `component` property.
+  - Because of this, anything that relied on the `classes` attribute is invalid.
 - **breaking** We now will attempt to resolve the default export before falling back its previous method of analyzing props (using the first component class in a file).
 - 🎉 FEATURE 🎉: `extract-react-types` now supports functional components as default exports. We will resolve both the props and the default props as a best effort. Huge thanks to [Peter Gleeson](https://github.com/petegleeson) for working on this.
 
@@ -77,16 +90,16 @@
 - Do not throw an error when prop types contain a generic spread
 - Update generic converter to convert utility types - at this time only $Exact, with the intent to add more.
     $Exact<T> is now converted to T directly to make object spreading
-    easier to work with as we do not care about exactness when spreading
-    from a prop documentation perspective.
+  easier to work with as we do not care about exactness when spreading
+  from a prop documentation perspective.
 - Gitignore vscode metadata
 - Add referenceIdName to identifiers converted in type mode
-    This provides a name that can be used when wanting to print the name of
-    a generic or similar, which is what we're doing with the typeof node.
+  This provides a name that can be used when wanting to print the name of
+  a generic or similar, which is what we're doing with the typeof node.
 - Update typeof to use referenceIdName if name does not exist
 
-
 ## 0.14.4
+
 - `getProp` recursive function now relies on `resolveFromGeneric` to escape from intersections, allowing for nested interrsections to find props.
 
 ## 0.14.3

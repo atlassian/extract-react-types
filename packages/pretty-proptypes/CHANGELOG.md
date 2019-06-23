@@ -1,14 +1,23 @@
 # pretty-proptypes
 
+## 0.6.3
+
+- Updated dependencies [d232e30](https://github.com/atlassian/extract-react-types/commit/d232e30):
+  - kind2string@0.5.6
+  - extract-react-types@0.19.0
+
 ## 0.6.2
+
 - Updated dependencies [907688c](https://github.com/atlassian/extract-react-types/commit/907688c):
   - kind2string@0.5.5
   - extract-react-types@0.18.0
 
 ## 0.6.1
+
 ### Patch Changes
 
-- [patch] [287e4b4](https://github.com/atlassian/extract-react-types/commit/287e4b4):
+- [patch][287e4b4](https://github.com/atlassian/extract-react-types/commit/287e4b4):
+
   - Updated build to use preconstruct (this shouldn't affect usage, but calling this out just in case)
 
 - Updated dependencies [e682bbb](https://github.com/atlassian/extract-react-types/commit/e682bbb):
@@ -16,7 +25,9 @@
   - extract-react-types@0.17.0
 
 ## 0.6.0
-- [minor] [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+
+- [minor][277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
+
   - Add component prop to Props component
 
 - Updated dependencies [277b0be](https://github.com/atlassian/extract-react-types/commit/277b0be):
@@ -34,7 +45,7 @@
 
 - Use <Whitespace /> to mean the prop type can be selected separately to the prop name
 
-Thanks [Maciej Adamczak](https://github.com/macku) for 
+Thanks [Maciej Adamczak](https://github.com/macku) for
 
 ## v0.4.1
 
