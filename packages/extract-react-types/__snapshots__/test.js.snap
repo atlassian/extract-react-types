@@ -3955,6 +3955,39 @@ Object {
 }
 `;
 
+exports[`ts custom prop 2`] = `
+Object {
+  "component": Object {
+    "key": Object {
+      "kind": "any",
+    },
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "typeParams": Object {
+      "kind": "typeParams",
+      "params": Array [
+        Object {
+          "kind": "string",
+        },
+        Object {
+          "kind": "object",
+          "members": Array [],
+        },
+      ],
+    },
+    "value": Object {
+      "kind": "any",
+      "referenceIdName": "Foo",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts decorators 1`] = `
 Object {
   "component": Object {

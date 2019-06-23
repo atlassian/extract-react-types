@@ -1396,6 +1396,12 @@ converters.ImportSpecifier = (path, context): K.Import => {
   return importConverterGeneral(path, context);
 };
 
+converters.TSConditionalType = (): K.Any => {
+  return {
+    kind: 'any'
+  };
+};
+
 function convertMethodCall(path, context): K.Func {
   const parameters = path.get('parameters').map(p => convertParameter(p, context));
   const returnType = convert(path.get('typeAnnotation'), context);

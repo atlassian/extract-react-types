@@ -1609,7 +1609,17 @@ const TESTS = [
       }
     }
     `
-  }
+  },
+  {
+    name: 'ts custom prop',
+    typeSystem: 'typescript',
+    code: `
+    type Foo<T, U> = T extends object ? T : U;
+
+    class Component extends React.Component<Foo<string, {}>> {
+    }
+  `
+  },
 ];
 
 cases(
