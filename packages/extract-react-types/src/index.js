@@ -395,6 +395,34 @@ converters.NewExpression = (path, context): K.New => {
   };
 };
 
+converters.InterfaceDeclaration = (path, context): K.InterfaceDeclaration => {
+  return { kind: 'interfaceDeclaration', id: convert(path.get('id'), context) };
+};
+
+converters.OpaqueType = (path, context): K.OpaqueType => {
+  // OpaqueTypes have several optional nodes that exist as a null when not present
+  // We need to convert these when they exist, and ignore them when they don't;
+  let supertypePath = path.get('supertype');
+  let impltypePath = path.get('impltype');
+  let typeParametersPath = path.get('typeParameters');
+
+  // TODO we are having a fight at the moment with id returning a binding, not a node,
+  // and don't have time to solve this properly - I am pathing it to being working-ish
+  // here, and will come back to this later. If you find this comment still here and
+  // want to fix this problem, I encourage you to do is.
+
+  let supertype;
+  let impltype;
+  let typeParameters;
+  let id = convert(path.get('id'), context);
+
+  if (supertypePath.node) supertype = convert(supertypePath, context);
+  if (impltypePath.node) impltype = convert(impltypePath, context);
+  if (typeParametersPath.node) typeParameters = convert(typeParametersPath, context);
+
+  return { kind: 'opaqueType', id, supertype, impltype, typeParameters };
+};
+
 converters.TypeofTypeAnnotation = (path, context): K.Typeof => {
   let type = convert(path.get('argument'), { ...context, mode: 'value' });
   let ungeneric = resolveFromGeneric(type);
@@ -742,7 +770,6 @@ converters.Identifier = (path, context): K.Id => {
   } else if (context.mode === 'type') {
     if (kind === 'reference') {
       let bindingPath;
-
       if (isFlowIdentifier(path)) {
         let flowBinding = getTypeBinding(path, name);
         if (!flowBinding) throw new Error();
@@ -771,12 +798,18 @@ converters.Identifier = (path, context): K.Id => {
       }
 
       if (bindingPath) {
-        if (bindingPath.kind === 'module') {
-          bindingPath = bindingPath.path;
-        }
+        if (name === 'SomethingId')
+          if (bindingPath.kind === 'module') {
+            bindingPath = bindingPath.path;
+          }
 
         // If path is a descendant of bindingPath and share the same name, this is a recursive type.
         if (path.isDescendant(bindingPath) && bindingPath.get('id').node.name === name) {
+          return { kind: 'id', name };
+        }
+
+        // This is a hack that stops horrible regression errors and problems
+        if (bindingPath.kind === 'unknown') {
           return { kind: 'id', name };
         }
 
@@ -1435,9 +1468,31 @@ function attachComments(source, dest) {
   attachCommentProperty(source, dest, 'innerComments');
 }
 
+// This function is from mdn:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#Examples
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  return (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};
+
 function convert(path, context) {
-  if (typeof path.get !== 'function')
-    throw new Error(`Did not pass a NodePath to convert() ${JSON.stringify(path)}`);
+  if (typeof path.get !== 'function') {
+    // We were getting incredible unhelpful errors here at times, so we have a circular replacement
+    // throw path.identifier;
+    let stringedPath = JSON.stringify(path, getCircularReplacer(), 2);
+    throw new Error(`Did not pass a NodePath to convert() ${stringedPath}`);
+  }
+
+  // console.log(path.node);
+
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
   let result = converter(path, context);

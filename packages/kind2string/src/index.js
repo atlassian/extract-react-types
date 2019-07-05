@@ -78,6 +78,13 @@ const converters = {
   id: (type: K.Id, mode: string): string => {
     return type.name;
   },
+  // TODO - this is not right and needs to be improved
+  opaqueType: (type: K.OpaqueType, mode: string): string => {
+    return convert(type.id);
+  },
+  interfaceDeclaration: (type: K.InterfaceDeclaration) => {
+    return convert(type.id);
+  },
   typeCastExpression: (type: K.TypeCastExpression, mode: string): string => {
     return convert(type.expression);
   },

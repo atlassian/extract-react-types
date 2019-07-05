@@ -39,5 +39,8 @@
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=16"
   }
 }
