@@ -1559,6 +1559,23 @@ const TESTS = [
     `
   },
   {
+    name: 'OpaqueType test',
+    typeSystem: 'flow',
+    code: `
+    opaque type SomethingId = string;
+
+    type Props = {
+      ok?: SomethingId
+    }
+
+    const SomeComponent = function(props: Props) {
+
+    }
+
+    export default SomeComponent
+    `
+  },
+  {
     name: 'flow forwardRef default export',
     typeSystem: 'flow',
     code: `
@@ -1619,7 +1636,7 @@ const TESTS = [
     class Component extends React.Component<Foo<string, {}>> {
     }
   `
-  },
+  }
 ];
 
 cases(

@@ -155,6 +155,16 @@ export type Import = {
   external?: boolean
 };
 
+export type OpaqueType = {
+  kind: 'opaqueType',
+  id: AnyTypeKind,
+  supertype?: AnyTypeKind,
+  impltype?: AnyTypeKind,
+  typeParameters?: AnyTypeKind
+};
+
+export type InterfaceDeclaration = { kind: 'interfaceDeclaration', id: AnyTypeKind };
+
 export type Program = { kind: 'program', component?: Property };
 
 export type ExportSpecifier = { kind: 'exportSpecifier', local: Id, exported: Id };

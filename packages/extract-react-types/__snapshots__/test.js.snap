@@ -368,6 +368,41 @@ Object {
 }
 `;
 
+exports[`OpaqueType test 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "SomeComponent",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "ok",
+          },
+          "kind": "property",
+          "optional": true,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "SomethingId",
+            },
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`Should handle ArrayTypeAnnotations 1`] = `
 Object {
   "component": Object {
