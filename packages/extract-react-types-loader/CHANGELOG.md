@@ -1,5 +1,15 @@
 # extract-react-types-loader
 
+## 0.3.5
+
+### Patch Changes
+
+- [patch][47a2b1d](https://github.com/atlassian/extract-react-types/commit/47a2b1d):
+  Don't pull types from src if types file exits
+
+- Updated dependencies [533d172](https://github.com/atlassian/extract-react-types/commit/533d172):
+  - extract-react-types@0.20.0
+
 ## 0.3.4
 
 - Updated dependencies [d232e30](https://github.com/atlassian/extract-react-types/commit/d232e30):

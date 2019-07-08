@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## 0.6.0
+
+### Minor Changes
+
+- [minor][533d172](https://github.com/atlassian/extract-react-types/commit/533d172):
+  Add support for opaque types
+
 ## 0.5.6
 
 - Updated dependencies [d232e30](https://github.com/atlassian/extract-react-types/commit/d232e30):

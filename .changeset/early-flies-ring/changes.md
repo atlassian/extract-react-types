@@ -1,1 +1,0 @@
-Don't pull types from src if types file exits

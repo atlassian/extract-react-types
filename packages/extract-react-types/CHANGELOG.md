@@ -1,5 +1,12 @@
 # extract-react-types
 
+## 0.20.0
+
+### Minor Changes
+
+- [minor][533d172](https://github.com/atlassian/extract-react-types/commit/533d172):
+  Add support for opaque types
+
 ## 0.19.0
 
 ### Minor Changes
