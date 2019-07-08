@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## 0.6.5
+
+### Patch Changes
+
+- [patch][e6cc1f5](https://github.com/atlassian/extract-react-types/commit/e6cc1f5):
+  Remove dangerous debug code that broke everything
+
 ## 0.6.4
 
 - Updated dependencies [533d172](https://github.com/atlassian/extract-react-types/commit/533d172):

@@ -1,5 +1,12 @@
 # extract-react-types
 
+## 0.20.1
+
+### Patch Changes
+
+- [patch][e6cc1f5](https://github.com/atlassian/extract-react-types/commit/e6cc1f5):
+  Remove dangerous debug code that broke everything
+
 ## 0.20.0
 
 ### Minor Changes

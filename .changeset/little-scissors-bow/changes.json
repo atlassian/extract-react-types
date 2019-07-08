@@ -1,9 +1,0 @@
-{
-  "releases": [
-    { "name": "extract-react-types", "type": "patch" },
-    { "name": "extract-react-types-loader", "type": "patch" },
-    { "name": "kind2string", "type": "patch" },
-    { "name": "pretty-proptypes", "type": "patch" }
-  ],
-  "dependents": []
-}
