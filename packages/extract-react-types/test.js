@@ -409,6 +409,21 @@ const TESTS = [
   `
   },
   {
+    name: 'typescript React.ComponentType',
+    typeSystem: 'typescript',
+    code: `
+    import React from 'react';
+
+    type Props = {
+      children: React.ComponentType,
+    };
+
+    class Component extends React.Component<Props> {
+
+    }
+  `
+  },
+  {
     name: 'ts custom prop',
     typeSystem: 'typescript',
     code: `

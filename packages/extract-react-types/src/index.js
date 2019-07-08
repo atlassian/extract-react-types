@@ -798,10 +798,9 @@ converters.Identifier = (path, context): K.Id => {
       }
 
       if (bindingPath) {
-        if (name === 'SomethingId')
-          if (bindingPath.kind === 'module') {
-            bindingPath = bindingPath.path;
-          }
+        if (bindingPath.kind === 'module') {
+          bindingPath = bindingPath.path;
+        }
 
         // If path is a descendant of bindingPath and share the same name, this is a recursive type.
         if (path.isDescendant(bindingPath) && bindingPath.get('id').node.name === name) {
