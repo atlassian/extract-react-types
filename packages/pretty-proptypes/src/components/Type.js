@@ -25,13 +25,15 @@ const stringType = css`
   color: ${colors.G500};
 `;
 
+const functionType = css``;
+
 const Type = (props: { children: Node }) => <span css={baseType} {...props} />;
 
 const TypeMeta = (props: { children: Node }) => <span css={typeMeta} {...props} />;
 
 const StringType = (props: { children: Node }) => <span css={stringType} {...props} />;
 
-const FunctionType = (props: { children: Node }) => <span {...props} />;
+const FunctionType = (props: { children: Node }) => <span css={functionType} {...props} />;
 
 export { TypeMeta, StringType, FunctionType };
 export default Type;
