@@ -1,5 +1,7 @@
 // @flow
-import React, { Component, type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { Component, type Node } from 'react';
 import { resolveFromGeneric } from 'kind2string';
 import { gridSize } from '../components/constants';
 import allComponents, { type Components } from '../components';
@@ -8,7 +10,7 @@ import prettyConvert, { SIMPLE_TYPES } from './converters';
 
 const Wrapper = (props: { children: Node }) => (
   <code
-    css={`
+    css={css`
       display: inline-block;
       font-size: 0.8rem;
       line-height: 1.4;

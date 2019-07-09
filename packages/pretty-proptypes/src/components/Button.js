@@ -1,10 +1,11 @@
 // @flow
-import React from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 
 const Button = (props: { isCollapsed: boolean }) => (
   <button
     type="button"
-    css={`
+    css={css`
       background: linear-gradient(to bottom, #1f8be6 0%, #1178ce 100%) #1385e5;
       border-width: 1px;
       border-style: solid;

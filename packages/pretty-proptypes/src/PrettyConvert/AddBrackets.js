@@ -1,5 +1,7 @@
 // @flow
-import React, { Component, Fragment, type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { Component, Fragment, type Node } from 'react';
 import { colors } from '../components/constants';
 
 const StateBit = ({
@@ -18,7 +20,7 @@ const StateBit = ({
   <button
     type="button"
     onClick={onClick}
-    css={`
+    css={css`
       background-color: ${isHovered ? colors.P300 : colors.N20};
       color: ${isHovered ? 'white' : colors.subtleText};
       border: 0;

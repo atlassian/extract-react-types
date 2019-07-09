@@ -1,6 +1,7 @@
 // @flow
-import React, { type Node } from 'react';
-import { css } from 'emotion';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { type Node } from 'react';
 import { borderRadius, colors } from './constants';
 
 const baseType = css`
@@ -24,15 +25,13 @@ const stringType = css`
   color: ${colors.G500};
 `;
 
-const functionType = css``;
+const Type = (props: { children: Node }) => <span css={baseType} {...props} />;
 
-const Type = (props: { children: Node }) => <span className={baseType} {...props} />;
+const TypeMeta = (props: { children: Node }) => <span css={typeMeta} {...props} />;
 
-const TypeMeta = (props: { children: Node }) => <span className={typeMeta} {...props} />;
+const StringType = (props: { children: Node }) => <span css={stringType} {...props} />;
 
-const StringType = (props: { children: Node }) => <span className={stringType} {...props} />;
-
-const FunctionType = (props: { children: Node }) => <span className={functionType} {...props} />;
+const FunctionType = (props: { children: Node }) => <span {...props} />;
 
 export { TypeMeta, StringType, FunctionType };
 export default Type;

@@ -1,5 +1,7 @@
 // @flow
-import React, { Component, type ComponentType, type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { Component, type ComponentType, type Node } from 'react';
 import md from 'react-markings';
 import { gridSize } from '../components/constants';
 import PrettyPropType from '../PrettyConvert';
@@ -8,7 +10,7 @@ import type { CommonProps } from '../types';
 
 const PropTypeWrapper = (props: { children: Node }) => (
   <div
-    css={`
+    css={css`
       margin-top: ${gridSize * 4}px;
     `}
     {...props}

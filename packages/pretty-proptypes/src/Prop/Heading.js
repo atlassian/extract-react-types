@@ -1,10 +1,12 @@
 // @flow
-import React, { type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { type Node } from 'react';
 import { colors, gridSize, borderRadius } from '../components/constants';
 
 const Heading = ({ children, ...rest }: { children: Node }) => (
   <h3
-    css={`
+    css={css`
       border-bottom: 2px solid ${colors.N20};
       font-size: 0.9rem;
       font-weight: normal;
@@ -20,7 +22,7 @@ const Heading = ({ children, ...rest }: { children: Node }) => (
 
 const HeadingDefault = (props: { children: Node }) => (
   <code
-    css={`
+    css={css`
       color: ${colors.subtleText};
     `}
     {...props}
@@ -29,7 +31,7 @@ const HeadingDefault = (props: { children: Node }) => (
 
 const HeadingRequired = (props: { children: Node }) => (
   <code
-    css={`
+    css={css`
       color: ${colors.R500};
     `}
     {...props}
@@ -38,7 +40,7 @@ const HeadingRequired = (props: { children: Node }) => (
 
 const HeadingType = (props: { children: Node }) => (
   <code
-    css={`
+    css={css`
       background: ${colors.N20};
       border-radius: ${borderRadius}px;
       color: ${colors.N300};
@@ -51,7 +53,7 @@ const HeadingType = (props: { children: Node }) => (
 
 const HeadingName = (props: { children: Node }) => (
   <code
-    css={`
+    css={css`
       background: ${colors.B50};
       color: ${colors.B500};
       border-radius: ${borderRadius}px;
