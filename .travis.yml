@@ -4,7 +4,7 @@ node_js:
   - '8'
 cache: yarn
 script: |
-  yarn bolt
+  yarn global add bolt
   if [[ $? != 0 ]]; then exit 1; fi
   yarn lint
   yarn test
