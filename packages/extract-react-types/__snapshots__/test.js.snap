@@ -3889,6 +3889,55 @@ Object {
 }
 `;
 
+exports[`ts as expression 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "default": Object {
+            "kind": "string",
+            "value": "foo",
+          },
+          "key": Object {
+            "kind": "id",
+            "name": "bar",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "union",
+              "referenceIdName": "Foo",
+              "types": Array [
+                Object {
+                  "kind": "string",
+                  "value": "foo",
+                },
+                Object {
+                  "kind": "string",
+                  "value": "bar",
+                },
+              ],
+            },
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts boolean 1`] = `
 Object {
   "component": Object {
