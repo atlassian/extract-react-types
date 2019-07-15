@@ -1,10 +1,12 @@
 // @flow
-import React, { type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { type Node } from 'react';
 import { gridSize } from '../components/constants';
 
 const Wrapper = (props: { children: Node }) => (
   <div
-    css={`
+    css={css`
       margin-top: ${gridSize * 1.5}px;
 
       @media (min-width: 780px) {
@@ -18,7 +20,7 @@ const Wrapper = (props: { children: Node }) => (
 
 const H2 = ({ children, ...rest }: { children: Node }) => (
   <h2
-    css={`
+    css={css`
       margintop: 1em;
     `}
     {...rest}

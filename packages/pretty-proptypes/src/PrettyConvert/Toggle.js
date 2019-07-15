@@ -1,5 +1,7 @@
 // @flow
-import React, { Component, type Node, type ElementRef } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { Component, type Node, type ElementRef } from 'react';
 
 const Collapse = ({
   height,
@@ -13,7 +15,7 @@ const Collapse = ({
 }) => (
   <div
     ref={innerRef}
-    css={`
+    css={css`
       height: ${isCollapsed ? 0 : `${height}px`};
       overflow: hidden;
       transition: height 260ms cubic-bezier(0.2, 0, 0, 1);
