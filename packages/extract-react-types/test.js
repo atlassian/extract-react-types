@@ -504,6 +504,20 @@ const TESTS = [
   `
   },
   {
+    name: 'ts as expression',
+    typeSystem: 'typescript',
+    code: `
+    type Foo = 'foo' | 'bar';
+    type Props = { bar: Foo }
+
+    class Component extends React.Component<Props> {
+      static defaultProps = {
+        bar: 'foo' as Foo,
+      }
+    }
+  `
+  },
+  {
     name: 'ts object',
     typeSystem: 'typescript',
     code: `

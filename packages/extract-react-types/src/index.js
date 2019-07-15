@@ -1188,6 +1188,10 @@ converters.TSThisType = (path, context): K.This => {
   return { kind: 'custom', value: 'this' };
 };
 
+converters.TSAsExpression = (path, context): K.Param => {
+  return convert(path.get('expression'), context);
+};
+
 function extendedTypesMembers(path, context) {
   const members = path.get('extends');
   if (!members || !members.length) {
