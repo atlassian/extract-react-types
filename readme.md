@@ -11,4 +11,4 @@ Packages:
 
 ## Contribute
 
-Pull requests, issues and comments welcome
+Pull requests, issues and comments welcome - please read our [contributing guidelines](./contributing.md) and our [code of conduct](./code-of-conduct.md).

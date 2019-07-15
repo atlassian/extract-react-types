@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "changeset": "changeset",
-    "bump": "changeset bump",
+    "apply-changesets": "changeset bump",
     "release": "yarn build && changeset release --public",
     "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
