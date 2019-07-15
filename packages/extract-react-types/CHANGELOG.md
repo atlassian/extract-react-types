@@ -1,5 +1,12 @@
 # extract-react-types
 
+## 0.21.0
+
+### Minor Changes
+
+- [minor][dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):
+  Adds support for TypeScript's as expression.
+
 ## 0.20.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "extract-react-types-loader",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "main": "index.js",
   "repository": "atlassian/extract-react-types",
   "description": "Load extract-react-types data given a fiile path, using webpack",
@@ -14,6 +14,6 @@
     "documentation"
   ],
   "dependencies": {
-    "extract-react-types": "^0.20.1"
+    "extract-react-types": "^0.21.0"
   }
 }
