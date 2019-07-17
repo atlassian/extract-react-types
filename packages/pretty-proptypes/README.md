@@ -90,7 +90,7 @@ ${<Props
   heading=""
   props={require('!!extract-react-types-loader!../../PropTypes/Select')}
   overrides={{
-    components: (props) => <Prop {...props} shapeComponent={() => null} type="All Components Object" /> }}
+    isACoolComponent: (props) => <Prop {...props} shapeComponent={() => null} type="All Components Object" /> }}
 />}
 ```
 
