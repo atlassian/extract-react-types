@@ -1,8 +1,9 @@
 // @flow
-
 // TODO: Remove this eslint-disable
 /* eslint-disable */
-import React, { type Node } from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import { type Node } from 'react';
 import convert, { resolveFromGeneric } from 'kind2string';
 import type { Components } from '../components';
 import AddBrackets from './AddBrackets';
@@ -34,7 +35,7 @@ function printComplexType(type, components, depth) {
 
 export const TypeMinWidth = (props: { children: Node }) => (
   <span
-    css={`
+    css={css`
       display: inline-block;
       min-width: 60px;
     `}
@@ -44,7 +45,7 @@ export const TypeMinWidth = (props: { children: Node }) => (
 
 const Arrow = () => (
   <span
-    css={`
+    css={css`
       color: ${colors.G500};
     `}
   >
