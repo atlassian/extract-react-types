@@ -1,0 +1,1 @@
+Exclude eslint comments from prop descriptions

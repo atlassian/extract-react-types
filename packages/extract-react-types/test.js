@@ -1077,6 +1077,9 @@ const TESTS = [
       type Props = {
         /* Type comment for a */
         a: string;
+        /* Type comment for b */
+        // eslint-disable-next-line flowtype/no-weak-types
+        b: any;
       }
 
       class Component extends React.Component<Props> {

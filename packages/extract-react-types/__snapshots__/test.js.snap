@@ -2428,6 +2428,24 @@ Object {
             "kind": "string",
           },
         },
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "b",
+          },
+          "kind": "property",
+          "leadingComments": Array [
+            Object {
+              "raw": " Type comment for b ",
+              "type": "commentBlock",
+              "value": "Type comment for b",
+            },
+          ],
+          "optional": false,
+          "value": Object {
+            "kind": "any",
+          },
+        },
       ],
       "referenceIdName": "Props",
     },
