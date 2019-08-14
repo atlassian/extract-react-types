@@ -14,6 +14,7 @@ import * as K from 'extract-react-types'
 import { resolveToLast, resolveFromGeneric, reduceToObj } from './utils';
 
 const unaryWhiteList = ['-', '+', '!'];
+const hideErrors = !!process.env.EXTRACT_REACT_TYPES_HIDE_ERRORS;
 
 function mapConvertAndJoin(array, joiner = ', ') {
   if (!Array.isArray(array)) return '';
@@ -185,7 +186,7 @@ const converters = {
     const object = resolveToLast(type.object);
     const property = convert(type.property);
 
-    if (!object) {
+    if (!object && !hideErrors) {
       console.error('Object property does not exist on this member expression');
       return '';
     }
