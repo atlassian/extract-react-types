@@ -1,0 +1,1 @@
+Fix to ensure members exist before attempting to filter them
