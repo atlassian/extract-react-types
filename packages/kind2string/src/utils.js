@@ -1,3 +1,5 @@
+const hideErrors = !!process.env.EXTRACT_REACT_TYPES_HIDE_ERRORS;
+
 export function resolveToLast(type /*: MemberExpression | Obj | Id*/) {
   switch (type.kind) {
     case 'id':
@@ -7,8 +9,10 @@ export function resolveToLast(type /*: MemberExpression | Obj | Id*/) {
     case 'memberExpression':
       return resolveToLast(type.object);
     default:
-      /* eslint-disable-next-line no-console */
-      console.error(`Unexpected initial type of member expression`, JSON.stringify(type));
+      if (hideErrors) {
+        /* eslint-disable-next-line no-console */
+        console.error(`Unexpected initial type of member expression`, JSON.stringify(type));
+      }
       break;
   }
 }
