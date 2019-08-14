@@ -218,6 +218,14 @@ function convertReactComponentClass(path, context) {
     ...context,
     mode: 'value'
   });
+
+  /**
+   * FIXME: It's possible to get nulls in the members array when TS is unable
+   * to resolve type definitions of non-relative module imports
+   * See: https://github.com/atlassian/extract-react-types/issues/89
+   **/
+  classProperties.value.members = classProperties.value.members.filter(m => !!m);
+
   return addDefaultProps(classProperties, defaultProps);
 }
 
