@@ -1,5 +1,21 @@
 # pretty-proptypes
 
+## 1.0.0
+
+### Major Changes
+
+- [major][13719db](https://github.com/atlassian/extract-react-types/commit/13719db):
+  Upgrade to emotion 10. If you've been using emotion-server to server render this package, you can remove it now because server rendering will work without it.
+
+### Patch Changes
+
+- [patch][58d12d8](https://github.com/atlassian/extract-react-types/commit/58d12d8):
+  Fix a usage of the css prop that wasn't updated to emotion 10's syntax
+
+- Updated dependencies [dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):
+  - kind2string@0.6.3
+  - extract-react-types@0.22.0
+
 ## 0.6.6
 
 - Updated dependencies [dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):

@@ -1,1 +1,0 @@
-Introduces a workaround for TypeScript types that are unable to be resolved and return null 
