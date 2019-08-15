@@ -1,5 +1,12 @@
 # extract-react-types
 
+## 0.22.1
+
+### Patch Changes
+
+- [patch][3385ac3](https://github.com/atlassian/extract-react-types/commit/3385ac3):
+  Enusre 'value' exists before attempting to filter its members
+
 ## 0.22.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "extract-react-types",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "main": "dist/extract-react-types.cjs.js",
   "repository": "atlassian/extract-react-types",
   "description": "Parse prop-types from react components using typescript or flow",
