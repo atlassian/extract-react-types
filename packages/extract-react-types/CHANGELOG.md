@@ -1,5 +1,19 @@
 # extract-react-types
 
+## 0.22.0
+
+### Minor Changes
+
+- [minor][dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):
+  Adds support for TypeScript's as expression.
+
+### Patch Changes
+
+- [patch][2e473dd](https://github.com/atlassian/extract-react-types/commit/2e473dd):
+  Fix to ensure members exist before attempting to filter them
+- [patch][6eea533](https://github.com/atlassian/extract-react-types/commit/6eea533):
+  Introduces a workaround for TypeScript types that are unable to be resolved and return null
+
 ## 0.21.0
 
 ### Minor Changes

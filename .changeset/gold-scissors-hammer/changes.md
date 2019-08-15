@@ -1,1 +1,0 @@
-Fix a usage of the css prop that wasn't updated to emotion 10's syntax

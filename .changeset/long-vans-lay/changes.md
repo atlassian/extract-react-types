@@ -1,1 +1,0 @@
-Introduces flag "EXTRACT_REACT_TYPES_HIDE_ERRORS" to suppress errors

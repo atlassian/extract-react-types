@@ -1,5 +1,15 @@
 # pretty-proptypes
 
+## 0.6.3
+
+### Patch Changes
+
+- [patch][52e37e6](https://github.com/atlassian/extract-react-types/commit/52e37e6):
+  Introduces flag "EXTRACT_REACT_TYPES_HIDE_ERRORS" to suppress errors
+
+- Updated dependencies [dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):
+  - extract-react-types@0.22.0
+
 ## 0.6.2
 
 - Updated dependencies [dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):
