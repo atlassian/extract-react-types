@@ -1,0 +1,1 @@
+Enusre 'value' exists before attempting to filter its members

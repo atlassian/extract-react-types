@@ -224,7 +224,7 @@ function convertReactComponentClass(path, context) {
    * to resolve type definitions of non-relative module imports
    * See: https://github.com/atlassian/extract-react-types/issues/89
    **/
-  if (classProperties.value.members) {
+  if (classProperties.value && classProperties.value.members) {
     classProperties.value.members = classProperties.value.members.filter(m => !!m);
   }
 
