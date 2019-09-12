@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## 1.0.1
+
+### Patch Changes
+
+- [patch][ac12401](https://github.com/atlassian/extract-react-types/commit/ac12401):
+  Work around added in object converter to not throw on null value in members list
+
 ## 1.0.0
 
 ### Major Changes
