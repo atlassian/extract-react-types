@@ -104,7 +104,14 @@ export const converters: { [string]: ?Function } = {
     if (type.members.length === 0) {
       return <components.Type>Object</components.Type>;
     }
-    let simpleObj = type.members.filter(mem => mem && !SIMPLE_TYPES.includes(mem.kind)).length === 0;
+    let simpleObj = type.members.filter(mem => {
+      if (mem === null) {
+        /** if the member is null, error out */
+        console.error(`null property in members of ${type.referenceIdName} of kind ${type.kind} `)
+        return false;
+      }
+      return !SIMPLE_TYPES.includes(mem.kind)
+    }).length === 0;
 
     if (simpleObj) {
       return <components.Type>{convert(type)}</components.Type>;
