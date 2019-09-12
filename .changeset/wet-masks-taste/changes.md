@@ -1,0 +1,1 @@
+Work around added in object converter to not throw on null value in members list
