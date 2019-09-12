@@ -122,9 +122,35 @@ test('resolve generic of array', () => {
   expect(wrapper.html().includes('string')).toBeTruthy();
 });
 
+test('objects with null members do not throw', () => {
+  const type = {
+    kind: "object",
+    members: [
+      {
+        kind: "property",
+        optional: false,
+        key: {
+          kind: "id",
+          name: "children"
+        },
+        value: {
+          kind: "generic",
+          value: {
+            kind: "id",
+            name: "React.ReactNode"
+          }
+        }
+      },
+      null
+    ],
+    referenceIdName: "LabelTextProps"
+  }
+  expect(() => prettyConvert(type, components)).not.toThrow();
+})
+
 test.skip('object with spread object', () => {
   let values = getSingleDefault(`{ ...something, c: 'something' }`);
-  let wrapper = shallow(prettyConvert(values, components));
+  let wrapper = shallow(prettyConvert(`{ ...something, c: 'something' }`, components));
   expect(wrapper).toBe('something');
 });
 test.skip('resolve generic of array with complex type', () => {
