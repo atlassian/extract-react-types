@@ -107,7 +107,7 @@ export const converters: { [string]: ?Function } = {
     let simpleObj = type.members.filter(mem => {
       if (mem === null) {
         /** if the member is null, error out */
-        console.error(`null property in members of ${type.referenceIdName} of kind ${type.kind} `)
+        console.warn(`null property in members of ${type.referenceIdName} of kind ${type.kind} `)
         return false;
       }
       return !SIMPLE_TYPES.includes(mem.kind)
