@@ -1,0 +1,10 @@
+{
+  "releases": [
+    { "name": "@extract-types/babel-plugin-extract-react-types", "type": "patch" },
+    { "name": "@extract-types/loader", "type": "patch" },
+    { "name": "@extract-types/core", "type": "patch" },
+    { "name": "@extract-types/kind2string", "type": "patch" },
+    { "name": "@extract-types/pretty-proptypes", "type": "patch" }
+  ],
+  "dependents": []
+}
