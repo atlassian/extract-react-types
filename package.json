@@ -23,7 +23,7 @@
   },
   "preconstruct": {
     "packages": [
-      "packages/extract-react-types",
+      "packages/core",
       "packages/kind2string",
       "packages/pretty-proptypes"
     ]
