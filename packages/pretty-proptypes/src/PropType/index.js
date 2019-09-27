@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-param-reassign */
 import React from 'react';
-import convert, { getKind, reduceToObj } from 'kind2string';
+import convert, { getKind, reduceToObj } from '@extract-types/kind2string';
 import Prop from '../Prop';
 import allComponents from '../components';
 

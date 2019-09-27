@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { Component, type Node } from 'react';
-import { resolveFromGeneric } from 'kind2string';
+import { resolveFromGeneric } from '@extract-types/kind2string';
 import { gridSize } from '../components/constants';
 import allComponents, { type Components } from '../components';
 import Toggle from './Toggle';

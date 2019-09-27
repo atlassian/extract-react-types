@@ -1,5 +1,5 @@
 // @flow
-import { extractReactTypes } from 'extract-react-types';
+import { extractReactTypes } from '@extract-types/core';
 import convert from './src';
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
