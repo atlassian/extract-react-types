@@ -8,7 +8,7 @@
 /* eslint-disable no-undef */
 
 /*::
-import * as K from 'extract-react-types'
+import * as K from '@extract-types/core'
 */
 
 import { resolveToLast, resolveFromGeneric, reduceToObj } from './utils';

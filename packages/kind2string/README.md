@@ -8,7 +8,7 @@ Default use-case:
 
 ```js
 import generatedData from './extract-react-type-write-location';
-import convert from 'kind2string';
+import convert from '@extract-types/kind2string';
 
 export default () => <div>convert(generatedData)</div>;
 ```

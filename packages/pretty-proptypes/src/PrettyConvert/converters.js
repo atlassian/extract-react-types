@@ -5,12 +5,12 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { type Node } from 'react';
-import convert, { resolveFromGeneric } from 'kind2string';
+import convert, { resolveFromGeneric } from '@extract-types/kind2string';
 import type { Components } from '../components';
 import AddBrackets from './AddBrackets';
 import { colors } from '../components/constants';
 /*::
-import * as K from 'extract-react-types'
+import * as K from '@extract-types/core'
 */
 
 export const SIMPLE_TYPES = [

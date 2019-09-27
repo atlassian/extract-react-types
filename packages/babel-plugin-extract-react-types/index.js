@@ -1,4 +1,4 @@
-const { findExportedComponents } = require('extract-react-types');
+const { findExportedComponents } = require('@extract-types/core');
 
 module.exports = babel => {
   let t = babel.types;
