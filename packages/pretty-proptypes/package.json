@@ -1,5 +1,5 @@
 {
-  "name": "pretty-proptypes",
+  "name": "@extract-types/pretty-proptypes",
   "version": "1.0.1",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",

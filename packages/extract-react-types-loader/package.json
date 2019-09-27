@@ -1,5 +1,5 @@
 {
-  "name": "extract-react-types-loader",
+  "name": "@extract-types/loader",
   "version": "0.3.9",
   "main": "index.js",
   "repository": "atlassian/extract-react-types",

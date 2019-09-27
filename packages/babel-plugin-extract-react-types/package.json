@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-extract-react-types",
+  "name": "@extract-types/babel-plugin-extract-react-types",
   "version": "0.1.6",
   "main": "index.js",
   "license": "MIT",

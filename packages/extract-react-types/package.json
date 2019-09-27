@@ -1,5 +1,5 @@
 {
-  "name": "extract-react-types",
+  "name": "@extract-types/core",
   "version": "0.22.1",
   "main": "dist/extract-react-types.cjs.js",
   "repository": "atlassian/extract-react-types",
