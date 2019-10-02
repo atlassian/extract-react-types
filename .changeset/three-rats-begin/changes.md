@@ -1,1 +1,0 @@
-Change console.error for null members in pretty-proptypes to console.warn

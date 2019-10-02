@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## 1.0.2
+
+### Patch Changes
+
+- [patch][089780f](https://github.com/atlassian/extract-react-types/commit/089780f):
+  Change console.error for null members in pretty-proptypes to console.warn
+
 ## 1.0.1
 
 ### Patch Changes
