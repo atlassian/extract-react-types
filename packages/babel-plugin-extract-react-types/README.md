@@ -10,13 +10,17 @@ yarn add babel-plugin-extract-react-types pretty-proptypes
 
 ## Usage
 
-`.babelrc`
+Add the plugin to your babel config.
+
+**.babelrc**
 
 ```json
 {
   "plugins": ["babel-plugin-extract-react-types"]
 }
 ```
+
+## Displaying props
 
 ```jsx
 import SomeComponent from 'somewhere';

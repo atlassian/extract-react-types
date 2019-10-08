@@ -1,0 +1,28 @@
+nav {
+    background: linear-gradient(270deg, #6738ff, #c3ffbf);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+  }
+  
+  nav h1 {
+    display: inline-block;
+    text-shadow: 7px 6px 20px #6a4fc6;
+    margin: 5px;
+  }
+  
+  nav .header-controls a{
+    color: #ffffff;
+    font-weight: bold;
+    margin-left: 15px;
+  }
+
+  nav .header-controls a.active{
+    text-decoration: underline;
+  }
+  
+  nav .header-controls select {
+    margin-left: 10px;
+  }
