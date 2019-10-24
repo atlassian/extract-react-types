@@ -334,4 +334,4 @@ function convert(type: any, mode: string = 'value') {
 }
 
 export default convert;
-export { getKind, resolveFromGeneric, reduceToObj };
+export { converters, getKind, resolveFromGeneric, reduceToObj };
