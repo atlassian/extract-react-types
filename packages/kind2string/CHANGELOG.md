@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 0.7.0
+
+### Minor Changes
+
+- [`dc667b4`](https://github.com/atlassian/extract-react-types/commit/dc667b45277ca0440f67f24051e1d0ada07f5e4d) [#101](https://github.com/atlassian/extract-react-types/pull/101) Thanks [@chasestarr](https://github.com/chasestarr)! - Export the `converters` object as a named export.
+
 ## 0.6.3
 
 ### Patch Changes
