@@ -1,6 +1,6 @@
 // @flow
 import { extractReactTypes } from 'extract-react-types';
-import convert from './src';
+import convert, { converters } from './src';
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {
   let file = `
@@ -306,6 +306,9 @@ describe('kind 2 string tests', () => {
         let final = convert(res.component.members[0].value);
         expect(final).toBe(prop);
       });
+    });
+    it('exposes converters object', () => {
+      expect(converters).not.toBeUndefined();
     });
   });
   describe('arrayType', () => {
