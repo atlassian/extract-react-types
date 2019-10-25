@@ -10,6 +10,9 @@ node_modules
 .idea
 .iml
 
+# ignore env file used for GH info fetching in version
+.env
+
 
 # ignore yarn.locks generated in packages
 packages/**/**/yarn.lock
