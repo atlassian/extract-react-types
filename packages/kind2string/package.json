@@ -1,6 +1,6 @@
 {
   "name": "kind2string",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "dist/kind2string.cjs.js",
   "module": "dist/kind2string.esm.js",
   "license": "MIT",

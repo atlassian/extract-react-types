@@ -1,6 +1,6 @@
 {
   "name": "pretty-proptypes",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",
   "main": "dist/pretty-proptypes.cjs.js",
@@ -16,12 +16,10 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@emotion/core": "^10.0.14",
-    "kind2string": "^0.7.0",
+    "kind2string": "^0.7.1",
     "react-markings": "^1.2.0"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

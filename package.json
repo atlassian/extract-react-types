@@ -6,7 +6,7 @@
     "test": "jest",
     "changeset": "changeset",
     "apply-changesets": "changeset bump",
-    "release": "yarn build && changeset release --public",
+    "release": "yarn build && changeset publish",
     "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
     "lint": "yarn eslint \"./**/*.js\"",

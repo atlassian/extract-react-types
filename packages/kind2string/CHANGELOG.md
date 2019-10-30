@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 0.7.1
+
+### Patch Changes
+
+- [`6827845`](https://github.com/atlassian/extract-react-types/commit/68278457981fc557dc470f79ca56b686814c3e21) Thanks [@Noviny](https://github.com/Noviny)! - Fix build from previous release
+
 ## 0.7.0
 
 ### Minor Changes
