@@ -104,6 +104,7 @@ export type Number = {
   value?: number
 };
 export type Null = { kind: 'null' };
+export type Unknown = { kind: 'unknown' };
 export type TemplateElement = {
   kind: 'templateElement',
   value: { raw: string, cooked: string }
