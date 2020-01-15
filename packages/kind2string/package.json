@@ -1,16 +1,18 @@
 {
   "name": "kind2string",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "main": "dist/kind2string.cjs.js",
   "module": "dist/kind2string.esm.js",
   "license": "MIT",
   "author": "Atlassian",
   "repository": "atlassian/extract-react-types",
   "description": "Utility to ensure extract-react-types output can be rendered without errors",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "babel-jest": "^24.7.1",
-    "extract-react-types": "^0.22.0"
+    "extract-react-types": "^0.23.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4"

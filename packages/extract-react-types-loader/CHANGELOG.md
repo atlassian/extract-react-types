@@ -1,5 +1,10 @@
 # extract-react-types-loader
 
+## 0.3.10
+
+- Updated dependencies [acb8499](https://github.com/atlassian/extract-react-types/commit/acb8499):
+  - extract-react-types@0.23.0
+
 ## 0.3.9
 
 ### Patch Changes
