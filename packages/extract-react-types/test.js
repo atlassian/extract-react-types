@@ -1665,6 +1665,20 @@ const TESTS = [
     class Component extends React.Component<Foo<string, {}>> {
     }
   `
+  },
+  {
+    name: 'ts unknown prop',
+    typeSystem: 'typescript',
+    code: `
+    import React from 'react';
+
+    type Props = {
+      children: unknown,
+    };
+
+    class Component extends React.Component<Props> {
+    }
+  `
   }
 ];
 

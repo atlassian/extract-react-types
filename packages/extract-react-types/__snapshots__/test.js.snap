@@ -4956,6 +4956,37 @@ Object {
 }
 `;
 
+exports[`ts unknown prop 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "children",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "unknown",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts void 1`] = `
 Object {
   "component": Object {
