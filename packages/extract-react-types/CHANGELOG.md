@@ -1,5 +1,12 @@
 # extract-react-types
 
+## 0.23.0
+
+### Minor Changes
+
+- [minor][acb8499](https://github.com/atlassian/extract-react-types/commit/acb8499):
+  Adds support for the TSUnknownKeyword
+
 ## 0.22.1
 
 ### Patch Changes

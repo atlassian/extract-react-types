@@ -1,5 +1,10 @@
 # babel-plugin-extract-react-types
 
+## 0.1.7
+
+- Updated dependencies [acb8499](https://github.com/atlassian/extract-react-types/commit/acb8499):
+  - extract-react-types@0.23.0
+
 ## 0.1.6
 
 - Updated dependencies [dc4b719](https://github.com/atlassian/extract-react-types/commit/dc4b719):

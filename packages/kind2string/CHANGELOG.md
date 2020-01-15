@@ -1,5 +1,10 @@
 # pretty-proptypes
 
+## 0.7.2
+
+- Updated dependencies [acb8499](https://github.com/atlassian/extract-react-types/commit/acb8499):
+  - extract-react-types@0.23.0
+
 ## 0.7.1
 
 ### Patch Changes
