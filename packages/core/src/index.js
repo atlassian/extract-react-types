@@ -1560,9 +1560,11 @@ function findExports(
   path,
   exportsToFind: 'all' | 'default'
 ): Array<{ name: string | null, path: any }> {
-  let moduleExports = path.get('body').filter(bodyPath =>
+  let moduleExports = path.get('body').filter(bodyPath => {
     // we only check for named and default exports here, we don't want export all
-    exportsToFind === 'default'
+    console.log(bodyPath.node.specifiers);
+    // console.log(bodyPath.node.source);
+    return exportsToFind === 'default'
       ? bodyPath.isExportDefaultDeclaration()
       : (bodyPath.isExportNamedDeclaration() &&
           bodyPath.node.source === null &&
@@ -1571,8 +1573,9 @@ function findExports(
             // exportKind is undefined in typescript
             bodyPath.node.exportKind === undefined)) ||
         bodyPath.isExportDefaultDeclaration()
-  );
-
+  });
+  
+  console.log('#### MODULE EXPORTS ## ', moduleExports)
   let formattedExports = [];
 
   moduleExports.forEach(exportPath => {
@@ -1637,6 +1640,7 @@ function findExports(
 function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
   let components = [];
   let exportPaths = findExports(programPath, componentsToFind);
+  console.log('EXPORT PATHS', exportPaths);
   exportPaths.forEach(({ path, name }) => {
     if (
       path.isFunctionExpression() ||

@@ -1665,16 +1665,35 @@ const TESTS = [
     class Component extends React.Component<Foo<string, {}>> {
     }
   `
+  },
+  {
+    name: 'follow export { default } to a component',
+    typeSystem: 'typescript',
+    code: `
+      export { default } from '__fixtures__/export-default-component/component';
+    `
   }
 ];
+
+const isolatedTC = [{
+  name: 'follow export { default } to a component',
+  typeSystem: 'typescript',
+  code: `
+    export { default } from '__fixtures__/export-default-component/component';
+  `
+}]
 
 cases(
   '',
   testCase => {
+    // let code = stripIndent(testCase.code);
+    // // Pass in file name so we can resolve imports to files in __fixtures__
+    // let result = extractReactTypes(code, testCase.typeSystem, __filename);
+
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename);
     expect(result).toMatchSnapshot();
   },
-  TESTS
+  isolatedTC
 );

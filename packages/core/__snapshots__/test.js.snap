@@ -2623,6 +2623,13 @@ Object {
 }
 `;
 
+exports[`follow export { default } to a component 1`] = `
+Object {
+  "component": undefined,
+  "kind": "program",
+}
+`;
+
 exports[`function declaration 1`] = `
 Object {
   "component": Object {
