@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "changeset": "changeset",
-    "apply-changesets": "changeset bump",
+    "apply-changesets": "changeset version",
     "release": "yarn build && changeset publish",
     "postinstall": "preconstruct dev",
     "dev:pretty-proptypes": "bolt w pretty-proptypes run dev",
@@ -39,7 +39,7 @@
     "@babel/plugin-syntax-typescript": "^7.2.0",
     "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
-    "@changesets/changelog-github": "^0.1.0",
+    "@changesets/changelog-github": "^0.2.1",
     "@changesets/cli": "^2.1.2",
     "@emotion/core": "^10.0.14",
     "ast-pretty-print": "^2.0.1",
