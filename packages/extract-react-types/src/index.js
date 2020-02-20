@@ -1566,10 +1566,10 @@ export function extractReactTypes(
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
-function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
+function exportedComponents(programPath, componentsToFind: 'all' | 'default') {
   let components = [];
 
-  findExports(programPath, componentsToFind, context).forEach(({ path, name }) => {
+  findExports(programPath, componentsToFind).forEach(({ path, name }) => {
     if (
       path.isFunctionExpression() ||
       path.isArrowFunctionExpression() ||

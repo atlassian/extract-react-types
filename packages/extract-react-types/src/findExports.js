@@ -37,9 +37,9 @@ export default function findExports(
 
   path
     .get('body')
-    .filter(bodyPath => {
+    .filter(bodyPath => 
       // we only check for named and default exports here, we don't want export all)
-      return exportsToFind === 'default'
+      exportsToFind === 'default'
         ? bodyPath.isExportDefaultDeclaration()
         : (bodyPath.isExportNamedDeclaration() &&
             bodyPath.node.source === null &&
@@ -47,8 +47,8 @@ export default function findExports(
             (bodyPath.node.exportKind === 'value' ||
               // exportKind is undefined in typescript
               bodyPath.node.exportKind === undefined)) ||
-          bodyPath.isExportDefaultDeclaration();
-    })
+          bodyPath.isExportDefaultDeclaration()
+    )
     .forEach(exportPath => {
       const declaration = exportPath.get('declaration');
 
