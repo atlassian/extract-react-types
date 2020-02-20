@@ -1,5 +1,15 @@
 # extract-react-types
 
+## 0.24.0
+
+### Minor Changes
+
+- [`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff) Thanks [@Noviny](https://github.com/Noviny)! - Update ert to resolve export { default } to a relevant react component
+
+### Patch Changes
+
+- [`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff) Thanks [@Noviny](https://github.com/Noviny)! - Interal refactor, no logic changes
+
 ## 0.23.0
 
 ### Minor Changes
