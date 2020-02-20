@@ -699,13 +699,13 @@
     "@changesets/types" "^0.3.0"
     semver "^5.4.1"
 
-"@changesets/changelog-github@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@changesets/changelog-github/-/changelog-github-0.1.0.tgz#32b9b025e3686c3c0563763540e97af4a88cc794"
-  integrity sha512-0s9vT743lkJwkuCrOIl7V7uEJq2vSY3GQ7u2haALHEAJSDkh7B/IoiL774cj9nzLbuVJE+B1pALJC/5TNtr/0w==
+"@changesets/changelog-github@^0.2.1":
+  version "0.2.1"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@changesets/changelog-github/-/changelog-github-0.2.1.tgz#59b723958c6293618de278f48ed15af740d9ed2a"
+  integrity sha1-WbcjlYxik2GN4nj0jtFa90DZ7So=
   dependencies:
-    "@changesets/get-github-info" "^0.3.0"
-    "@changesets/types" "^0.3.0"
+    "@changesets/get-github-info" "^0.4.1"
+    "@changesets/types" "^0.4.0"
     dotenv "^8.1.0"
 
 "@changesets/cli@^2.1.2":
@@ -758,10 +758,10 @@
   resolved "https://registry.yarnpkg.com/@changesets/errors/-/errors-0.1.0.tgz#3062bf45049833378d84bc5c4900f9e9e1e87f72"
   integrity sha512-to3U6z9D+anEFLiY0rgQdv8pRnZ95gzjZk5Gkw+3Gko7tLkoqROlb5ot6aOHNHwUYFCGJReYe02sIMXuwRjVyQ==
 
-"@changesets/get-github-info@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@changesets/get-github-info/-/get-github-info-0.3.0.tgz#1776a6b5ed2f9f1d16d076ef19acbc29003ef81c"
-  integrity sha512-PTFJk1hiMUZ1YGzULmRNo6a6w6LTV6iCY1muCBTby+k4WWGbGgAaqKfUVhpZBosd1fvFIlXl3wqxdA93PLkRaQ==
+"@changesets/get-github-info@^0.4.1":
+  version "0.4.1"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@changesets/get-github-info/-/get-github-info-0.4.1.tgz#359562fb9ad1ba38b90f8d097337c8e36372d96c"
+  integrity sha1-NZVi+5rRuji5D40JczfI42Ny2Ww=
   dependencies:
     dataloader "^1.4.0"
     node-fetch "^2.5.0"
@@ -819,6 +819,11 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@changesets/types/-/types-0.3.0.tgz#ca7b609c1e778448c8763ca8cdb0bbd776c39c9b"
   integrity sha512-9fwlRVzvfzF6vf7178vu1HDg4N80Z4Y/B0pS9zUWmmEruLzmzN94OoDk3obQ3P8M0EUH+oHnq8QVuKPLAR9VAw==
+
+"@changesets/types@^0.4.0":
+  version "0.4.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@changesets/types/-/types-0.4.0.tgz#3413badb2c3904357a36268cb9f8c7e0afc3a804"
+  integrity sha1-NBO62yw5BDV6NiaMufjH4K/DqAQ=
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
