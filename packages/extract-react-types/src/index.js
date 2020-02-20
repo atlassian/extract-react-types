@@ -11,11 +11,10 @@ import * as t from '@babel/types';
 import { normalizeComment } from 'babel-normalize-comments';
 import { sync as resolveSync } from 'resolve';
 import matchExported from './matchExported';
-import findExports from './findExports';
+import findExports, { hasDestructuredDefaultExport, followExports } from './findExports';
 import * as K from './kinds';
 
 export type * from './kinds';
-
 const converters = {};
 
 function convertObject(path, context) {
@@ -345,25 +344,32 @@ function convertFunction(path, context): K.Func {
 
 // This is the entry point. Program will only be found once.
 converters.Program = (path, context): K.Program => {
-  let components = exportedComponents(path, 'default', context);
-  // components[0] could be undefined
-  let component;
-  if (components[0]) {
-    component = components[0].component;
-  }
+  // coerce whether or not we need to follow an export to a new File and Program
+  // only do so on export { default } from 'x';
+  // followExports(path, context, convert);
+  if (hasDestructuredDefaultExport(path, context)) {
+    return followExports(path, context, convert);
+  } else {
+    let components = exportedComponents(path, 'default', context);
+    // components[0] could be undefined
+    let component;
+    if (components[0]) {
+      component = components[0].component;
+    }
 
-  // just extract the props from the first class in the file
-  if (!component) {
-    path.traverse({
-      ClassDeclaration(scopedPath) {
-        if (!component && isReactComponentClass(scopedPath)) {
-          component = convertReactComponentClass(scopedPath, context);
+    // just extract the props from the first class in the file
+    if (!component) {
+      path.traverse({
+        ClassDeclaration(scopedPath) {
+          if (!component && isReactComponentClass(scopedPath)) {
+            component = convertReactComponentClass(scopedPath, context);
+          }
         }
-      }
-    });
-  }
+      });
+    }
 
-  return { kind: 'program', component };
+    return { kind: 'program', component };
+  }
 };
 
 converters.TaggedTemplateExpression = (path, context): K.TemplateExpression => {
@@ -1509,8 +1515,6 @@ function convert(path, context) {
     let stringedPath = JSON.stringify(path, getCircularReplacer(), 2);
     throw new Error(`Did not pass a NodePath to convert() ${stringedPath}`);
   }
-
-  // console.log(path.node);
 
   let converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);

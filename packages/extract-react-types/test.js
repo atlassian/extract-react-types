@@ -1679,6 +1679,37 @@ const TESTS = [
     class Component extends React.Component<Props> {
     }
   `
+  },
+  {
+    name: 'follow export { default } ',
+    typeSystem: 'typescript',
+    code: `
+      export { default } from './__fixtures__/component.tsx';
+    `
+  },
+  {
+    name: 'follow export { default } ',
+    typeSystem: 'typescript',
+    code: `
+      export { x as default } from './__fixtures__/componentB.tsx';
+    `
+  }
+];
+
+const specificTestCases = [
+  {
+    name: 'follow export { default } ',
+    typeSystem: 'typescript',
+    code: `
+      export { default } from './__fixtures__/component.tsx';
+    `
+  },
+  {
+    name: 'follow export { default } ',
+    typeSystem: 'typescript',
+    code: `
+      export { x as default } from './__fixtures__/componentB.tsx';
+    `
   }
 ];
 

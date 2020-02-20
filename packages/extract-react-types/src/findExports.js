@@ -1,3 +1,38 @@
+import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
+export function hasDestructuredDefaultExport(path) {
+  const exportPath = path.get('body').find(bodyPath => {
+    return (
+      bodyPath.isExportNamedDeclaration() &&
+      bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default').length
+    );
+  });
+
+  return Boolean(exportPath);
+}
+
+export function followExports(path, context, convert) {
+  const exportPath = path.get('body').find(bodyPath => {
+    return (
+      bodyPath.isExportNamedDeclaration() &&
+      bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default')
+    );
+  });
+
+  if (!exportPath)
+    throw new Error({
+      message: 'No export path found'
+    });
+
+  try {
+    const filePath = resolveImportFilePathSync(exportPath, context.resolveOptions);
+    const file = loadFileSync(filePath, context.parserOpts);
+    const converted = convert(file.path, context);
+    return converted;
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
 export default function findExports(
   path,
   exportsToFind: 'all' | 'default'
