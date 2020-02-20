@@ -42,7 +42,7 @@ export default function findExports(
   path
     .get('body')
     .filter(bodyPath =>
-      // we only check for named and default exports here, we don't want export all)
+      // we only check for named and default exports here, we don't want export all
       exportsToFind === 'default'
         ? bodyPath.isExportDefaultDeclaration()
         : (bodyPath.isExportNamedDeclaration() &&
