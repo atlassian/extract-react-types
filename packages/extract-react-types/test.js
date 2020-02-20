@@ -1686,7 +1686,7 @@ const TESTS = [
     code: `
       export { default } from './__fixtures__/component.tsx';
     `
-  }, 
+  },
   {
     name: 'follow export { default } ',
     typeSystem: 'typescript',
@@ -1703,7 +1703,7 @@ const specificTestCases = [
     code: `
       export { default } from './__fixtures__/component.tsx';
     `
-  }, 
+  },
   {
     name: 'follow export { default } ',
     typeSystem: 'typescript',

@@ -1,23 +1,27 @@
 import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
-export function hasDestructuredDefaultExport (path) {
+export function hasDestructuredDefaultExport(path) {
   const exportPath = path.get('body').find(bodyPath => {
-    return bodyPath.isExportNamedDeclaration() 
-      && bodyPath.get('specifiers')
-        .filter(n => n.node.exported.name === 'default').length;
+    return (
+      bodyPath.isExportNamedDeclaration() &&
+      bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default').length
+    );
   });
 
   return Boolean(exportPath);
 }
 
-export function followExports (path, context, convert) {
-  const exportPath = path.get('body')
-    .find(bodyPath => {
-      return bodyPath.isExportNamedDeclaration() && bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default');
-    })
-  
-  if (!exportPath) throw new Error({
-    message: 'No export path found' 
+export function followExports(path, context, convert) {
+  const exportPath = path.get('body').find(bodyPath => {
+    return (
+      bodyPath.isExportNamedDeclaration() &&
+      bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default')
+    );
   });
+
+  if (!exportPath)
+    throw new Error({
+      message: 'No export path found'
+    });
 
   try {
     const filePath = resolveImportFilePathSync(exportPath, context.resolveOptions);
@@ -31,13 +35,13 @@ export function followExports (path, context, convert) {
 
 export default function findExports(
   path,
-  exportsToFind: 'all' | 'default',
+  exportsToFind: 'all' | 'default'
 ): Array<{ name: string | null, path: any }> {
   let formattedExports = [];
 
   path
     .get('body')
-    .filter(bodyPath => 
+    .filter(bodyPath =>
       // we only check for named and default exports here, we don't want export all)
       exportsToFind === 'default'
         ? bodyPath.isExportDefaultDeclaration()

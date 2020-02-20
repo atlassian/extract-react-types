@@ -348,7 +348,7 @@ converters.Program = (path, context): K.Program => {
   // only do so on export { default } from 'x';
   // followExports(path, context, convert);
   if (hasDestructuredDefaultExport(path, context)) {
-    return followExports(path, context, convert); 
+    return followExports(path, context, convert);
   } else {
     let components = exportedComponents(path, 'default', context);
     // components[0] could be undefined
@@ -1566,7 +1566,7 @@ export function extractReactTypes(
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
-function exportedComponents(programPath, componentsToFind: 'all' | 'default') {
+function exportedComponents(programPath, componentsToFind: 'all' | 'default', context) {
   let components = [];
 
   findExports(programPath, componentsToFind).forEach(({ path, name }) => {
