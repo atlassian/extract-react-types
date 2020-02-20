@@ -2623,6 +2623,39 @@ Object {
 }
 `;
 
+exports[`follow export { default }  1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "className",
+          },
+          "kind": "property",
+          "optional": true,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`follow export { default }  2`] = `
+Object {
+  "component": undefined,
+  "kind": "program",
+}
+`;
+
 exports[`function declaration 1`] = `
 Object {
   "component": Object {

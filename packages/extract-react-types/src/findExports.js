@@ -1,14 +1,45 @@
+import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
+export function hasDestructuredDefaultExport (path) {
+  const exportPath = path.get('body').find(bodyPath => {
+    return bodyPath.isExportNamedDeclaration() 
+      && bodyPath.get('specifiers')
+        .filter(n => n.node.exported.name === 'default').length;
+  });
+
+  return Boolean(exportPath);
+}
+
+export function followExports (path, context, convert) {
+  const exportPath = path.get('body')
+    .find(bodyPath => {
+      return bodyPath.isExportNamedDeclaration() && bodyPath.get('specifiers').filter(n => n.node.exported.name === 'default');
+    })
+  
+  if (!exportPath) throw new Error({
+    message: 'No export path found' 
+  });
+
+  try {
+    const filePath = resolveImportFilePathSync(exportPath, context.resolveOptions);
+    const file = loadFileSync(filePath, context.parserOpts);
+    const converted = convert(file.path, context);
+    return converted;
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
 export default function findExports(
   path,
-  exportsToFind: 'all' | 'default'
+  exportsToFind: 'all' | 'default',
 ): Array<{ name: string | null, path: any }> {
   let formattedExports = [];
 
   path
     .get('body')
-    .filter(bodyPath =>
-      // we only check for named and default exports here, we don't want export all
-      exportsToFind === 'default'
+    .filter(bodyPath => {
+      // we only check for named and default exports here, we don't want export all)
+      return exportsToFind === 'default'
         ? bodyPath.isExportDefaultDeclaration()
         : (bodyPath.isExportNamedDeclaration() &&
             bodyPath.node.source === null &&
@@ -16,8 +47,8 @@ export default function findExports(
             (bodyPath.node.exportKind === 'value' ||
               // exportKind is undefined in typescript
               bodyPath.node.exportKind === undefined)) ||
-          bodyPath.isExportDefaultDeclaration()
-    )
+          bodyPath.isExportDefaultDeclaration();
+    })
     .forEach(exportPath => {
       const declaration = exportPath.get('declaration');
 
