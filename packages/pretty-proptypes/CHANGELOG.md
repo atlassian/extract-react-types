@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.1.0
+
+### Minor Changes
+
+- [`e2519d0`](https://github.com/atlassian/extract-react-types/commit/e2519d040a16f55ff501da8716371b1331a379e5) [#122](https://github.com/atlassian/extract-react-types/pull/122) Thanks [@gwyneplaine](https://github.com/gwyneplaine)! - Table view added to pretty-proptypes in the form of PropTable component, exported from src
+
 ## 1.0.6
 
 ### Patch Changes
