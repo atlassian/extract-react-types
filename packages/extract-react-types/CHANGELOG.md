@@ -8,7 +8,7 @@
 
 ### Patch Changes
 
-- [`849c979`](https://github.com/atlassian/extract-react-types/commit/849c979faf91b6b1f24a85ce267698639e4caeb8) [#115](https://github.com/atlassian/extract-react-types/pull/115) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Interal refactor, no logic changes
+- [`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff) Thanks [@Noviny](https://github.com/Noviny)! - Interal refactor, no logic changes
 
 ## 0.23.0
 
