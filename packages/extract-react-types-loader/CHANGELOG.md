@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- Updated dependencies [[`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff), [`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff)]:
+- Updated dependencies [[`99f6c8a`](https://github.com/atlassian/extract-react-types/commit/99f6c8a1cd0c41091caa870d233b34c0500b0565), [`849c979`](https://github.com/atlassian/extract-react-types/commit/849c979faf91b6b1f24a85ce267698639e4caeb8)]:
   - extract-react-types@0.24.0
 
 ## 0.3.10

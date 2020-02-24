@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- [`63c7367`](https://github.com/atlassian/extract-react-types/commit/63c7367b5aa449ef8fffbf1d9daf0da71c5dabff) Thanks [@Noviny](https://github.com/Noviny)! - Update ert to resolve export { default } to a relevant react component
+- [`99f6c8a`](https://github.com/atlassian/extract-react-types/commit/99f6c8a1cd0c41091caa870d233b34c0500b0565) [#118](https://github.com/atlassian/extract-react-types/pull/118) Thanks [@gwyneplaine](https://github.com/gwyneplaine)! - Update ert to resolve export { default } to a relevant react component
 
 ### Patch Changes
 

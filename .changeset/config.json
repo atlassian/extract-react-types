@@ -1,5 +1,5 @@
 {
   "changelog": ["@changesets/changelog-github", { "repo": "atlassian/extract-react-types" }],
-  "commit": false,
+  "commit": true,
   "access": "public"
 }
