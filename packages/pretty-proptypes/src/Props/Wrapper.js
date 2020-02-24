@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core';
 import { type Node } from 'react';
 import { gridSize } from '../components/constants';
 
-const Wrapper = (props: { children: Node }) => (
+export const Wrapper = (props: { children: Node }) => (
   <div
     css={css`
       margin-top: ${gridSize * 1.5}px;
@@ -18,7 +18,7 @@ const Wrapper = (props: { children: Node }) => (
   />
 );
 
-const H2 = ({ children, ...rest }: { children: Node }) => (
+export const H2 = ({ children, ...rest }: { children: Node }) => (
   <h2
     css={css`
       margintop: 1em;
@@ -32,7 +32,7 @@ const H2 = ({ children, ...rest }: { children: Node }) => (
 const PropsWrapper = ({ children, heading }: { children: Node, heading?: string }) => (
   <Wrapper>
     {typeof heading === 'string' && heading.length === 0 ? null : <H2>{heading || 'Props'}</H2>}
-    {children}
+      {children}
   </Wrapper>
 );
 

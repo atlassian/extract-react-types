@@ -2,12 +2,13 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
+import PropRow from '../PropsTable/PropRow';
 import Prop from '../Prop';
 import allComponents from '../components';
 
 const renderPropType = (
   propType: any,
-  { overrides = {}, shouldCollapseProps, components }: any
+  { table = false, overrides = {}, shouldCollapseProps, components }: any,
 ) => {
   if (!components) {
     components = allComponents;
@@ -55,7 +56,9 @@ const renderPropType = (
     typeValue: propType.value
   };
 
-  return overrides[name] ? <OverrideComponent {...commonProps} /> : <Prop {...commonProps} />;
+  return overrides[name] 
+    ? <OverrideComponent {...commonProps} /> 
+    : (table ? <PropRow {...commonProps} />: <Prop {...commonProps} />);
 };
 
 export default renderPropType;

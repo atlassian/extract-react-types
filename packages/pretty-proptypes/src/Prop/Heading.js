@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core';
 import { type Node } from 'react';
 import { colors, gridSize, borderRadius } from '../components/constants';
 
-const Heading = ({ children, ...rest }: { children: Node }) => (
+export const Heading = ({ children, ...rest }: { children: Node }) => (
   <h3
     css={css`
       border-bottom: 2px solid ${colors.N20};
@@ -20,7 +20,7 @@ const Heading = ({ children, ...rest }: { children: Node }) => (
   </h3>
 );
 
-const HeadingDefault = (props: { children: Node }) => (
+export const HeadingDefault = (props: { children: Node }) => (
   <code
     css={css`
       color: ${colors.subtleText};
@@ -29,7 +29,7 @@ const HeadingDefault = (props: { children: Node }) => (
   />
 );
 
-const HeadingRequired = (props: { children: Node }) => (
+export const HeadingRequired = (props: { children: Node }) => (
   <code
     css={css`
       color: ${colors.R500};
@@ -38,7 +38,7 @@ const HeadingRequired = (props: { children: Node }) => (
   />
 );
 
-const HeadingType = (props: { children: Node }) => (
+export const HeadingType = (props: { children: Node }) => (
   <code
     css={css`
       background: ${colors.N20};
@@ -51,7 +51,7 @@ const HeadingType = (props: { children: Node }) => (
   />
 );
 
-const HeadingName = (props: { children: Node }) => (
+export const HeadingName = (props: { children: Node }) => (
   <code
     css={css`
       background: ${colors.B50};

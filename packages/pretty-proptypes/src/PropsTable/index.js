@@ -6,7 +6,7 @@ import React, { Component, type ComponentType } from 'react';
 
 import type { Components } from '../components';
 import type { CommonProps } from '../types';
-import PropsWrapper from './Wrapper';
+import PropsWrapper from '../Props/Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
 
@@ -45,7 +45,7 @@ const getProps = props => {
   return null;
 };
 
-export default class Props extends Component<DynamicPropsProps> {
+export default class PropsTable extends Component<DynamicPropsProps> {
   render() {
     let { props, heading, component, ...rest } = this.props;
     if (component) {
@@ -68,17 +68,19 @@ export default class Props extends Component<DynamicPropsProps> {
 
     return (
       <PropsWrapper heading={heading}>
-        <thead>
-          <tr css={{
-            paddingTop: '14px',
-          }}>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Defaults</td>
-            <td>Description</td>
-          </tr>
-        </thead>
-        {propTypes.map(propType => renderPropType(propType, rest))}
+        <table>
+          <thead>
+            <tr css={{
+              paddingTop: '14px',
+            }}>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Defaults</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          {propTypes.map(propType => renderPropType(propType, { table: true, ...rest }))}
+        </table>
       </PropsWrapper>
     );
   }
