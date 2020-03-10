@@ -64,6 +64,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "jest-in-case": "^1.0.2",
+    "jest-watch-typeahead": "^0.4.2",
     "preconstruct": "^0.0.81",
     "react-markings": "^1.2.0",
     "resolve": "^1.10.1",
