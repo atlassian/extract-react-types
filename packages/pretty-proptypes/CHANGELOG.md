@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.1.1
+
+### Patch Changes
+
+- [`c7c50fa`](https://github.com/atlassian/extract-react-types/commit/c7c50fa09a571a77a5f1376a97b1872a8e85af2e) [#125](https://github.com/atlassian/extract-react-types/pull/125) Thanks [@gwyneplaine](https://github.com/gwyneplaine)! - Fix rendering bug in Props component
+
 ## 1.1.0
 
 ### Minor Changes
