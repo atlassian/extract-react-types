@@ -68,16 +68,6 @@ export default class Props extends Component<DynamicPropsProps> {
 
     return (
       <PropsWrapper heading={heading}>
-        <thead>
-          <tr css={{
-            paddingTop: '14px',
-          }}>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Defaults</td>
-            <td>Description</td>
-          </tr>
-        </thead>
         {propTypes.map(propType => renderPropType(propType, rest))}
       </PropsWrapper>
     );
