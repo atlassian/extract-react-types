@@ -41,6 +41,9 @@ export function reduceToObj(type) {
     return type.members;
   } else if (type.kind === 'intersection') {
     return type.types.reduce((acc, i) => [...acc, ...reduceToObj(i)], []);
+  } else if (type.kind === 'typeQuery') {
+    // typeQuery is not reducable so we return early to avoid the console warn below
+    return [];
   }
   /* eslint-disable-next-line no-console */
   console.warn('was expecting to reduce to an object and could not', type);

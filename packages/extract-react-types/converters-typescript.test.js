@@ -436,6 +436,55 @@ const TESTS = [
     code: `
       export { x as default } from './__fixtures__/componentB.tsx';
     `
+  },
+  {
+    name: 'ts type query for class component',
+    typeSystem: 'typescript',
+    code: `
+    import React from 'react';
+
+    import { NestedInterface1 } from './__fixtures__/types';
+    import { NestedInterface2 } from 'external-package';
+
+    interface Props extends NestedInterface1, NestedInterface2 {
+      foo: number;
+      bar?: string;
+      baz?: boolean
+    }
+
+    const value = {
+      a: 'a value',
+      b: 'b value',
+    };
+
+    type MyComponentProps = Props & typeof MyComponent.defaultProps & typeof value;
+
+    class MyComponent extends React.Component<MyComponentProps> {
+      static defaultProps = {
+        bar: 'bar',
+        baz: true
+      }
+    }
+  `
+  },
+  {
+    name: 'ts type query for functional component',
+    typeSystem: 'typescript',
+    code: `
+    import React from 'react';
+
+    type OCProps = {
+      type: 'a' | 'b' | 'c' | 'd',
+    }
+    function OtherComponent(props: OCProps) {}
+
+    type MCProps = {
+      type: React.ComponentProps<typeof OtherComponent>['type'],
+    }
+    function MyComponent(props: MCProps) {}
+
+    export default MyComponent;
+  `
   }
 ];
 

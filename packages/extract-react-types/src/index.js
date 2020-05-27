@@ -1258,8 +1258,15 @@ function extendedTypesMembers(path, context) {
   }
 
   return members.reduce((acc, current) => {
-    const converted = convert(current, context);
-    return acc.concat(converted.members);
+    const { members: convertedMembers } = convert(current, context);
+
+    // #convertedMembers are undefined if converter is not able to resolve
+    // extended types which are coming from some external package.
+    if (!convertedMembers) {
+      return acc;
+    }
+
+    return acc.concat(convertedMembers);
   }, []);
 }
 
@@ -1457,6 +1464,13 @@ converters.ImportSpecifier = (path, context): K.Import => {
 converters.TSConditionalType = (): K.Any => {
   return {
     kind: 'any'
+  };
+};
+
+converters.TSTypeQuery = (path, context): K.TypeQuery => {
+  return {
+    kind: 'typeQuery',
+    exprName: convert(path.get('exprName'), { ...context, mode: 'value' })
   };
 };
 
