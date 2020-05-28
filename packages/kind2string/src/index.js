@@ -311,7 +311,10 @@ from file: ${convert(type.source, mode)}`
   exportSpecifier: (type, mode) => convert(type.exported),
 
   // TS
-  tuple: (type: K.Tuple, mode: string): string => `[${mapConvertAndJoin(type.types)}]`
+  tuple: (type: K.Tuple, mode: string): string => `[${mapConvertAndJoin(type.types)}]`,
+  typeQuery: (type: K.TypeQuery): string => {
+    return type.exprName ? `typeof ${type.exprName.name}` : `${type.kind}`;
+  }
 };
 
 function convert(type: any, mode: string = 'value') {

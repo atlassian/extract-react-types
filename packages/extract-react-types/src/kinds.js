@@ -176,6 +176,8 @@ export type This = {
   value: 'this'
 };
 
+export type TypeQuery = { kind: 'typeQuery', exprName: AnyValueKind };
+
 export type AnyTypeKind =
   | Any
   | AssignmentPattern

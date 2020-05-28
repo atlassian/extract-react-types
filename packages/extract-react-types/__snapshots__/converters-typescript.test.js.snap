@@ -1215,6 +1215,173 @@ Object {
 }
 `;
 
+exports[`ts type query for class component 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "MyComponent",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "intersection",
+      "referenceIdName": "MyComponentProps",
+      "types": Array [
+        Object {
+          "kind": "generic",
+          "value": Object {
+            "kind": "object",
+            "members": Array [
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "foo",
+                },
+                "kind": "property",
+                "optional": false,
+                "value": Object {
+                  "kind": "number",
+                },
+              },
+              Object {
+                "default": Object {
+                  "kind": "string",
+                  "value": "bar",
+                },
+                "key": Object {
+                  "kind": "id",
+                  "name": "bar",
+                },
+                "kind": "property",
+                "optional": true,
+                "value": Object {
+                  "kind": "string",
+                },
+              },
+              Object {
+                "default": Object {
+                  "kind": "boolean",
+                  "value": true,
+                },
+                "key": Object {
+                  "kind": "id",
+                  "name": "baz",
+                },
+                "kind": "property",
+                "optional": true,
+                "value": Object {
+                  "kind": "boolean",
+                },
+              },
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "nestedProperty1",
+                },
+                "kind": "property",
+                "optional": false,
+                "value": Object {
+                  "kind": "boolean",
+                },
+              },
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "nestedProperty2",
+                },
+                "kind": "property",
+                "optional": false,
+                "value": Object {
+                  "kind": "string",
+                },
+              },
+            ],
+            "referenceIdName": "Props",
+          },
+        },
+        Object {
+          "exprName": Object {
+            "kind": "id",
+            "name": "MyComponent.defaultProps",
+          },
+          "kind": "typeQuery",
+        },
+        Object {
+          "exprName": Object {
+            "kind": "object",
+            "members": Array [
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "a",
+                  "type": null,
+                },
+                "kind": "property",
+                "value": Object {
+                  "kind": "string",
+                  "value": "a value",
+                },
+              },
+              Object {
+                "key": Object {
+                  "kind": "id",
+                  "name": "b",
+                  "type": null,
+                },
+                "kind": "property",
+                "value": Object {
+                  "kind": "string",
+                  "value": "b value",
+                },
+              },
+            ],
+            "referenceIdName": "value",
+          },
+          "kind": "typeQuery",
+        },
+      ],
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`ts type query for functional component 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "MyComponent",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "type",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "React.ComponentProps['type']",
+            },
+          },
+        },
+      ],
+      "referenceIdName": "MCProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts union 1`] = `
 Object {
   "component": Object {

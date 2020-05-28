@@ -295,6 +295,13 @@ describe('kind 2 string tests', () => {
         expect(final).toBe(`a: [string, number]`);
       });
     });
+    describe('typeQuery', () => {
+      it('Resolves down to a string representation of a typeof invocation', () => {
+        const prop = `typeof Foo`;
+        const final = getSingleTSPropTypes(prop);
+        expect(final).toBe(`a: ${prop}`);
+      });
+    });
     describe('type params', () => {
       it('should return a string representation of a function type with type params', () => {
         let prop = '(<T>) => <T><string>';
@@ -341,7 +348,7 @@ describe('kind 2 string tests', () => {
   describe('typecastExpression', () => {
     let file = `
     type Props = { bar: string }
-  
+
     class Component extends React.Component<Props> {
       static defaultProps = {
         bar: (ascii: string),
