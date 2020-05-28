@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.25.0
+
+### Minor Changes
+
+- [`d1115ee`](https://github.com/atlassian/extract-react-types/commit/d1115eecdeedda23caa558f253ee4f769e3f0606) [#126](https://github.com/atlassian/extract-react-types/pull/126) Thanks [@pgmanutd](https://github.com/pgmanutd)! - add support for TSTypeQuery
+
 ## 0.24.0
 
 ### Minor Changes
