@@ -1,6 +1,6 @@
 {
   "name": "kind2string",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "main": "dist/kind2string.cjs.js",
   "module": "dist/kind2string.esm.js",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "files": ["dist"],
   "devDependencies": {
     "babel-jest": "^24.7.1",
-    "extract-react-types": "^0.24.0"
+    "extract-react-types": "^0.25.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4"

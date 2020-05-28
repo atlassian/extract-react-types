@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - '8'
+  - '10'
 cache: yarn
 script: |
   yarn global add bolt
@@ -9,4 +9,3 @@ script: |
   if [[ $? != 0 ]]; then exit 1; fi
   yarn lint
   yarn test
-  yarn flow

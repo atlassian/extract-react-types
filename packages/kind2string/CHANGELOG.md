@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 0.8.0
+
+### Minor Changes
+
+- [`d1115ee`](https://github.com/atlassian/extract-react-types/commit/d1115eecdeedda23caa558f253ee4f769e3f0606) [#126](https://github.com/atlassian/extract-react-types/pull/126) Thanks [@pgmanutd](https://github.com/pgmanutd)! - add typeQuery converter
+
 ## 0.7.3
 
 ### Patch Changes
