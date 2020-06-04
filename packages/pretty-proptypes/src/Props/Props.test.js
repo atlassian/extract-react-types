@@ -48,3 +48,84 @@ test('renders no children when passed on props', () => {
 
   expect(wrapper.children().length).toBe(0);
 });
+
+describe('#typescript typeSystem', () => {
+  test('should visualize generic props from extract-types-loader', () => {
+    const code = `
+    import React from 'react';
+
+    export type OnSubmitHandler<FormData> = (
+      values: FormData,
+      callback?: (errors?: Record<string, string>) => void,
+    ) => void | Object | Promise<Object | void>;
+
+    interface FormChildrenProps {
+      ref: React.RefObject<HTMLFormElement>;
+      onSubmit: (
+        event?:
+          | React.FormEvent<HTMLFormElement>
+          | React.SyntheticEvent<HTMLElement>,
+      ) => void;
+      onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
+    }
+
+    interface FormProps<FormData> {
+      children: (args: {
+        formProps: FormChildrenProps;
+        disabled: boolean;
+        dirty: boolean;
+        submitting: boolean;
+        getValues: () => FormData;
+        setFieldValue: (name: string, value: any) => void;
+        reset: (initialValues?: FormData) => void;
+      }) => ReactNode;
+      onSubmit: OnSubmitHandler<FormData>;
+      /* When set the form and all fields will be disabled */
+      isDisabled?: boolean;
+    }
+
+    function Form<FormData extends Record<string, any> = {}>(
+      props: FormProps<FormData>,
+    ) {}
+
+    Form.defaultProps = {
+      isDisabled: true
+    };
+
+    export default Form;
+  `;
+
+    const wrapper = mount(
+      <Props props={extractReactTypes(code, 'typescript')} heading="Form Props" />
+    );
+
+    const Prop = wrapper.find('Prop');
+
+    expect(Prop.length).toBe(3);
+
+    const childrenProp = Prop.at(0);
+
+    expect(childrenProp.prop('name')).toBe('children');
+    expect(childrenProp.prop('required')).toBe(true);
+    expect(childrenProp.prop('type')).toBe('function');
+
+    const onSubmitProp = Prop.at(1);
+
+    expect(onSubmitProp.prop('name')).toBe('onSubmit');
+    expect(onSubmitProp.prop('required')).toBe(true);
+    expect(onSubmitProp.prop('type')).toBe(
+      '(values, callback) => undefined | Object | Promise<Object | undefined><FormData>'
+    );
+
+    const isDisabledProp = Prop.at(2);
+
+    expect(isDisabledProp.prop('name')).toBe('isDisabled');
+    expect(isDisabledProp.prop('required')).toBe(false);
+    expect(isDisabledProp.prop('type')).toBe('boolean');
+    expect(isDisabledProp.prop('defaultValue')).toBe('true');
+    expect(isDisabledProp.prop('description')).toBe(
+      `
+When set the form and all fields will be disabled`
+    );
+  });
+});

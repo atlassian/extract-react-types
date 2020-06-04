@@ -9,7 +9,12 @@ const getPropTypes = (propTypesObj: Kind) => {
     propTypes = resolvedTypes.members;
   } else if (resolvedTypes.kind === 'intersection') {
     propTypes = resolvedTypes.types.reduce((acc, type) => [...acc, ...reduceToObj(type)], []);
+  } else if (resolvedTypes.kind === 'generic') {
+    const { value } = resolvedTypes;
+
+    propTypes = value && value.members;
   }
+
   return propTypes;
 };
 
