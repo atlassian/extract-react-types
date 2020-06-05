@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.2.0
+
+### Minor Changes
+
+- [`4c2ebef`](https://github.com/atlassian/extract-react-types/commit/4c2ebef747443e259b129891b71727e978077b76) [#128](https://github.com/atlassian/extract-react-types/pull/128) Thanks [@pgmanutd](https://github.com/pgmanutd)! - add generic prop interface handling in pretty-proptypes
+
 ## 1.1.2
 
 ### Patch Changes
