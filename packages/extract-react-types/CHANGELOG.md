@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.26.0
+
+### Minor Changes
+
+- [`19b9bc8`](https://github.com/atlassian/extract-react-types/commit/19b9bc8164216ae3ed40d6abfc93920016ba63e2) [#134](https://github.com/atlassian/extract-react-types/pull/134) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Add support for forwardRefs typed via TS type arguments (aka generics)
+
 ## 0.25.0
 
 ### Minor Changes

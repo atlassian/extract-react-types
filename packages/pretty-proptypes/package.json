@@ -23,7 +23,7 @@
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "extract-react-types": "^0.25.0",
+    "extract-react-types": "^0.26.0",
     "jsdom": "^11.7.0",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
