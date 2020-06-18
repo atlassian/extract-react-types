@@ -10,7 +10,7 @@
   "files": ["dist"],
   "devDependencies": {
     "babel-jest": "^24.7.1",
-    "extract-react-types": "^0.25.0"
+    "extract-react-types": "^0.26.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4"
