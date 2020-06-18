@@ -74,6 +74,68 @@ Object {
 }
 `;
 
+exports[`forwardRef typed via function args 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "MyComponent",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "MyComponentProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`forwardRef typed via generic types 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "MyComponent",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "foo",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "MyComponentProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`ts any 1`] = `
 Object {
   "component": Object {

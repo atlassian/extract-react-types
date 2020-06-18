@@ -485,6 +485,40 @@ const TESTS = [
 
     export default MyComponent;
   `
+  },
+  {
+    name: 'forwardRef typed via generic types',
+    typeSystem: 'typescript',
+    code: `
+    import React, { forwardRef } from 'react';
+
+    type MyComponentProps = {
+      foo: string,
+    }
+
+    const MyComponent = forwardRef<HTMLElement, MyComponentProps>((props, ref) => {
+      return <span>Foo</span>;
+    });
+
+    export default MyComponent;
+  `
+  },
+  {
+    name: 'forwardRef typed via function args',
+    typeSystem: 'typescript',
+    code: `
+    import React, { forwardRef } from 'react';
+
+    type MyComponentProps = {
+      foo: string,
+    }
+
+    const MyComponent = forwardRef((props: MyComponentProps, ref: HTMLElement) => {
+      return <span>Foo</span>;
+    });
+
+    export default MyComponent;
+  `
   }
 ];
 

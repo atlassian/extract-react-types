@@ -97,10 +97,9 @@ function convertReactComponentClass(path, context) {
   return addDefaultProps(classProperties, defaultProps);
 }
 
-function convertReactComponentFunction(path, context) {
+function convertReactComponentFunction(path, context, propTypes) {
   // we have a function, assume the props are the first parameter
-  let propType = path.get('params.0.typeAnnotation');
-  let functionProperties = convert(propType, {
+  let functionProperties = convert(propTypes, {
     ...context,
     mode: 'type'
   });
@@ -1589,7 +1588,11 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
       path.isArrowFunctionExpression() ||
       path.isFunctionDeclaration()
     ) {
-      let component = convertReactComponentFunction(path, context);
+      let component = convertReactComponentFunction(
+        path,
+        context,
+        path.get('params.0.typeAnnotation')
+      );
       components.push({ name, path, component });
       return;
     }
@@ -1598,20 +1601,58 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
       components.push({ name, path, component });
       return;
     }
-    let isMemo = isSpecialReactComponentType(path, 'memo');
-    if (isMemo || isSpecialReactComponentType(path, 'forwardRef')) {
-      let firstArg = path.get('arguments')[0];
+
+    const isMemo = isSpecialReactComponentType(path, 'memo');
+    const isForwardRef = isSpecialReactComponentType(path, 'forwardRef');
+
+    if (isMemo || isForwardRef) {
+      // Props typed via generics
+      const genericTypeParams = path.get('typeParameters');
+
+      // Props are the second type arg
+      if (isForwardRef && genericTypeParams && genericTypeParams.node) {
+        const component = convertReactComponentFunction(
+          genericTypeParams,
+          context,
+          genericTypeParams.get('params.1')
+        );
+        components.push({
+          name,
+          path,
+          component
+        });
+        return;
+      }
+
+      // Props typed via function arguments
+      const firstArg = path.get('arguments')[0];
       if (firstArg) {
         if (firstArg.isFunctionExpression() || firstArg.isArrowFunctionExpression()) {
-          let component = convertReactComponentFunction(firstArg, context);
-          components.push({ name, path, component });
+          const component = convertReactComponentFunction(
+            firstArg,
+            context,
+            firstArg.get('params.0.typeAnnotation')
+          );
+          components.push({
+            name,
+            path,
+            component
+          });
           return;
         }
         if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
-          let innerFirstArg = firstArg.get('arguments')[0];
+          const innerFirstArg = firstArg.get('arguments')[0];
           if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
-            let component = convertReactComponentFunction(innerFirstArg, context);
-            components.push({ name, path, component });
+            const component = convertReactComponentFunction(
+              innerFirstArg,
+              innerFirstArg,
+              innerFirstArg.get('params.0.typeAnnotation')
+            );
+            components.push({
+              name,
+              path,
+              component
+            });
           }
         }
       }
