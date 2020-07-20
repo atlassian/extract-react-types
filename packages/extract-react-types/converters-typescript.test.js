@@ -14,10 +14,11 @@ import stripIndent from 'strip-indent';
 import cases from 'jest-in-case';
 import { extractReactTypes } from './src';
 
+const typeSystem = 'typescript';
 const TESTS = [
   {
     name: 'typescript React.ComponentType',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     import React from 'react';
 
@@ -32,7 +33,7 @@ const TESTS = [
   },
   {
     name: 'ts custom prop',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     interface BadgeProps {
       texture: string;
@@ -47,7 +48,7 @@ const TESTS = [
   },
   {
     name: 'ts nested prop',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     interface BadgeProps {
       texture: Texture["src"];
@@ -60,7 +61,7 @@ const TESTS = [
   },
   {
     name: 'ts array prop',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     interface ScheduleProps {
       intervals: Array<{
@@ -76,7 +77,7 @@ const TESTS = [
   },
   {
     name: 'ts decorators',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     @ObjectType()
     export class Theme extends React.Component<{}, {}> {
@@ -94,7 +95,7 @@ const TESTS = [
   },
   {
     name: 'ts boolean',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{ foo: boolean }> {
 
@@ -103,7 +104,7 @@ const TESTS = [
   },
   {
     name: 'ts string',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{ foo: string }> {
 
@@ -112,7 +113,7 @@ const TESTS = [
   },
   {
     name: 'ts as expression',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     type Foo = 'foo' | 'bar';
     type Props = { bar: Foo }
@@ -126,7 +127,7 @@ const TESTS = [
   },
   {
     name: 'ts object',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {
 
@@ -135,7 +136,7 @@ const TESTS = [
   },
   {
     name: 'ts interface',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     interface ComponentProps {
       foo: string;
@@ -149,7 +150,7 @@ const TESTS = [
   },
   {
     name: 'ts function',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: (string, boolean) => number}> {
       // ...
@@ -158,7 +159,7 @@ const TESTS = [
   },
   {
     name: 'ts array',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: Array<number>}> {
       // ...
@@ -167,7 +168,7 @@ const TESTS = [
   },
   {
     name: 'ts union',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: number | string}> {
       // ...
@@ -176,7 +177,7 @@ const TESTS = [
   },
   {
     name: 'ts any',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: any}> {
       // ...
@@ -185,7 +186,7 @@ const TESTS = [
   },
   {
     name: 'ts literals',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: '25' | 30}> {
 
@@ -194,7 +195,7 @@ const TESTS = [
   },
   {
     name: 'ts optional',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo?: string}> {
 
@@ -203,7 +204,7 @@ const TESTS = [
   },
   {
     name: 'ts void',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: void}> {
 
@@ -212,7 +213,7 @@ const TESTS = [
   },
   {
     name: 'ts no react component',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends Foo<{foo: void}> {
 
@@ -221,7 +222,7 @@ const TESTS = [
   },
   {
     name: 'ts different React components',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     import {Component} from 'react';
 
@@ -236,7 +237,7 @@ const TESTS = [
   },
   {
     name: 'ts tuple',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     class Component extends React.Component<{foo: [string, number]}> {
 
@@ -245,7 +246,7 @@ const TESTS = [
   },
   {
     name: 'ts enum',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     enum Color {Red, Green, Blue};
     class Component extends React.Component<{foo: Color}> {
@@ -256,7 +257,7 @@ const TESTS = [
 
   {
     name: 'ts type alias',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       type Props = {
         a: string;
@@ -268,7 +269,7 @@ const TESTS = [
   },
   {
     name: 'ts type alias declaration - 1',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       type LiteralType = 'one' | 'two';
       interface Props {
@@ -281,7 +282,7 @@ const TESTS = [
   },
   {
     name: 'ts type alias declaration - 2',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       type ReactElement = React.ReactElement<any> | React.ReactElement<any>[];
       interface Props {
@@ -294,7 +295,7 @@ const TESTS = [
   },
   {
     name: 'Should handle importing other ts files',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       import { Props } from "./__fixtures__/props";
 
@@ -304,7 +305,7 @@ const TESTS = [
   },
   {
     name: 'ts method signature',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       interface Props {
         on(x: string): void;
@@ -315,7 +316,7 @@ const TESTS = [
   },
   {
     name: 'ts call signature declaration',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       interface Props {
         (x: string): void;
@@ -326,7 +327,7 @@ const TESTS = [
   },
   {
     name: 'ts parenthesized type',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       interface Props {
         a: ({ b: string })
@@ -337,7 +338,7 @@ const TESTS = [
   },
   {
     name: 'ts interface extend',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       import { Type } from './__fixtures__/types';
       interface DefaultTypes {
@@ -357,7 +358,7 @@ const TESTS = [
   },
   {
     name: 'ts export all',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       import { NestedInterface1 } from './__fixtures__/types';
 
@@ -366,7 +367,7 @@ const TESTS = [
   },
   {
     name: 'ts recursive type',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       interface SiblingInterface {
         property: string
@@ -383,7 +384,7 @@ const TESTS = [
 
   {
     name: 'typescript indexed type',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       type MyType = {
         props: number;
@@ -394,14 +395,14 @@ const TESTS = [
   },
   {
     name: 'typescript indexed imported type',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       class Component extends React.Component<{ foo: ImportedType['props'] }> {}
     `
   },
   {
     name: 'ts custom prop',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     type Foo<T, U> = T extends object ? T : U;
 
@@ -411,7 +412,7 @@ const TESTS = [
   },
   {
     name: 'ts unknown prop',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     import React from 'react';
 
@@ -425,21 +426,21 @@ const TESTS = [
   },
   {
     name: 'follow export default export',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       export { default } from './__fixtures__/component.tsx';
     `
   },
   {
     name: 'follow export named default export',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
       export { x as default } from './__fixtures__/componentB.tsx';
     `
   },
   {
     name: 'ts type query for class component',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     import React from 'react';
 
@@ -469,7 +470,7 @@ const TESTS = [
   },
   {
     name: 'ts type query for functional component',
-    typeSystem: 'typescript',
+    typeSystem,
     code: `
     import React from 'react';
 
