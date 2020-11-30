@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.27.0
+
+### Minor Changes
+
+- [`cf31e5e`](https://github.com/atlassian/extract-react-types/commit/cf31e5e4e99648994ceb6bb1719e20226f816532) [#143](https://github.com/atlassian/extract-react-types/pull/143) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Added support for React.FC type annotations
+
 ## 0.26.0
 
 ### Minor Changes
