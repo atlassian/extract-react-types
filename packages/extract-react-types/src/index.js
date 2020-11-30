@@ -1592,7 +1592,6 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
 
       // check for a component typed with the `FC<Props>` annotation
       if (
-        // path.parentPath &&
         path.parentPath.node.id &&
         path.parentPath.node.id.typeAnnotation &&
         path.parentPath.node.id.typeAnnotation.typeAnnotation.typeName.name === 'FC' &&
