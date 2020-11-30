@@ -1588,11 +1588,23 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
       path.isArrowFunctionExpression() ||
       path.isFunctionDeclaration()
     ) {
-      let component = convertReactComponentFunction(
-        path,
-        context,
-        path.get('params.0.typeAnnotation')
-      );
+      let propType;
+
+      // check for a component typed with the `FC<Props>` annotation
+      if (
+        // path.parentPath &&
+        path.parentPath.node.id &&
+        path.parentPath.node.id.typeAnnotation &&
+        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeName.name === 'FC' &&
+        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeParameters
+      ) {
+        propType = path.parentPath.get('id.typeAnnotation.typeAnnotation.typeParameters.params.0');
+      } else {
+        // we have a normal function, assume the props are the first parameter
+        propType = path.get('params.0.typeAnnotation');
+      }
+
+      let component = convertReactComponentFunction(path, context, propType);
       components.push({ name, path, component });
       return;
     }

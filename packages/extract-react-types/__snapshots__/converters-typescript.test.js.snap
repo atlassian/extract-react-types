@@ -1572,6 +1572,78 @@ Object {
 }
 `;
 
+exports[`typescript React.FC 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "children",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`typescript React.FC with empty type argument 1`] = `
+Object {
+  "component": Object {
+    "kind": "any",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`typescript React.FC with inline type argument 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "children",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
 exports[`typescript indexed imported type 1`] = `
 Object {
   "component": Object {
