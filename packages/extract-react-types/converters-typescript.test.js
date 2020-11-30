@@ -31,6 +31,43 @@ const TESTS = [
   `
   },
   {
+    name: 'typescript React.FC',
+    typeSystem: 'typescript',
+    code: `
+      type Props = {
+        children: string;
+      };
+
+      const Component: FC<Props> = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'typescript React.FC with empty type argument',
+    typeSystem: 'typescript',
+    code: `
+      type Props = {
+        children: string;
+      };
+
+      const Component: FC = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'typescript React.FC with inline type argument',
+    typeSystem: 'typescript',
+    code: `
+      const Component: FC<{
+        children: string;
+      }> = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
     name: 'ts custom prop',
     typeSystem: 'typescript',
     code: `
