@@ -2,6 +2,8 @@
 
 /* eslint-disable no-underscore-dangle */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { Component, type ComponentType } from 'react';
 
 import type { Components } from '../components';
@@ -70,9 +72,11 @@ export default class PropsTable extends Component<DynamicPropsProps> {
       <PropsWrapper heading={heading}>
         <table>
           <thead>
-            <tr css={{
-              paddingTop: '14px',
-            }}>
+            <tr
+              css={{
+                paddingTop: '14px'
+              }}
+            >
               <td>Name</td>
               <td>Type</td>
               <td>Defaults</td>
