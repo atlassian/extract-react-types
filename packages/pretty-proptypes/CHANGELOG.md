@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.1.4
+
+### Patch Changes
+
+- [`a879c29`](https://github.com/atlassian/extract-react-types/commit/a879c295a2b3131d00087d606a5d85cac60924ec) [#146](https://github.com/atlassian/extract-react-types/pull/146) Thanks [@declan-warn](https://github.com/declan-warn)! - Add missing jsx pragma in `packages/pretty-proptypes/src/PropsTable/index.js` which fixes an erroneous `css` attribute being rendered in prop table `tr`'s.
+
 ## 1.1.3
 
 ### Patch Changes
