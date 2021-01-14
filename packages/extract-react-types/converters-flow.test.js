@@ -820,19 +820,6 @@ const TESTS = [
   `
   },
   {
-    name: 'ts type comments',
-    typeSystem: 'typescript',
-    code: `
-      interface Props {
-        /* Type comment for a */
-        a: string;
-      }
-
-      class Component extends React.Component<Props> {
-      }
-    `
-  },
-  {
     name: 'flow type comments',
     typeSystem: 'flow',
     code: `
@@ -1100,9 +1087,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = forwardRef((props: Props, ref) => {
-
-    })
+    const SomeComponent = forwardRef((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1117,9 +1102,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = React.forwardRef((props: Props, ref) => {
-
-    })
+    const SomeComponent = React.forwardRef((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1149,9 +1132,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = memo((props: Props, ref) => {
-
-    })
+    const SomeComponent = memo((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1165,9 +1146,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = React.memo((props: Props, ref) => {
-
-    })
+    const SomeComponent = React.memo((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1181,9 +1160,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = something((props: Props, ref) => {
-
-    })
+    const SomeComponent = something((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1197,9 +1174,7 @@ const TESTS = [
       ok: number
     }
 
-    const SomeComponent = memo(forwardRef((props: Props, ref) => {
-
-    }))
+    const SomeComponent = memo(forwardRef((props: Props, ref) => {}))
 
     export default SomeComponent
 
@@ -1230,9 +1205,7 @@ const TESTS = [
       ok: number
     }
 
-    export default forwardRef((props: Props, ref) => {
-
-    })
+    export default forwardRef((props: Props, ref) => {})
     `
   },
   {
@@ -1243,9 +1216,7 @@ const TESTS = [
       ok: number
     }
 
-    export default memo((props: Props, ref) => {
-
-    })
+    export default memo((props: Props, ref) => {})
     `
   },
   {
@@ -1256,9 +1227,7 @@ const TESTS = [
       ok: number
     }
 
-    export default memo(forwardRef((props: Props, ref) => {
-
-    }))
+    export default memo(forwardRef((props: Props, ref) => {}))
     `
   },
   {
@@ -1277,7 +1246,7 @@ const TESTS = [
 ];
 
 cases(
-  '',
+  'Flow: ',
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__

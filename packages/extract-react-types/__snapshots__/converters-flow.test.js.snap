@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`$Exact flow utility type 1`] = `
+exports[`Flow:  $Exact flow utility type 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -63,7 +63,7 @@ Object {
 }
 `;
 
-exports[`Assignment Pattern 1`] = `
+exports[`Flow:  Assignment Pattern 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -129,7 +129,7 @@ Object {
 }
 `;
 
-exports[`BooleanLiteralTypeAnnotation 1`] = `
+exports[`Flow:  BooleanLiteralTypeAnnotation 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -169,7 +169,7 @@ Object {
 }
 `;
 
-exports[`Flow TypeCastExpression 1`] = `
+exports[`Flow:  Flow TypeCastExpression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -208,7 +208,7 @@ Object {
 }
 `;
 
-exports[`LogicalExpression and 1`] = `
+exports[`Flow:  LogicalExpression and 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -247,7 +247,7 @@ Object {
 }
 `;
 
-exports[`LogicalExpression or 1`] = `
+exports[`Flow:  LogicalExpression or 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -286,7 +286,7 @@ Object {
 }
 `;
 
-exports[`LogicalExpression or complicated 1`] = `
+exports[`Flow:  LogicalExpression or complicated 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -341,7 +341,7 @@ Object {
 }
 `;
 
-exports[`NullLiteralTypeAnnotation 1`] = `
+exports[`Flow:  NullLiteralTypeAnnotation 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -368,7 +368,7 @@ Object {
 }
 `;
 
-exports[`OpaqueType test 1`] = `
+exports[`Flow:  OpaqueType test 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -403,7 +403,7 @@ Object {
 }
 `;
 
-exports[`Should handle ArrayTypeAnnotations 1`] = `
+exports[`Flow:  Should handle ArrayTypeAnnotations 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -433,7 +433,7 @@ Object {
 }
 `;
 
-exports[`Should handle importing JSON files 1`] = `
+exports[`Flow:  Should handle importing JSON files 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -467,7 +467,7 @@ Object {
 }
 `;
 
-exports[`Should handle rest element 1`] = `
+exports[`Flow:  Should handle rest element 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -537,7 +537,7 @@ Object {
 }
 `;
 
-exports[`array expression 1`] = `
+exports[`Flow:  array expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -585,7 +585,7 @@ Object {
 }
 `;
 
-exports[`arrow function expression 1`] = `
+exports[`Flow:  arrow function expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -626,7 +626,7 @@ Object {
 }
 `;
 
-exports[`binary expression 1`] = `
+exports[`Flow:  binary expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -665,7 +665,7 @@ Object {
 }
 `;
 
-exports[`boolean literal 1`] = `
+exports[`Flow:  boolean literal 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -696,7 +696,7 @@ Object {
 }
 `;
 
-exports[`defined member expression 1`] = `
+exports[`Flow:  defined member expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -780,7 +780,7 @@ Object {
 }
 `;
 
-exports[`exists type annotation 1`] = `
+exports[`Flow:  exists type annotation 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -821,7 +821,7 @@ Object {
 }
 `;
 
-exports[`flow React.forwardRef 1`] = `
+exports[`Flow:  flow React.forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -852,7 +852,7 @@ Object {
 }
 `;
 
-exports[`flow React.memo 1`] = `
+exports[`Flow:  flow React.memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -883,7 +883,7 @@ Object {
 }
 `;
 
-exports[`flow any 1`] = `
+exports[`Flow:  flow any 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -910,7 +910,7 @@ Object {
 }
 `;
 
-exports[`flow array 1`] = `
+exports[`Flow:  flow array 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -949,7 +949,7 @@ Object {
 }
 `;
 
-exports[`flow array union 1`] = `
+exports[`Flow:  flow array union 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -996,7 +996,7 @@ Object {
 }
 `;
 
-exports[`flow arrow function component 1`] = `
+exports[`Flow:  flow arrow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1027,7 +1027,7 @@ Object {
 }
 `;
 
-exports[`flow boolean 1`] = `
+exports[`Flow:  flow boolean 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1054,7 +1054,7 @@ Object {
 }
 `;
 
-exports[`flow class with this expression 1`] = `
+exports[`Flow:  flow class with this expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1089,7 +1089,7 @@ Object {
 }
 `;
 
-exports[`flow default class export 1`] = `
+exports[`Flow:  flow default class export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1120,7 +1120,7 @@ Object {
 }
 `;
 
-exports[`flow different React component 1`] = `
+exports[`Flow:  flow different React component 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1147,7 +1147,7 @@ Object {
 }
 `;
 
-exports[`flow exported type alias reference 1`] = `
+exports[`Flow:  flow exported type alias reference 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1178,7 +1178,7 @@ Object {
 }
 `;
 
-exports[`flow forwardRef 1`] = `
+exports[`Flow:  flow forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1209,7 +1209,7 @@ Object {
 }
 `;
 
-exports[`flow forwardRef callable type arguments 1`] = `
+exports[`Flow:  flow forwardRef callable type arguments 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1235,7 +1235,7 @@ Object {
 }
 `;
 
-exports[`flow forwardRef default export 1`] = `
+exports[`Flow:  flow forwardRef default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1261,7 +1261,7 @@ Object {
 }
 `;
 
-exports[`flow forwardRef default export 2`] = `
+exports[`Flow:  flow forwardRef default export 2`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1287,14 +1287,14 @@ Object {
 }
 `;
 
-exports[`flow func that is not valid 1`] = `
+exports[`Flow:  flow func that is not valid 1`] = `
 Object {
   "component": undefined,
   "kind": "program",
 }
 `;
 
-exports[`flow function 1`] = `
+exports[`Flow:  flow function 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1340,7 +1340,7 @@ Object {
 }
 `;
 
-exports[`flow function component 1`] = `
+exports[`Flow:  flow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1371,7 +1371,7 @@ Object {
 }
 `;
 
-exports[`flow function component with default including spread 1`] = `
+exports[`Flow:  flow function component with default including spread 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1421,7 +1421,7 @@ Object {
 }
 `;
 
-exports[`flow function component with default props 1`] = `
+exports[`Flow:  flow function component with default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1456,7 +1456,7 @@ Object {
 }
 `;
 
-exports[`flow function expression 1`] = `
+exports[`Flow:  flow function expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1487,7 +1487,7 @@ Object {
 }
 `;
 
-exports[`flow function named params 1`] = `
+exports[`Flow:  flow function named params 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1533,7 +1533,7 @@ Object {
 }
 `;
 
-exports[`flow function return type 1`] = `
+exports[`Flow:  flow function return type 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1572,7 +1572,7 @@ Object {
 }
 `;
 
-exports[`flow function type 1`] = `
+exports[`Flow:  flow function type 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1603,7 +1603,7 @@ Object {
 }
 `;
 
-exports[`flow function unnamed params 1`] = `
+exports[`Flow:  flow function unnamed params 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1649,7 +1649,7 @@ Object {
 }
 `;
 
-exports[`flow function unnamed params w/ object 1`] = `
+exports[`Flow:  flow function unnamed params w/ object 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1701,7 +1701,7 @@ Object {
 }
 `;
 
-exports[`flow function with defaults not arrow 1`] = `
+exports[`Flow:  flow function with defaults not arrow 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1751,7 +1751,7 @@ Object {
 }
 `;
 
-exports[`flow generic class 1`] = `
+exports[`Flow:  flow generic class 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1769,7 +1769,7 @@ Object {
 }
 `;
 
-exports[`flow ignores other components 1`] = `
+exports[`Flow:  flow ignores other components 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1795,7 +1795,7 @@ Object {
 }
 `;
 
-exports[`flow import { type } 1`] = `
+exports[`Flow:  flow import { type } 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1833,7 +1833,7 @@ Object {
 }
 `;
 
-exports[`flow inline anonymous function component 1`] = `
+exports[`Flow:  flow inline anonymous function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1859,7 +1859,7 @@ Object {
 }
 `;
 
-exports[`flow inline arrow function component 1`] = `
+exports[`Flow:  flow inline arrow function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1885,7 +1885,7 @@ Object {
 }
 `;
 
-exports[`flow inline function component 1`] = `
+exports[`Flow:  flow inline function component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1916,7 +1916,7 @@ Object {
 }
 `;
 
-exports[`flow maybe 1`] = `
+exports[`Flow:  flow maybe 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1946,7 +1946,7 @@ Object {
 }
 `;
 
-exports[`flow memo 1`] = `
+exports[`Flow:  flow memo 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1977,7 +1977,7 @@ Object {
 }
 `;
 
-exports[`flow memo default export 1`] = `
+exports[`Flow:  flow memo default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2003,7 +2003,7 @@ Object {
 }
 `;
 
-exports[`flow memo wrapping forwardRef 1`] = `
+exports[`Flow:  flow memo wrapping forwardRef 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2034,7 +2034,7 @@ Object {
 }
 `;
 
-exports[`flow memo wrapping forwardRef default export 1`] = `
+exports[`Flow:  flow memo wrapping forwardRef default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2060,7 +2060,7 @@ Object {
 }
 `;
 
-exports[`flow mixed 1`] = `
+exports[`Flow:  flow mixed 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2087,14 +2087,14 @@ Object {
 }
 `;
 
-exports[`flow no React component 1`] = `
+exports[`Flow:  flow no React component 1`] = `
 Object {
   "component": undefined,
   "kind": "program",
 }
 `;
 
-exports[`flow number 1`] = `
+exports[`Flow:  flow number 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2121,7 +2121,7 @@ Object {
 }
 `;
 
-exports[`flow optional 1`] = `
+exports[`Flow:  flow optional 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2148,7 +2148,7 @@ Object {
 }
 `;
 
-exports[`flow recursive type 1`] = `
+exports[`Flow:  flow recursive type 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2183,7 +2183,7 @@ Object {
 }
 `;
 
-exports[`flow string 1`] = `
+exports[`Flow:  flow string 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2210,7 +2210,7 @@ Object {
 }
 `;
 
-exports[`flow type 1`] = `
+exports[`Flow:  flow type 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2252,7 +2252,7 @@ Object {
 }
 `;
 
-exports[`flow type 2`] = `
+exports[`Flow:  flow type 2`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2287,7 +2287,7 @@ Object {
 }
 `;
 
-exports[`flow type alias declaration - 1 1`] = `
+exports[`Flow:  flow type alias declaration - 1 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2357,7 +2357,7 @@ Object {
 }
 `;
 
-exports[`flow type comments 1`] = `
+exports[`Flow:  flow type comments 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2395,7 +2395,7 @@ Object {
 }
 `;
 
-exports[`flow type identifier 1`] = `
+exports[`Flow:  flow type identifier 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -2430,7 +2430,7 @@ Object {
 }
 `;
 
-exports[`flow type parameter declaration 1`] = `
+exports[`Flow:  flow type parameter declaration 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2483,7 +2483,7 @@ Object {
 }
 `;
 
-exports[`flow union 1`] = `
+exports[`Flow:  flow union 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2518,7 +2518,7 @@ Object {
 }
 `;
 
-exports[`flow union literals 1`] = `
+exports[`Flow:  flow union literals 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2555,7 +2555,7 @@ Object {
 }
 `;
 
-exports[`flow void 1`] = `
+exports[`Flow:  flow void 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2582,7 +2582,7 @@ Object {
 }
 `;
 
-exports[`function declaration 1`] = `
+exports[`Flow:  function declaration 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2619,7 +2619,7 @@ Object {
 }
 `;
 
-exports[`function expression 1`] = `
+exports[`Flow:  function expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2660,7 +2660,7 @@ Object {
 }
 `;
 
-exports[`imported member expression default 1`] = `
+exports[`Flow:  imported member expression default 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2704,7 +2704,7 @@ Object {
 }
 `;
 
-exports[`imported member expression named 1`] = `
+exports[`Flow:  imported member expression named 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2748,7 +2748,7 @@ Object {
 }
 `;
 
-exports[`imported member expression named alias 1`] = `
+exports[`Flow:  imported member expression named alias 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2792,7 +2792,7 @@ Object {
 }
 `;
 
-exports[`intersection type 1`] = `
+exports[`Flow:  intersection type 1`] = `
 Object {
   "component": Object {
     "kind": "intersection",
@@ -2844,7 +2844,7 @@ Object {
 }
 `;
 
-exports[`member expression 1`] = `
+exports[`Flow:  member expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -2888,7 +2888,7 @@ Object {
 }
 `;
 
-exports[`nested intersection type with default props 1`] = `
+exports[`Flow:  nested intersection type with default props 1`] = `
 Object {
   "component": Object {
     "kind": "intersection",
@@ -2969,7 +2969,7 @@ Object {
 }
 `;
 
-exports[`new expression 1`] = `
+exports[`Flow:  new expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3009,7 +3009,7 @@ Object {
 }
 `;
 
-exports[`non-standard key 1`] = `
+exports[`Flow:  non-standard key 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3047,7 +3047,7 @@ Object {
 }
 `;
 
-exports[`non-standard key with default 1`] = `
+exports[`Flow:  non-standard key with default 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3089,7 +3089,7 @@ Object {
 }
 `;
 
-exports[`null literal 1`] = `
+exports[`Flow:  null literal 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3119,7 +3119,7 @@ Object {
 }
 `;
 
-exports[`numeric literal 1`] = `
+exports[`Flow:  numeric literal 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3150,7 +3150,7 @@ Object {
 }
 `;
 
-exports[`spread element  1`] = `
+exports[`Flow:  spread element  1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3196,7 +3196,7 @@ Object {
 }
 `;
 
-exports[`spread element cannot find 1`] = `
+exports[`Flow:  spread element cannot find 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3253,7 +3253,7 @@ Object {
 }
 `;
 
-exports[`string literal 1`] = `
+exports[`Flow:  string literal 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3284,7 +3284,7 @@ Object {
 }
 `;
 
-exports[`tagged template expression 1`] = `
+exports[`Flow:  tagged template expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3331,7 +3331,7 @@ Object {
 }
 `;
 
-exports[`template literal with quasis 1`] = `
+exports[`Flow:  template literal with quasis 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3384,7 +3384,7 @@ Object {
 }
 `;
 
-exports[`test 1`] = `
+exports[`Flow:  test 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3415,7 +3415,7 @@ Object {
 }
 `;
 
-exports[`test defaultProp as JSXElement 1`] = `
+exports[`Flow:  test defaultProp as JSXElement 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3475,7 +3475,7 @@ Object {
 }
 `;
 
-exports[`test defaultProp as JSXElement with JSXExpressionContainer 1`] = `
+exports[`Flow:  test defaultProp as JSXElement with JSXExpressionContainer 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3535,7 +3535,7 @@ Object {
 }
 `;
 
-exports[`test defaultProp as JSXElement with member expression 1`] = `
+exports[`Flow:  test defaultProp as JSXElement with member expression 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3602,7 +3602,7 @@ Object {
 }
 `;
 
-exports[`test defaultProp as JSXElement with multiple props 1`] = `
+exports[`Flow:  test defaultProp as JSXElement with multiple props 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3670,7 +3670,7 @@ Object {
 }
 `;
 
-exports[`test get defaultProps 1`] = `
+exports[`Flow:  test get defaultProps 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3701,45 +3701,7 @@ Object {
 }
 `;
 
-exports[`ts type comments 1`] = `
-Object {
-  "component": Object {
-    "kind": "generic",
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
-    },
-    "value": Object {
-      "kind": "object",
-      "members": Array [
-        Object {
-          "key": Object {
-            "kind": "id",
-            "name": "a",
-          },
-          "kind": "property",
-          "leadingComments": Array [
-            Object {
-              "raw": " Type comment for a ",
-              "type": "commentBlock",
-              "value": "Type comment for a",
-            },
-          ],
-          "optional": false,
-          "value": Object {
-            "kind": "string",
-          },
-        },
-      ],
-      "referenceIdName": "Props",
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`typeof statements 1`] = `
+exports[`Flow:  typeof statements 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3775,7 +3737,7 @@ Object {
 }
 `;
 
-exports[`unary operator 1`] = `
+exports[`Flow:  unary operator 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -3810,7 +3772,7 @@ Object {
 }
 `;
 
-exports[`with $Exact spread in type annotation and default props 1`] = `
+exports[`Flow:  with $Exact spread in type annotation and default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -3856,7 +3818,7 @@ Object {
 }
 `;
 
-exports[`with generic spread in type annotation and default props 1`] = `
+exports[`Flow:  with generic spread in type annotation and default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -3929,7 +3891,7 @@ Object {
 }
 `;
 
-exports[`with spread in type annotation 1`] = `
+exports[`Flow:  with spread in type annotation 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -3971,7 +3933,7 @@ Object {
 }
 `;
 
-exports[`with spread in type annotation and default props 1`] = `
+exports[`Flow:  with spread in type annotation and default props 1`] = `
 Object {
   "component": Object {
     "kind": "generic",

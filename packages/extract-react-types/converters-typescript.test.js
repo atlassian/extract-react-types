@@ -16,6 +16,19 @@ import { extractReactTypes } from './src';
 
 const TESTS = [
   {
+    name: 'type comments',
+    typeSystem: 'typescript',
+    code: `
+      interface Props {
+        /* Type comment for a */
+        a: string;
+      }
+
+      class Component extends React.Component<Props> {
+      }
+    `
+  },
+  {
     name: 'typescript React.ComponentType',
     typeSystem: 'typescript',
     code: `
@@ -560,7 +573,7 @@ const TESTS = [
 ];
 
 cases(
-  '',
+  'TypeScript: ',
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
