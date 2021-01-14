@@ -16,7 +16,7 @@ import { extractReactTypes } from './src';
 
 const TESTS = [
   {
-    name: 'flow boolean',
+    name: 'boolean',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: boolean }> {
@@ -60,7 +60,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow string',
+    name: 'string',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: string }> {
@@ -69,7 +69,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow number',
+    name: 'number',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: number }> {
@@ -78,7 +78,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function',
+    name: 'function',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (string, number) => string }> {
@@ -87,7 +87,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function named params',
+    name: 'function named params',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (name: string, age: number) => void }> {
@@ -96,7 +96,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function unnamed params',
+    name: 'function unnamed params',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (string, number) => void }> {
@@ -105,7 +105,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function unnamed params w/ object',
+    name: 'function unnamed params w/ object',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: ({ prop: string }) => void }> {
@@ -114,7 +114,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function return type',
+    name: 'function return type',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: (number) => void }> {
@@ -123,7 +123,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow function type',
+    name: 'function type',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Function }> {
@@ -132,7 +132,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow maybe',
+    name: 'maybe',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: ?string }> {
@@ -141,7 +141,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow array',
+    name: 'array',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Array<boolean> }> {
@@ -150,7 +150,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow union',
+    name: 'union',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: boolean | number }> {
@@ -159,7 +159,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow union literals',
+    name: 'union literals',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: '25' | 30 }> {
@@ -168,7 +168,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow mixed',
+    name: 'mixed',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: mixed }> {
@@ -177,7 +177,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow any',
+    name: 'any',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ age: any }> {
@@ -186,7 +186,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow generic class',
+    name: 'generic class',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<A> {
@@ -195,7 +195,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow type',
+    name: 'type',
     typeSystem: 'flow',
     code: `
     type ComponentProps = {
@@ -208,7 +208,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow type identifier',
+    name: 'type identifier',
     typeSystem: 'flow',
     code: `
     import * as React from 'react';
@@ -223,7 +223,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow exported type alias reference',
+    name: 'exported type alias reference',
     typeSystem: 'flow',
     code: `
     export type Foo = boolean;
@@ -233,7 +233,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow type',
+    name: 'type',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{foo: number & string}> {
@@ -347,7 +347,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow array union',
+    name: 'array union',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: Array<boolean | number> }> {
@@ -356,7 +356,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow void',
+    name: 'void',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo: void }> {
@@ -365,7 +365,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow optional',
+    name: 'optional',
     typeSystem: 'flow',
     code: `
     class Component extends React.Component<{ foo?: number }> {
@@ -373,7 +373,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow no React component',
+    name: 'no React component',
     typeSystem: 'flow',
     code: `
     class FooComponent extends Bar<{ foo?: number }> {
@@ -381,7 +381,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow different React component',
+    name: 'different React component',
     typeSystem: 'flow',
     code: `
     import {Component} from 'react';
@@ -394,7 +394,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow import { type }',
+    name: 'import { type }',
     typeSystem: 'flow',
     code: `
     import React, { type Node } from 'react';
@@ -811,7 +811,7 @@ const TESTS = [
   `
   },
   {
-    name: 'flow type parameter declaration',
+    name: 'type parameter declaration',
     typeSystem: 'flow',
     code: `
       type Foo<T> = () => T;
@@ -820,20 +820,7 @@ const TESTS = [
   `
   },
   {
-    name: 'ts type comments',
-    typeSystem: 'typescript',
-    code: `
-      interface Props {
-        /* Type comment for a */
-        a: string;
-      }
-
-      class Component extends React.Component<Props> {
-      }
-    `
-  },
-  {
-    name: 'flow type comments',
+    name: 'type comments',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -846,7 +833,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow type alias declaration - 1',
+    name: 'type alias declaration - 1',
     typeSystem: 'flow',
     code: `
       import * as React from 'react';
@@ -861,7 +848,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow recursive type',
+    name: 'recursive type',
     typeSystem: 'flow',
     code: `
       type RecursiveType = {
@@ -872,7 +859,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow function component',
+    name: 'function component',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -887,7 +874,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow inline function component',
+    name: 'inline function component',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -900,7 +887,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow inline anonymous function component',
+    name: 'inline anonymous function component',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -913,7 +900,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow arrow function component',
+    name: 'arrow function component',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -926,7 +913,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow inline arrow function component',
+    name: 'inline arrow function component',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -937,7 +924,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow ignores other components',
+    name: 'ignores other components',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -954,7 +941,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow function component with default props',
+    name: 'function component with default props',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -971,7 +958,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow function component with default including spread',
+    name: 'function component with default including spread',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -992,7 +979,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow function with defaults not arrow',
+    name: 'function with defaults not arrow',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -1013,7 +1000,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow forwardRef default export',
+    name: 'forwardRef default export',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -1030,7 +1017,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow forwardRef callable type arguments',
+    name: 'forwardRef callable type arguments',
     typeSystem: 'flow',
     code: `
       type Props = {
@@ -1047,7 +1034,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow default class export',
+    name: 'default class export',
     typeSystem: 'flow',
     code: `
       import { Component } from 'react';
@@ -1063,7 +1050,7 @@ const TESTS = [
     `
   },
   {
-    name: 'flow class with this expression',
+    name: 'class with this expression',
     typeSystem: 'flow',
     code: `
     type Props = {
@@ -1093,16 +1080,14 @@ const TESTS = [
     `
   },
   {
-    name: 'flow forwardRef',
+    name: 'forwardRef',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = forwardRef((props: Props, ref) => {
-
-    })
+    const SomeComponent = forwardRef((props: Props, ref) => {})
 
     export default SomeComponent
 
@@ -1110,23 +1095,21 @@ const TESTS = [
     `
   },
   {
-    name: 'flow React.forwardRef',
+    name: 'React.forwardRef',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = React.forwardRef((props: Props, ref) => {
-
-    })
+    const SomeComponent = React.forwardRef((props: Props, ref) => {})
 
     export default SomeComponent
 
     `
   },
   {
-    name: 'flow function expression',
+    name: 'function expression',
     typeSystem: 'flow',
     code: `
     type Props = {
@@ -1142,64 +1125,56 @@ const TESTS = [
     `
   },
   {
-    name: 'flow React.memo',
+    name: 'React.memo',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = memo((props: Props, ref) => {
-
-    })
+    const SomeComponent = memo((props: Props, ref) => {})
 
     export default SomeComponent
 
     `
   },
   {
-    name: 'flow memo',
+    name: 'memo',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = React.memo((props: Props, ref) => {
-
-    })
+    const SomeComponent = React.memo((props: Props, ref) => {})
 
     export default SomeComponent
 
     `
   },
   {
-    name: 'flow func that is not valid',
+    name: 'func that is not valid',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = something((props: Props, ref) => {
-
-    })
+    const SomeComponent = something((props: Props, ref) => {})
 
     export default SomeComponent
 
     `
   },
   {
-    name: 'flow memo wrapping forwardRef',
+    name: 'memo wrapping forwardRef',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    const SomeComponent = memo(forwardRef((props: Props, ref) => {
-
-    }))
+    const SomeComponent = memo(forwardRef((props: Props, ref) => {}))
 
     export default SomeComponent
 
@@ -1223,46 +1198,40 @@ const TESTS = [
     `
   },
   {
-    name: 'flow forwardRef default export',
+    name: 'forwardRef default export',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    export default forwardRef((props: Props, ref) => {
-
-    })
+    export default forwardRef((props: Props, ref) => {})
     `
   },
   {
-    name: 'flow memo default export',
+    name: 'memo default export',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    export default memo((props: Props, ref) => {
-
-    })
+    export default memo((props: Props, ref) => {})
     `
   },
   {
-    name: 'flow memo wrapping forwardRef default export',
+    name: 'memo wrapping forwardRef default export',
     typeSystem: 'flow',
     code: `
     type Props = {
       ok: number
     }
 
-    export default memo(forwardRef((props: Props, ref) => {
-
-    }))
+    export default memo(forwardRef((props: Props, ref) => {}))
     `
   },
   {
-    name: 'Flow TypeCastExpression',
+    name: 'TypeCastExpression',
     typeSystem: 'flow',
     code: `
     type Props = { bar: string }
@@ -1277,7 +1246,7 @@ const TESTS = [
 ];
 
 cases(
-  '',
+  'Flow:',
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__

@@ -1,6 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should handle importing other ts files 1`] = `
+exports[`TypeScript: Direct type assignment 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Badge",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "texture",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "BadgeProps",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: React.ComponentType 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "children",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "generic",
+            "value": Object {
+              "kind": "id",
+              "name": "React.ComponentType",
+            },
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: React.FC 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "children",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: React.FC with empty type argument 1`] = `
+Object {
+  "component": Object {
+    "kind": "any",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: React.FC with inline type argument 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "children",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: Should handle importing other ts files 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -41,7 +179,7 @@ Object {
 }
 `;
 
-exports[`follow export default export 1`] = `
+exports[`TypeScript: follow export default export 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -67,14 +205,14 @@ Object {
 }
 `;
 
-exports[`follow export named default export 1`] = `
+exports[`TypeScript: follow export named default export 1`] = `
 Object {
   "component": undefined,
   "kind": "program",
 }
 `;
 
-exports[`forwardRef typed via function args 1`] = `
+exports[`TypeScript: forwardRef typed via function args 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -105,7 +243,7 @@ Object {
 }
 `;
 
-exports[`forwardRef typed via generic types 1`] = `
+exports[`TypeScript: forwardRef typed via generic types 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -136,7 +274,98 @@ Object {
 }
 `;
 
-exports[`ts any 1`] = `
+exports[`TypeScript: generic + type expression 1`] = `
+Object {
+  "component": Object {
+    "key": Object {
+      "kind": "any",
+    },
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "typeParams": Object {
+      "kind": "typeParams",
+      "params": Array [
+        Object {
+          "kind": "string",
+        },
+        Object {
+          "kind": "object",
+          "members": Array [],
+        },
+      ],
+    },
+    "value": Object {
+      "kind": "any",
+      "referenceIdName": "Foo",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: indexed imported type 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "generic",
+          "value": Object {
+            "kind": "id",
+            "name": "ImportedType['props']",
+          },
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: indexed type 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "number",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: ts any 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -163,7 +392,7 @@ Object {
 }
 `;
 
-exports[`ts array 1`] = `
+exports[`TypeScript: ts array 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -205,7 +434,7 @@ Object {
 }
 `;
 
-exports[`ts array prop 1`] = `
+exports[`TypeScript: ts array prop 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -283,7 +512,7 @@ Object {
 }
 `;
 
-exports[`ts as expression 1`] = `
+exports[`TypeScript: ts as expression 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -332,7 +561,7 @@ Object {
 }
 `;
 
-exports[`ts boolean 1`] = `
+exports[`TypeScript: ts boolean 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -359,7 +588,7 @@ Object {
 }
 `;
 
-exports[`ts call signature declaration 1`] = `
+exports[`TypeScript: ts call signature declaration 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -402,71 +631,7 @@ Object {
 }
 `;
 
-exports[`ts custom prop 1`] = `
-Object {
-  "component": Object {
-    "kind": "generic",
-    "name": Object {
-      "kind": "id",
-      "name": "Badge",
-      "type": null,
-    },
-    "value": Object {
-      "kind": "object",
-      "members": Array [
-        Object {
-          "key": Object {
-            "kind": "id",
-            "name": "texture",
-          },
-          "kind": "property",
-          "optional": false,
-          "value": Object {
-            "kind": "string",
-          },
-        },
-      ],
-      "referenceIdName": "BadgeProps",
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`ts custom prop 2`] = `
-Object {
-  "component": Object {
-    "key": Object {
-      "kind": "any",
-    },
-    "kind": "generic",
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
-    },
-    "typeParams": Object {
-      "kind": "typeParams",
-      "params": Array [
-        Object {
-          "kind": "string",
-        },
-        Object {
-          "kind": "object",
-          "members": Array [],
-        },
-      ],
-    },
-    "value": Object {
-      "kind": "any",
-      "referenceIdName": "Foo",
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`ts decorators 1`] = `
+exports[`TypeScript: ts decorators 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -481,7 +646,7 @@ Object {
 }
 `;
 
-exports[`ts different React components 1`] = `
+exports[`TypeScript: ts different React components 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -508,7 +673,7 @@ Object {
 }
 `;
 
-exports[`ts enum 1`] = `
+exports[`TypeScript: ts enum 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -553,7 +718,7 @@ Object {
 }
 `;
 
-exports[`ts export all 1`] = `
+exports[`TypeScript: ts export all 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -594,7 +759,7 @@ Object {
 }
 `;
 
-exports[`ts function 1`] = `
+exports[`TypeScript: ts function 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -645,7 +810,7 @@ Object {
 }
 `;
 
-exports[`ts interface 1`] = `
+exports[`TypeScript: ts interface 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -687,7 +852,7 @@ Object {
 }
 `;
 
-exports[`ts interface extend 1`] = `
+exports[`TypeScript: ts interface extend 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -744,7 +909,7 @@ Object {
 }
 `;
 
-exports[`ts literals 1`] = `
+exports[`TypeScript: ts literals 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -781,7 +946,7 @@ Object {
 }
 `;
 
-exports[`ts method signature 1`] = `
+exports[`TypeScript: ts method signature 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -825,7 +990,7 @@ Object {
 }
 `;
 
-exports[`ts nested prop 1`] = `
+exports[`TypeScript: ts nested prop 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -860,14 +1025,14 @@ Object {
 }
 `;
 
-exports[`ts no react component 1`] = `
+exports[`TypeScript: ts no react component 1`] = `
 Object {
   "component": undefined,
   "kind": "program",
 }
 `;
 
-exports[`ts object 1`] = `
+exports[`TypeScript: ts object 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -929,7 +1094,7 @@ Object {
 }
 `;
 
-exports[`ts optional 1`] = `
+exports[`TypeScript: ts optional 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -956,7 +1121,7 @@ Object {
 }
 `;
 
-exports[`ts parenthesized type 1`] = `
+exports[`TypeScript: ts parenthesized type 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1000,7 +1165,7 @@ Object {
 }
 `;
 
-exports[`ts recursive type 1`] = `
+exports[`TypeScript: ts recursive type 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1063,7 +1228,7 @@ Object {
 }
 `;
 
-exports[`ts string 1`] = `
+exports[`TypeScript: ts string 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1090,7 +1255,7 @@ Object {
 }
 `;
 
-exports[`ts tuple 1`] = `
+exports[`TypeScript: ts tuple 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1125,7 +1290,7 @@ Object {
 }
 `;
 
-exports[`ts type alias 1`] = `
+exports[`TypeScript: ts type alias 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1156,7 +1321,7 @@ Object {
 }
 `;
 
-exports[`ts type alias declaration - 1 1`] = `
+exports[`TypeScript: ts type alias declaration - 1 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1201,7 +1366,7 @@ Object {
 }
 `;
 
-exports[`ts type alias declaration - 2 1`] = `
+exports[`TypeScript: ts type alias declaration - 2 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1277,7 +1442,107 @@ Object {
 }
 `;
 
-exports[`ts type query for class component 1`] = `
+exports[`TypeScript: ts union 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "union",
+          "types": Array [
+            Object {
+              "kind": "number",
+            },
+            Object {
+              "kind": "string",
+            },
+          ],
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: ts void 1`] = `
+Object {
+  "component": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "void",
+        },
+      },
+    ],
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: type comments 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "a",
+          },
+          "kind": "property",
+          "leadingComments": Array [
+            Object {
+              "raw": " Type comment for a ",
+              "type": "commentBlock",
+              "value": "Type comment for a",
+            },
+          ],
+          "optional": false,
+          "value": Object {
+            "kind": "string",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: type query for class component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1409,7 +1674,7 @@ Object {
 }
 `;
 
-exports[`ts type query for functional component 1`] = `
+exports[`TypeScript: type query for functional component 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1444,100 +1709,7 @@ Object {
 }
 `;
 
-exports[`ts union 1`] = `
-Object {
-  "component": Object {
-    "kind": "object",
-    "members": Array [
-      Object {
-        "key": Object {
-          "kind": "id",
-          "name": "foo",
-        },
-        "kind": "property",
-        "optional": false,
-        "value": Object {
-          "kind": "union",
-          "types": Array [
-            Object {
-              "kind": "number",
-            },
-            Object {
-              "kind": "string",
-            },
-          ],
-        },
-      },
-    ],
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`ts unknown prop 1`] = `
-Object {
-  "component": Object {
-    "kind": "generic",
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
-    },
-    "value": Object {
-      "kind": "object",
-      "members": Array [
-        Object {
-          "key": Object {
-            "kind": "id",
-            "name": "children",
-          },
-          "kind": "property",
-          "optional": false,
-          "value": Object {
-            "kind": "unknown",
-          },
-        },
-      ],
-      "referenceIdName": "Props",
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`ts void 1`] = `
-Object {
-  "component": Object {
-    "kind": "object",
-    "members": Array [
-      Object {
-        "key": Object {
-          "kind": "id",
-          "name": "foo",
-        },
-        "kind": "property",
-        "optional": false,
-        "value": Object {
-          "kind": "void",
-        },
-      },
-    ],
-    "name": Object {
-      "kind": "id",
-      "name": "Component",
-      "type": null,
-    },
-  },
-  "kind": "program",
-}
-`;
-
-exports[`typescript React.ComponentType 1`] = `
+exports[`TypeScript: typescript React.ComponentType 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1572,7 +1744,7 @@ Object {
 }
 `;
 
-exports[`typescript React.FC 1`] = `
+exports[`TypeScript: typescript React.FC 1`] = `
 Object {
   "component": Object {
     "kind": "generic",
@@ -1603,7 +1775,7 @@ Object {
 }
 `;
 
-exports[`typescript React.FC with empty type argument 1`] = `
+exports[`TypeScript: typescript React.FC with empty type argument 1`] = `
 Object {
   "component": Object {
     "kind": "any",
@@ -1617,7 +1789,7 @@ Object {
 }
 `;
 
-exports[`typescript React.FC with inline type argument 1`] = `
+exports[`TypeScript: typescript React.FC with inline type argument 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1644,7 +1816,7 @@ Object {
 }
 `;
 
-exports[`typescript indexed imported type 1`] = `
+exports[`TypeScript: typescript indexed imported type 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1675,7 +1847,7 @@ Object {
 }
 `;
 
-exports[`typescript indexed type 1`] = `
+exports[`TypeScript: typescript indexed type 1`] = `
 Object {
   "component": Object {
     "kind": "object",
@@ -1696,6 +1868,37 @@ Object {
       "kind": "id",
       "name": "Component",
       "type": null,
+    },
+  },
+  "kind": "program",
+}
+`;
+
+exports[`TypeScript: unknown prop 1`] = `
+Object {
+  "component": Object {
+    "kind": "generic",
+    "name": Object {
+      "kind": "id",
+      "name": "Component",
+      "type": null,
+    },
+    "value": Object {
+      "kind": "object",
+      "members": Array [
+        Object {
+          "key": Object {
+            "kind": "id",
+            "name": "children",
+          },
+          "kind": "property",
+          "optional": false,
+          "value": Object {
+            "kind": "unknown",
+          },
+        },
+      ],
+      "referenceIdName": "Props",
     },
   },
   "kind": "program",
