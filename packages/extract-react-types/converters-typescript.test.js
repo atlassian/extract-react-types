@@ -29,7 +29,7 @@ const TESTS = [
     `
   },
   {
-    name: 'typescript React.ComponentType',
+    name: 'React.ComponentType',
     typeSystem: 'typescript',
     code: `
     import React from 'react';
@@ -44,7 +44,7 @@ const TESTS = [
   `
   },
   {
-    name: 'typescript React.FC',
+    name: 'React.FC',
     typeSystem: 'typescript',
     code: `
       type Props = {
@@ -57,7 +57,7 @@ const TESTS = [
     `
   },
   {
-    name: 'typescript React.FC with empty type argument',
+    name: 'React.FC with empty type argument',
     typeSystem: 'typescript',
     code: `
       type Props = {
@@ -70,7 +70,7 @@ const TESTS = [
     `
   },
   {
-    name: 'typescript React.FC with inline type argument',
+    name: 'React.FC with inline type argument',
     typeSystem: 'typescript',
     code: `
       const Component: FC<{
@@ -81,7 +81,7 @@ const TESTS = [
     `
   },
   {
-    name: 'ts custom prop',
+    name: 'Direct type assignment',
     typeSystem: 'typescript',
     code: `
     interface BadgeProps {
@@ -432,7 +432,7 @@ const TESTS = [
   },
 
   {
-    name: 'typescript indexed type',
+    name: 'indexed type',
     typeSystem: 'typescript',
     code: `
       type MyType = {
@@ -443,14 +443,14 @@ const TESTS = [
     `
   },
   {
-    name: 'typescript indexed imported type',
+    name: 'indexed imported type',
     typeSystem: 'typescript',
     code: `
       class Component extends React.Component<{ foo: ImportedType['props'] }> {}
     `
   },
   {
-    name: 'ts custom prop',
+    name: 'generic + type expression',
     typeSystem: 'typescript',
     code: `
     type Foo<T, U> = T extends object ? T : U;
@@ -460,7 +460,7 @@ const TESTS = [
   `
   },
   {
-    name: 'ts unknown prop',
+    name: 'unknown prop',
     typeSystem: 'typescript',
     code: `
     import React from 'react';
@@ -488,7 +488,7 @@ const TESTS = [
     `
   },
   {
-    name: 'ts type query for class component',
+    name: 'type query for class component',
     typeSystem: 'typescript',
     code: `
     import React from 'react';
@@ -518,7 +518,7 @@ const TESTS = [
   `
   },
   {
-    name: 'ts type query for functional component',
+    name: 'type query for functional component',
     typeSystem: 'typescript',
     code: `
     import React from 'react';
@@ -573,7 +573,7 @@ const TESTS = [
 ];
 
 cases(
-  'TypeScript: ',
+  'TypeScript:',
   testCase => {
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
