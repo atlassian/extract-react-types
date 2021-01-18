@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "changeset": "changeset",
     "apply-changesets": "changeset version",
     "release": "yarn build && changeset publish",
