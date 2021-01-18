@@ -50,10 +50,10 @@ function convertObject(path, context) {
 }
 
 function resolveExportAllDeclaration(path, context) {
-  let source = path.get('source');
+  const source = path.get('source');
   // The parentPath is a reference to where we currently are. We want to
   // get the source value, but resolving this first makes this easier.
-  let filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
+  const filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
 
   return loadFileSync(filePath, context.parserOpts);
 }
@@ -546,34 +546,30 @@ converters.InterfaceDeclaration = (path, context): K.InterfaceDeclaration => {
 converters.OpaqueType = (path, context): K.OpaqueType => {
   // OpaqueTypes have several optional nodes that exist as a null when not present
   // We need to convert these when they exist, and ignore them when they don't;
-  let supertypePath = path.get('supertype');
-  let impltypePath = path.get('impltype');
-  let typeParametersPath = path.get('typeParameters');
+  const supertypePath = path.get('supertype');
+  const impltypePath = path.get('impltype');
+  const typeParametersPath = path.get('typeParameters');
 
   // TODO we are having a fight at the moment with id returning a binding, not a node,
   // and don't have time to solve this properly - I am pathing it to being working-ish
   // here, and will come back to this later. If you find this comment still here and
   // want to fix this problem, I encourage you to do is.
-
-  let supertype;
-  let impltype;
-  let typeParameters;
-  let id = convert(path.get('id'), context);
-
-  if (supertypePath.node) supertype = convert(supertypePath, context);
-  if (impltypePath.node) impltype = convert(impltypePath, context);
-  if (typeParametersPath.node) typeParameters = convert(typeParametersPath, context);
+  const supertype = supertypePath.node && convert(supertypePath, context);
+  const impltype = impltypePath.node && convert(impltypePath, context);
+  const typeParameters = typeParametersPath.node && convert(typeParametersPath, context);
+  const id = convert(path.get('id'), context);
 
   return { kind: 'opaqueType', id, supertype, impltype, typeParameters };
 };
 
 converters.TypeofTypeAnnotation = (path, context): K.Typeof => {
-  let type = convert(path.get('argument'), { ...context, mode: 'value' });
-  let ungeneric = resolveFromGeneric(type);
+  const type = convert(path.get('argument'), { ...context, mode: 'value' });
+  const { name, referenceIdName } = resolveFromGeneric(type);
+
   return {
     kind: 'typeof',
     type,
-    name: ungeneric.name || ungeneric.referenceIdName
+    name: name || referenceIdName
   };
 };
 
@@ -664,12 +660,12 @@ converters.ObjectTypeAnnotation = (path, context): K.Obj => {
 };
 
 converters.ObjectTypeProperty = (path, context): K.Property => {
-  let result = {};
-  result.kind = 'property';
-  result.key = convert(path.get('key'), context);
-  result.value = convert(path.get('value'), context);
-  result.optional = path.node.optional;
-  return result;
+  return {
+    kind: 'property',
+    key: convert(path.get('key'), context),
+    value: convert(path.get('value'), context),
+    optional: path.node.optional
+  };
 };
 
 converters.UnionTypeAnnotation = (path, context): K.Union => {
@@ -736,10 +732,10 @@ converters.ObjectExpression = (path, context): K.Obj => {
 };
 
 converters.VariableDeclaration = (path, context): K.Variable => {
-  let res = {};
-  res.kind = 'variable';
-  res.declarations = path.get('declarations').map(p => convert(p, context));
-  return res;
+  return {
+    kind: 'variable',
+    declarations: path.get('declarations').map(p => convert(p, context))
+  };
 };
 
 converters.VariableDeclarator = (path, context): K.Initial => {
@@ -763,17 +759,14 @@ converters.Identifier = (path, context): K.Id => {
         let foundPath = null;
 
         if (bindingPath.isVariableDeclaration()) {
-          foundPath = bindingPath.get('declarators').find(p => {
-            return p.node.name === name;
-          });
+          foundPath = bindingPath.get('declarators').find(p => p.node.name === name);
         } else if (bindingPath.isVariableDeclarator()) {
           foundPath = bindingPath.get('init');
         } else if (
           bindingPath.isImportDefaultSpecifier() ||
-          bindingPath.isImportNamespaceSpecifier()
+          bindingPath.isImportNamespaceSpecifier() ||
+          bindingPath.isImportSpecifier()
         ) {
-          foundPath = bindingPath;
-        } else if (bindingPath.isImportSpecifier()) {
           foundPath = bindingPath;
         } else if (bindingPath.isDeclaration()) {
           foundPath = bindingPath.get('id');
@@ -788,14 +781,9 @@ converters.Identifier = (path, context): K.Id => {
           referenceIdName: path.node.name
         };
       } else {
-        let type = null;
-
-        if (path.node.typeAnnotation) {
-          type = convert(path.get('typeAnnotation'), {
-            ...context,
-            mode: 'type'
-          });
-        }
+        const type = path.node.typeAnnotation
+          ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
+          : null;
 
         return {
           kind: 'id',
@@ -804,13 +792,9 @@ converters.Identifier = (path, context): K.Id => {
         };
       }
     } else if (kind === 'static' || kind === 'binding') {
-      let type = null;
-      if (path.node.typeAnnotation) {
-        type = convert(path.get('typeAnnotation'), {
-          ...context,
-          mode: 'type'
-        });
-      }
+      const type = path.node.typeAnnotation
+        ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
+        : null;
 
       return {
         kind: 'id',
@@ -1307,7 +1291,7 @@ function importConverterGeneral(path, context): K.Import {
       };
     }
 
-    if (!filePath) {
+    if (!filePath || nodePath.extname(filePath) === '.json') {
       return {
         kind: 'import',
         importKind,
@@ -1316,24 +1300,8 @@ function importConverterGeneral(path, context): K.Import {
       };
     }
 
-    // Don't attempt to parse JSON
-    if (nodePath.extname(filePath) === '.json') {
-      return {
-        kind: 'import',
-        importKind,
-        name,
-        moduleSpecifier
-      };
-    }
-
-    let file = loadFileSync(filePath, context.parserOpts);
-
-    let id;
-    if (path.node.imported) {
-      id = path.node.imported.name;
-    } else {
-      id = path.node.local.name;
-    }
+    const file = loadFileSync(filePath, context.parserOpts);
+    const id = path.node.imported ? path.node.imported.name : path.node.local.name;
 
     let exported = matchExported(file, name);
 
@@ -1536,11 +1504,12 @@ function convert(path, context) {
   return result;
 }
 
-function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolveOptions?: Object) {
+function getContext(
+  typeSystem: 'flow' | 'typescript',
+  filename?: string,
+  resolveOptions?: Object = {}
+) {
   let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
-  /* eslint-disable-next-line no-param-reassign */
-  if (!resolveOptions) resolveOptions = {};
-
   if (!resolveOptions.extensions) {
     // The resolve package that babel-file-loader uses only resolves .js files by default instead of the
     // default extension list of node (.js, .json and .node) so add .json back here.
@@ -1627,11 +1596,9 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
           context,
           genericTypeParams.get('params.1')
         );
-        components.push({
-          name,
-          path,
-          component
-        });
+
+        components.push({ name, path, component });
+
         return;
       }
 

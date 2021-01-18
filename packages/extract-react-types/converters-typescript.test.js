@@ -24,8 +24,7 @@ const TESTS = [
         a: string;
       }
 
-      class Component extends React.Component<Props> {
-      }
+      class Component extends React.Component<Props> {}
     `
   },
   {
@@ -38,9 +37,7 @@ const TESTS = [
       children: React.ComponentType,
     };
 
-    class Component extends React.Component<Props> {
-
-    }
+    class Component extends React.Component<Props> {}
   `
   },
   {
@@ -146,18 +143,14 @@ const TESTS = [
     name: 'ts boolean',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{ foo: boolean }> {
-
-    }
+    class Component extends React.Component<{ foo: boolean }> {}
   `
   },
   {
     name: 'ts string',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{ foo: string }> {
-
-    }
+    class Component extends React.Component<{ foo: string }> {}
   `
   },
   {
@@ -178,9 +171,7 @@ const TESTS = [
     name: 'ts object',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {
-
-    }
+    class Component extends React.Component<{foo: { name: string }, bar: number, verified: boolean}> {}
   `
   },
   {
@@ -237,36 +228,28 @@ const TESTS = [
     name: 'ts literals',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{foo: '25' | 30}> {
-
-    }
+    class Component extends React.Component<{foo: '25' | 30}> {}
   `
   },
   {
     name: 'ts optional',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{foo?: string}> {
-
-    }
+    class Component extends React.Component<{foo?: string}> {}
   `
   },
   {
     name: 'ts void',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{foo: void}> {
-
-    }
+    class Component extends React.Component<{foo: void}> {}
   `
   },
   {
     name: 'ts no react component',
     typeSystem: 'typescript',
     code: `
-    class Component extends Foo<{foo: void}> {
-
-    }
+    class Component extends Foo<{foo: void}> {}
   `
   },
   {
@@ -275,22 +258,16 @@ const TESTS = [
     code: `
     import {Component} from 'react';
 
-    class FooComponent extends Component<{foo: void}> {
+    class FooComponent extends Component<{foo: void}> {}
 
-    }
-
-    class BarComponent extends React.Component<{foo: void}> {
-
-    }
+    class BarComponent extends React.Component<{foo: void}> {}
   `
   },
   {
     name: 'ts tuple',
     typeSystem: 'typescript',
     code: `
-    class Component extends React.Component<{foo: [string, number]}> {
-
-    }
+    class Component extends React.Component<{foo: [string, number]}> {}
   `
   },
   {
@@ -298,9 +275,7 @@ const TESTS = [
     typeSystem: 'typescript',
     code: `
     enum Color {Red, Green, Blue};
-    class Component extends React.Component<{foo: Color}> {
-
-    }
+    class Component extends React.Component<{foo: Color}> {}
   `
   },
 
@@ -469,8 +444,7 @@ const TESTS = [
       children: unknown,
     };
 
-    class Component extends React.Component<Props> {
-    }
+    class Component extends React.Component<Props> {}
   `
   },
   {
@@ -578,7 +552,7 @@ cases(
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename);
-    expect(result).toMatchSnapshot();
+    expect(result.component).toMatchSnapshot();
   },
   TESTS
 );

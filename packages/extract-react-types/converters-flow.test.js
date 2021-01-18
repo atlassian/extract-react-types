@@ -1251,7 +1251,7 @@ cases(
     let code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
     let result = extractReactTypes(code, testCase.typeSystem, __filename);
-    expect(result).toMatchSnapshot();
+    expect(result.component).toMatchSnapshot();
   },
   TESTS
 );
