@@ -1278,7 +1278,7 @@ function convert(path, context) {
   const converter = converters[path.type];
 
   if (!converter) {
-    const propertySignature = path.find(p => p.isTSPropertySignature());
+    const propertySignature = path.find(p => p.isTSPropertySignature() || p.isObjectTypeProperty());
     if (propertySignature && propertySignature.node) {
       const leadingComments = propertySignature.node.leadingComments || [];
       const leadingComment = leadingComments.reduce((accum, comment) => accum + comment.value, '');
