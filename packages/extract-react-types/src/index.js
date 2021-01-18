@@ -16,6 +16,7 @@ import * as K from './kinds';
 
 export type * from './kinds';
 
+const IGNORE_STATEMENT = '@ert-ignore';
 const converters = {};
 
 function convertObject(path, context) {
@@ -908,6 +909,17 @@ converters.TSFunctionType = (path, context): K.Generic => ({
   }
 });
 
+function convertMethodCall(path, context): K.Func {
+  const parameters = path.get('parameters').map(p => convertParameter(p, context));
+  const returnType = convert(path.get('typeAnnotation'), context);
+
+  return {
+    kind: 'function',
+    returnType,
+    parameters
+  };
+}
+
 converters.TSMethodSignature = (path, context): K.Property => ({
   kind: 'property',
   optional: !!path.node.optional,
@@ -1217,37 +1229,27 @@ converters.TSTypeQuery = (path, context): K.TypeQuery => ({
   exprName: convert(path.get('exprName'), { ...context, mode: 'value' })
 });
 
-function convertMethodCall(path, context): K.Func {
-  const parameters = path.get('parameters').map(p => convertParameter(p, context));
-  const returnType = convert(path.get('typeAnnotation'), context);
-
-  return {
-    kind: 'function',
-    returnType,
-    parameters
-  };
-}
-
-function mapComment(comment) {
-  return {
-    type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
-    value: normalizeComment(comment),
-    raw: comment.value
-  };
-}
-
 function attachCommentProperty(source, dest, name) {
   if (!source || !source[name]) return;
   if (!dest[name]) dest[name] = [];
 
-  let comments = source[name].map(mapComment);
-  dest[name] = dest[name].concat(comments);
+  dest[name] = dest[name].concat(parseComment(source[name]));
 }
 
 function attachComments(source, dest) {
   attachCommentProperty(source, dest, 'leadingComments');
   attachCommentProperty(source, dest, 'trailingComments');
   attachCommentProperty(source, dest, 'innerComments');
+}
+
+function parseComment(commentProperty) {
+  return commentProperty.map(comment => ({
+    type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
+    value: normalizeComment(comment)
+      .replace(IGNORE_STATEMENT, '')
+      .trim(),
+    raw: comment.value
+  }));
 }
 
 // This function is from mdn:
@@ -1274,8 +1276,29 @@ function convert(path, context) {
   }
 
   const converter = converters[path.type];
-  if (!converter) throw new Error(`Missing converter for: ${path.type}`);
+
+  if (!converter) {
+    const propertySignature = path.find(p => p.isTSPropertySignature());
+    if (propertySignature && propertySignature.node) {
+      const leadingComments = propertySignature.node.leadingComments || [];
+      const leadingComment = leadingComments.reduce((accum, comment) => accum + comment.value, '');
+
+      /**
+       * User wishes to ignore this property, since it uses unknown syntax
+       * https://github.com/atlassian/extract-react-types/issues/141
+       */
+      if (leadingComment.includes(IGNORE_STATEMENT)) return;
+    }
+
+    throw new Error(
+      `Missing converter for: ${
+        path.type
+      }, see: https://github.com/atlassian/extract-react-types/issues/150`
+    );
+  }
+
   const result = converter(path, context);
+
   attachComments(path.node, result);
   return result;
 }

@@ -28,6 +28,18 @@ const TESTS = [
     `
   },
   {
+    name: 'Ignores unsupported typescript keywords',
+    typeSystem: 'typescript',
+    code: `
+      interface BarProps {
+        /* @ert-ignore bar property, ignored because of unknown type */
+        bar: keyof Bar;
+      }
+
+      class Component extends React.Component<BarProps> {}
+    `
+  },
+  {
     name: 'React.ComponentType',
     typeSystem: 'typescript',
     code: `
