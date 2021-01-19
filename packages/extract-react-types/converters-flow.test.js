@@ -1248,9 +1248,9 @@ const TESTS = [
 cases(
   'Flow:',
   testCase => {
-    let code = stripIndent(testCase.code);
+    const code = stripIndent(testCase.code);
     // Pass in file name so we can resolve imports to files in __fixtures__
-    let result = extractReactTypes(code, testCase.typeSystem, __filename);
+    const result = extractReactTypes(code, testCase.typeSystem, __filename);
     expect(result.component).toMatchSnapshot();
   },
   TESTS
