@@ -15,6 +15,7 @@ import findExports, { hasDestructuredDefaultExport, followExports } from './find
 import * as K from './kinds';
 
 export type * from './kinds';
+
 const converters = {};
 
 function convertObject(path, context) {
@@ -46,14 +47,15 @@ function convertObject(path, context) {
       members.push(mem);
     }
   });
+
   return { kind: 'object', members };
 }
 
 function resolveExportAllDeclaration(path, context) {
-  let source = path.get('source');
+  const source = path.get('source');
   // The parentPath is a reference to where we currently are. We want to
   // get the source value, but resolving this first makes this easier.
-  let filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
+  const filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
 
   return loadFileSync(filePath, context.parserOpts);
 }
@@ -75,15 +77,12 @@ function convertUtilityTypes(type: K.Generic) {
 }
 
 function convertReactComponentClass(path, context) {
-  let params = path.get('superTypeParameters').get('params');
-  let props = params[0];
-  let defaultProps = getDefaultProps(path, context);
+  const params = path.get('superTypeParameters').get('params');
+  const props = params[0];
+  const defaultProps = getDefaultProps(path, context);
 
   let classProperties = convert(props, { ...context, mode: 'type' });
-  classProperties.name = convert(path.get('id'), {
-    ...context,
-    mode: 'value'
-  });
+  classProperties.name = convert(path.get('id'), { ...context, mode: 'value' });
 
   /**
    * FIXME: It's possible to get nulls in the members array when TS is unable
@@ -99,10 +98,7 @@ function convertReactComponentClass(path, context) {
 
 function convertReactComponentFunction(path, context, propTypes) {
   // we have a function, assume the props are the first parameter
-  let functionProperties = convert(propTypes, {
-    ...context,
-    mode: 'type'
-  });
+  const functionProperties = convert(propTypes, { ...context, mode: 'type' });
 
   let name = '';
   if (path.type === 'FunctionDeclaration' && path.node.id && path.node.id.name) {
@@ -131,6 +127,7 @@ function convertReactComponentFunction(path, context, propTypes) {
         }
       }
     });
+
     functionProperties.name = {
       kind: 'id',
       name,
@@ -147,8 +144,9 @@ function addDefaultProps(props, defaultProps) {
   }
 
   defaultProps.forEach(property => {
-    let ungeneric = resolveFromGeneric(props);
+    const ungeneric = resolveFromGeneric(props);
     const prop = getProp(ungeneric, property);
+
     if (!prop) {
       /* eslint-disable-next-line no-console */
       console.warn(
@@ -171,7 +169,7 @@ function convertCall(path, context) {
 }
 
 function recursivelyResolveExportAll(path, context, name) {
-  let source = path
+  const source = path
     .get('body')
     .filter(item => item.isExportAllDeclaration())
     .map(item => resolveExportAllDeclaration(item, context))
@@ -257,21 +255,15 @@ const getProp = (props, property) => {
   return prop;
 };
 
-const isVariableOfMembers = defaultProps => {
-  let defaultPropsIsVar =
-    defaultProps && defaultProps.value && defaultProps.value.kind === 'variable';
-  if (!defaultPropsIsVar) {
-    return false;
-  }
-  let declarations = defaultProps.value.declarations;
+const isVariableOfMembers = (defaultProps: {}) => {
+  const defaultPropsIsVar = defaultProps.value && defaultProps.value.kind === 'variable';
 
-  let lastDeclarationIsObject = declarations[declarations.length - 1].value.kind === 'object';
+  if (!defaultPropsIsVar) return false;
 
-  if (lastDeclarationIsObject) {
-    return true;
-  } else {
-    return false;
-  }
+  const declarations = defaultProps.value.declarations;
+  const lastDeclarationIsObject = declarations[declarations.length - 1].value.kind === 'object';
+
+  return lastDeclarationIsObject;
 };
 
 const getDefaultProps = (path, context) => {
@@ -320,16 +312,8 @@ function convertParameter(param, context): K.Param {
 
 function convertFunction(path, context): K.Func {
   const parameters = path.get('params').map(p => convertParameter(p, context));
-  let returnType = null;
-  let id = null;
-
-  if (path.node.returnType) {
-    returnType = convert(path.get('returnType'), context);
-  }
-
-  if (path.node.id) {
-    id = convert(path.get('id'), context);
-  }
+  const returnType = path.node.returnType ? convert(path.get('returnType'), context) : null;
+  const id = path.node.id ? convert(path.get('id'), context) : null;
 
   return {
     kind: 'function',
@@ -371,53 +355,39 @@ converters.Program = (path, context): K.Program => {
   }
 };
 
-converters.TaggedTemplateExpression = (path, context): K.TemplateExpression => {
-  return {
-    kind: 'templateExpression',
-    tag: convert(path.get('tag'), context)
-  };
-};
+converters.TaggedTemplateExpression = (path, context): K.TemplateExpression => ({
+  kind: 'templateExpression',
+  tag: convert(path.get('tag'), context)
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TemplateElement = (path, context): K.TemplateElement => {
-  return {
-    kind: 'templateElement',
-    value: path.node.value
-  };
-};
+converters.TemplateElement = (path): K.TemplateElement => ({
+  kind: 'templateElement',
+  value: path.node.value
+});
 
-converters.TemplateLiteral = (path, context): K.TemplateLiteral => {
-  // hard challenge, we need to know the combined ordering of expressions and quasis
-  return {
-    kind: 'templateLiteral',
-    expressions: path.get('expressions').map(e => convert(e, context)),
-    quasis: path.get('quasis').map(q => convert(q, context))
-  };
-};
+converters.TemplateLiteral = (path, context): K.TemplateLiteral => ({
+  kind: 'templateLiteral',
+  expressions: path.get('expressions').map(e => convert(e, context)),
+  quasis: path.get('quasis').map(q => convert(q, context))
+});
 
-converters.LogicalExpression = (path, context) => {
-  return {
-    kind: 'logicalExpression',
-    operator: path.node.operator,
-    left: convert(path.get('left'), context),
-    right: convert(path.get('right'), context)
-  };
-};
+converters.LogicalExpression = (path, context) => ({
+  kind: 'logicalExpression',
+  operator: path.node.operator,
+  left: convert(path.get('left'), context),
+  right: convert(path.get('right'), context)
+});
 
-converters.RestElement = (path, context): K.Rest => {
-  return {
-    kind: 'rest',
-    argument: convert(path.get('argument'), context)
-  };
-};
+converters.RestElement = (path, context): K.Rest => ({
+  kind: 'rest',
+  argument: convert(path.get('argument'), context)
+});
 
-converters.AssignmentPattern = (path, context): K.AssignmentPattern => {
-  return {
-    kind: 'assignmentPattern',
-    left: convert(path.get('left'), context),
-    right: convert(path.get('right'), context)
-  };
-};
+converters.AssignmentPattern = (path, context): K.AssignmentPattern => ({
+  kind: 'assignmentPattern',
+  left: convert(path.get('left'), context),
+  right: convert(path.get('right'), context)
+});
 
 converters.ObjectPattern = (path, context): K.ObjectPattern => {
   let members = [];
@@ -443,83 +413,61 @@ converters.ClassDeclaration = (path, context): K.ClassKind => {
   }
 };
 
-converters.SpreadElement = (path, context): K.Spread => {
-  return {
-    kind: 'spread',
-    value: convert(path.get('argument'), context)
-  };
-};
+converters.SpreadElement = (path, context): K.Spread => ({
+  kind: 'spread',
+  value: convert(path.get('argument'), context)
+});
 
-// This has been renamed to SpreadElement in babel 7. Added here for backwards
-// compatibility in other projects
-converters.SpreadProperty = (path, context): K.Spread => {
-  return {
-    kind: 'spread',
-    value: convert(path.get('argument'), context)
-  };
-};
+// Renamed to SpreadElement in babel 7. Added here for backwards compatibility
+converters.SpreadProperty = (path, context): K.Spread => ({
+  kind: 'spread',
+  value: convert(path.get('argument'), context)
+});
 
-converters.UnaryExpression = (path, context): K.Unary => {
-  return {
-    kind: 'unary',
-    operator: path.node.operator,
-    argument: convert(path.get('argument'), context)
-  };
-};
+converters.UnaryExpression = (path, context): K.Unary => ({
+  kind: 'unary',
+  operator: path.node.operator,
+  argument: convert(path.get('argument'), context)
+});
 
-converters.JSXAttribute = (path, context): K.JSXAttribute => {
-  return {
-    kind: 'JSXAttribute',
-    name: convert(path.get('name'), context),
-    value: convert(path.get('value'), context)
-  };
-};
+converters.JSXAttribute = (path, context): K.JSXAttribute => ({
+  kind: 'JSXAttribute',
+  name: convert(path.get('name'), context),
+  value: convert(path.get('value'), context)
+});
 
-converters.JSXExpressionContainer = (path, context): K.JSXExpressionContainer => {
-  return {
-    kind: 'JSXExpressionContainer',
-    expression: convert(path.get('expression'), context)
-  };
-};
+converters.JSXExpressionContainer = (path, context): K.JSXExpressionContainer => ({
+  kind: 'JSXExpressionContainer',
+  expression: convert(path.get('expression'), context)
+});
 
-converters.JSXElement = (path, context): K.JSXElement => {
-  return {
-    kind: 'JSXElement',
-    value: convert(path.get('openingElement'), context)
-  };
-};
+converters.JSXElement = (path, context): K.JSXElement => ({
+  kind: 'JSXElement',
+  value: convert(path.get('openingElement'), context)
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.JSXIdentifier = (path, context): K.JSXIdentifier => {
-  return {
-    kind: 'JSXIdentifier',
-    value: path.node.name
-  };
-};
+converters.JSXIdentifier = (path): K.JSXIdentifier => ({
+  kind: 'JSXIdentifier',
+  value: path.node.name
+});
 
-converters.JSXMemberExpression = (path, context): K.JSXMemberExpression => {
-  return {
-    kind: 'JSXMemberExpression',
-    object: convert(path.get('object'), context),
-    property: convert(path.get('property'), context)
-  };
-};
+converters.JSXMemberExpression = (path, context): K.JSXMemberExpression => ({
+  kind: 'JSXMemberExpression',
+  object: convert(path.get('object'), context),
+  property: convert(path.get('property'), context)
+});
 
-converters.JSXOpeningElement = (path, context): K.JSXOpeningElement => {
-  return {
-    kind: 'JSXOpeningElement',
-    name: convert(path.get('name'), context),
-    attributes: path.get('attributes').map(item => convert(item, context))
-  };
-};
+converters.JSXOpeningElement = (path, context): K.JSXOpeningElement => ({
+  kind: 'JSXOpeningElement',
+  name: convert(path.get('name'), context),
+  attributes: path.get('attributes').map(item => convert(item, context))
+});
 
-converters.ClassProperty = (path, context): K.Property => {
-  return {
-    kind: 'property',
-    key: convert(path.get('key'), context),
-    value: convert(path.get('value'), context)
-  };
-};
+converters.ClassProperty = (path, context): K.Property => ({
+  kind: 'property',
+  key: convert(path.get('key'), context),
+  value: convert(path.get('value'), context)
+});
 
 converters.CallExpression = (path, context): K.Call => {
   const { callee, args } = convertCall(path, context);
@@ -539,171 +487,125 @@ converters.NewExpression = (path, context): K.New => {
   };
 };
 
-converters.InterfaceDeclaration = (path, context): K.InterfaceDeclaration => {
-  return { kind: 'interfaceDeclaration', id: convert(path.get('id'), context) };
-};
+converters.InterfaceDeclaration = (path, context): K.InterfaceDeclaration => ({
+  kind: 'interfaceDeclaration',
+  id: convert(path.get('id'), context)
+});
 
 converters.OpaqueType = (path, context): K.OpaqueType => {
   // OpaqueTypes have several optional nodes that exist as a null when not present
   // We need to convert these when they exist, and ignore them when they don't;
-  let supertypePath = path.get('supertype');
-  let impltypePath = path.get('impltype');
-  let typeParametersPath = path.get('typeParameters');
+  const supertypePath = path.get('supertype');
+  const impltypePath = path.get('impltype');
+  const typeParametersPath = path.get('typeParameters');
 
   // TODO we are having a fight at the moment with id returning a binding, not a node,
   // and don't have time to solve this properly - I am pathing it to being working-ish
   // here, and will come back to this later. If you find this comment still here and
   // want to fix this problem, I encourage you to do is.
-
-  let supertype;
-  let impltype;
-  let typeParameters;
-  let id = convert(path.get('id'), context);
-
-  if (supertypePath.node) supertype = convert(supertypePath, context);
-  if (impltypePath.node) impltype = convert(impltypePath, context);
-  if (typeParametersPath.node) typeParameters = convert(typeParametersPath, context);
+  const supertype = supertypePath.node && convert(supertypePath, context);
+  const impltype = impltypePath.node && convert(impltypePath, context);
+  const typeParameters = typeParametersPath.node && convert(typeParametersPath, context);
+  const id = convert(path.get('id'), context);
 
   return { kind: 'opaqueType', id, supertype, impltype, typeParameters };
 };
 
 converters.TypeofTypeAnnotation = (path, context): K.Typeof => {
-  let type = convert(path.get('argument'), { ...context, mode: 'value' });
-  let ungeneric = resolveFromGeneric(type);
+  const type = convert(path.get('argument'), { ...context, mode: 'value' });
+  const { name, referenceIdName } = resolveFromGeneric(type);
+
   return {
     kind: 'typeof',
     type,
-    name: ungeneric.name || ungeneric.referenceIdName
+    name: name || referenceIdName
   };
 };
 
-converters.ObjectProperty = (path, context): K.Property => {
-  return {
-    kind: 'property',
-    key: convert(path.get('key'), context),
-    value: convert(path.get('value'), context)
-  };
-};
+converters.ObjectProperty = (path, context): K.Property => ({
+  kind: 'property',
+  key: convert(path.get('key'), context),
+  value: convert(path.get('value'), context)
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.ExistentialTypeParam = (path, context): K.Exists => {
-  return { kind: 'exists' };
-};
+converters.ExistentialTypeParam = (): K.Exists => ({ kind: 'exists' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.StringLiteral = (path, context): K.String => {
-  return { kind: 'string', value: path.node.value };
-};
+converters.StringLiteral = (path): K.String => ({ kind: 'string', value: path.node.value });
 
-converters.TypeCastExpression = (path, context): K.TypeCastExpression => {
-  return { kind: 'typeCastExpression', expression: convert(path.get('expression'), context) };
-};
+converters.TypeCastExpression = (path, context): K.TypeCastExpression => ({
+  kind: 'typeCastExpression',
+  expression: convert(path.get('expression'), context)
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.NumericLiteral = (path, context): K.Number => {
-  return { kind: 'number', value: path.node.value };
-};
+converters.NumericLiteral = (path): K.Number => ({ kind: 'number', value: path.node.value });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.NullLiteral = (path, context): K.Null => {
-  return { kind: 'null' };
-};
+converters.NullLiteral = (path): K.Null => ({ kind: 'null' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.BooleanLiteral = (path, context): K.Boolean => {
-  return { kind: 'boolean', value: path.node.value };
-};
+converters.BooleanLiteral = (path): K.Boolean => ({ kind: 'boolean', value: path.node.value });
 
-converters.ArrayExpression = (path, context): K.ArrayExpression => {
-  return {
-    kind: 'array',
-    elements: path.get('elements').map(e => convert(e, context))
-  };
-};
+converters.ArrayExpression = (path, context): K.ArrayExpression => ({
+  kind: 'array',
+  elements: path.get('elements').map(e => convert(e, context))
+});
 
-converters.BinaryExpression = (path, context): K.BinaryExpression => {
-  return {
-    kind: 'binary',
-    operator: path.node.operator,
-    left: convert(path.get('left'), context),
-    right: convert(path.get('right'), context)
-  };
-};
+converters.BinaryExpression = (path, context): K.BinaryExpression => ({
+  kind: 'binary',
+  operator: path.node.operator,
+  left: convert(path.get('left'), context),
+  right: convert(path.get('right'), context)
+});
 
-converters.MemberExpression = (path, context): K.MemberExpression => {
-  return {
-    kind: 'memberExpression',
-    object: convert(path.get('object'), context),
-    property: convert(path.get('property'), context)
-  };
-};
+converters.MemberExpression = (path, context): K.MemberExpression => ({
+  kind: 'memberExpression',
+  object: convert(path.get('object'), context),
+  property: convert(path.get('property'), context)
+});
 
-converters.FunctionDeclaration = (path, context) => {
-  return convertFunction(path, context);
-};
+converters.FunctionDeclaration = (path, context) => convertFunction(path, context);
 
-converters.ArrowFunctionExpression = (path, context) => {
-  return convertFunction(path, context);
-};
+converters.ArrowFunctionExpression = (path, context) => convertFunction(path, context);
 
-converters.FunctionExpression = (path, context) => {
-  return convertFunction(path, context);
-};
+converters.FunctionExpression = (path, context) => convertFunction(path, context);
 
-converters.TypeAnnotation = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
-};
+converters.TypeAnnotation = (path, context) => convert(path.get('typeAnnotation'), context);
 
-/* eslint-disable-next-line no-unused-vars */
-converters.ExistsTypeAnnotation = (path, context): K.Exists => {
-  return { kind: 'exists' };
-};
+converters.ExistsTypeAnnotation = (): K.Exists => ({ kind: 'exists' });
 
-converters.ObjectTypeAnnotation = (path, context): K.Obj => {
-  return convertObject(path, context);
-};
+converters.ObjectTypeAnnotation = (path, context): K.Obj => convertObject(path, context);
 
-converters.ObjectTypeProperty = (path, context): K.Property => {
-  let result = {};
-  result.kind = 'property';
-  result.key = convert(path.get('key'), context);
-  result.value = convert(path.get('value'), context);
-  result.optional = path.node.optional;
-  return result;
-};
+converters.ObjectTypeProperty = (path, context): K.Property => ({
+  kind: 'property',
+  key: convert(path.get('key'), context),
+  value: convert(path.get('value'), context),
+  optional: path.node.optional
+});
 
-converters.UnionTypeAnnotation = (path, context): K.Union => {
-  const types = path.get('types').map(p => convert(p, context));
-  return { kind: 'union', types };
-};
+converters.UnionTypeAnnotation = (path, context): K.Union => ({
+  kind: 'union',
+  types: path.get('types').map(p => convert(p, context))
+});
 
-converters.TypeParameterInstantiation = (path, context): K.TypeParams => {
-  return {
-    kind: 'typeParams',
-    params: path.get('params').map(p => convert(p, context))
-  };
-};
+converters.TypeParameterInstantiation = (path, context): K.TypeParams => ({
+  kind: 'typeParams',
+  params: path.get('params').map(p => convert(p, context))
+});
 
-converters.TypeParameterDeclaration = (path, context): K.TypeParamsDeclaration => {
-  return {
-    kind: 'typeParamsDeclaration',
-    params: path.get('params').map(p => convert(p, context))
-  };
-};
+converters.TypeParameterDeclaration = (path, context): K.TypeParamsDeclaration => ({
+  kind: 'typeParamsDeclaration',
+  params: path.get('params').map(p => convert(p, context))
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TypeParameter = (path, context): K.TypeParam => {
-  return {
-    kind: 'typeParam',
-    name: path.node.name
-  };
-};
+converters.TypeParameter = (path): K.TypeParam => ({
+  kind: 'typeParam',
+  name: path.node.name
+});
 
 converters.GenericTypeAnnotation = (path, context) => {
   let result = {};
 
   result.kind = 'generic';
   result.value = convert(path.get('id'), context);
+
   if (path.node.typeParameters) {
     result.typeParams = convert(path.get('typeParameters'), context);
   }
@@ -714,12 +616,8 @@ converters.GenericTypeAnnotation = (path, context) => {
 };
 
 converters.ObjectMethod = (path, context): K.Func => {
-  let parameters = path.get('params').map(p => convertParameter(p, context));
-  let returnType = null;
-
-  if (path.node.returnType) {
-    returnType = convert(path.get('returnType'), context);
-  }
+  const parameters = path.get('params').map(p => convertParameter(p, context));
+  const returnType = path.node.returnType ? convert(path.get('returnType'), context) : null;
 
   return {
     kind: 'function',
@@ -731,24 +629,18 @@ converters.ObjectMethod = (path, context): K.Func => {
   };
 };
 
-converters.ObjectExpression = (path, context): K.Obj => {
-  return convertObject(path, context);
-};
+converters.ObjectExpression = (path, context): K.Obj => convertObject(path, context);
 
-converters.VariableDeclaration = (path, context): K.Variable => {
-  let res = {};
-  res.kind = 'variable';
-  res.declarations = path.get('declarations').map(p => convert(p, context));
-  return res;
-};
+converters.VariableDeclaration = (path, context): K.Variable => ({
+  kind: 'variable',
+  declarations: path.get('declarations').map(p => convert(p, context))
+});
 
-converters.VariableDeclarator = (path, context): K.Initial => {
-  return {
-    kind: 'initial',
-    id: convert(path.get('id'), context),
-    value: convert(path.get('init'), context)
-  };
-};
+converters.VariableDeclarator = (path, context): K.Initial => ({
+  kind: 'initial',
+  id: convert(path.get('id'), context),
+  value: convert(path.get('init'), context)
+});
 
 converters.Identifier = (path, context): K.Id => {
   let kind = getIdentifierKind(path);
@@ -763,17 +655,14 @@ converters.Identifier = (path, context): K.Id => {
         let foundPath = null;
 
         if (bindingPath.isVariableDeclaration()) {
-          foundPath = bindingPath.get('declarators').find(p => {
-            return p.node.name === name;
-          });
+          foundPath = bindingPath.get('declarators').find(p => p.node.name === name);
         } else if (bindingPath.isVariableDeclarator()) {
           foundPath = bindingPath.get('init');
         } else if (
           bindingPath.isImportDefaultSpecifier() ||
-          bindingPath.isImportNamespaceSpecifier()
+          bindingPath.isImportNamespaceSpecifier() ||
+          bindingPath.isImportSpecifier()
         ) {
-          foundPath = bindingPath;
-        } else if (bindingPath.isImportSpecifier()) {
           foundPath = bindingPath;
         } else if (bindingPath.isDeclaration()) {
           foundPath = bindingPath.get('id');
@@ -788,14 +677,9 @@ converters.Identifier = (path, context): K.Id => {
           referenceIdName: path.node.name
         };
       } else {
-        let type = null;
-
-        if (path.node.typeAnnotation) {
-          type = convert(path.get('typeAnnotation'), {
-            ...context,
-            mode: 'type'
-          });
-        }
+        const type = path.node.typeAnnotation
+          ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
+          : null;
 
         return {
           kind: 'id',
@@ -804,13 +688,9 @@ converters.Identifier = (path, context): K.Id => {
         };
       }
     } else if (kind === 'static' || kind === 'binding') {
-      let type = null;
-      if (path.node.typeAnnotation) {
-        type = convert(path.get('typeAnnotation'), {
-          ...context,
-          mode: 'type'
-        });
-      }
+      const type = path.node.typeAnnotation
+        ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
+        : null;
 
       return {
         kind: 'id',
@@ -882,89 +762,56 @@ converters.Identifier = (path, context): K.Id => {
   throw new Error(`Could not parse Identifier ${name} in mode ${context.mode}`);
 };
 
-converters.TypeAlias = (path, context) => {
-  return convert(path.get('right'), context);
-};
+converters.TypeAlias = (path, context) => convert(path.get('right'), context);
 
-converters.IntersectionTypeAnnotation = (path, context): K.Intersection => {
-  const types = path.get('types').map(p => convert(p, context));
-  return { kind: 'intersection', types };
-};
+converters.IntersectionTypeAnnotation = (path, context): K.Intersection => ({
+  kind: 'intersection',
+  types: path.get('types').map(p => convert(p, context))
+});
 
-converters.QualifiedTypeIdentifier = (path, context) => {
-  return convert(path.get('id'), context);
-};
+converters.QualifiedTypeIdentifier = (path, context) => convert(path.get('id'), context);
 
-/* eslint-disable-next-line no-unused-vars */
-converters.VoidTypeAnnotation = (path): K.Void => {
-  return { kind: 'void' };
-};
+converters.VoidTypeAnnotation = (): K.Void => ({ kind: 'void' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.BooleanTypeAnnotation = (path): K.Boolean => {
-  return { kind: 'boolean' };
-};
+converters.BooleanTypeAnnotation = (): K.Boolean => ({ kind: 'boolean' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.BooleanLiteralTypeAnnotation = (path): K.Boolean => {
-  return { kind: 'boolean', value: path.node.value };
-};
+converters.BooleanLiteralTypeAnnotation = (path): K.Boolean => ({
+  kind: 'boolean',
+  value: path.node.value
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.NullLiteralTypeAnnotation = (path): K.Null => {
-  return { kind: 'null' };
-};
+converters.NullLiteralTypeAnnotation = (): K.Null => ({ kind: 'null' });
 
-converters.StringLiteralTypeAnnotation = (path): K.String => {
-  return { kind: 'string', value: path.node.value };
-};
+converters.StringLiteralTypeAnnotation = (path): K.String => ({
+  kind: 'string',
+  value: path.node.value
+});
 
-// This should absolutely return a value
-converters.NumberLiteralTypeAnnotation = (path): K.Number => {
-  return { kind: 'number', value: path.node.value };
-};
+converters.NumberLiteralTypeAnnotation = (path): K.Number => ({
+  kind: 'number',
+  value: path.node.value
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.MixedTypeAnnotation = (path): K.Mixed => {
-  return { kind: 'mixed' };
-};
+converters.MixedTypeAnnotation = (): K.Mixed => ({ kind: 'mixed' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.AnyTypeAnnotation = (path): K.Any => {
-  return { kind: 'any' };
-};
+converters.AnyTypeAnnotation = (): K.Any => ({ kind: 'any' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.NumberTypeAnnotation = (path): K.Number => {
-  return { kind: 'number' };
-};
+converters.NumberTypeAnnotation = (): K.Number => ({ kind: 'number' });
 
-converters.FunctionTypeParam = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
-};
+converters.FunctionTypeParam = (path, context) => convert(path.get('typeAnnotation'), context);
 
-converters.FunctionTypeAnnotation = (path, context): K.Func => {
-  const parameters = path.get('params').map(p => convertParameter(p, context));
-  const returnType = convert(path.get('returnType'), context);
+converters.FunctionTypeAnnotation = (path, context): K.Func => ({
+  parameters: path.get('params').map(p => convertParameter(p, context)),
+  returnType: convert(path.get('returnType'), context),
+  kind: 'function'
+});
 
-  return {
-    parameters,
-    returnType,
-    kind: 'function'
-  };
-};
+converters.StringTypeAnnotation = (): K.String => ({ kind: 'string' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.StringTypeAnnotation = (path): K.String => {
-  return { kind: 'string' };
-};
-
-converters.NullableTypeAnnotation = (path, context): K.Nullable => {
-  return {
-    kind: 'nullable',
-    arguments: convert(path.get('typeAnnotation'), context)
-  };
-};
+converters.NullableTypeAnnotation = (path, context): K.Nullable => ({
+  kind: 'nullable',
+  arguments: convert(path.get('typeAnnotation'), context)
+});
 
 converters.TSIndexedAccessType = (path, context) => {
   const type = convert(path.get('objectType'), context);
@@ -987,62 +834,40 @@ converters.TSIndexedAccessType = (path, context) => {
         name: `${name.name || name}['${indexKey}']`
       }
     };
-  } else {
-    throw new Error(`Unsupported TSIndexedAccessType kind: ${type.kind}`);
   }
+
+  throw new Error(`Unsupported TSIndexedAccessType kind: ${type.kind}`);
 };
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSStringKeyword = (path): K.String => {
-  return { kind: 'string' };
-};
+converters.TSStringKeyword = (): K.String => ({ kind: 'string' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSNumberKeyword = (path): K.Number => {
-  return { kind: 'number' };
-};
+converters.TSNumberKeyword = (): K.Number => ({ kind: 'number' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSBooleanKeyword = (path): K.Boolean => {
-  return { kind: 'boolean' };
-};
+converters.TSBooleanKeyword = (): K.Boolean => ({ kind: 'boolean' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSVoidKeyword = (path): K.Void => {
-  return { kind: 'void' };
-};
+converters.TSVoidKeyword = (): K.Void => ({ kind: 'void' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSUndefinedKeyword = (path, context): K.Void => {
-  return { kind: 'void' };
-};
+converters.TSUndefinedKeyword = (): K.Void => ({ kind: 'void' });
 
-converters.TSTypeLiteral = (path, context): K.Obj => {
-  return {
-    kind: 'object',
-    members: path.get('members').map(memberPath => convert(memberPath, context))
-  };
-};
+converters.TSTypeLiteral = (path, context): K.Obj => ({
+  kind: 'object',
+  members: path.get('members').map(memberPath => convert(memberPath, context))
+});
 
-converters.TSPropertySignature = (path, context): K.Property => {
-  return {
-    kind: 'property',
-    optional: !!path.node.optional,
-    key: convert(path.get('key'), context),
-    value: convert(path.get('typeAnnotation'), context)
-  };
-};
+converters.TSPropertySignature = (path, context): K.Property => ({
+  kind: 'property',
+  optional: !!path.node.optional,
+  key: convert(path.get('key'), context),
+  value: convert(path.get('typeAnnotation'), context)
+});
 
-converters.TSTypeAliasDeclaration = (path, context): K.Obj => {
-  return convert(path.get('typeAnnotation'), context);
-};
+converters.TSTypeAliasDeclaration = (path, context): K.Obj =>
+  convert(path.get('typeAnnotation'), context);
 
-converters.TSLiteralType = (path): K.String => {
-  return {
-    kind: 'string',
-    value: path.node.literal.value
-  };
-};
+converters.TSLiteralType = (path): K.String => ({
+  kind: 'string',
+  value: path.node.literal.value
+});
 
 converters.TSTypeReference = (path, context): K.Generic => {
   const typeParameters = path.get('typeParameters');
@@ -1062,58 +887,66 @@ converters.TSTypeReference = (path, context): K.Generic => {
   };
 };
 
-converters.TSUnionType = (path, context): K.Union => {
-  const types = path.get('types').map(p => convert(p, context));
-  return { kind: 'union', types };
-};
+converters.TSUnionType = (path, context): K.Union => ({
+  kind: 'union',
+  types: path.get('types').map(p => convert(p, context))
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSAnyKeyword = (path): K.Any => {
-  return { kind: 'any' };
-};
+converters.TSAnyKeyword = (): K.Any => ({ kind: 'any' });
 
-converters.TSTupleType = (path, context): K.Tuple => {
-  const types = path.get('elementTypes').map(p => convert(p, context));
-  return { kind: 'tuple', types };
-};
+converters.TSTupleType = (path, context): K.Tuple => ({
+  kind: 'tuple',
+  types: path.get('elementTypes').map(p => convert(p, context))
+});
 
-converters.TSFunctionType = (path, context): K.Generic => {
-  const parameters = path.get('parameters').map(p => convertParameter(p, context));
-  const returnType = convert(path.get('typeAnnotation'), context);
+converters.TSFunctionType = (path, context): K.Generic => ({
+  kind: 'generic',
+  value: {
+    kind: 'function',
+    returnType: convert(path.get('typeAnnotation'), context),
+    parameters: path.get('parameters').map(p => convertParameter(p, context))
+  }
+});
 
-  return {
-    kind: 'generic',
-    value: {
-      kind: 'function',
-      returnType,
-      parameters
+converters.TSMethodSignature = (path, context): K.Property => ({
+  kind: 'property',
+  optional: !!path.node.optional,
+  key: convert(path.get('key'), context),
+  value: convertMethodCall(path, context)
+});
+
+converters.TSCallSignatureDeclaration = (path, context): K.Property => ({
+  kind: 'property',
+  key: {
+    kind: 'string'
+  },
+  optional: false,
+  value: convertMethodCall(path, context)
+});
+
+function extendedTypesMembers(path, context) {
+  const members = path.get('extends');
+  if (!members || !members.length) {
+    return [];
+  }
+
+  return members.reduce((acc, current) => {
+    const { members: convertedMembers } = convert(current, context);
+
+    // #convertedMembers are undefined if converter is not able to resolve
+    // extended types which are coming from some external package.
+    if (!convertedMembers) {
+      return acc;
     }
-  };
-};
 
-converters.TSMethodSignature = (path, context): K.Property => {
-  return {
-    kind: 'property',
-    optional: !!path.node.optional,
-    key: convert(path.get('key'), context),
-    value: convertMethodCall(path, context)
-  };
-};
-
-converters.TSCallSignatureDeclaration = (path, context): K.Property => {
-  return {
-    kind: 'property',
-    key: {
-      kind: 'string'
-    },
-    optional: false,
-    value: convertMethodCall(path, context)
-  };
-};
+    return acc.concat(convertedMembers);
+  }, []);
+}
 
 converters.TSInterfaceDeclaration = (path, context): K.Obj => {
   const extendedTypes = extendedTypesMembers(path, context);
   const interfaceType = convert(path.get('body'), context) || { members: [] };
+
   return {
     kind: 'object',
     // Merge the current interface members with any extended members
@@ -1121,20 +954,15 @@ converters.TSInterfaceDeclaration = (path, context): K.Obj => {
   };
 };
 
-converters.TSExpressionWithTypeArguments = (path, context): K.Id => {
-  return convert(path.get('expression'), context);
-};
+converters.TSExpressionWithTypeArguments = (path, context): K.Id =>
+  convert(path.get('expression'), context);
 
-converters.TSInterfaceBody = (path, context): K.Obj => {
-  return {
-    kind: 'object',
-    members: path.get('body').map(prop => convert(prop, context))
-  };
-};
+converters.TSInterfaceBody = (path, context): K.Obj => ({
+  kind: 'object',
+  members: path.get('body').map(prop => convert(prop, context))
+});
 
-converters.TSTypeAnnotation = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
-};
+converters.TSTypeAnnotation = (path, context) => convert(path.get('typeAnnotation'), context);
 
 converters.TSQualifiedName = (path, context): K.Id => {
   const left = convert(path.get('left'), context);
@@ -1158,57 +986,38 @@ converters.TSEnumDeclaration = (path, context): K.Union => {
   return { kind: 'union', types };
 };
 
-converters.TSEnumMember = (path, context) => {
-  return convert(path.get('id'), context);
-};
+converters.TSEnumMember = (path, context) => convert(path.get('id'), context);
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSArray = (path, context): K.Any => {
-  return { kind: 'any' };
-};
+converters.TSArray = (): K.Any => ({ kind: 'any' });
 
-converters.TSArrayType = (path, context): K.ArrayType => {
-  return {
-    kind: 'arrayType',
-    type: convert(path.get('elementType'), context)
-  };
-};
+converters.TSArrayType = (path, context): K.ArrayType => ({
+  kind: 'arrayType',
+  type: convert(path.get('elementType'), context)
+});
 
-converters.TSTypeParameterInstantiation = (path, context): K.TypeParams => {
-  return {
-    kind: 'typeParams',
-    params: path.get('params').map(param => convert(param, context))
-  };
-};
+converters.TSTypeParameterInstantiation = (path, context): K.TypeParams => ({
+  kind: 'typeParams',
+  params: path.get('params').map(param => convert(param, context))
+});
 
-/* eslint-disable-next-line no-unused-vars */
-converters.ImportNamespaceSpecifier = (path, context): K.Any => {
-  return { kind: 'any' };
-};
+converters.ImportNamespaceSpecifier = (): K.Any => ({ kind: 'any' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.undefined = (path, context): K.Any => {
-  return { kind: 'any' };
-};
+converters.undefined = (): K.Any => ({ kind: 'any' });
 
-converters.ObjectTypeSpreadProperty = (path, context): K.Spread => {
-  return {
-    kind: 'spread',
-    value: convert(path.get('argument'), context)
-  };
-};
+converters.ObjectTypeSpreadProperty = (path, context): K.Spread => ({
+  kind: 'spread',
+  value: convert(path.get('argument'), context)
+});
 
-converters.ArrayTypeAnnotation = (path, context): K.ArrayType => {
-  return {
-    kind: 'arrayType',
-    type: convert(path.get('elementType'), context)
-  };
-};
+converters.ArrayTypeAnnotation = (path, context): K.ArrayType => ({
+  kind: 'arrayType',
+  type: convert(path.get('elementType'), context)
+});
 
-converters.TSIntersectionType = (path, context): K.Intersection => {
-  const types = path.get('types').map(type => convert(type, context));
-  return { kind: 'intersection', types };
-};
+converters.TSIntersectionType = (path, context): K.Intersection => ({
+  kind: 'intersection',
+  types: path.get('types').map(type => convert(type, context))
+});
 
 converters.TSIndexSignature = (path, context): K.Property => {
   const id = path.get('parameters')[0];
@@ -1222,52 +1031,17 @@ converters.TSIndexSignature = (path, context): K.Property => {
   };
 };
 
-converters.TSParenthesizedType = (path, context) => {
-  return convert(path.get('typeAnnotation'), context);
-};
+converters.TSParenthesizedType = (path, context) => convert(path.get('typeAnnotation'), context);
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSObjectKeyword = (path, context): K.Obj => {
-  return { kind: 'object', members: [] };
-};
+converters.TSObjectKeyword = (): K.Obj => ({ kind: 'object', members: [] });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSNullKeyword = (path, context): K.Null => {
-  return { kind: 'null' };
-};
+converters.TSNullKeyword = (): K.Null => ({ kind: 'null' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSUnknownKeyword = (path, context): K.Unknown => {
-  return { kind: 'unknown' };
-};
+converters.TSUnknownKeyword = (): K.Unknown => ({ kind: 'unknown' });
 
-/* eslint-disable-next-line no-unused-vars */
-converters.TSThisType = (path, context): K.This => {
-  return { kind: 'custom', value: 'this' };
-};
+converters.TSThisType = (): K.This => ({ kind: 'custom', value: 'this' });
 
-converters.TSAsExpression = (path, context): K.Param => {
-  return convert(path.get('expression'), context);
-};
-
-function extendedTypesMembers(path, context) {
-  const members = path.get('extends');
-  if (!members || !members.length) {
-    return [];
-  }
-
-  return members.reduce((acc, current) => {
-    const { members: convertedMembers } = convert(current, context);
-
-    // #convertedMembers are undefined if converter is not able to resolve
-    // extended types which are coming from some external package.
-    if (!convertedMembers) {
-      return acc;
-    }
-
-    return acc.concat(convertedMembers);
-  }, []);
-}
+converters.TSAsExpression = (path, context): K.Param => convert(path.get('expression'), context);
 
 function importConverterGeneral(path, context): K.Import {
   let importKind = path.node.importKind || path.parent.importKind || 'value';
@@ -1307,7 +1081,7 @@ function importConverterGeneral(path, context): K.Import {
       };
     }
 
-    if (!filePath) {
+    if (!filePath || nodePath.extname(filePath) === '.json') {
       return {
         kind: 'import',
         importKind,
@@ -1316,24 +1090,8 @@ function importConverterGeneral(path, context): K.Import {
       };
     }
 
-    // Don't attempt to parse JSON
-    if (nodePath.extname(filePath) === '.json') {
-      return {
-        kind: 'import',
-        importKind,
-        name,
-        moduleSpecifier
-      };
-    }
-
-    let file = loadFileSync(filePath, context.parserOpts);
-
-    let id;
-    if (path.node.imported) {
-      id = path.node.imported.name;
-    } else {
-      id = path.node.local.name;
-    }
+    const file = loadFileSync(filePath, context.parserOpts);
+    const id = path.node.imported ? path.node.imported.name : path.node.local.name;
 
     let exported = matchExported(file, name);
 
@@ -1354,14 +1112,13 @@ function importConverterGeneral(path, context): K.Import {
   }
 }
 
-converters.ImportDefaultSpecifier = (path, context): K.Import => {
-  return importConverterGeneral(path, context);
-};
+converters.ImportDefaultSpecifier = (path, context): K.Import =>
+  importConverterGeneral(path, context);
 
 converters.ImportDeclaration = (path, context): K.Import => {
-  let importKind = path.node.importKind || 'value';
-  let moduleSpecifier = path.get('source').node.value;
-  let name = 'default';
+  const importKind = path.node.importKind || 'value';
+  const moduleSpecifier = path.get('source').node.value;
+  const name = 'default';
 
   if (!context.replacementId) {
     return {
@@ -1388,23 +1145,18 @@ converters.ImportDeclaration = (path, context): K.Import => {
   return convert(exported, context);
 };
 
-converters.ExportSpecifier = (path, context): K.ExportSpecifier => {
-  let local = convert(path.get('local'), context);
-  let exported = convert(path.get('exported'), context);
-
-  return {
-    kind: 'exportSpecifier',
-    local,
-    exported
-  };
-};
+converters.ExportSpecifier = (path, context): K.ExportSpecifier => ({
+  kind: 'exportSpecifier',
+  local: convert(path.get('local'), context),
+  exported: convert(path.get('exported'), context)
+});
 
 converters.ExportNamedDeclaration = (path, context): K.Export => {
-  let specifiers = path.get('specifiers');
+  const specifiers = path.get('specifiers');
   // This needs to be in all of them --- let source = path.get('source');
 
   if (path.get('source').node) {
-    let source = path.get('source');
+    const source = path.get('source');
 
     if (specifiers.length !== 1) {
       return {
@@ -1414,16 +1166,15 @@ converters.ExportNamedDeclaration = (path, context): K.Export => {
       };
     }
 
-    let name = convert(specifiers[0], context).local.name;
-
+    const name = convert(specifiers[0], context).local.name;
     let file;
 
     try {
       // The parentPath is a reference to where we currently are. We want to
       // get the source value, but resolving this first makes this easier.
-      let filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
+      const filePath = resolveImportFilePathSync(source.parentPath, context.resolveOptions);
 
-      let actualPath = resolveSync(
+      const actualPath = resolveSync(
         nodePath.join(nodePath.dirname(filePath), source.node.value),
         context.resolveOptions
       );
@@ -1431,11 +1182,12 @@ converters.ExportNamedDeclaration = (path, context): K.Export => {
       file = loadFileSync(actualPath, context.parserOpts);
       // We need to calculate name from the specifiers, I think knowing that there
       // will always be one specifier
-      let resolvedValue = matchExported(file, name);
+      const resolvedValue = matchExported(file, name);
 
       if (resolvedValue) {
         return convert(resolvedValue, context);
       }
+
       return {
         kind: 'export',
         exports: specifiers.map(s => convert(s, context)),
@@ -1456,22 +1208,14 @@ converters.ExportNamedDeclaration = (path, context): K.Export => {
   }
 };
 
-converters.ImportSpecifier = (path, context): K.Import => {
-  return importConverterGeneral(path, context);
-};
+converters.ImportSpecifier = (path, context): K.Import => importConverterGeneral(path, context);
 
-converters.TSConditionalType = (): K.Any => {
-  return {
-    kind: 'any'
-  };
-};
+converters.TSConditionalType = (): K.Any => ({ kind: 'any' });
 
-converters.TSTypeQuery = (path, context): K.TypeQuery => {
-  return {
-    kind: 'typeQuery',
-    exprName: convert(path.get('exprName'), { ...context, mode: 'value' })
-  };
-};
+converters.TSTypeQuery = (path, context): K.TypeQuery => ({
+  kind: 'typeQuery',
+  exprName: convert(path.get('exprName'), { ...context, mode: 'value' })
+});
 
 function convertMethodCall(path, context): K.Func {
   const parameters = path.get('parameters').map(p => convertParameter(p, context));
@@ -1525,22 +1269,23 @@ function convert(path, context) {
   if (typeof path.get !== 'function') {
     // We were getting incredible unhelpful errors here at times, so we have a circular replacement
     // throw path.identifier;
-    let stringedPath = JSON.stringify(path, getCircularReplacer(), 2);
+    const stringedPath = JSON.stringify(path, getCircularReplacer(), 2);
     throw new Error(`Did not pass a NodePath to convert() ${stringedPath}`);
   }
 
-  let converter = converters[path.type];
+  const converter = converters[path.type];
   if (!converter) throw new Error(`Missing converter for: ${path.type}`);
-  let result = converter(path, context);
+  const result = converter(path, context);
   attachComments(path.node, result);
   return result;
 }
 
-function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolveOptions?: Object) {
-  let plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
-  /* eslint-disable-next-line no-param-reassign */
-  if (!resolveOptions) resolveOptions = {};
-
+function getContext(
+  typeSystem: 'flow' | 'typescript',
+  filename?: string,
+  resolveOptions?: Object = {}
+) {
+  const plugins = ['jsx', ['decorators', { decoratorsBeforeExport: true }]];
   if (!resolveOptions.extensions) {
     // The resolve package that babel-file-loader uses only resolves .js files by default instead of the
     // default extension list of node (.js, .json and .node) so add .json back here.
@@ -1559,7 +1304,7 @@ function getContext(typeSystem: 'flow' | 'typescript', filename?: string, resolv
   }
 
   /* $FlowFixMe - need to update types in babylon-options */
-  let parserOpts = createBabylonOptions({
+  const parserOpts = createBabylonOptions({
     stage: 2,
     plugins
   });
@@ -1573,9 +1318,9 @@ export function extractReactTypes(
   filename?: string,
   inputResolveOptions?: Object
 ) {
-  let { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
+  const { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
+  const file = createBabelFile(code, { parserOpts, filename });
 
-  let file = createBabelFile(code, { parserOpts, filename });
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
@@ -1627,16 +1372,15 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
           context,
           genericTypeParams.get('params.1')
         );
-        components.push({
-          name,
-          path,
-          component
-        });
+
+        components.push({ name, path, component });
+
         return;
       }
 
       // Props typed via function arguments
       const firstArg = path.get('arguments')[0];
+
       if (firstArg) {
         if (firstArg.isFunctionExpression() || firstArg.isArrowFunctionExpression()) {
           const component = convertReactComponentFunction(
@@ -1651,6 +1395,7 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
           });
           return;
         }
+
         if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
           const innerFirstArg = firstArg.get('arguments')[0];
           if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
