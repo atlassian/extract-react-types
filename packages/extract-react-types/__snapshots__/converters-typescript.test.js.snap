@@ -161,6 +161,78 @@ Object {
 }
 `;
 
+exports[`TypeScript: Types fallback to raw source when an unsupported type us used (interface) 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "bar",
+        },
+        "kind": "property",
+        "leadingComments": Array [
+          Object {
+            "raw": " bar property docs ",
+            "type": "commentBlock",
+            "value": "bar property docs",
+          },
+        ],
+        "optional": false,
+        "value": Object {
+          "kind": "raw",
+          "name": "keyof Bar",
+        },
+      },
+    ],
+    "referenceIdName": "BarProps",
+  },
+}
+`;
+
+exports[`TypeScript: Types fallback to raw source when an unsupported type us used (type) 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "bar",
+        },
+        "kind": "property",
+        "leadingComments": Array [
+          Object {
+            "raw": " bar property docs ",
+            "type": "commentBlock",
+            "value": "bar property docs",
+          },
+        ],
+        "optional": false,
+        "value": Object {
+          "kind": "raw",
+          "name": "keyof Bar",
+        },
+      },
+    ],
+    "referenceIdName": "BarProps",
+  },
+}
+`;
+
 exports[`TypeScript: follow export default export 1`] = `
 Object {
   "kind": "generic",

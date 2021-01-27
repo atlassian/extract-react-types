@@ -28,6 +28,30 @@ const TESTS = [
     `
   },
   {
+    name: 'Types fallback to raw source when an unsupported type us used (interface)',
+    typeSystem: 'typescript',
+    code: `
+      interface BarProps {
+        /* bar property docs */
+        bar: keyof Bar;
+      }
+
+      class Component extends React.Component<BarProps> {}
+    `
+  },
+  {
+    name: 'Types fallback to raw source when an unsupported type us used (type)',
+    typeSystem: 'typescript',
+    code: `
+      type BarProps = {
+        /* bar property docs */
+        bar: keyof Bar;
+      }
+
+      class Component extends React.Component<BarProps> {}
+    `
+  },
+  {
     name: 'React.ComponentType',
     typeSystem: 'typescript',
     code: `
