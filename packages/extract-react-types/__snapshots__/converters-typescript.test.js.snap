@@ -28,72 +28,6 @@ Object {
 }
 `;
 
-exports[`TypeScript: Ignores unsupported typescript keywords 1`] = `
-Object {
-  "kind": "generic",
-  "name": Object {
-    "kind": "id",
-    "name": "Component",
-    "type": null,
-  },
-  "value": Object {
-    "kind": "object",
-    "members": Array [
-      Object {
-        "key": Object {
-          "kind": "id",
-          "name": "bar",
-        },
-        "kind": "property",
-        "leadingComments": Array [
-          Object {
-            "raw": " @ert-ignore bar property, ignored because of unknown type ",
-            "type": "commentBlock",
-            "value": "bar property, ignored because of unknown type",
-          },
-        ],
-        "optional": false,
-        "value": undefined,
-      },
-    ],
-    "referenceIdName": "BarProps",
-  },
-}
-`;
-
-exports[`TypeScript: Ignores unsupported typescript keywords type props 1`] = `
-Object {
-  "kind": "generic",
-  "name": Object {
-    "kind": "id",
-    "name": "Component",
-    "type": null,
-  },
-  "value": Object {
-    "kind": "object",
-    "members": Array [
-      Object {
-        "key": Object {
-          "kind": "id",
-          "name": "bar",
-        },
-        "kind": "property",
-        "leadingComments": Array [
-          Object {
-            "raw": " @ert-ignore bar property, ignored because of unknown type ",
-            "type": "commentBlock",
-            "value": "bar property, ignored because of unknown type",
-          },
-        ],
-        "optional": false,
-        "value": undefined,
-      },
-    ],
-    "referenceIdName": "BarProps",
-  },
-}
-`;
-
 exports[`TypeScript: React.ComponentType 1`] = `
 Object {
   "kind": "generic",
@@ -223,6 +157,78 @@ Object {
         },
       },
     ],
+  },
+}
+`;
+
+exports[`TypeScript: Types fallback to raw source when an unsupported type us used (interface) 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "bar",
+        },
+        "kind": "property",
+        "leadingComments": Array [
+          Object {
+            "raw": " bar property docs ",
+            "type": "commentBlock",
+            "value": "bar property docs",
+          },
+        ],
+        "optional": false,
+        "value": Object {
+          "kind": "unsupported",
+          "name": "keyof Bar",
+        },
+      },
+    ],
+    "referenceIdName": "BarProps",
+  },
+}
+`;
+
+exports[`TypeScript: Types fallback to raw source when an unsupported type us used (type) 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "bar",
+        },
+        "kind": "property",
+        "leadingComments": Array [
+          Object {
+            "raw": " bar property docs ",
+            "type": "commentBlock",
+            "value": "bar property docs",
+          },
+        ],
+        "optional": false,
+        "value": Object {
+          "kind": "unsupported",
+          "name": "keyof Bar",
+        },
+      },
+    ],
+    "referenceIdName": "BarProps",
   },
 }
 `;

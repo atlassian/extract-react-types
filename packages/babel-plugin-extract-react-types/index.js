@@ -9,10 +9,11 @@ module.exports = babel => {
           .map(plugin => (Array.isArray(plugin) ? plugin[0] : plugin))
           .find(plugin => plugin === 'flow' || plugin === 'typescript');
 
-        if (typeSystem) {
-          try {
-            let components = findExportedComponents(programPath, typeSystem, state.file.filename);
-            components.forEach(({ name, component }) => {
+        if (!typeSystem) return;
+
+        try {
+          findExportedComponents(programPath, typeSystem, state.file.filename).forEach(
+            ({ name, component }) => {
               // TODO: handle when name is null
               // it will only happen when it's the default export
               // generate something like this
@@ -28,10 +29,10 @@ module.exports = babel => {
                   )
                 );
               }
-            });
-            /* eslint-disable no-empty */
-          } catch (e) {}
-        }
+            }
+          );
+          /* eslint-disable no-empty */
+        } catch (e) {}
       }
     }
   };

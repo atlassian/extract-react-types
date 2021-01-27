@@ -65,9 +65,10 @@ const converters = {
   custom: (type: any, mode: string): string => type.value.toString(),
   any: (type: K.Any, mode: string): string => type.kind,
   void: (type: K.Void, mode: string): 'undefined' => 'undefined',
-  literal: (type: any, mode: string): string => `${type.kind}`,
+  literal: (type: any, mode: string): string => type.kind,
   mixed: (type: K.Mixed, mode: string): string => type.kind,
   null: (type: K.Null, mode: string): 'null' => 'null',
+  unknown: (type: K.Unknown): string => type.kind,
   logicalExpression: (type, mode: string): string => {
     return `${convert(type.left)} ${type.operator} ${convert(type.right)}`;
   },
@@ -76,9 +77,7 @@ const converters = {
     return `${type.operator}${space}${convert(type.argument)}`;
   },
 
-  id: (type: K.Id, mode: string): string => {
-    return type.name;
-  },
+  id: (type: K.Id, mode: string): string => type.name,
   // TODO - this is not right and needs to be improved
   opaqueType: (type: K.OpaqueType, mode: string): string => {
     return convert(type.id);
@@ -314,6 +313,12 @@ from file: ${convert(type.source, mode)}`
   tuple: (type: K.Tuple, mode: string): string => `[${mapConvertAndJoin(type.types)}]`,
   typeQuery: (type: K.TypeQuery): string => {
     return type.exprName ? `typeof ${type.exprName.name}` : `${type.kind}`;
+  },
+
+  // ERT - Misc
+  unsupported: (type: any): string => {
+    console.log('HERE');
+    return type.name;
   }
 };
 

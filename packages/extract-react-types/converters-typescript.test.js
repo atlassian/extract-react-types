@@ -28,11 +28,11 @@ const TESTS = [
     `
   },
   {
-    name: 'Ignores unsupported typescript keywords',
+    name: 'Types fallback to raw source when an unsupported type us used (interface)',
     typeSystem: 'typescript',
     code: `
       interface BarProps {
-        /* @ert-ignore bar property, ignored because of unknown type */
+        /* bar property docs */
         bar: keyof Bar;
       }
 
@@ -40,11 +40,11 @@ const TESTS = [
     `
   },
   {
-    name: 'Ignores unsupported typescript keywords type props',
+    name: 'Types fallback to raw source when an unsupported type us used (type)',
     typeSystem: 'typescript',
     code: `
       type BarProps = {
-        /* @ert-ignore bar property, ignored because of unknown type */
+        /* bar property docs */
         bar: keyof Bar;
       }
 

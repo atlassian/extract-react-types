@@ -540,7 +540,7 @@ converters.TypeCastExpression = (path, context): K.TypeCastExpression => ({
 
 converters.NumericLiteral = (path): K.Number => ({ kind: 'number', value: path.node.value });
 
-converters.NullLiteral = (path): K.Null => ({ kind: 'null' });
+converters.NullLiteral = (): K.Null => ({ kind: 'null' });
 
 converters.BooleanLiteral = (path): K.Boolean => ({ kind: 'boolean', value: path.node.value });
 
@@ -1279,15 +1279,13 @@ function convert(path, context) {
 
   if (!converter) {
     const propertySignature = path.find(p => p.isTSPropertySignature() || p.isObjectTypeProperty());
-    if (propertySignature && propertySignature.node) {
-      const leadingComments = propertySignature.node.leadingComments || [];
-      const leadingComment = leadingComments.reduce((accum, comment) => accum + comment.value, '');
 
-      /**
-       * User wishes to ignore this property, since it uses unknown syntax
-       * https://github.com/atlassian/extract-react-types/issues/141
-       */
-      if (leadingComment.includes(IGNORE_STATEMENT)) return;
+    // Fallback to a raw string if property uses a type without a matching converter
+    if (propertySignature && propertySignature.node) {
+      return {
+        kind: 'unsupported',
+        name: path.getSource()
+      };
     }
 
     throw new Error(
@@ -1327,10 +1325,7 @@ function getContext(
   }
 
   /* $FlowFixMe - need to update types in babylon-options */
-  const parserOpts = createBabylonOptions({
-    stage: 2,
-    plugins
-  });
+  const parserOpts = createBabylonOptions({ stage: 2, plugins });
 
   return { resolveOptions, parserOpts };
 }
@@ -1343,7 +1338,6 @@ export function extractReactTypes(
 ) {
   const { resolveOptions, parserOpts } = getContext(typeSystem, filename, inputResolveOptions);
   const file = createBabelFile(code, { parserOpts, filename });
-
   return convert(file.path, { resolveOptions, parserOpts });
 }
 
@@ -1411,11 +1405,7 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
             context,
             firstArg.get('params.0.typeAnnotation')
           );
-          components.push({
-            name,
-            path,
-            component
-          });
+          components.push({ name, path, component });
           return;
         }
 
