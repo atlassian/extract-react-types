@@ -316,10 +316,7 @@ from file: ${convert(type.source, mode)}`
   },
 
   // ERT - Misc
-  unsupported: (type: any): string => {
-    console.log('HERE');
-    return type.name;
-  }
+  raw: (type: any): string => type.name
 };
 
 function convert(type: any, mode: string = 'value') {

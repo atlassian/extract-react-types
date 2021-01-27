@@ -16,7 +16,6 @@ import * as K from './kinds';
 
 export type * from './kinds';
 
-const IGNORE_STATEMENT = '@ert-ignore';
 const converters = {};
 
 function convertObject(path, context) {
@@ -1245,9 +1244,7 @@ function attachComments(source, dest) {
 function parseComment(commentProperty) {
   return commentProperty.map(comment => ({
     type: comment.type === 'CommentLine' ? 'commentLine' : 'commentBlock',
-    value: normalizeComment(comment)
-      .replace(IGNORE_STATEMENT, '')
-      .trim(),
+    value: normalizeComment(comment),
     raw: comment.value
   }));
 }
@@ -1283,7 +1280,7 @@ function convert(path, context) {
     // Fallback to a raw string if property uses a type without a matching converter
     if (propertySignature && propertySignature.node) {
       return {
-        kind: 'unsupported',
+        kind: 'raw',
         name: path.getSource()
       };
     }
