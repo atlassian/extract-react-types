@@ -13,6 +13,8 @@ node_modules
 # ignore env file used for GH info fetching in version
 .env
 
-
 # ignore yarn.locks generated in packages
 packages/**/**/yarn.lock
+
+# ignore storybook static
+storybook-static
