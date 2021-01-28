@@ -1,5 +1,12 @@
 # pretty-proptypes
 
+## 0.8.1
+
+### Patch Changes
+
+- [`68bcec6`](https://github.com/atlassian/extract-react-types/commit/68bcec67728218b861fedb99c735a5ddc062ee53) [#152](https://github.com/atlassian/extract-react-types/pull/152) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Added a safe bail-out for when extract-react-types encounters an unsupported keyword or syntax.
+  In that case, the type will be output as a raw string and summary type will be `raw`.
+
 ## 0.8.0
 
 ### Minor Changes
