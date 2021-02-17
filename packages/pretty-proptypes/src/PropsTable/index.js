@@ -11,6 +11,7 @@ import type { CommonProps } from '../types';
 import PropsWrapper from '../Props/Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
+import PropRow from './PropRow';
 
 type Obj = {
   kind: 'object',
@@ -83,7 +84,7 @@ export default class PropsTable extends Component<DynamicPropsProps> {
               <td>Description</td>
             </tr>
           </thead>
-          {propTypes.map(propType => renderPropType(propType, { table: true, ...rest }))}
+          {propTypes.map(propType => renderPropType(propType, rest, PropRow))}
         </table>
       </PropsWrapper>
     );
