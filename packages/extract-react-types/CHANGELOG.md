@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.29.0
+
+### Minor Changes
+
+- [`683eac7`](https://github.com/atlassian/extract-react-types/commit/683eac7d701293b1ff6a6fc345e9b1b59d0b02e9) [#159](https://github.com/atlassian/extract-react-types/pull/159) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Add support for memos typed with generics
+
 ## 0.28.0
 
 ### Minor Changes
