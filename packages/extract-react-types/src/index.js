@@ -1366,6 +1366,7 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
       components.push({ name, path, component });
       return;
     }
+
     if (path.isClass()) {
       let component = convertReactComponentClass(path, context);
       components.push({ name, path, component });
@@ -1380,11 +1381,23 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
       const genericTypeParams = path.get('typeParameters');
 
       // Props are the second type arg
-      if (isForwardRef && genericTypeParams && genericTypeParams.node) {
+      if (isForwardRef && genericTypeParams.node) {
         const component = convertReactComponentFunction(
           genericTypeParams,
           context,
           genericTypeParams.get('params.1')
+        );
+
+        components.push({ name, path, component });
+
+        return;
+      }
+
+      if (isMemo && genericTypeParams.node) {
+        const component = convertReactComponentFunction(
+          genericTypeParams,
+          context,
+          genericTypeParams.get('params.0')
         );
 
         components.push({ name, path, component });

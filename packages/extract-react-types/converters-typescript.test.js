@@ -567,6 +567,40 @@ const TESTS = [
 
     export default MyComponent;
   `
+  },
+  {
+    name: 'memo typed via generic types',
+    typeSystem: 'typescript',
+    code: `
+    import React, { forwardRef, memo } from 'react';
+
+    type MyComponentProps = {
+      foo: string,
+    }
+
+    const MyComponent = memo<MyComponentProps>((props, ref) => {
+      return <span>Foo</span>;
+    });
+
+    export default MyComponent;
+  `
+  },
+  {
+    name: 'memo wrapping forwardRef, both typed via generic types',
+    typeSystem: 'typescript',
+    code: `
+    import React, { forwardRef, memo } from 'react';
+
+    type MyComponentProps = {
+      foo: string,
+    }
+
+    const MyComponent = memo<MyComponentProps>(forwardRef<HTMLElement, MyComponentProps>((props, ref) => {
+      return <span>Foo</span>;
+    }));
+
+    export default MyComponent;
+  `
   }
 ];
 
