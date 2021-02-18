@@ -1,18 +1,10 @@
-# Extract react types mono repo
+# Extract React Types
 
 > One stop shop to document your react components.
 
 <p align="center">
   <img width="500" src="./assets/example.png">
 </p>
-
-Packages:
-
-1. [extract-react-types](./packages/extract-react-types) _Extract Flow & TypeScript types from React Components_
-2. [extract-react-types-loader](./packages/extract-react-types-loader) _Webpack loader for extract-react-types_
-3. [babel-plugin-extract-react-types](./packages/babel-plugin-extract-react-types) _A Babel plugin to store the types of React components as a property on the component for documentation_
-4. [kind2string](./packages/kind2string) _kind2string is designed to take the data structures output by extract-react-types and convert it down to a (useful) string._
-5. [pretty-proptypes](./packages/pretty-proptypes) _PrettyPropTypes is designed to display the output of extract-react-types and display rich prop information for consumers._
 
 ## Getting started 🏁
 
@@ -70,6 +62,14 @@ import { Props } from 'pretty-proptypes';
 ```
 
 This analyses prop type definitions, and default props. It creates descriptions from comments before the type definitions, and will render markdown syntax using [react-markings](https://www.npmjs.com/package/react-markings).
+
+## Packages
+
+1. [extract-react-types](./packages/extract-react-types) _Extract Flow & TypeScript types from React Components_
+2. [extract-react-types-loader](./packages/extract-react-types-loader) _Webpack loader for extract-react-types_
+3. [babel-plugin-extract-react-types](./packages/babel-plugin-extract-react-types) _A Babel plugin to store the types of React components as a property on the component for documentation_
+4. [kind2string](./packages/kind2string) _kind2string is designed to take the data structures output by extract-react-types and convert it down to a (useful) string._
+5. [pretty-proptypes](./packages/pretty-proptypes) _PrettyPropTypes is designed to display the output of extract-react-types and display rich prop information for consumers._
 
 ## Contribute
 
