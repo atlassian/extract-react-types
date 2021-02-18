@@ -396,6 +396,62 @@ Object {
 }
 `;
 
+exports[`TypeScript: memo typed via generic types 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "MyComponent",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "referenceIdName": "MyComponentProps",
+  },
+}
+`;
+
+exports[`TypeScript: memo wrapping forwardRef, both typed via generic types 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "MyComponent",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "foo",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "referenceIdName": "MyComponentProps",
+  },
+}
+`;
+
 exports[`TypeScript: ts any 1`] = `
 Object {
   "kind": "object",
