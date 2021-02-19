@@ -4,7 +4,7 @@ import { PropsTable } from 'pretty-proptypes';
 import TypeScriptComponent from '../TypeScriptComponent';
 
 export default {
-  title: 'Example/Layouts',
+  title: 'Example/Layouts/Table',
   component: PropsTable
 };
 
