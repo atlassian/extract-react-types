@@ -1389,7 +1389,6 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
         );
 
         components.push({ name, path, component });
-
         return;
       }
 
@@ -1401,7 +1400,6 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
         );
 
         components.push({ name, path, component });
-
         return;
       }
 
@@ -1419,6 +1417,23 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
           return;
         }
 
+        const genericTypeParamsTEMP = firstArg.get('typeParameters');
+
+        if (
+          isMemo &&
+          isSpecialReactComponentType(firstArg, 'forwardRef') &&
+          genericTypeParamsTEMP.node
+        ) {
+          const component = convertReactComponentFunction(
+            genericTypeParams,
+            context,
+            genericTypeParamsTEMP.get('params.1')
+          );
+
+          components.push({ name, path, component });
+          return;
+        }
+
         if (isMemo && isSpecialReactComponentType(firstArg, 'forwardRef')) {
           const innerFirstArg = firstArg.get('arguments')[0];
           if (innerFirstArg.isFunctionExpression() || innerFirstArg.isArrowFunctionExpression()) {
@@ -1427,11 +1442,7 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
               innerFirstArg,
               innerFirstArg.get('params.0.typeAnnotation')
             );
-            components.push({
-              name,
-              path,
-              component
-            });
+            components.push({ name, path, component });
           }
         }
       }

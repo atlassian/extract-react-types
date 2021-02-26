@@ -601,6 +601,23 @@ const TESTS = [
 
     export default MyComponent;
   `
+  },
+  {
+    name: 'memo wrapping forwardRef, with inferred types',
+    typeSystem: 'typescript',
+    code: `
+    import React, { forwardRef, memo } from 'react';
+
+    type MyComponentProps = {
+      foo: string,
+    }
+
+    const MyComponent = memo(forwardRef<HTMLElement, MyComponentProps>((props, ref) => {
+      return <span>Foo</span>;
+    }));
+
+    export default MyComponent;
+  `
   }
 ];
 
