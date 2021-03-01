@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.29.1
+
+### Patch Changes
+
+- [`945eb91`](https://github.com/atlassian/extract-react-types/commit/945eb91b43a0ab0b0baa354515007c8b0aad79f2) [#164](https://github.com/atlassian/extract-react-types/pull/164) Thanks [@danieldelcore](https://github.com/danieldelcore)! - forwardRef wrapped in a memo now works with type inference
+
 ## 0.29.0
 
 ### Minor Changes
