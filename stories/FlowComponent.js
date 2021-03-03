@@ -25,7 +25,9 @@ type FlowComponentProps = {
   // This prop is a mixed
   mixedProp: mixed,
   // This prop is a union
-  unionProp: 'hello' | 'world'
+  unionProp: 'hello' | 'world',
+  // This prop is required as it is not optional and has no default
+  requiredProp: any
 };
 
 const FlowComponent = (props: FlowComponentProps) => <p>Hello World</p>;
