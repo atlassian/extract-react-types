@@ -6,6 +6,8 @@
 import React from 'react';
 
 type FlowComponentProps = {
+  // This prop is required as it is not optional and has no default
+  requiredProp: any,
   // This prop is a string
   stringProp: string,
   // This prop is a number
@@ -25,9 +27,7 @@ type FlowComponentProps = {
   // This prop is a mixed
   mixedProp: mixed,
   // This prop is a union
-  unionProp: 'hello' | 'world',
-  // This prop is required as it is not optional and has no default
-  requiredProp: any
+  unionProp: 'hello' | 'world'
 };
 
 const FlowComponent = (props: FlowComponentProps) => <p>Hello World</p>;

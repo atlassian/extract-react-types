@@ -10,6 +10,8 @@ interface DummyInterface {
 }
 
 type TypeScriptComponentProps = {
+  // This prop is required as it is not optional and has no default
+  requiredProp: any;
   // This prop is a string
   stringProp: string;
   // This prop is a number
@@ -32,8 +34,6 @@ type TypeScriptComponentProps = {
   unknownProp: unknown;
   // This prop uses an unknown typescript keyword "keyof" and so will result in a bail-out
   unsupportedProp: keyof DummyInterface;
-  // This prop is required as it is not optional and has no default
-  requiredProp: any;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;
