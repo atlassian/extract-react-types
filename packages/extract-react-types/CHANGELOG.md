@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.29.2
+
+### Patch Changes
+
+- [`8688631`](https://github.com/atlassian/extract-react-types/commit/8688631d360bc7d4f42f166d62ac14ae07750f5e) [#167](https://github.com/atlassian/extract-react-types/pull/167) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Minor variable rename and code formatting
+
 ## 0.29.1
 
 ### Patch Changes
