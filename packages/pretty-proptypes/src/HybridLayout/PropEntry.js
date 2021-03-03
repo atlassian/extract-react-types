@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core';
 import { Fragment, Component, type ComponentType, type Node } from 'react';
 import md from 'react-markings';
 import PrettyPropType from '../PrettyConvert';
-import { HeadingType, HeadingDefault, Heading } from '../Prop/Heading';
+import { HeadingType, HeadingDefault, Heading, HeadingRequired } from '../Prop/Heading';
 import type { CommonProps } from '../types';
 import { colors } from '../components/constants';
 
@@ -46,7 +46,7 @@ export default class Prop extends Component<PropProps> {
             css={css`
               text-align: left;
               font-weight: 500;
-              font-size: 1.4285714285714286em;
+              font-size: 1.28571428571em;
               margin-top: 28px;
               margin-bottom: 0;
             `}
@@ -55,9 +55,20 @@ export default class Prop extends Component<PropProps> {
               css={css`
                 font-size: inherit;
                 margin-bottom: 0;
+                padding-bottom: 4px;
               `}
             >
               <code>{name}</code>
+              {required && defaultValue === undefined && (
+                <HeadingRequired
+                  css={css`
+                    font-size: initial;
+                    margin-left: 1em;
+                  `}
+                >
+                  required
+                </HeadingRequired>
+              )}
             </Heading>
           </caption>
           <tbody
@@ -73,12 +84,14 @@ export default class Prop extends Component<PropProps> {
                 )}
               </td>
             </tr>
-            <tr>
-              <th>Default</th>
-              <td>
-                {defaultValue !== undefined && <HeadingDefault>{defaultValue}</HeadingDefault>}
-              </td>
-            </tr>
+            {defaultValue !== undefined && (
+              <tr>
+                <th>Default</th>
+                <td>
+                  <HeadingDefault>{defaultValue}</HeadingDefault>
+                </td>
+              </tr>
+            )}
             <tr>
               <th>Type</th>
               <td
@@ -89,14 +102,6 @@ export default class Prop extends Component<PropProps> {
               >
                 <span>
                   <HeadingType>{type}</HeadingType>
-                  {/* <HeadingRequired
-                    css={css`
-                      margin-left: 1em;
-                      font-size: 0.9rem;
-                    `}
-                  >
-                    required
-                  </HeadingRequired> */}
                 </span>
                 <span>
                   <ShapeComponent {...commonProps} />
