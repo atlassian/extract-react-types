@@ -681,22 +681,14 @@ converters.Identifier = (path, context): K.Id => {
           ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
           : null;
 
-        return {
-          kind: 'id',
-          name,
-          type
-        };
+        return { kind: 'id', name, type };
       }
     } else if (kind === 'static' || kind === 'binding') {
       const type = path.node.typeAnnotation
         ? convert(path.get('typeAnnotation'), { ...context, mode: 'type' })
         : null;
 
-      return {
-        kind: 'id',
-        name,
-        type
-      };
+      return { kind: 'id', name, type };
     } else {
       throw new Error(`Unable to resolve path for: ${kind}`);
     }
@@ -720,10 +712,7 @@ converters.Identifier = (path, context): K.Id => {
 
         let tsBinding = getTypeBinding(path, name);
         if (!tsBinding) {
-          return {
-            kind: 'id',
-            name
-          };
+          return { kind: 'id', name };
         }
         bindingPath = tsBinding.path.parentPath;
       } else {
@@ -1378,25 +1367,25 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
 
     if (isMemo || isForwardRef) {
       // Props typed via generics
-      const genericTypeParams = path.get('typeParameters');
+      const genericParams = path.get('typeParameters');
 
       // Props are the second type arg
-      if (isForwardRef && genericTypeParams.node) {
+      if (isForwardRef && genericParams.node) {
         const component = convertReactComponentFunction(
-          genericTypeParams,
+          genericParams,
           context,
-          genericTypeParams.get('params.1')
+          genericParams.get('params.1')
         );
 
         components.push({ name, path, component });
         return;
       }
 
-      if (isMemo && genericTypeParams.node) {
+      if (isMemo && genericParams.node) {
         const component = convertReactComponentFunction(
-          genericTypeParams,
+          genericParams,
           context,
-          genericTypeParams.get('params.0')
+          genericParams.get('params.0')
         );
 
         components.push({ name, path, component });
@@ -1417,17 +1406,17 @@ function exportedComponents(programPath, componentsToFind: 'all' | 'default', co
           return;
         }
 
-        const genericTypeParamsTEMP = firstArg.get('typeParameters');
+        const firstArgGenericParams = firstArg.get('typeParameters');
 
         if (
           isMemo &&
           isSpecialReactComponentType(firstArg, 'forwardRef') &&
-          genericTypeParamsTEMP.node
+          firstArgGenericParams.node
         ) {
           const component = convertReactComponentFunction(
-            genericTypeParams,
+            firstArgGenericParams,
             context,
-            genericTypeParamsTEMP.get('params.1')
+            firstArgGenericParams.get('params.1')
           );
 
           components.push({ name, path, component });
