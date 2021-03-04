@@ -846,7 +846,7 @@ converters.TSTypeLiteral = (path, context): K.Obj => ({
 converters.TSPropertySignature = (path, context): K.Property => ({
   kind: 'property',
   optional: !!path.node.optional,
-  key: convert(path.get('key'), context),
+  key: { kind: 'id', name: path.node.key.name },
   value: convert(path.get('typeAnnotation'), context)
 });
 
