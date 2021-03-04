@@ -1,3 +1,6 @@
+import { explodeModule } from '@aparna036/babel-explode-module';
+import { explodedToStatements } from 'babel-helper-simplify-module';
+import printAST from 'ast-pretty-print';
 import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
 
 export function hasDestructuredDefaultExport(path) {
@@ -37,7 +40,7 @@ export function followExports(path, context, convert) {
   }
 }
 
-export default function findExports(
+export function findExports(
   path,
   exportsToFind: 'all' | 'default'
 ): Array<{ name: string | null, path: any }> {
@@ -121,4 +124,57 @@ export default function findExports(
     });
 
   return formattedExports;
+}
+
+export function matchExported(file: Object, exportName: string) {
+  const exploded = explodeModule(file.path.node);
+  const statements = explodedToStatements(exploded);
+  const program = Object.assign({}, file.path.node, {
+    body: statements
+  });
+
+  file.path.replaceWith(program);
+
+  const match = exploded.exports.find(item => item.external === exportName);
+
+  if (!match) {
+    return null;
+  }
+
+  let local = match.local;
+
+  if (!local) {
+    return null;
+  }
+
+  if (local === 'default' && match.source) {
+    local = exportName;
+  }
+
+  let statement = file.path.get('body').find(item => {
+    // Ignore export all & default declarations, since they do not have specifiers/ids.
+    if (!item.isDeclaration() || item.isExportAllDeclaration()) return false;
+
+    let id = null;
+
+    if (item.isVariableDeclaration()) {
+      id = item.node.declarations[0].id;
+    } else if (item.isImportDeclaration()) {
+      id = item.node.specifiers[0].local;
+    } else if (item.isExportNamedDeclaration()) {
+      id = item.node.specifiers[0].exported;
+    } else if (item.node.id) {
+      id = item.node.id;
+    } else {
+      throw new Error(`Unexpected node:\n\n${printAST(item)}`);
+    }
+
+    if (!id) {
+      throw new Error(`Couldn't find id on node:\n\n${printAST(item)}`);
+    }
+
+    return id.name === local;
+  });
+
+  return statement || null;
 }
