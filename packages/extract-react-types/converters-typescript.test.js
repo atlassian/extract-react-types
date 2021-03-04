@@ -618,6 +618,24 @@ const TESTS = [
 
     export default MyComponent;
   `
+  },
+  {
+    name: 'does not conflict with ambiguously named type properties ',
+    typeSystem: 'typescript',
+    code: `
+      import React, { FC } from 'react';
+
+      const size = 'My var name conflicts with the property name';
+
+      export interface IconProps {
+        // Icon sizes
+        size?: 'small' | 'medium' | 'large' | 'xlarge';
+      }
+
+      const Icon: FC<IconProps> = ({ size = 'medium' }) => null;
+
+      export default Icon;
+  `
   }
 ];
 

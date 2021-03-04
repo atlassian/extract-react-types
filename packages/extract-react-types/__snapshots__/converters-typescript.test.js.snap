@@ -233,6 +233,59 @@ Object {
 }
 `;
 
+exports[`TypeScript: does not conflict with ambiguously named type properties  1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Icon",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "size",
+        },
+        "kind": "property",
+        "leadingComments": Array [
+          Object {
+            "raw": " Icon sizes",
+            "type": "commentLine",
+            "value": "Icon sizes",
+          },
+        ],
+        "optional": true,
+        "value": Object {
+          "kind": "union",
+          "types": Array [
+            Object {
+              "kind": "string",
+              "value": "small",
+            },
+            Object {
+              "kind": "string",
+              "value": "medium",
+            },
+            Object {
+              "kind": "string",
+              "value": "large",
+            },
+            Object {
+              "kind": "string",
+              "value": "xlarge",
+            },
+          ],
+        },
+      },
+    ],
+    "referenceIdName": "IconProps",
+  },
+}
+`;
+
 exports[`TypeScript: follow export default export 1`] = `
 Object {
   "kind": "generic",
