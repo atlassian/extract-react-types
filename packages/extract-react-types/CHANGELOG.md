@@ -1,5 +1,13 @@
 # extract-react-types
 
+## 0.29.3
+
+### Patch Changes
+
+- [`4589e9f`](https://github.com/atlassian/extract-react-types/commit/4589e9f272adb4c7c4135c6e8165bf40346cacf4) [#169](https://github.com/atlassian/extract-react-types/pull/169) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Fixes a bug where variable names clash with type properties of the same name, causing a "Missing converter for: [path]" error
+
+* [`ff72fd8`](https://github.com/atlassian/extract-react-types/commit/ff72fd809d0cab377283f5cf8fb48954e917d583) [#171](https://github.com/atlassian/extract-react-types/pull/171) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Internal refactor. Changes internal logic and file structure only.
+
 ## 0.29.2
 
 ### Patch Changes
