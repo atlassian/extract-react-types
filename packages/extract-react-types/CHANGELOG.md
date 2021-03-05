@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.0
+
+### Minor Changes
+
+- [`c1aa88d`](https://github.com/atlassian/extract-react-types/commit/c1aa88d6b5913b933711c3cc0139de63b2633678) [#172](https://github.com/atlassian/extract-react-types/pull/172) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Forced minor (no changes)
+
 ## 0.29.3
 
 ### Patch Changes
