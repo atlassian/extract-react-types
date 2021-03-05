@@ -12,7 +12,7 @@ type PropProps = CommonProps & {
   shapeComponent: ComponentType<CommonProps>
 };
 
-export default class Prop extends Component<PropProps> {
+export default class PropEntry extends Component<PropProps> {
   static defaultProps = {
     shapeComponent: (props: CommonProps) => <PrettyPropType {...props} />
   };
@@ -28,10 +28,11 @@ export default class Prop extends Component<PropProps> {
           css={css`
             width: 100%;
             border-collapse: collapse;
+            margin-top: 40px;
 
             th {
               text-align: left;
-              padding: 4px 8px 4px 0;
+              padding: 4px 16px 4px 8px;
               white-space: nowrap;
               vertical-align: top;
             }
@@ -45,25 +46,35 @@ export default class Prop extends Component<PropProps> {
           <caption
             css={css`
               text-align: left;
-              font-weight: 500;
-              font-size: 1.28571428571em;
-              margin-top: 28px;
-              margin-bottom: 0;
+              margin: 0;
+              font-size: 1em;
             `}
           >
             <Heading
               css={css`
-                font-size: inherit;
-                margin-bottom: 0;
-                padding-bottom: 4px;
+                font-size: 1em;
+                padding-bottom: 8px;
+                border-bottom: 1px solid ${colors.N30};
+                margin-bottom: 4px;
               `}
             >
-              <code>{name}</code>
+              <code
+                css={css`
+                  background-color: ${colors.N20};
+                  color: ${colors.N800};
+                  border-radius: 3px;
+                  padding: 4px 8px;
+                  line-height: 20px;
+                  display: inline-block;
+                `}
+              >
+                {name}
+              </code>
               {required && defaultValue === undefined && (
                 <HeadingRequired
                   css={css`
-                    font-size: initial;
                     margin-left: 1em;
+                    color: ${colors.R400};
                   `}
                 >
                   required
@@ -73,11 +84,11 @@ export default class Prop extends Component<PropProps> {
           </caption>
           <tbody
             css={css`
-              border-bottom: 2px solid ${colors.N20};
+              border-bottom: none;
             `}
           >
             <tr>
-              <th>Description</th>
+              <th scope="row">Description</th>
               <td>
                 {description && (
                   <components.Description>{md([description])}</components.Description>
@@ -86,19 +97,19 @@ export default class Prop extends Component<PropProps> {
             </tr>
             {defaultValue !== undefined && (
               <tr>
-                <th>Default</th>
+                <th scope="row">Default</th>
                 <td>
                   <HeadingDefault>{defaultValue}</HeadingDefault>
                 </td>
               </tr>
             )}
             <tr>
-              <th>Type</th>
+              <th scope="row">Type</th>
               <td
-                css={{
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}
+                css={css`
+                  display: flex;
+                  flex-direction: column;
+                `}
               >
                 <span>
                   <HeadingType>{type}</HeadingType>
