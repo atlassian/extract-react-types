@@ -6,6 +6,8 @@
 import React from 'react';
 
 type FlowComponentProps = {
+  // This prop is required as it is not optional and has no default
+  requiredProp: any,
   // This prop is a string
   stringProp: string,
   // This prop is a number

@@ -3,7 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import React, { Component, type ComponentType } from 'react';
 
 import type { Components } from '../components';
@@ -11,7 +11,7 @@ import type { CommonProps } from '../types';
 import PropsWrapper from '../Props/Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
-import PropRow from './PropRow';
+import PropEntry from './PropEntry';
 
 type Obj = {
   kind: 'object',
@@ -48,9 +48,9 @@ const getProps = props => {
   return null;
 };
 
-export default class PropsTable extends Component<DynamicPropsProps> {
+export default class HybridLayout extends Component<DynamicPropsProps> {
   render() {
-    let { props, heading, component, ...rest } = this.props;
+    let { props, heading, component, components, ...rest } = this.props;
     if (component) {
       /* $FlowFixMe the component prop is typed as a component because
          that's what people pass to Props and the ___types property shouldn't
@@ -66,26 +66,31 @@ export default class PropsTable extends Component<DynamicPropsProps> {
         );
       }
     }
+
+    if (!components || !components.Description) {
+      components = components || {};
+      components.Description = ({ children }) => (
+        <div
+          css={css`
+            p:first-of-type {
+              margin-top: 0px;
+            }
+            p:last-of-type {
+              margin-bottom: 0px;
+            }
+          `}
+        >
+          {children}
+        </div>
+      );
+    }
+
     let propTypes = getProps(props);
     if (!propTypes) return null;
 
     return (
       <PropsWrapper heading={heading}>
-        <table>
-          <thead>
-            <tr
-              css={{
-                paddingTop: '14px'
-              }}
-            >
-              <td>Name</td>
-              <td>Type</td>
-              <td>Defaults</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          {propTypes.map(propType => renderPropType(propType, rest, PropRow))}
-        </table>
+        {propTypes.map(propType => renderPropType(propType, { ...rest, components }, PropEntry))}
       </PropsWrapper>
     );
   }

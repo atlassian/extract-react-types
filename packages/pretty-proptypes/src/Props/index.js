@@ -10,6 +10,8 @@ import PropsWrapper from './Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../PropType';
 
+import Prop from '../Prop';
+
 type Obj = {
   kind: 'object',
   members: Array<any>
@@ -68,7 +70,7 @@ export default class Props extends Component<DynamicPropsProps> {
 
     return (
       <PropsWrapper heading={heading}>
-        {propTypes.map(propType => renderPropType(propType, rest))}
+        {propTypes.map(propType => renderPropType(propType, rest, Prop))}
       </PropsWrapper>
     );
   }
