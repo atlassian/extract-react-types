@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.2.0
+
+### Minor Changes
+
+- [`84e9241`](https://github.com/atlassian/extract-react-types/commit/84e9241d0bfe9827f5331d96ae9f80cdf3e10894) [#174](https://github.com/atlassian/extract-react-types/pull/174) Thanks [@declan-warn](https://github.com/declan-warn)! - Added a new hybrid layout for displaying props.
+
 ## 1.1.4
 
 ### Patch Changes
