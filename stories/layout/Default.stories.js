@@ -1,6 +1,11 @@
+// @flow
+/** @jsx jsx */
+import { jsx, css, Global } from '@emotion/core';
+import { type Node } from 'react';
+
 import React from 'react';
 
-import Props from 'pretty-proptypes';
+import { PrettyProps } from 'pretty-proptypes';
 import TypeScriptComponent from '../TypeScriptComponent';
 
 export default {
@@ -10,8 +15,25 @@ export default {
 
 const Template = args => args.component;
 
-export const Default = Template.bind({});
+export const Base = Template.bind({});
 
-Default.args = {
-  component: <Props component={TypeScriptComponent} heading="Primitive types" />
+Base.args = {
+  component: (
+    <>
+      <h2>Primitive types</h2>
+      <PrettyProps component={TypeScriptComponent} />
+    </>
+  )
 };
+
+export const WithReset = () => (
+  <>
+    <Global
+      styles={css`
+        @import 'https://unpkg.com/@atlaskit/css-reset@6.0.5/dist/bundle.css';
+      `}
+    />
+    <h2>Primitive types</h2>
+    <PrettyProps component={TypeScriptComponent} />
+  </>
+);

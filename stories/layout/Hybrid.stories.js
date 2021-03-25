@@ -1,7 +1,9 @@
+// @flow
+/** @jsx jsx */
+import { jsx, css, Global } from '@emotion/core';
 import React from 'react';
 
-import { HybridLayout } from 'pretty-proptypes';
-import { css, Global } from '@emotion/core';
+import { HybridLayout, PrettyProps } from 'pretty-proptypes';
 import TypeScriptComponent from '../TypeScriptComponent';
 
 import { colors } from '../../packages/pretty-proptypes/src/components/constants';
@@ -16,7 +18,16 @@ const Template = args => args.component;
 export const Base = Template.bind({});
 
 Base.args = {
-  component: <HybridLayout component={TypeScriptComponent} heading="Primitive types" />
+  component: (
+    <>
+      <h2>Primitive types</h2>
+      <PrettyProps
+        component={TypeScriptComponent}
+        heading="Primitive types"
+        layout={HybridLayout}
+      />
+    </>
+  )
 };
 
 export const WithReset = Template.bind({});
@@ -29,7 +40,12 @@ WithReset.args = {
           @import 'https://unpkg.com/@atlaskit/css-reset@6.0.5/dist/bundle.css';
         `}
       />
-      <HybridLayout component={TypeScriptComponent} heading="Primitive types" />
+      <h2>Primitive types</h2>
+      <PrettyProps
+        component={TypeScriptComponent}
+        heading="Primitive types"
+        layout={HybridLayout}
+      />
     </>
   )
 };

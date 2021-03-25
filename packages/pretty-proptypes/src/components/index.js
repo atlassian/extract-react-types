@@ -6,6 +6,7 @@ import Required from './Required';
 import Description from './Description';
 import Button from './Button';
 import Type, { StringType, TypeMeta, FunctionType } from './Type';
+import * as Heading from './Heading';
 
 const components = {
   Indent,
@@ -16,7 +17,8 @@ const components = {
   TypeMeta,
   Description,
   Button,
-  FunctionType
+  FunctionType,
+  ...Heading
 };
 
 export default components;
