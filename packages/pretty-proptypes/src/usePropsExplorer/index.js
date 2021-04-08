@@ -27,7 +27,5 @@ export default function usePropsExplorer(props) {
 
   let propTypes = getProps(props) || null;
 
-  return {
-    propTypes
-  };
+  return propTypes;
 }

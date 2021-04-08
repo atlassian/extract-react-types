@@ -10,7 +10,7 @@ export default {
 };
 
 const Template = args => {
-  const { propTypes } = usePropsExplorer({ component: TypeScriptComponent });
+  const propTypes = usePropsExplorer({ component: TypeScriptComponent });
 
   return (
     <div>
