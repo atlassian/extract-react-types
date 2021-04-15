@@ -15,7 +15,7 @@ import {
   hasDestructuredDefaultExport,
   matchExported
 } from './export-manager';
-
+import { hasTypeAnnotation } from './utils';
 import * as K from './kinds';
 
 const converters = {};
@@ -1267,28 +1267,6 @@ export default function convert(path, context) {
   return result;
 }
 
-function hasTypeAnnotation(path, left, right) {
-  try {
-    const { typeName, typeParameters } = path.get('id.typeAnnotation.typeAnnotation').node;
-
-    if (!typeParameters) return false;
-
-    if (typeName.left) {
-      if (typeName.left.name === left && typeName.right.name === right) {
-        return true;
-      }
-
-      return false;
-    }
-
-    if (typeName.name === right) {
-      return true;
-    }
-  } catch (e) {
-    return false;
-  }
-}
-
 export function convertComponentExports(componentExports, context) {
   // eslint-disable-next-line array-callback-return
   return componentExports.map(({ path, name }) => {
@@ -1299,7 +1277,7 @@ export function convertComponentExports(componentExports, context) {
     ) {
       let propType;
 
-      // check for a component typed with the `FC<Props>` annotation
+      // check for a component typed with the `React.FC<Props>` or `FC<Props>` type annotation
       if (hasTypeAnnotation(path.parentPath, 'React', 'FC')) {
         propType = path.parentPath.get('id.typeAnnotation.typeAnnotation.typeParameters.params.0');
       } else {
