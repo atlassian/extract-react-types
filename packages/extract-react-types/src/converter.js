@@ -1267,6 +1267,28 @@ export default function convert(path, context) {
   return result;
 }
 
+function hasTypeAnnotation(path, left, right) {
+  try {
+    const { typeName, typeParameters } = path.get('id.typeAnnotation.typeAnnotation').node;
+
+    if (!typeParameters) return false;
+
+    if (typeName.left) {
+      if (typeName.left.name === left && typeName.right.name === right) {
+        return true;
+      }
+
+      return false;
+    }
+
+    if (typeName.name === right) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
 export function convertComponentExports(componentExports, context) {
   // eslint-disable-next-line array-callback-return
   return componentExports.map(({ path, name }) => {
@@ -1278,12 +1300,7 @@ export function convertComponentExports(componentExports, context) {
       let propType;
 
       // check for a component typed with the `FC<Props>` annotation
-      if (
-        path.parentPath.node.id &&
-        path.parentPath.node.id.typeAnnotation &&
-        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeName.name === 'FC' &&
-        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeParameters
-      ) {
+      if (hasTypeAnnotation(path.parentPath, 'React', 'FC')) {
         propType = path.parentPath.get('id.typeAnnotation.typeAnnotation.typeParameters.params.0');
       } else {
         // we have a normal function, assume the props are the first parameter
