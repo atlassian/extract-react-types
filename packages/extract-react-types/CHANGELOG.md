@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.1
+
+### Patch Changes
+
+- [`7a46827`](https://github.com/atlassian/extract-react-types/commit/7a468274d4ad3f6db8c4ad42613cecb122ed002e) [#183](https://github.com/atlassian/extract-react-types/pull/183) Thanks [@danieldelcore](https://github.com/danieldelcore)! - Adds support for React.FC and FC
+
 ## 0.30.0
 
 ### Minor Changes
