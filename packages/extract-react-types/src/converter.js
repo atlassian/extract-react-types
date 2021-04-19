@@ -15,7 +15,7 @@ import {
   hasDestructuredDefaultExport,
   matchExported
 } from './export-manager';
-
+import { hasTypeAnnotation } from './utils';
 import * as K from './kinds';
 
 const converters = {};
@@ -1277,13 +1277,8 @@ export function convertComponentExports(componentExports, context) {
     ) {
       let propType;
 
-      // check for a component typed with the `FC<Props>` annotation
-      if (
-        path.parentPath.node.id &&
-        path.parentPath.node.id.typeAnnotation &&
-        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeName.name === 'FC' &&
-        path.parentPath.node.id.typeAnnotation.typeAnnotation.typeParameters
-      ) {
+      // check for a component typed with the `React.FC<Props>` or `FC<Props>` type annotation
+      if (hasTypeAnnotation(path.parentPath, 'React', 'FC')) {
         propType = path.parentPath.get('id.typeAnnotation.typeAnnotation.typeParameters.params.0');
       } else {
         // we have a normal function, assume the props are the first parameter

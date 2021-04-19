@@ -28,6 +28,69 @@ Object {
 }
 `;
 
+exports[`TypeScript: FC 1`] = `
+Object {
+  "kind": "generic",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+  "value": Object {
+    "kind": "object",
+    "members": Array [
+      Object {
+        "key": Object {
+          "kind": "id",
+          "name": "children",
+        },
+        "kind": "property",
+        "optional": false,
+        "value": Object {
+          "kind": "string",
+        },
+      },
+    ],
+    "referenceIdName": "Props",
+  },
+}
+`;
+
+exports[`TypeScript: FC with empty type argument 1`] = `
+Object {
+  "kind": "any",
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+}
+`;
+
+exports[`TypeScript: FC with inline type argument 1`] = `
+Object {
+  "kind": "object",
+  "members": Array [
+    Object {
+      "key": Object {
+        "kind": "id",
+        "name": "children",
+      },
+      "kind": "property",
+      "optional": false,
+      "value": Object {
+        "kind": "string",
+      },
+    },
+  ],
+  "name": Object {
+    "kind": "id",
+    "name": "Component",
+    "type": null,
+  },
+}
+`;
+
 exports[`TypeScript: React.ComponentType 1`] = `
 Object {
   "kind": "generic",

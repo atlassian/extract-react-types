@@ -65,7 +65,7 @@ const TESTS = [
   `
   },
   {
-    name: 'React.FC',
+    name: 'FC',
     typeSystem: 'typescript',
     code: `
       type Props = {
@@ -78,7 +78,7 @@ const TESTS = [
     `
   },
   {
-    name: 'React.FC with empty type argument',
+    name: 'FC with empty type argument',
     typeSystem: 'typescript',
     code: `
       type Props = {
@@ -91,10 +91,51 @@ const TESTS = [
     `
   },
   {
-    name: 'React.FC with inline type argument',
+    name: 'FC with inline type argument',
     typeSystem: 'typescript',
     code: `
       const Component: FC<{
+        children: string;
+      }> = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'React.FC',
+    typeSystem: 'typescript',
+    code: `
+      import React from 'react';
+
+      type Props = {
+        children: string;
+      };
+
+      const Component: React.FC<Props> = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'React.FC with empty type argument',
+    typeSystem: 'typescript',
+    code: `
+      import React from 'react';
+
+      type Props = {
+        children: string;
+      };
+
+      const Component: React.FC = (props) => null;
+
+      export default Component;
+    `
+  },
+  {
+    name: 'React.FC with inline type argument',
+    typeSystem: 'typescript',
+    code: `
+      const Component: React.FC<{
         children: string;
       }> = (props) => null;
 
