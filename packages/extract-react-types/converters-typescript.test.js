@@ -694,7 +694,7 @@ cases(
 test('Typescript quoted property name is converted properly', () => {
   const name = 'quoted';
   const code = stripIndent(`
-    class Component extends React.Component<{ quoted: string }> {
+    class Component extends React.Component<{ '${name}': string }> {
       // ...
     }`);
   const typeSystem = 'typescript';
