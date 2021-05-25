@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.2
+
+### Patch Changes
+
+- [`f5866b0`](https://github.com/atlassian/extract-react-types/commit/f5866b0d5a93663d9f9f4f827a9b0512539ede08) [#188](https://github.com/atlassian/extract-react-types/pull/188) Thanks [@declan-warn](https://github.com/declan-warn)! - Adds support for string type keys in TypeScript.
+
 ## 0.30.1
 
 ### Patch Changes
