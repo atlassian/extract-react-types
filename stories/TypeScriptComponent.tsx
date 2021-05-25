@@ -34,6 +34,8 @@ type TypeScriptComponentProps = {
   unknownProp: unknown;
   // This prop uses an unknown typescript keyword "keyof" and so will result in a bail-out
   unsupportedProp: keyof DummyInterface;
+  // This prop uses hyphens, so the type uses quotations around the key
+  'quoted-prop': any;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;

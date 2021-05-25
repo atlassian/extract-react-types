@@ -690,3 +690,15 @@ cases(
   },
   TESTS
 );
+
+test('Typescript quoted property name is converted properly', () => {
+  const name = 'quoted';
+  const code = stripIndent(`
+    class Component extends React.Component<{ quoted: string }> {
+      // ...
+    }`);
+  const typeSystem = 'typescript';
+  const result = extractReactTypes(code, typeSystem, __filename);
+
+  expect(result).toHaveProperty(['component', 'members', 0, 'key', 'name'], name);
+});
