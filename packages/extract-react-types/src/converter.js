@@ -535,12 +535,28 @@ converters.TSTypeLiteral = (path, context): K.Obj => ({
   members: path.get('members').map(memberPath => convert(memberPath, context))
 });
 
-converters.TSPropertySignature = (path, context): K.Property => ({
-  kind: 'property',
-  optional: !!path.node.optional,
-  key: { kind: 'id', name: path.node.key.name },
-  value: convert(path.get('typeAnnotation'), context)
-});
+converters.TSPropertySignature = (path, context): K.Property => {
+  let key = { kind: 'id' };
+  switch (path.node.key.type) {
+    case 'Identifier':
+      key.name = path.node.key.name;
+      break;
+
+    case 'StringLiteral':
+      key.name = path.node.key.value;
+      break;
+
+    default:
+      key.name = undefined;
+  }
+
+  return {
+    kind: 'property',
+    optional: !!path.node.optional,
+    key,
+    value: convert(path.get('typeAnnotation'), context)
+  };
+};
 
 converters.TSTypeAliasDeclaration = (path, context): K.Obj =>
   convert(path.get('typeAnnotation'), context);

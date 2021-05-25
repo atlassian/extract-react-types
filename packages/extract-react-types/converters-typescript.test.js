@@ -690,3 +690,33 @@ cases(
   },
   TESTS
 );
+
+test('Typescript interface quoted property name is converted properly', () => {
+  const name = 'quoted';
+  const code = stripIndent(`
+    interface Props {
+      /* Type comment for ${name} */
+      '${name}': string;
+    }
+
+    class Component extends React.Component<Props> {}`);
+  const typeSystem = 'typescript';
+  const result = extractReactTypes(code, typeSystem, __filename);
+
+  expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
+});
+
+test('Typescript type quoted property name is converted properly', () => {
+  const name = 'quoted';
+  const code = stripIndent(`
+    type Props = {
+      /* Type comment for ${name} */
+      '${name}': string;
+    }
+
+    class Component extends React.Component<Props> {}`);
+  const typeSystem = 'typescript';
+  const result = extractReactTypes(code, typeSystem, __filename);
+
+  expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
+});
