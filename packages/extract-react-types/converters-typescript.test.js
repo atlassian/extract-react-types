@@ -694,11 +694,14 @@ cases(
 test('Typescript quoted property name is converted properly', () => {
   const name = 'quoted';
   const code = stripIndent(`
-    class Component extends React.Component<{ '${name}': string }> {
-      // ...
-    }`);
+    interface Props {
+      /* Type comment for ${name} */
+      '${name}': string;
+    }
+
+    class Component extends React.Component<Props> {}`);
   const typeSystem = 'typescript';
   const result = extractReactTypes(code, typeSystem, __filename);
 
-  expect(result).toHaveProperty(['component', 'members', 0, 'key', 'name'], name);
+  expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
 });
