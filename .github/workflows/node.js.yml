@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn global add bolt
+    - run: sudo yarn global add bolt
     - run: bolt --frozen-lockfile
     - run: bolt lint
     - run: bolt test
