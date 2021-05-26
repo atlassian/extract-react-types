@@ -334,6 +334,8 @@ describe('kind 2 string tests', () => {
       let converted = convert(res);
       expect(converted).toBe('react.Component');
     });
+
+    // eslint-disable-next-line jest/no-disabled-tests
     it.skip('Resolves down to a string representation for namespaced external imports', () => {
       let file = `
         import { Component } from 'react';

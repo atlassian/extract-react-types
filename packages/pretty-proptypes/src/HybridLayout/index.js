@@ -4,7 +4,7 @@
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import React, { Component, type ComponentType } from 'react';
+import { Component, type ComponentType } from 'react';
 
 import type { Components } from '../components';
 import type { CommonProps } from '../types';

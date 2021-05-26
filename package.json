@@ -14,6 +14,7 @@
     "release": "yarn build && changeset publish",
     "postinstall": "preconstruct dev",
     "lint": "yarn eslint \"./**/*.js\"",
+    "lint:fix": "prettier --write packages/**/*.js",
     "validate": "yarn lint && yarn test && yarn flow",
     "build": "preconstruct build",
     "clean": "yarn delete:modules && yarn delete:dist",
