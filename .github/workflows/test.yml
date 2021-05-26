@@ -1,3 +1,5 @@
+# Run linting and tests when pushing to master or targeting master in pull requests
+
 name: Test
 
 on:
