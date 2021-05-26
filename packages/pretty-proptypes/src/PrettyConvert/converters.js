@@ -104,14 +104,15 @@ export const converters: { [string]: ?Function } = {
     if (type.members.length === 0) {
       return <components.Type>Object</components.Type>;
     }
-    let simpleObj = type.members.filter(mem => {
-      if (mem === null) {
-        /** if the member is null, error out */
-        console.warn(`null property in members of ${type.referenceIdName} of kind ${type.kind} `)
-        return false;
-      }
-      return !SIMPLE_TYPES.includes(mem.kind)
-    }).length === 0;
+    let simpleObj =
+      type.members.filter(mem => {
+        if (mem === null) {
+          /** if the member is null, error out */
+          console.warn(`null property in members of ${type.referenceIdName} of kind ${type.kind} `);
+          return false;
+        }
+        return !SIMPLE_TYPES.includes(mem.kind);
+      }).length === 0;
 
     if (simpleObj) {
       return <components.Type>{convert(type)}</components.Type>;
@@ -121,20 +122,22 @@ export const converters: { [string]: ?Function } = {
       <span>
         <AddBrackets BracketStyler={components.TypeMeta} openBracket="{" closeBracket="}">
           <components.Indent>
-            {type.members.filter(p => p).map(prop => {
-              if (prop.kind === 'spread') {
-                const nestedObj = resolveFromGeneric(prop.value);
-                // Spreads almost always resolve to an object, but they can
-                // also resolve to an import. We just allow it to fall through
-                // to prettyConvert if there are no members
-                if (nestedObj.members) {
-                  return nestedObj.members.map(newProp =>
-                    prettyConvert(newProp, components, depth)
-                  );
+            {type.members
+              .filter(p => p)
+              .map(prop => {
+                if (prop.kind === 'spread') {
+                  const nestedObj = resolveFromGeneric(prop.value);
+                  // Spreads almost always resolve to an object, but they can
+                  // also resolve to an import. We just allow it to fall through
+                  // to prettyConvert if there are no members
+                  if (nestedObj.members) {
+                    return nestedObj.members.map(newProp =>
+                      prettyConvert(newProp, components, depth)
+                    );
+                  }
                 }
-              }
-              return prettyConvert(prop, components, depth);
-            })}
+                return prettyConvert(prop, components, depth);
+              })}
           </components.Indent>
         </AddBrackets>
       </span>
@@ -243,6 +246,5 @@ const prettyConvert = (type: K.AnyKind, components: Components, depth: number = 
   }
   return converter(type, components, depth);
 };
-
 
 export default prettyConvert;

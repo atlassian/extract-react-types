@@ -1,7 +1,7 @@
 // @flow
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Fragment, Component, type ComponentType, type Node } from 'react';
+import { Fragment, Component, type ComponentType } from 'react';
 import md from 'react-markings';
 import PrettyPropType from '../PrettyConvert';
 import { HeadingName, HeadingType, HeadingDefault } from '../Prop/Heading';
@@ -24,42 +24,33 @@ export default class Prop extends Component<PropProps> {
     return (
       <Fragment>
         <tbody>
-          <tr valign="top" css={{
-            '& > td': { 
-              padding: '14px 0px',
-            }
-          }}>
-            <td>
-              <HeadingName>
-                {name}
-              </HeadingName>
-            </td>
-            <td css={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}>
-              <span>
-                <HeadingType>
-                  {type}
-                </HeadingType>
-              </span>
-              <span>
-                <ShapeComponent {...commonProps}/>
-              </span>
-            </td>
-            <td>
-              {defaultValue !== undefined && (
-                <HeadingDefault>
-                  {defaultValue}
-                </HeadingDefault>
-                )}
-            </td>
-            <td>
-              {description && 
-                (<components.Description>
-                  {md([description])}
-                </components.Description>)
+          <tr
+            valign="top"
+            css={{
+              '& > td': {
+                padding: '14px 0px'
               }
+            }}
+          >
+            <td>
+              <HeadingName>{name}</HeadingName>
+            </td>
+            <td
+              css={{
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <span>
+                <HeadingType>{type}</HeadingType>
+              </span>
+              <span>
+                <ShapeComponent {...commonProps} />
+              </span>
+            </td>
+            <td>{defaultValue !== undefined && <HeadingDefault>{defaultValue}</HeadingDefault>}</td>
+            <td>
+              {description && <components.Description>{md([description])}</components.Description>}
             </td>
           </tr>
         </tbody>
@@ -67,5 +58,3 @@ export default class Prop extends Component<PropProps> {
     );
   }
 }
-
-

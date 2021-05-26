@@ -32,7 +32,7 @@ export const H2 = ({ children, ...rest }: { children: Node }) => (
 const PropsWrapper = ({ children, heading }: { children: Node, heading?: string }) => (
   <Wrapper>
     {typeof heading === 'string' && heading.length === 0 ? null : <H2>{heading || 'Props'}</H2>}
-      {children}
+    {children}
   </Wrapper>
 );
 

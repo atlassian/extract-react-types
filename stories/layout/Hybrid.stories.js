@@ -4,8 +4,6 @@ import { HybridLayout } from 'pretty-proptypes';
 import { css, Global } from '@emotion/core';
 import TypeScriptComponent from '../TypeScriptComponent';
 
-import { colors } from '../../packages/pretty-proptypes/src/components/constants';
-
 export default {
   title: 'Example/Layouts/Hybrid',
   component: HybridLayout

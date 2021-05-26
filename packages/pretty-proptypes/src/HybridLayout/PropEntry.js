@@ -1,7 +1,7 @@
 // @flow
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { Fragment, Component, type ComponentType, type Node } from 'react';
+import { Fragment, Component, type ComponentType } from 'react';
 import md from 'react-markings';
 import PrettyPropType from '../PrettyConvert';
 import { HeadingType, HeadingDefault, Heading, HeadingRequired } from '../Prop/Heading';
