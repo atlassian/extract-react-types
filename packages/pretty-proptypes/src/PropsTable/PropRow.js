@@ -19,7 +19,12 @@ export default class Prop extends Component<PropProps> {
   render() {
     let { shapeComponent: ShapeComponent, ...commonProps } = this.props;
 
-    let { defaultValue, description, name, required, type, components } = commonProps;
+    /**
+     * TODO: extract + use `required` to display whether the prop is required.
+     * Other layouts already do.
+     * https://github.com/atlassian/extract-react-types/issues/192
+     */
+    let { defaultValue, description, name, type, components } = commonProps;
 
     return (
       <Fragment>
