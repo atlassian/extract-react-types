@@ -1,5 +1,65 @@
 # extract-react-types-loader
 
+## 1.0.0
+
+### Major Changes
+
+- [`1ec5f76`](https://github.com/atlassian/extract-react-types/commit/1ec5f76c5e99ce78e952a83eac178fcc22e5f557) [#196](https://github.com/atlassian/extract-react-types/pull/196) Thanks [@marionebl](https://github.com/marionebl)! - Remove Atlaskit specific process.env switches (#195)
+
+  BREAKING CHANGE
+  This removes the previously available process.env switches to conditionally disable the loader.
+  To restore the previous behaviour you'll have to use the `resolveLoader` webpack config, e.g.
+
+  ```js
+  // webpack.config.js
+  const enabled =
+    ['production', 'staging'].includes(process.env.WEBSITE_ENV) ||
+    process.env.FORCE_EXTRACT_REACT_TYPES;
+
+  module.exports = {
+    /* ... */
+    resolveLoader: {
+      alias: {
+        'extract-react-types-loader': enabled
+          ? undefined
+          : require.resolve('./noop-extract-react-types-loader')
+      }
+    }
+  };
+  ```
+
+  ```js
+  // noop-extract-react-types-loader.js
+  module.exports = function noopExtractReactPropTypesLoader() {
+    return `module.exports = {
+      component: {
+        kind: 'object',
+        members: [
+          {
+            kind: 'property',
+            key: { kind: 'id', name: 'Warning' },
+            value: { kind: 'any' },
+            optional: false,
+            leadingComments: [
+              {
+                type: 'commentBlock',
+                value: `extract-react-types is not being run in dev mode for speed reasons. If you need to
+    see prop types add the environment variable \`FORCE_EXTRACT_REACT_TYPES\`
+                raw: '**'
+              }
+            ],
+            default: {
+              kind: 'string',
+              value: 'Prop types are not shown in dev mode'
+            }
+          }
+        ],
+        referenceIdName: 'NoopPropTpes'
+      }
+    };`
+  }
+  ```
+
 ## 0.3.17
 
 ### Patch Changes
