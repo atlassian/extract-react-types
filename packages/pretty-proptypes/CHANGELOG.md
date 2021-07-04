@@ -1,5 +1,15 @@
 # pretty-proptypes
 
+## 1.3.0
+
+### Minor Changes
+
+- [`a763063`](https://github.com/atlassian/extract-react-types/commit/a76306349bbccc1aa53a101ce7c444120c2a0ba4) [#199](https://github.com/atlassian/extract-react-types/pull/199) Thanks [@madou](https://github.com/madou)! - Props that have comments which start with `eslint-ignore` or `@ts-` are no longer rendered,
+  other surrounding comments are still rendered for the prop however.
+
+* [`a763063`](https://github.com/atlassian/extract-react-types/commit/a76306349bbccc1aa53a101ce7c444120c2a0ba4) [#199](https://github.com/atlassian/extract-react-types/pull/199) Thanks [@madou](https://github.com/madou)! - Props that have comments which contain `@internal` or `@access private` are no longer rendered to the props table,
+  essentially having the prop and all of its comments hidden.
+
 ## 1.2.0
 
 ### Minor Changes
