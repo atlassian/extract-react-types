@@ -5,11 +5,23 @@ import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from '../components';
 
 const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
+const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
 
 const shouldIgnoreComment = comment => {
   for (let index in IGNORE_COMMENTS_STARTING_WITH) {
     const value = IGNORE_COMMENTS_STARTING_WITH[index];
     if (comment.startsWith(value)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const shouldHideProp = comment => {
+  for (let index in HIDE_PROPS_THAT_CONTAIN) {
+    const value = HIDE_PROPS_THAT_CONTAIN[index];
+    if (comment.includes(value)) {
       return true;
     }
   }
@@ -56,8 +68,7 @@ const renderPropType = (
     return null;
   }
 
-  if (description.includes('@internal')) {
-    // This prop is internal so we skip rendering it.
+  if (shouldHideProp(description)) {
     return null;
   }
 
