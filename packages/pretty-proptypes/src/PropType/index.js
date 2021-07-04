@@ -8,8 +8,8 @@ const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
 const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
 
 const shouldIgnoreComment = comment => {
-  for (let index in IGNORE_COMMENTS_STARTING_WITH) {
-    const value = IGNORE_COMMENTS_STARTING_WITH[index];
+  for (let i = 0; i < IGNORE_COMMENTS_STARTING_WITH.length; i++) {
+    const value = IGNORE_COMMENTS_STARTING_WITH[i];
     if (comment.startsWith(value)) {
       return true;
     }
@@ -19,8 +19,8 @@ const shouldIgnoreComment = comment => {
 };
 
 const shouldHideProp = comment => {
-  for (let index in HIDE_PROPS_THAT_CONTAIN) {
-    const value = HIDE_PROPS_THAT_CONTAIN[index];
+  for (let i = 0; i < HIDE_PROPS_THAT_CONTAIN.length; i++) {
+    const value = HIDE_PROPS_THAT_CONTAIN[i];
     if (comment.includes(value)) {
       return true;
     }
