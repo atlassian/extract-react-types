@@ -4,6 +4,39 @@ import React from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from '../components';
 
+const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
+const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
+
+const shouldIgnoreComment = comment => {
+  if (!comment) {
+    return false;
+  }
+
+  for (let i = 0; i < IGNORE_COMMENTS_STARTING_WITH.length; i++) {
+    const value = IGNORE_COMMENTS_STARTING_WITH[i];
+    if (comment.startsWith(value)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const shouldHideProp = comment => {
+  if (!comment) {
+    return false;
+  }
+
+  for (let i = 0; i < HIDE_PROPS_THAT_CONTAIN.length; i++) {
+    const value = HIDE_PROPS_THAT_CONTAIN[i];
+    if (comment.includes(value)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const renderPropType = (
   propType: any,
   { overrides = {}, shouldCollapseProps, components }: any,
@@ -28,7 +61,9 @@ const renderPropType = (
 
   let description;
   if (propType.leadingComments) {
-    description = propType.leadingComments.reduce((acc, { value }) => acc.concat(`\n${value}`), '');
+    description = propType.leadingComments
+      .filter(({ value }) => !shouldIgnoreComment(value))
+      .reduce((acc, { value }) => acc.concat(`\n${value}`), '');
   }
 
   if (!propType.value) {
@@ -38,6 +73,10 @@ const renderPropType = (
         propType.key
       } has no type; this usually indicates invalid propType or defaultProps config`
     );
+    return null;
+  }
+
+  if (shouldHideProp(description)) {
     return null;
   }
 
