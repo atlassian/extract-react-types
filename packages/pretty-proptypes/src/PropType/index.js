@@ -41,7 +41,6 @@ const renderPropType = (
 
   let description;
   if (propType.leadingComments) {
-    console.log(propType.leadingComments);
     description = propType.leadingComments
       .filter(({ value }) => !shouldIgnoreComment(value))
       .reduce((acc, { value }) => acc.concat(`\n${value}`), '');
