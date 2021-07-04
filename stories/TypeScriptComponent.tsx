@@ -11,8 +11,10 @@ interface DummyInterface {
 
 type TypeScriptComponentProps = {
   // This prop is required as it is not optional and has no default
+  // eslint-disable-next-line
   requiredProp: any;
   // This prop is a string
+  // @ts-ignore
   stringProp: string;
   // This prop is a number
   numberProp: number;
@@ -36,6 +38,8 @@ type TypeScriptComponentProps = {
   unsupportedProp: keyof DummyInterface;
   // This prop uses hyphens, so the type uses quotations around the key
   'quoted-prop': any;
+  // @internal
+  hideProp: Boolean;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;

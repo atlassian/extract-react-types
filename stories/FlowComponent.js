@@ -7,8 +7,10 @@ import React from 'react';
 
 type FlowComponentProps = {
   // This prop is required as it is not optional and has no default
+  // eslint-disable-next-line
   requiredProp: any,
   // This prop is a string
+  // @ts-ignore
   stringProp: string,
   // This prop is a number
   numberProp: number,
@@ -27,7 +29,9 @@ type FlowComponentProps = {
   // This prop is a mixed
   mixedProp: mixed,
   // This prop is a union
-  unionProp: 'hello' | 'world'
+  unionProp: 'hello' | 'world',
+  // @internal
+  hideProp: Boolean
 };
 
 const FlowComponent = (props: FlowComponentProps) => <p>Hello World</p>;

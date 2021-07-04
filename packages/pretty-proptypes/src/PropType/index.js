@@ -4,6 +4,19 @@ import React from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from '../components';
 
+const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
+
+const shouldIgnoreComment = comment => {
+  for (let index in IGNORE_COMMENTS_STARTING_WITH) {
+    const value = IGNORE_COMMENTS_STARTING_WITH[index];
+    if (comment.startsWith(value)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const renderPropType = (
   propType: any,
   { overrides = {}, shouldCollapseProps, components }: any,
@@ -28,7 +41,10 @@ const renderPropType = (
 
   let description;
   if (propType.leadingComments) {
-    description = propType.leadingComments.reduce((acc, { value }) => acc.concat(`\n${value}`), '');
+    console.log(propType.leadingComments);
+    description = propType.leadingComments
+      .filter(({ value }) => !shouldIgnoreComment(value))
+      .reduce((acc, { value }) => acc.concat(`\n${value}`), '');
   }
 
   if (!propType.value) {
@@ -38,6 +54,11 @@ const renderPropType = (
         propType.key
       } has no type; this usually indicates invalid propType or defaultProps config`
     );
+    return null;
+  }
+
+  if (description.includes('@internal')) {
+    // This prop is internal so we skip rendering it.
     return null;
   }
 
