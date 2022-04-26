@@ -40,6 +40,7 @@ type TypeScriptComponentProps = {
   'quoted-prop': any;
   // @internal
   hideProp: Boolean;
+  nocomment: boolean;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;

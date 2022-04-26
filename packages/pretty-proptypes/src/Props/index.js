@@ -8,7 +8,7 @@ import type { Components } from '../components';
 import type { CommonProps } from '../types';
 import PropsWrapper from './Wrapper';
 import getPropTypes from '../getPropTypes';
-import renderPropType from '../PropType';
+import renderPropType from '../renderPropType';
 
 import Prop from '../Prop';
 

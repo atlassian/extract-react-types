@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
-import allComponents from '../components';
+import allComponents from './components';
 
 const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
 const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
@@ -39,14 +39,11 @@ const shouldHideProp = comment => {
 
 const renderPropType = (
   propType: any,
-  { overrides = {}, shouldCollapseProps, components }: any,
+  { overrides = {}, shouldCollapseProps, components = {} }: any,
   PropComponent
 ) => {
-  if (!components) {
-    components = allComponents;
-  } else {
-    components = { ...allComponents, ...components };
-  }
+  components = { ...allComponents, ...components };
+
   if (propType.kind === 'spread') {
     const furtherProps = reduceToObj(propType.value);
     if (Array.isArray(furtherProps) && furtherProps.length > 0) {
@@ -73,6 +70,7 @@ const renderPropType = (
         propType.key
       } has no type; this usually indicates invalid propType or defaultProps config`
     );
+
     return null;
   }
 
@@ -81,23 +79,20 @@ const renderPropType = (
   }
 
   const name = propType.kind === 'spread' ? '...' : convert(propType.key);
-  const OverrideComponent = overrides[name];
-  const commonProps = {
-    components,
-    name,
-    key: name,
-    required: !propType.optional,
-    type: getKind(propType.value),
-    defaultValue: propType.default && convert(propType.default),
-    description,
-    shouldCollapse: shouldCollapseProps,
-    typeValue: propType.value
-  };
+  const Component = overrides[name] || PropComponent;
 
-  return overrides[name] ? (
-    <OverrideComponent {...commonProps} />
-  ) : (
-    <PropComponent {...commonProps} />
+  return (
+    <Component
+      key={name}
+      components={components}
+      name={name}
+      description={description}
+      required={!propType.optional}
+      type={getKind(propType.value)}
+      defaultValue={propType.default && convert(propType.default)}
+      shouldCollapse={shouldCollapseProps}
+      typeValue={propType.value}
+    />
   );
 };
 
