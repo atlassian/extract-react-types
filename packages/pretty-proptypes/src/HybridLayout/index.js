@@ -4,93 +4,151 @@
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { Component, type ComponentType } from 'react';
+import { Component, type Node } from 'react';
 
-import type { Components } from '../components';
-import type { CommonProps } from '../types';
+import md from 'react-markings';
 import PropsWrapper from '../Props/Wrapper';
-import getPropTypes from '../getPropTypes';
-import renderPropType from '../PropType';
-import PropEntry from './PropEntry';
+import LayoutRenderer, { type LayoutRendererProps } from '../LayoutRenderer';
+import { HeadingType, HeadingDefault, Heading, HeadingRequired } from '../Prop/Heading';
+import { colors } from '../components/constants';
 
-type Obj = {
-  kind: 'object',
-  members: Array<any>
-};
-
-type Gen = {
-  kind: 'generic',
-  value: any
-};
-
-type Inter = {
-  kind: 'intersection',
-  types: Array<Obj | Gen>
-};
-
-type DynamicPropsProps = {
-  components?: Components,
+type DynamicPropsProps = LayoutRendererProps & {
   heading?: string,
-  shouldCollapseProps?: boolean,
-  overrides?: {
-    [string]: ComponentType<CommonProps>
-  },
-  props?: {
-    component?: Obj | Inter
-  },
-  component?: ComponentType<any>
+  shouldCollapseProps?: boolean
 };
 
-const getProps = props => {
-  if (props && props.component) {
-    return getPropTypes(props.component);
-  }
-  return null;
-};
+const Description = ({ children }: { children: Node }) => (
+  <div
+    css={css`
+      p:first-of-type {
+        margin-top: 0px;
+      }
+      p:last-of-type {
+        margin-bottom: 0px;
+      }
+    `}
+  >
+    {children}
+  </div>
+);
 
 export default class HybridLayout extends Component<DynamicPropsProps> {
   render() {
-    let { props, heading, component, components, ...rest } = this.props;
-    if (component) {
-      /* $FlowFixMe the component prop is typed as a component because
-         that's what people pass to Props and the ___types property shouldn't
-         exist in the components types so we're just going to ignore this error */
-      if (component.___types) {
-        props = { type: 'program', component: component.___types };
-      } else {
-        /* eslint-disable-next-line no-console */
-        console.error(
-          'A component was passed to <Props> but it does not have types attached.\n' +
-            'babel-plugin-extract-react-types may not be correctly installed.\n' +
-            '<Props> will fallback to the props prop to display types.'
-        );
-      }
-    }
-
-    if (!components || !components.Description) {
-      components = components || {};
-      components.Description = ({ children }) => (
-        <div
-          css={css`
-            p:first-of-type {
-              margin-top: 0px;
-            }
-            p:last-of-type {
-              margin-bottom: 0px;
-            }
-          `}
-        >
-          {children}
-        </div>
-      );
-    }
-
-    let propTypes = getProps(props);
-    if (!propTypes) return null;
+    const { props, heading, component, shouldCollapseProps } = this.props;
 
     return (
       <PropsWrapper heading={heading}>
-        {propTypes.map(propType => renderPropType(propType, { ...rest, components }, PropEntry))}
+        <LayoutRenderer
+          component={component}
+          props={props}
+          renderType={({
+            typeValue,
+            defaultValue,
+            description,
+            required,
+            name,
+            type,
+            components: Comp
+          }) => (
+            <table
+              css={css`
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 40px;
+
+                th {
+                  text-align: left;
+                  padding: 4px 16px 4px 8px;
+                  white-space: nowrap;
+                  vertical-align: top;
+                }
+
+                td {
+                  padding: 4px 0 4px 8px;
+                  width: 100%;
+                }
+
+                tbody {
+                  border-bottom: none;
+                }
+              `}
+            >
+              <caption
+                css={css`
+                  text-align: left;
+                  margin: 0;
+                  font-size: 1em;
+                `}
+              >
+                <Heading
+                  css={css`
+                    font-size: 1em;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid ${colors.N30};
+                    margin-bottom: 4px;
+                  `}
+                >
+                  <code
+                    css={css`
+                      background-color: ${colors.N20};
+                      color: ${colors.N800};
+                      border-radius: 3px;
+                      padding: 4px 8px;
+                      line-height: 20px;
+                      display: inline-block;
+                    `}
+                  >
+                    {name}
+                  </code>
+                  {required && defaultValue === undefined && (
+                    <HeadingRequired
+                      css={css`
+                        margin-left: 1em;
+                        color: ${colors.R400};
+                      `}
+                    >
+                      required
+                    </HeadingRequired>
+                  )}
+                </Heading>
+              </caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Description</th>
+                  <td>{description && <Description>{md([description])}</Description>}</td>
+                </tr>
+                {defaultValue !== undefined && (
+                  <tr>
+                    <th scope="row">Default</th>
+                    <td>
+                      <HeadingDefault>{defaultValue}</HeadingDefault>
+                    </td>
+                  </tr>
+                )}
+                <tr>
+                  <th scope="row">Type</th>
+                  <td
+                    css={css`
+                      display: flex;
+                      flex-direction: column;
+                    `}
+                  >
+                    <span>
+                      <HeadingType>{type}</HeadingType>
+                    </span>
+                    <span>
+                      <Comp.PropType
+                        typeValue={typeValue}
+                        components={Comp}
+                        shouldCollapse={shouldCollapseProps}
+                      />
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          )}
+        />
       </PropsWrapper>
     );
   }

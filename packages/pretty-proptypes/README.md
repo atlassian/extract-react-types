@@ -96,3 +96,28 @@ ${<Props
 
 While you can pass style `components` directly to `Prop`, we recommend passing
 style components in the top level Props, and letting them flow down.
+
+## Custom layouts
+
+In cases where a completely bespoke layout is required, use the `LayoutRenderer`. This component allows you to define a completely custom layout and substitute in your own UI.
+
+The `renderTypes` prop is called for every prop found on a given component and allows you to specify how that type should be rendered.
+
+If you don't want to override the default components, you can use the `components` property. Or import them directly from `pretty-proptypes`.
+
+```js
+import { LayoutRenderer } from 'pretty-proptypes';
+
+<LayoutRenderer
+  props={require('!!extract-react-types-loader!../MyCoolComponent')}
+  renderTypes={({ typeValue, defaultValue, description, required, name, type, components }) => {
+    <div>
+      <h2>{name}</h2>
+      <components.Description>{description}</components.Description>
+      {required && <components.Required>Required</components.Required>}
+      <components.Type>{type}</components.Type>
+      <components.PropType typeValue={typeValue} />
+    </div>;
+  }}
+/>;
+```

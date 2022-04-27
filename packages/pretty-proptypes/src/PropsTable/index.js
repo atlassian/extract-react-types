@@ -10,7 +10,7 @@ import type { Components } from '../components';
 import type { CommonProps } from '../types';
 import PropsWrapper from '../Props/Wrapper';
 import getPropTypes from '../getPropTypes';
-import renderPropType from '../PropType';
+import renderPropType from '../renderPropType';
 import PropRow from './PropRow';
 
 type Obj = {
