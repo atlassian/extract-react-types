@@ -44,7 +44,6 @@
     "@babel/plugin-syntax-typescript": "^7.2.0",
     "@babel/runtime": "^7.4.4",
     "@babel/types": "^7.0.0-beta.56",
-    "@changesets/changelog-github": "^0.2.1",
     "@changesets/cli": "^2.8.0",
     "@emotion/core": "^10.0.14",
     "@preconstruct/cli": "^2.0.0",
