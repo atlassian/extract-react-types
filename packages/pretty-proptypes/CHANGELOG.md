@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.4.0
+
+### Minor Changes
+
+- 0d19c1c: Adds a generic layout renderer which can be used to create bespoke prop tables. Also refactors the internals of the hybrid layout to utilise it
+
 ## 1.3.0
 
 ### Minor Changes
