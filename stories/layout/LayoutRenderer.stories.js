@@ -121,7 +121,7 @@ Base.args = {
                     <HeadingType>{type}</HeadingType>
                   </span>
                   <span>
-                    <components.PropType typeValue={typeValue} />
+                    <components.PropType typeValue={typeValue} components={components} />
                   </span>
                 </td>
               </tr>

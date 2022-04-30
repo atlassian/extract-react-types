@@ -5,6 +5,7 @@ import Outline from './Outline';
 import Required from './Required';
 import Description from './Description';
 import Button from './Button';
+import Expander from './Expander';
 import Type, { StringType, TypeMeta, FunctionType } from './Type';
 
 const components = {
@@ -16,7 +17,8 @@ const components = {
   TypeMeta,
   Description,
   Button,
-  FunctionType
+  FunctionType,
+  Expander
 };
 
 export default components;
@@ -30,5 +32,6 @@ export type Components = {
   TypeMeta: ComponentType<any>,
   Description: ComponentType<any>,
   Button: ComponentType<any>,
-  FunctionType: ComponentType<any>
+  FunctionType: ComponentType<any>,
+  Expander: ComponentType<any>
 };

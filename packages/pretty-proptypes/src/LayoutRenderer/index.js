@@ -5,6 +5,8 @@
 import { FC, type ComponentType } from 'react';
 
 import type { CommonProps } from '../types';
+import type { Components } from '../components';
+
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../renderPropType';
 import PrettyPropType from '../PrettyConvert';
@@ -29,12 +31,13 @@ export type LayoutRendererProps = {
     component?: Obj | Inter
   },
   component?: ComponentType<any>,
+  components?: Components,
   renderType: CommonProps => ComponentType<CommonProps>
 };
 
 const getProps = props => (props && props.component ? getPropTypes(props.component) : null);
 
-const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, ...rest }) => {
+const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, components, ...rest }) => {
   let resolvedProps = props;
   if (component) {
     /* $FlowFixMe the component prop is typed as a component because
@@ -53,7 +56,11 @@ const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, ...rest }) 
   }
 
   return getProps(resolvedProps).map(propType =>
-    renderPropType(propType, { ...rest, components: { PropType: PrettyPropType } }, rest.renderType)
+    renderPropType(
+      propType,
+      { ...rest, components: { ...components, PropType: PrettyPropType } },
+      rest.renderType
+    )
   );
 };
 

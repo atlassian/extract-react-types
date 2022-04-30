@@ -21,8 +21,6 @@ const Wrapper = (props: { children: Node }) => (
   />
 );
 
-// const printFunc = type => null;
-
 type PrettyPropTypeProps = {
   typeValue: Object,
   shouldCollapse?: boolean,

@@ -86,7 +86,7 @@ export const converters: { [string]: ?Function } = {
       return (
         <span>
           <components.TypeMeta>{convert(type.value)}</components.TypeMeta>
-          <AddBrackets openBracket="<" closeBracket=">">
+          <AddBrackets openBracket="<" closeBracket=">" Expander={components.Expander}>
             {type.typeParams &&
               type.typeParams.params.map((param, index, array) => (
                 <span key={index}>
@@ -120,7 +120,7 @@ export const converters: { [string]: ?Function } = {
 
     return (
       <span>
-        <AddBrackets BracketStyler={components.TypeMeta} openBracket="{" closeBracket="}">
+        <AddBrackets openBracket="{" closeBracket="}" Expander={components.Expander}>
           <components.Indent>
             {type.members
               .filter(p => p)
@@ -147,7 +147,7 @@ export const converters: { [string]: ?Function } = {
     return (
       <span>
         <components.TypeMeta>Array</components.TypeMeta>
-        <AddBrackets BracketStyler={components.TypeMeta} openBracket="<" closeBracket=">">
+        <AddBrackets openBracket="<" closeBracket=">" Expander={components.Expander}>
           <components.Indent>{prettyConvert(type.type, components, depth)}</components.Indent>
         </AddBrackets>
       </span>
@@ -168,7 +168,7 @@ export const converters: { [string]: ?Function } = {
   union: (type: K.Union, components: Components, depth: number) => (
     <span>
       <components.TypeMeta>One of </components.TypeMeta>
-      <AddBrackets BracketStyler={components.TypeMeta} openBracket="<" closeBracket=">">
+      <AddBrackets openBracket="<" closeBracket=">" Expander={components.Expander}>
         <components.Indent>
           {type.types.map((t, index, array) => (
             <div key={index}>
@@ -198,7 +198,7 @@ export const converters: { [string]: ?Function } = {
     } else if (simpleParameters || type.parameters.length < 2) {
       return (
         <span>
-          <AddBrackets BracketStyler={components.FunctionType}>
+          <AddBrackets Expander={components.Expander}>
             {type.parameters.map((param, index, array) => [
               prettyConvert(param, components, depth),
               array.length - 1 === index ? '' : ', '
@@ -212,7 +212,7 @@ export const converters: { [string]: ?Function } = {
       return (
         <span>
           <components.TypeMeta>function </components.TypeMeta>
-          <AddBrackets BracketStyler={components.FunctionType}>
+          <AddBrackets Expander={components.Expander}>
             <components.Indent>
               {type.parameters.map((param, index, array) => (
                 <div key={convert(param.value)}>
@@ -228,9 +228,9 @@ export const converters: { [string]: ?Function } = {
       );
     }
   },
-  param: (type: K.Param, components, depth) => {
-    return <span key={convert(type.value)}>{prettyConvert(type.value, components, depth)}</span>;
-  },
+  param: (type: K.Param, components, depth) => (
+    <span key={convert(type.value)}>{prettyConvert(type.value, components, depth)}</span>
+  ),
   typeof: (type: K.Typeof, components, depth) => prettyConvert(type.type, components, depth)
 };
 
