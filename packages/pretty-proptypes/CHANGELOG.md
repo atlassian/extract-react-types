@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.5.0
+
+### Minor Changes
+
+- f34959f: Adds the ability to override the Prop Expander + Fixes a few styling issues
+
 ## 1.4.0
 
 ### Minor Changes
