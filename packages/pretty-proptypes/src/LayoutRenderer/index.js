@@ -35,7 +35,7 @@ export type LayoutRendererProps = {
   renderType: CommonProps => ComponentType<CommonProps>
 };
 
-const getProps = props => (props && props.component ? getPropTypes(props.component) : null);
+const getProps = props => (props && props.component ? getPropTypes(props.component) : []);
 
 const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, components, ...rest }) => {
   let resolvedProps = props;
