@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.5.2
+
+### Patch Changes
+
+- 2bef5ff: Reintroduces null check in the case where props can't be parsed and return empty
+
 ## 1.5.0
 
 ### Minor Changes
