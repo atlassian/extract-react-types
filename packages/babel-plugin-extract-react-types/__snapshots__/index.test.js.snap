@@ -41,7 +41,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow arrow function 1`] = `
@@ -85,7 +86,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow arrow function export default identifier 1`] = `
@@ -132,7 +134,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow arrow function then export 1`] = `
@@ -179,7 +182,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow class 1`] = `
@@ -226,7 +230,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow class declaration export default identifier 1`] = `
@@ -276,7 +281,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow class declaration then export 1`] = `
@@ -326,7 +332,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow default class 1`] = `
@@ -373,7 +380,56 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
+`;
+
+exports[`flow default export with named identifier 1`] = `
+"// @flow
+type Props = {
+  /** this does something */
+  wow: boolean
+};
+
+const CustomComponent = (props: Props) => {
+  return null;
+};
+
+export default CustomComponent;
+CustomComponent.___types = {
+  \\"kind\\": \\"generic\\",
+  \\"value\\": {
+    \\"kind\\": \\"object\\",
+    \\"members\\": [{
+      \\"kind\\": \\"property\\",
+      \\"key\\": {
+        \\"kind\\": \\"id\\",
+        \\"name\\": \\"wow\\"
+      },
+      \\"value\\": {
+        \\"kind\\": \\"boolean\\"
+      },
+      \\"optional\\": false,
+      \\"leadingComments\\": [{
+        \\"type\\": \\"commentBlock\\",
+        \\"value\\": \\"this does something\\",
+        \\"raw\\": \\"* this does something \\"
+      }]
+    }],
+    \\"leadingComments\\": [{
+      \\"type\\": \\"commentLine\\",
+      \\"value\\": \\"@flow\\",
+      \\"raw\\": \\" @flow\\"
+    }],
+    \\"referenceIdName\\": \\"Props\\"
+  },
+  \\"name\\": {
+    \\"kind\\": \\"id\\",
+    \\"name\\": \\"CustomComponent\\",
+    \\"type\\": null
+  }
+};
+CustomComponent.___displayName = \\"CustomComponent\\";"
 `;
 
 exports[`flow default function declaration 1`] = `
@@ -420,7 +476,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow export default function declaration 1`] = `
@@ -465,7 +522,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow forwardRef 1`] = `
@@ -509,7 +567,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow forwardRef function expression 1`] = `
@@ -553,7 +612,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow forwardRef memo arrow function 1`] = `
@@ -597,7 +657,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow forwardRef memo function expression 1`] = `
@@ -641,7 +702,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow function declaration 1`] = `
@@ -685,7 +747,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`flow memo 1`] = `
@@ -729,7 +792,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`typescript default 1`] = `
@@ -754,7 +818,8 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;
 
 exports[`typescript named 1`] = `
@@ -779,5 +844,6 @@ SomeComponent.___types = {
     \\"name\\": \\"SomeComponent\\",
     \\"type\\": null
   }
-};"
+};
+SomeComponent.___displayName = \\"SomeComponent\\";"
 `;

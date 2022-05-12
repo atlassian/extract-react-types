@@ -11,5 +11,7 @@ export type CommonProps = {
   typeValue: Kind,
   type: string,
   shouldCollapse?: boolean,
-  components: Components
+  components: Components,
+  // name of the component being rendered
+  componentDisplayName: string
 };

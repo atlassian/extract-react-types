@@ -41,6 +41,10 @@ const rowStyles = css`
   tbody {
     border-bottom: none;
   }
+
+  &:target {
+    background: #e9f2ff;
+  }
 `;
 
 const headingStyles = css`
@@ -83,9 +87,13 @@ Base.args = {
           required,
           name,
           type,
-          components
+          components,
+          componentDisplayName
         }) => (
-          <table css={rowStyles}>
+          <table
+            css={rowStyles}
+            {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
+          >
             <caption css={captionStyles}>
               <Heading css={headingStyles}>
                 <code css={headingCodeStyles}>{name}</code>

@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { Component, ComponentType, Fragment, type Node } from 'react';
-import ExpanderDefault from '../Components/Expander';
+import ExpanderDefault from '../components/Expander';
 
 type Props = {
   openBracket: string,

@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from './components';
 
@@ -39,8 +39,8 @@ const shouldHideProp = comment => {
 
 const renderPropType = (
   propType: any,
-  { overrides = {}, shouldCollapseProps, components = {} }: any,
-  PropComponent
+  { overrides = {}, shouldCollapseProps, components, componentDisplayName = {} }: any,
+  PropComponent?: ComponentType<any>
 ) => {
   components = { ...allComponents, ...components };
 
@@ -92,6 +92,7 @@ const renderPropType = (
       defaultValue={propType.default && convert(propType.default)}
       shouldCollapse={shouldCollapseProps}
       typeValue={propType.value}
+      componentDisplayName={componentDisplayName}
     />
   );
 };

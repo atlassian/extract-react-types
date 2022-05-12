@@ -259,6 +259,23 @@ let flowCases = [
 
       export { SomeComponent }
       `
+  },
+  {
+    name: 'default export with named identifier',
+    code: `
+    // @flow
+
+    type Props = {
+      /** this does something */
+      wow: boolean
+    };
+    
+    const CustomComponent = (props: Props) => {
+      return null;
+    };  
+
+    export default CustomComponent
+    `
   }
 ];
 
