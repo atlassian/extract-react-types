@@ -5,7 +5,7 @@ import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from './components';
 
 const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
-const DEPRECATE_PROP_THAT_CONTAIN = '@deprecated';
+const DEPRECATE_PROPS_THAT_CONTAIN = '@deprecated';
 const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
 
 const shouldIgnoreComment = comment => {
@@ -43,7 +43,7 @@ const shouldDeprecateProp = comment => {
     return false;
   }
 
-  return comment.includes(DEPRECATE_PROP_THAT_CONTAIN);
+  return comment.includes(DEPRECATE_PROPS_THAT_CONTAIN);
 };
 
 const renderPropType = (
