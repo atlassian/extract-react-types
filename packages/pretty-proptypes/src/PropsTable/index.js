@@ -72,7 +72,7 @@ export default class PropsTable extends Component<DynamicPropsProps> {
     let renderProps = rest;
     // ensure displayName passes through, assuming it has been captured
     // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
-    if (component.___displayName) {
+    if (component && component.___displayName) {
       renderProps = {
         ...rest,
         componentDisplayName: String(component.___displayName)
