@@ -64,7 +64,8 @@ TypeScriptComponent.defaultProps = {
   anyProp: 'any',
   unionProp: 'hello',
   unknownProp: 'hello',
-  unsupportedProp: 'text'
+  unsupportedProp: 'text',
+  deprecatedProp: true
 };
 
 export default TypeScriptComponent;
