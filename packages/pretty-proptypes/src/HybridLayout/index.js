@@ -9,7 +9,13 @@ import { Component, type Node } from 'react';
 import md from 'react-markings';
 import PropsWrapper from '../Props/Wrapper';
 import LayoutRenderer, { type LayoutRendererProps } from '../LayoutRenderer';
-import { HeadingType, HeadingDefault, Heading, HeadingRequired } from '../Prop/Heading';
+import {
+  HeadingType,
+  HeadingDefault,
+  Heading,
+  HeadingRequired,
+  HeadingDeprecated
+} from '../Prop/Heading';
 import { colors } from '../components/constants';
 
 type DynamicPropsProps = LayoutRendererProps & {
@@ -48,8 +54,13 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
             required,
             name,
             type,
+<<<<<<< HEAD
             componentDisplayName,
             components: Comp
+=======
+            components: Comp,
+            deprecated
+>>>>>>> 9ba91d5 (add deprecated styling)
           }) => (
             <table
               {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
@@ -103,6 +114,7 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
                       padding: 4px 8px;
                       line-height: 20px;
                       display: inline-block;
+                      text-decoration: ${deprecated ? 'line-through' : 'none'};
                     `}
                   >
                     {name}
@@ -117,12 +129,28 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
                       required
                     </HeadingRequired>
                   )}
+                  {deprecated && (
+                    <HeadingDeprecated
+                      css={css`
+                        margin-left: 1em;
+                        color: ${colors.N300};
+                      `}
+                    >
+                      deprecated
+                    </HeadingDeprecated>
+                  )}
                 </Heading>
               </caption>
               <tbody>
                 <tr>
                   <th scope="row">Description</th>
-                  <td>{description && <Description>{md([description])}</Description>}</td>
+                  <td>
+                    {description && (
+                      <Description>
+                        {md([description && description.replace('@deprecated', '')])}
+                      </Description>
+                    )}
+                  </td>
                 </tr>
                 {defaultValue !== undefined && (
                   <tr>

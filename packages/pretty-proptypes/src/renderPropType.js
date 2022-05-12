@@ -5,6 +5,7 @@ import convert, { getKind, reduceToObj } from 'kind2string';
 import allComponents from './components';
 
 const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];
+const DEPRECATE_PROP_THAT_CONTAIN = '@deprecated';
 const HIDE_PROPS_THAT_CONTAIN = ['@internal', '@access private'];
 
 const shouldIgnoreComment = comment => {
@@ -35,6 +36,14 @@ const shouldHideProp = comment => {
   }
 
   return false;
+};
+
+const shouldDeprecateProp = comment => {
+  if (!comment) {
+    return false;
+  }
+
+  return comment.includes(DEPRECATE_PROP_THAT_CONTAIN);
 };
 
 const renderPropType = (
@@ -92,7 +101,11 @@ const renderPropType = (
       defaultValue={propType.default && convert(propType.default)}
       shouldCollapse={shouldCollapseProps}
       typeValue={propType.value}
+<<<<<<< HEAD
       componentDisplayName={componentDisplayName}
+=======
+      deprecated={shouldDeprecateProp(description)}
+>>>>>>> 9ba91d5 (add deprecated styling)
     />
   );
 };

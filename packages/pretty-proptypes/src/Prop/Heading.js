@@ -38,6 +38,15 @@ export const HeadingRequired = (props: { children: Node }) => (
   />
 );
 
+export const HeadingDeprecated = (props: { children: Node }) => (
+  <code
+    css={css`
+      color: ${colors.N300};
+    `}
+    {...props}
+  />
+);
+
 export const HeadingType = (props: { children: Node }) => (
   <code
     css={css`
@@ -70,6 +79,7 @@ const Whitespace = () => ' ';
 type PropTypeHeadingProps = {
   name: any,
   required: boolean,
+  deprecated?: boolean,
   type: any,
   // This is probably giving up
   defaultValue?: any
@@ -77,13 +87,16 @@ type PropTypeHeadingProps = {
 
 const PropTypeHeading = (props: PropTypeHeadingProps) => (
   <Heading>
-    <HeadingName>{props.name}</HeadingName>
+    <HeadingName style={{ textDecoration: props.deprecated ? 'line-through' : 'none' }}>
+      {props.name}
+    </HeadingName>
     <Whitespace />
     <HeadingType>{props.type}</HeadingType>
     {props.defaultValue !== undefined && <HeadingDefault> = {props.defaultValue}</HeadingDefault>}
     {props.required && props.defaultValue === undefined ? (
       <HeadingRequired> required</HeadingRequired>
     ) : null}
+    {props.deprecated && <HeadingDeprecated> deprecated</HeadingDeprecated>}
   </Heading>
 );
 

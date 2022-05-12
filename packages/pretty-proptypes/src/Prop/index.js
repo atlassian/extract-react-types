@@ -33,6 +33,7 @@ export default class Prop extends Component<PropProps> {
   render() {
     let { shapeComponent: ShapeComponent, ...commonProps } = this.props;
 
+<<<<<<< HEAD
     let {
       defaultValue,
       description,
@@ -49,6 +50,24 @@ export default class Prop extends Component<PropProps> {
       >
         <PropTypeHeading name={name} required={required} type={type} defaultValue={defaultValue} />
         {description && <components.Description>{md([description])}</components.Description>}
+=======
+    let { defaultValue, description, name, required, deprecated, type, components } = commonProps;
+
+    return (
+      <PropTypeWrapper>
+        <PropTypeHeading
+          name={name}
+          required={required}
+          deprecated={deprecated}
+          type={type}
+          defaultValue={defaultValue}
+        />
+        {description && (
+          <components.Description>
+            {md([deprecated ? description.replace('@deprecated', '') : description])}
+          </components.Description>
+        )}
+>>>>>>> 9ba91d5 (add deprecated styling)
         <ShapeComponent {...commonProps} />
       </PropTypeWrapper>
     );

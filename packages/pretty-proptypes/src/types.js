@@ -12,6 +12,10 @@ export type CommonProps = {
   type: string,
   shouldCollapse?: boolean,
   components: Components,
+<<<<<<< HEAD
   // name of the component being rendered
   componentDisplayName: string
+=======
+  deprecated?: boolean
+>>>>>>> 9ba91d5 (add deprecated styling)
 };
