@@ -76,7 +76,7 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
 
                 &:target,
                 &:target > caption {
-                  background: #fffae6;
+                  background: #e9f2ff;
                 }
               `}
             >

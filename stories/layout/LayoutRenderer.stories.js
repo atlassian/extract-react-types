@@ -43,7 +43,7 @@ const rowStyles = css`
   }
 
   &:target {
-    background: #fffae6;
+    background: #e9f2ff;
   }
 `;
 

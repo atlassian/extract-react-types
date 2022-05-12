@@ -14,7 +14,7 @@ const PropTypeWrapper = (props: { children: Node }) => (
       margin-top: ${gridSize * 4}px;
 
       &:target {
-        background: #fffae6;
+        background: #e9f2ff;
       }
     `}
     {...props}

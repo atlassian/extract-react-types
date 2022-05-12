@@ -34,10 +34,10 @@ export default class Prop extends Component<PropProps> {
             valign="top"
             css={{
               '& > td': {
-                padding: '14px 0px'
+                padding: '14px 8px'
               },
               '&:target': {
-                background: '#FFFAE6'
+                background: '#e9f2ff'
               }
             }}
           >
