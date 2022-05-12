@@ -97,15 +97,12 @@ const renderPropType = (
       name={name}
       description={description}
       required={!propType.optional}
+      deprecated={shouldDeprecateProp(description)}
       type={getKind(propType.value)}
       defaultValue={propType.default && convert(propType.default)}
       shouldCollapse={shouldCollapseProps}
       typeValue={propType.value}
-<<<<<<< HEAD
       componentDisplayName={componentDisplayName}
-=======
-      deprecated={shouldDeprecateProp(description)}
->>>>>>> 9ba91d5 (add deprecated styling)
     />
   );
 };

@@ -52,15 +52,11 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
             defaultValue,
             description,
             required,
+            deprecated,
             name,
             type,
-<<<<<<< HEAD
             componentDisplayName,
             components: Comp
-=======
-            components: Comp,
-            deprecated
->>>>>>> 9ba91d5 (add deprecated styling)
           }) => (
             <table
               {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
