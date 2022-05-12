@@ -55,10 +55,20 @@ const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, components,
     }
   }
 
+  let renderProps = rest;
+  // ensure displayName passes through, assuming it has been captured
+  // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
+  if (component.___displayName) {
+    renderProps = {
+      ...rest,
+      componentDisplayName: String(component.___displayName)
+    };
+  }
+
   return getProps(resolvedProps).map(propType =>
     renderPropType(
       propType,
-      { ...rest, components: { ...components, PropType: PrettyPropType } },
+      { ...renderProps, components: { ...components, PropType: PrettyPropType } },
       rest.renderType
     )
   );

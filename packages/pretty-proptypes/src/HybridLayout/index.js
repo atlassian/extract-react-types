@@ -48,9 +48,11 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
             required,
             name,
             type,
+            componentDisplayName,
             components: Comp
           }) => (
             <table
+              {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
               css={css`
                 width: 100%;
                 border-collapse: collapse;
@@ -70,6 +72,11 @@ export default class HybridLayout extends Component<DynamicPropsProps> {
 
                 tbody {
                   border-bottom: none;
+                }
+
+                &:target,
+                &:target > caption {
+                  background: #fffae6;
                 }
               `}
             >

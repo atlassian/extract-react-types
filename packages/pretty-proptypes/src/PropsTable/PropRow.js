@@ -24,16 +24,20 @@ export default class Prop extends Component<PropProps> {
      * Other layouts already do.
      * https://github.com/atlassian/extract-react-types/issues/192
      */
-    let { defaultValue, description, name, type, components } = commonProps;
+    let { defaultValue, description, name, type, components, componentDisplayName } = commonProps;
 
     return (
       <Fragment>
         <tbody>
           <tr
+            {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
             valign="top"
             css={{
               '& > td': {
                 padding: '14px 0px'
+              },
+              '&:target': {
+                background: '#FFFAE6'
               }
             }}
           >

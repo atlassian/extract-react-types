@@ -12,6 +12,10 @@ const PropTypeWrapper = (props: { children: Node }) => (
   <div
     css={css`
       margin-top: ${gridSize * 4}px;
+
+      &:target {
+        background: #fffae6;
+      }
     `}
     {...props}
   />
@@ -29,10 +33,20 @@ export default class Prop extends Component<PropProps> {
   render() {
     let { shapeComponent: ShapeComponent, ...commonProps } = this.props;
 
-    let { defaultValue, description, name, required, type, components } = commonProps;
+    let {
+      defaultValue,
+      description,
+      name,
+      required,
+      type,
+      components,
+      componentDisplayName
+    } = commonProps;
 
     return (
-      <PropTypeWrapper>
+      <PropTypeWrapper
+        {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
+      >
         <PropTypeHeading name={name} required={required} type={type} defaultValue={defaultValue} />
         {description && <components.Description>{md([description])}</components.Description>}
         <ShapeComponent {...commonProps} />

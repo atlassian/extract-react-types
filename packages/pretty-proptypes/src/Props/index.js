@@ -68,9 +68,19 @@ export default class Props extends Component<DynamicPropsProps> {
     let propTypes = getProps(props);
     if (!propTypes) return null;
 
+    let renderProps = rest;
+    // ensure displayName passes through, assuming it has been captured
+    // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
+    if (component.___displayName) {
+      renderProps = {
+        ...rest,
+        componentDisplayName: String(component.___displayName)
+      };
+    }
+
     return (
       <PropsWrapper heading={heading}>
-        {propTypes.map(propType => renderPropType(propType, rest, Prop))}
+        {propTypes.map(propType => renderPropType(propType, renderProps, Prop))}
       </PropsWrapper>
     );
   }

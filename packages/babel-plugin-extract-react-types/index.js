@@ -15,7 +15,7 @@ module.exports = babel => {
           findExportedComponents(programPath, typeSystem, state.file.filename).forEach(
             ({ name, component }) => {
               // TODO: handle when name is null
-              // it will only happen when it's the default export
+              // it will only happen when it's a default and anonymous export
               // generate something like this
               // export default (var someName = function() {}, someName.___types = theTypes, someName)
               if (name !== null) {
@@ -25,6 +25,15 @@ module.exports = babel => {
                       '=',
                       t.memberExpression(t.identifier(name), t.identifier('___types')),
                       babel.parse(`(${JSON.stringify(component)})`).program.body[0].expression
+                    )
+                  )
+                );
+                programPath.node.body.push(
+                  t.expressionStatement(
+                    t.assignmentExpression(
+                      '=',
+                      t.memberExpression(t.identifier(name), t.identifier('___displayName')),
+                      t.stringLiteral(name)
                     )
                   )
                 );

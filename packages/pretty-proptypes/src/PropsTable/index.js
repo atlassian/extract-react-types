@@ -69,6 +69,16 @@ export default class PropsTable extends Component<DynamicPropsProps> {
     let propTypes = getProps(props);
     if (!propTypes) return null;
 
+    let renderProps = rest;
+    // ensure displayName passes through, assuming it has been captured
+    // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
+    if (component.___displayName) {
+      renderProps = {
+        ...rest,
+        componentDisplayName: String(component.___displayName)
+      };
+    }
+
     return (
       <PropsWrapper heading={heading}>
         <table>
@@ -84,7 +94,7 @@ export default class PropsTable extends Component<DynamicPropsProps> {
               <td>Description</td>
             </tr>
           </thead>
-          {propTypes.map(propType => renderPropType(propType, rest, PropRow))}
+          {propTypes.map(propType => renderPropType(propType, renderProps, PropRow))}
         </table>
       </PropsWrapper>
     );
