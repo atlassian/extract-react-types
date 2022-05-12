@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.6.0
+
+### Minor Changes
+
+- 33d0126: Introduces new functionality enabling permalinks to each section of a props list. It's done in a backwards-compatible manner requiring no code changes for a dependency bump, but you might want to double check styles are suitable to the surroundings of where the props are displayed.
+
 ## 1.5.2
 
 ### Patch Changes
