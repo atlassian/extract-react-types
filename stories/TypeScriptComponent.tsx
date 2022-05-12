@@ -41,6 +41,11 @@ type TypeScriptComponentProps = {
   // @internal
   hideProp: Boolean;
   nocomment: boolean;
+  /**
+   * @deprecated
+   * This prop is deprecated
+   */
+  deprecatedProp: boolean;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;
