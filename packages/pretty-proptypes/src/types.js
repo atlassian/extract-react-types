@@ -7,6 +7,7 @@ export type CommonProps = {
   defaultValue?: string,
   description?: string,
   required: boolean,
+  deprecated?: boolean,
   name: string,
   typeValue: Kind,
   type: string,

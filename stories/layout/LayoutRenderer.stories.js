@@ -8,6 +8,7 @@ import {
   Heading,
   HeadingDefault,
   HeadingRequired,
+  HeadingDeprecated,
   HeadingType
 } from '../../packages/pretty-proptypes/src/Prop/Heading';
 import { colors } from '../../packages/pretty-proptypes/src/components/constants';
@@ -41,10 +42,6 @@ const rowStyles = css`
   tbody {
     border-bottom: none;
   }
-
-  &:target {
-    background: #e9f2ff;
-  }
 `;
 
 const headingStyles = css`
@@ -74,6 +71,11 @@ const headingRequiredStyles = css`
   color: ${colors.R400};
 `;
 
+const headingDeprecatedStyles = css`
+  margin-left: 1em;
+  color: ${colors.N300};
+`;
+
 Base.args = {
   component: (
     <div>
@@ -88,17 +90,22 @@ Base.args = {
           name,
           type,
           components,
-          componentDisplayName
+          deprecated
         }) => (
-          <table
-            css={rowStyles}
-            {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
-          >
+          <table css={rowStyles}>
             <caption css={captionStyles}>
               <Heading css={headingStyles}>
-                <code css={headingCodeStyles}>{name}</code>
+                <code
+                  css={headingCodeStyles}
+                  style={{ textDecoration: deprecated ? 'line-through' : 'none' }}
+                >
+                  {name}
+                </code>
                 {required && defaultValue === undefined && (
                   <HeadingRequired css={headingRequiredStyles}>required</HeadingRequired>
+                )}
+                {deprecated && (
+                  <HeadingDeprecated css={headingDeprecatedStyles}>deprecated</HeadingDeprecated>
                 )}
               </Heading>
             </caption>
@@ -106,7 +113,9 @@ Base.args = {
               <tr>
                 <th scope="row">Description</th>
                 <td>
-                  <components.Description>{md([description])}</components.Description>
+                  <components.Description>
+                    {md([description && description.replace('@deprecated', '')])}
+                  </components.Description>
                 </td>
               </tr>
               {defaultValue !== undefined && (

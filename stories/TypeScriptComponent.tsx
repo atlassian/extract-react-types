@@ -41,6 +41,11 @@ type TypeScriptComponentProps = {
   // @internal
   hideProp: Boolean;
   nocomment: boolean;
+  /**
+   * @deprecated
+   * This prop is deprecated
+   */
+  deprecatedProp: boolean;
 };
 
 const TypeScriptComponent = (props: TypeScriptComponentProps) => <p>Hello World</p>;
@@ -59,7 +64,8 @@ TypeScriptComponent.defaultProps = {
   anyProp: 'any',
   unionProp: 'hello',
   unknownProp: 'hello',
-  unsupportedProp: 'text'
+  unsupportedProp: 'text',
+  deprecatedProp: true
 };
 
 export default TypeScriptComponent;

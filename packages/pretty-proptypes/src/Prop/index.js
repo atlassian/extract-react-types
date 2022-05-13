@@ -38,6 +38,7 @@ export default class Prop extends Component<PropProps> {
       description,
       name,
       required,
+      deprecated,
       type,
       components,
       componentDisplayName
@@ -47,8 +48,19 @@ export default class Prop extends Component<PropProps> {
       <PropTypeWrapper
         {...(componentDisplayName ? { id: `${componentDisplayName}-${name}` } : null)}
       >
-        <PropTypeHeading name={name} required={required} type={type} defaultValue={defaultValue} />
-        {description && <components.Description>{md([description])}</components.Description>}
+        <PropTypeHeading
+          name={name}
+          required={required}
+          type={type}
+          defaultValue={defaultValue}
+          deprecated={deprecated}
+        />
+        {description && (
+          <components.Description>
+            {' '}
+            {md([deprecated ? description.replace('@deprecated', '') : description])}
+          </components.Description>
+        )}
         <ShapeComponent {...commonProps} />
       </PropTypeWrapper>
     );
