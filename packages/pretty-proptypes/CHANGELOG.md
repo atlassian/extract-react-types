@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.6.1
+
+### Patch Changes
+
+- e0686d4: Changed the heading styles for deprecated props and removed "@deprecated" from the prop description.
+
 ## 1.6.0
 
 ### Minor Changes
