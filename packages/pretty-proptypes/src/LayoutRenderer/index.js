@@ -26,18 +26,53 @@ type Inter = {
   types: Array<Obj | Gen>
 };
 
+type Prop = {
+  kind: string,
+  optional: boolean,
+  key: { kind: string, name: string },
+  value: { kind: string }
+};
+
 export type LayoutRendererProps = {
+  /**
+   * Types to render, passed directly from the output of extract-react-types-loader
+   */
   props?: {
     component?: Obj | Inter
   },
+  /** React Component to render props for. */
   component?: ComponentType<any>,
+  /** Custom components to render to end-users */
   components?: Components,
-  renderType: CommonProps => ComponentType<CommonProps>
+  /**
+   * Function to render each prop in the props list.
+   * Render props contain the prop's information, including name, description etc.
+   */
+  renderType: CommonProps => ComponentType<CommonProps>,
+  /**
+   * If true, required props will be placed first in the props array
+   */
+  requiredPropsFirst?: boolean,
+  /**
+   * Sorting function applied to props list.
+   * Given two prop objects, returns:
+   * - 0 to maintain order
+   * - < 0 if propA should render before propB
+   * - > 0 if propB should render before propA
+   */
+  sortProps?: (propA: Prop, propB: Prop) => number
 };
 
 const getProps = props => (props && props.component ? getPropTypes(props.component) : []);
 
-const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, components, ...rest }) => {
+const LayoutRenderer: FC<LayoutRendererProps> = ({
+  props,
+  component,
+  components,
+  requiredPropsFirst,
+  sortProps,
+  ...rest
+}) => {
   let resolvedProps = props;
   if (component) {
     /* $FlowFixMe the component prop is typed as a component because
@@ -65,7 +100,19 @@ const LayoutRenderer: FC<LayoutRendererProps> = ({ props, component, components,
     };
   }
 
-  return getProps(resolvedProps).map(propType =>
+  // Sort prop list
+  let finalProps = getProps(resolvedProps);
+  if (sortProps) finalProps.sort(sortProps);
+  if (requiredPropsFirst) {
+    finalProps.sort((propA, propB) => {
+      const propARequired = !(propA.optional || propA.default);
+      const propBRequired = !(propB.optional || propB.default);
+      if (propARequired === propBRequired) return 0;
+      return propARequired ? -1 : 1;
+    });
+  }
+
+  return finalProps.map(propType =>
     renderPropType(
       propType,
       { ...renderProps, components: { ...components, PropType: PrettyPropType } },

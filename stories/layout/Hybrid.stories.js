@@ -13,8 +13,14 @@ const Template = args => args.component;
 
 export const Base = Template.bind({});
 
+const props = {
+  component: TypeScriptComponent,
+  requiredPropsFirst: true,
+  heading: 'Primitive types'
+};
+
 Base.args = {
-  component: <HybridLayout component={TypeScriptComponent} heading="Primitive types" />
+  component: <HybridLayout {...props} />
 };
 
 export const WithReset = Template.bind({});
@@ -27,7 +33,7 @@ WithReset.args = {
           @import 'https://unpkg.com/@atlaskit/css-reset@6.0.5/dist/bundle.css';
         `}
       />
-      <HybridLayout component={TypeScriptComponent} heading="Primitive types" />
+      <HybridLayout {...props} />
     </>
   )
 };
