@@ -11,6 +11,7 @@ import type { CommonProps } from '../types';
 import PropsWrapper from '../Props/Wrapper';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../renderPropType';
+import { getComponentDisplayName } from '../utils';
 import PropRow from './PropRow';
 
 type Obj = {
@@ -70,12 +71,12 @@ export default class PropsTable extends Component<DynamicPropsProps> {
     if (!propTypes) return null;
 
     let renderProps = rest;
-    // ensure displayName passes through, assuming it has been captured
-    // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
-    if (component && component.___displayName) {
+    // $FlowFixMe types are not exactly correct here ... sadly :/
+    const componentDisplayName = getComponentDisplayName(component || (props || {}).component);
+    if (typeof componentDisplayName === 'string') {
       renderProps = {
         ...rest,
-        componentDisplayName: String(component.___displayName)
+        componentDisplayName
       };
     }
 
