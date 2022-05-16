@@ -82,6 +82,7 @@ Base.args = {
       <h2>Primitive types</h2>
       <LayoutRenderer
         component={TypeScriptComponent}
+        requiredPropsFirst
         renderType={({
           typeValue,
           defaultValue,

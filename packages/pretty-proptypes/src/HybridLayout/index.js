@@ -40,13 +40,22 @@ const Description = ({ children }: { children: Node }) => (
 
 export default class HybridLayout extends Component<DynamicPropsProps> {
   render() {
-    const { props, heading, component, shouldCollapseProps } = this.props;
+    const {
+      props,
+      heading,
+      component,
+      shouldCollapseProps,
+      requiredPropsFirst,
+      sortProps
+    } = this.props;
 
     return (
       <PropsWrapper heading={heading}>
         <LayoutRenderer
           component={component}
           props={props}
+          requiredPropsFirst={requiredPropsFirst}
+          sortProps={sortProps}
           renderType={({
             typeValue,
             defaultValue,
