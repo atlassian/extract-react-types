@@ -10,6 +10,7 @@ import type { Components } from '../components';
 import getPropTypes from '../getPropTypes';
 import renderPropType from '../renderPropType';
 import PrettyPropType from '../PrettyConvert';
+import { getComponentDisplayName } from '../utils';
 
 type Obj = {
   kind: 'object',
@@ -91,12 +92,11 @@ const LayoutRenderer: FC<LayoutRendererProps> = ({
   }
 
   let renderProps = rest;
-  // ensure displayName passes through, assuming it has been captured
-  // $FlowFixMe as mentioned above, the typing for `component` is a bit off here...
-  if (component && component.___displayName) {
+  const componentDisplayName = getComponentDisplayName(component || (props || {}).component);
+  if (typeof componentDisplayName === 'string') {
     renderProps = {
       ...rest,
-      componentDisplayName: String(component.___displayName)
+      componentDisplayName
     };
   }
 
