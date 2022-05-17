@@ -1712,9 +1712,9 @@
   dependencies:
     "@changesets/types" "^5.0.0"
 
-"@changesets/cli@^2.8.0":
+"@changesets/cli@^2.22.0":
   version "2.22.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/@changesets/cli/-/cli-2.22.0.tgz#3bdbfb4a7a81ef37f63114e77da84e23f906b763"
+  resolved "https://registry.npmjs.org/@changesets/cli/-/cli-2.22.0.tgz#3bdbfb4a7a81ef37f63114e77da84e23f906b763"
   integrity sha512-4bA3YoBkd5cm5WUxmrR2N9WYE7EeQcM+R3bVYMUj2NvffkQVpU3ckAI+z8UICoojq+HRl2OEwtz+S5UBmYY4zw==
   dependencies:
     "@babel/runtime" "^7.10.4"
