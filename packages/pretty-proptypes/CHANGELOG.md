@@ -1,15 +1,5 @@
 # pretty-proptypes
 
-## 1.7.0
-
-### Minor Changes
-
-- b5c1a5d: Adds "sortProps" and "requiredPropsFirst" props to LayoutRenderer and HybridLayout
-
-### Patch Changes
-
-- d4fcb97: Permalink generation should also work now when `extract-react-types` is used.
-
 ## 1.6.1
 
 ### Patch Changes
