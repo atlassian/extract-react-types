@@ -1,6 +1,6 @@
 {
   "name": "pretty-proptypes",
-  "version": "1.7.0",
+  "version": "1.6.1",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",
   "main": "dist/pretty-proptypes.cjs.js",
