@@ -44,7 +44,7 @@ pretty-proptypes can display props from two sources.
 ```
 
 ```jsx
-import { Props } from 'pretty-proptypes';
+import Props from 'pretty-proptypes';
 import MyCoolComponent from '../MyCoolComponent';
 
 <Props heading="My Cool Component" component={MyCoolComponent} />;
@@ -53,7 +53,7 @@ import MyCoolComponent from '../MyCoolComponent';
 **Option 2.** Directly passing a component's props to Props with [extract-react-types-loader](./packages/extract-react-types-loader) or getting types from [extract-react-types](./packages/extract-react-types) and writing it to a file
 
 ```jsx
-import { Props } from 'pretty-proptypes';
+import Props from 'pretty-proptypes';
 
 <Props
   heading="My Cool Component"
