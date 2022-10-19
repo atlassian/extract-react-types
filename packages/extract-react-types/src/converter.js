@@ -2,12 +2,12 @@
 import nodePath from 'path';
 import { sync as resolveSync } from 'resolve';
 import * as t from '@babel/types';
-import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
 import { isFlowIdentifier } from 'babel-flow-identifiers';
 import { getTypeBinding } from 'babel-type-scopes';
 import { getIdentifierKind } from 'babel-identifiers';
 import { isReactComponentClass } from 'babel-react-components';
 import { normalizeComment } from 'babel-normalize-comments';
+import { loadFileSync, resolveImportFilePathSync } from './file-loader';
 
 import {
   findExports,
