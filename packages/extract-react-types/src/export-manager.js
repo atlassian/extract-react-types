@@ -1,7 +1,7 @@
 import { explodeModule } from '@aparna036/babel-explode-module';
 import { explodedToStatements } from 'babel-helper-simplify-module';
 import printAST from 'ast-pretty-print';
-import { loadFileSync, resolveImportFilePathSync } from 'babel-file-loader';
+import { loadFileSync, resolveImportFilePathSync } from './file-loader';
 
 export function hasDestructuredDefaultExport(path) {
   const exportPath = path
