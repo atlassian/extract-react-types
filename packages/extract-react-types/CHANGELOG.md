@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.3
+
+### Patch Changes
+
+- 882277e: Bumps dev deps to resolve vulnerability with ansi-regex
+
 ## 0.30.2
 
 ### Patch Changes
