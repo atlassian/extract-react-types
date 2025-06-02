@@ -279,7 +279,7 @@ let flowCases = [
   }
 ];
 
-test('File type', () => {
+describe('File type', () => {
   jestInCase(
     'flow',
     ({ code }) => {

@@ -680,7 +680,7 @@ const TESTS = [
   }
 ];
 
-test('TypeScript Converters', () => {
+describe('TypeScript Converters', () => {
   cases(
     'TypeScript:',
     testCase => {

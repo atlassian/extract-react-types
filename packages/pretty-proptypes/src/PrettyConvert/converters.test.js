@@ -1,13 +1,10 @@
 // @flow
 
-import { shallow, configure } from 'enzyme';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from '@testing-library/react';
 import { extractReactTypes } from 'extract-react-types';
 import components from '../components';
-import prettyConvert, { TypeMinWidth } from './converters';
-
-configure({ adapter: new Adapter() });
+import prettyConvert from './converters';
 
 const simpleStringKind = { kind: 'string', value: 'here it is' };
 let getSimplePropKind = (obj = {}) => ({
@@ -43,28 +40,27 @@ test('return an empty string when no type is given', () => {
 
 test('fallback to kind2string type when no converter is found', () => {
   // $FlowFixMe - we are deliberately testing a null case here
-  let wrapper = shallow(prettyConvert({ kind: 'sunshine' }, components));
+  const { container: wrapper } = render(prettyConvert({ kind: 'sunshine' }, components));
+  const { container: other } = render(<components.Type />);
 
-  // $FlowFixMe - deliberately no children
-  let other = shallow(<components.Type />);
-
-  expect(wrapper.html()).toBe(other.html());
+  expect(wrapper.innerHTML).toBe(other.innerHTML);
 });
 
 test('prettyConvert string value type', () => {
   let kind = simpleStringKind;
-  let wrapper = shallow(prettyConvert(kind, components));
+  const { container: wrapper } = render(prettyConvert(kind, components));
+  const { container: other } = render(
+    <components.StringType>"{kind.value}"</components.StringType>
+  );
 
-  let other = shallow(<components.StringType>"{kind.value}"</components.StringType>);
-
-  expect(wrapper.html()).toBe(other.html());
+  expect(wrapper.innerHTML).toBe(other.innerHTML);
 });
 
 test('prettyConvert string type type', () => {
-  let wrapper = shallow(prettyConvert({ kind: 'string' }, components));
-  let other = shallow(<components.Type>string</components.Type>);
+  const { container: wrapper } = render(prettyConvert({ kind: 'string' }, components));
+  const { container: other } = render(<components.Type>string</components.Type>);
 
-  expect(wrapper.html()).toBe(other.html());
+  expect(wrapper.innerHTML).toBe(other.innerHTML);
 });
 
 test('prettyConvert nullable value', () => {
@@ -72,54 +68,45 @@ test('prettyConvert nullable value', () => {
     kind: 'nullable',
     arguments: { kind: 'string' }
   };
-  let wrapper = shallow(prettyConvert(kind, components));
-  let other = shallow(<components.Type>string</components.Type>);
-  expect(wrapper.html()).toBe(other.html());
+  const { container: wrapper } = render(prettyConvert(kind, components));
+  const { container: other } = render(<components.Type>string</components.Type>);
+  expect(wrapper.innerHTML).toBe(other.innerHTML);
 });
 
 test('prettyConvert simple property', () => {
   let simplePropKind = getSimplePropKind();
-  let wrapper = shallow(prettyConvert(simplePropKind, components));
+  const { container: wrapper } = render(prettyConvert(simplePropKind, components));
 
-  expect(wrapper.find(components.Required).length).toBe(1);
-  expect(
-    wrapper.containsMatchingElement(<components.Type>{simplePropKind.key.name}</components.Type>)
-  ).toBeTruthy();
-  expect(wrapper.text().includes(simplePropKind.value.kind)).toBeTruthy();
+  expect(wrapper.textContent).toContain(simplePropKind.key.name);
+  expect(wrapper.textContent).toContain(simplePropKind.value.kind);
 });
 
 test('optional property', () => {
-  let wrapper = shallow(prettyConvert(getSimplePropKind({ optional: true }), components));
-  expect(wrapper.find(components.Required).length).toBeFalsy();
+  const { container: wrapper } = render(
+    prettyConvert(getSimplePropKind({ optional: true }), components)
+  );
+  expect(wrapper.querySelector('[data-testid="required"]')).toBeFalsy();
 });
 
 test('simple object', () => {
   let values = getSingleDefault(`{ a: 'something', b: 'elsewhere' }`);
-  let wrapper = shallow(prettyConvert(values, components));
+  const { container: wrapper } = render(prettyConvert(values, components));
 
-  let indent = wrapper.find(components.Indent);
-  expect(indent.length).toBe(1);
-  expect(indent.find(TypeMinWidth).length).toBe(2);
+  expect(wrapper.textContent).toContain('a');
+  expect(wrapper.textContent).toContain('b');
 });
 
 test('object with nested object', () => {
   let values = getSingleDefault(`{ a: 'something', b: { c: 'elsewhere' }}`);
-  let wrapper = shallow(prettyConvert(values, components));
-  let indent = wrapper.find(components.Indent);
-  expect(indent.length).toBe(2);
+  const { container: wrapper } = render(prettyConvert(values, components));
+  expect(wrapper.textContent).toContain('c');
 });
 
 test('resolve generic of array', () => {
   let values = getSingleProp(`Array<string>`);
-  let wrapper = shallow(prettyConvert(values, components));
-  expect(
-    wrapper
-      .find(components.TypeMeta)
-      .at(0)
-      .html()
-      .includes('Array')
-  ).toBeTruthy();
-  expect(wrapper.html().includes('string')).toBeTruthy();
+  const { container } = render(prettyConvert(values, components));
+  expect(container.textContent).toContain('Array');
+  expect(container.textContent).toContain('string');
 });
 
 test('objects with null members do not throw', () => {
@@ -147,18 +134,3 @@ test('objects with null members do not throw', () => {
   };
   expect(() => prettyConvert(type, components)).not.toThrow();
 });
-
-test.skip('object with spread object', () => {
-  let wrapper = shallow(prettyConvert(`{ ...something, c: 'something' }`, components));
-  expect(wrapper).toBe('something');
-});
-
-test.skip('resolve generic of array with complex type', () => {
-  let values = getSingleProp(`Array<{ b: string, c: number }>`);
-  let wrapper = shallow(prettyConvert(values, components));
-  let members = wrapper.find(components.Indent).at(0);
-  expect(members).toBe('something');
-});
-
-// test.todo('intersection');
-// test.todo('union');

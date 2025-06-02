@@ -1245,7 +1245,7 @@ const TESTS = [
   }
 ];
 
-test('Flow Converters', () => {
+describe('Flow Converters', () => {
   cases(
     'Flow:',
     testCase => {

@@ -1,12 +1,9 @@
 // @flow
 
-import { mount, configure } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import { extractReactTypes } from 'extract-react-types';
 import LayoutRenderer from './index';
-
-configure({ adapter: new Adapter() });
 
 const assembleComponent = (propTypes, defaultProps, type = 'typescript') => {
   let file = `
@@ -21,30 +18,29 @@ test('requiredPropsFirst should place required props in front of other props', (
     `{
       /**
        * Required, but with a default value. Should be rendered second
-       */ 
+       */
       a: number,
-      /** 
+      /**
        * Optional, should be rendered third
-       */ 
+       */
       b?: string,
       /**
        * Required, no default. Should be rendered first
        */
-      c: boolean,  
+      c: boolean,
     }`,
     `{a: 1}`
   );
 
   const order = [];
 
-  // $FlowFixMe - deliberately no children
-  mount(
+  render(
     <LayoutRenderer
       props={propTypes}
       requiredPropsFirst
       renderType={props => {
         order.push(props.name);
-        return <div />;
+        return <div data-testid={props.name} />;
       }}
     />
   );
@@ -57,7 +53,7 @@ test('sortProps should run sort function before applying requiredPropsFirst', ()
     `{
       c?: number,
       b?: string,
-      a?: boolean,  
+      a?: boolean,
       e: string,
       d: string,
     }`,
@@ -66,15 +62,14 @@ test('sortProps should run sort function before applying requiredPropsFirst', ()
 
   const order = [];
 
-  // $FlowFixMe - deliberately no children
-  mount(
+  render(
     <LayoutRenderer
       props={propTypes}
       sortProps={(propA, propB) => propA.key.name.localeCompare(propB.key.name)}
       requiredPropsFirst
       renderType={props => {
         order.push(props.name);
-        return <div />;
+        return <div data-testid={props.name} />;
       }}
     />
   );
