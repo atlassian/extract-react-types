@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable no-underscore-dangle */
-
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { Component, type Node } from 'react';

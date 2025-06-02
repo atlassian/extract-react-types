@@ -1245,13 +1245,15 @@ const TESTS = [
   }
 ];
 
-cases(
-  'Flow:',
-  testCase => {
-    const code = stripIndent(testCase.code);
-    // Pass in file name so we can resolve imports to files in __fixtures__
-    const result = extractReactTypes(code, testCase.typeSystem, __filename);
-    expect(result.component).toMatchSnapshot();
-  },
-  TESTS
-);
+test('Flow Converters', () => {
+  cases(
+    'Flow:',
+    testCase => {
+      const code = stripIndent(testCase.code);
+      // Pass in file name so we can resolve imports to files in __fixtures__
+      const result = extractReactTypes(code, testCase.typeSystem, __filename);
+      expect(result.component).toMatchSnapshot();
+    },
+    TESTS
+  );
+});

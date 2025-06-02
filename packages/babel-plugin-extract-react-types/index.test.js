@@ -28,10 +28,10 @@ let flowCases = [
       /** this does something */
       wow: boolean
     };
-    
+
     export const SomeComponent = (props: Props) => {
       return null;
-    };  
+    };
     `
   },
   {
@@ -43,7 +43,7 @@ let flowCases = [
       /** this does something */
       wow: boolean
     };
-    
+
     export function SomeComponent(props: Props) {
       return null;
     }
@@ -111,10 +111,10 @@ let flowCases = [
       /** this does something */
       wow: boolean
     };
-    
+
     const SomeComponent = (props: Props) => {
       return null;
-    };  
+    };
 
     export default SomeComponent
     `
@@ -128,22 +128,22 @@ let flowCases = [
       /** this does something */
       wow: boolean
     };
-    
+
     export default function SomeComponent (props: Props) {
       return null;
-    };  
+    };
     `
   },
   {
     name: 'React.memo',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = React.memo((props: Props) => {
         return null
       })
@@ -153,12 +153,12 @@ let flowCases = [
     name: 'memo',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = memo((props: Props) => {
         return null
       })
@@ -168,12 +168,12 @@ let flowCases = [
     name: 'forwardRef',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = forwardRef((props: Props) => {
         return null
       })
@@ -183,12 +183,12 @@ let flowCases = [
     name: 'forwardRef function expression',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = forwardRef(function (props: Props) {
         return null
       })
@@ -198,12 +198,12 @@ let flowCases = [
     name: 'forwardRef memo function expression',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = memo(forwardRef(function (props: Props) {
         return null
       }))
@@ -213,12 +213,12 @@ let flowCases = [
     name: 'forwardRef memo arrow function',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       export const SomeComponent = memo(forwardRef((props: Props) => {
         return null
       }))
@@ -228,12 +228,12 @@ let flowCases = [
     name: 'arrow function then export',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       const SomeComponent = (props: Props) => {
         return null
       }
@@ -245,12 +245,12 @@ let flowCases = [
     name: 'class declaration then export',
     code: `
       // @flow
-  
+
       type Props = {
         /** this does something */
         wow: boolean
       };
-      
+
       class SomeComponent extends React.Component<Props> {
         render() {
           return null;
@@ -269,61 +269,63 @@ let flowCases = [
       /** this does something */
       wow: boolean
     };
-    
+
     const CustomComponent = (props: Props) => {
       return null;
-    };  
+    };
 
     export default CustomComponent
     `
   }
 ];
 
-jestInCase(
-  'flow',
-  ({ code }) => {
-    let transformedCode = transformSync(code, {
-      plugins: [
-        require.resolve('./index'),
-        require.resolve('@babel/plugin-syntax-jsx'),
-        require.resolve('@babel/plugin-syntax-flow')
-      ],
-      babelrc: false,
-      configFile: false
-    }).code;
-    expect(transformedCode).toMatchSnapshot();
-  },
-  flowCases
-);
+test('File type', () => {
+  jestInCase(
+    'flow',
+    ({ code }) => {
+      let transformedCode = transformSync(code, {
+        plugins: [
+          require.resolve('./index'),
+          require.resolve('@babel/plugin-syntax-jsx'),
+          require.resolve('@babel/plugin-syntax-flow')
+        ],
+        babelrc: false,
+        configFile: false
+      }).code;
+      expect(transformedCode).toMatchSnapshot();
+    },
+    flowCases
+  );
 
-let tsCases = [
-  {
-    name: 'named',
-    code: `export class SomeComponent extends React.Component<{ foo: boolean }> {
-
-    }`
-  },
-  {
-    name: 'default',
-    code: `export default class SomeComponent extends React.Component<{ foo: boolean }> {
+  let tsCases = [
+    {
+      name: 'named',
+      code: `export class SomeComponent extends React.Component<{ foo: boolean }> {
 
     }`
-  }
-];
+    },
+    {
+      name: 'default',
+      code: `export default class SomeComponent extends React.Component<{ foo: boolean }> {
 
-jestInCase(
-  'typescript',
-  ({ code }) => {
-    let transformedCode = transformSync(code, {
-      plugins: [
-        require.resolve('./index'),
-        require.resolve('@babel/plugin-syntax-jsx'),
-        require.resolve('@babel/plugin-syntax-typescript')
-      ],
-      babelrc: false,
-      configFile: false
-    }).code;
-    expect(transformedCode).toMatchSnapshot();
-  },
-  tsCases
-);
+    }`
+    }
+  ];
+
+  jestInCase(
+    'typescript',
+    ({ code }) => {
+      let transformedCode = transformSync(code, {
+        plugins: [
+          require.resolve('./index'),
+          require.resolve('@babel/plugin-syntax-jsx'),
+          require.resolve('@babel/plugin-syntax-typescript')
+        ],
+        babelrc: false,
+        configFile: false
+      }).code;
+      expect(transformedCode).toMatchSnapshot();
+    },
+    tsCases
+  );
+});

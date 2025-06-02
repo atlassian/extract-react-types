@@ -54,7 +54,7 @@ test('fallback to kind2string type when no converter is found', () => {
 test('prettyConvert string value type', () => {
   let kind = simpleStringKind;
   let wrapper = shallow(prettyConvert(kind, components));
-  /* eslint-disable-next-line react/no-unescaped-entities */
+
   let other = shallow(<components.StringType>"{kind.value}"</components.StringType>);
 
   expect(wrapper.html()).toBe(other.html());
@@ -148,13 +148,11 @@ test('objects with null members do not throw', () => {
   expect(() => prettyConvert(type, components)).not.toThrow();
 });
 
-// eslint-disable-next-line jest/no-disabled-tests
 test.skip('object with spread object', () => {
   let wrapper = shallow(prettyConvert(`{ ...something, c: 'something' }`, components));
   expect(wrapper).toBe('something');
 });
 
-// eslint-disable-next-line jest/no-disabled-tests
 test.skip('resolve generic of array with complex type', () => {
   let values = getSingleProp(`Array<{ b: string, c: number }>`);
   let wrapper = shallow(prettyConvert(values, components));

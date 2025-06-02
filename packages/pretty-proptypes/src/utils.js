@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 // @flow strict-local
 
-// eslint-disable-next-line import/prefer-default-export
 export const getComponentDisplayName = (
   data:
     | {

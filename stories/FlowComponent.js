@@ -1,13 +1,12 @@
 // @flow
 
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-prop-types */
 
 import React from 'react';
 
 type FlowComponentProps = {
   // This prop is required as it is not optional and has no default
-  // eslint-disable-next-line
+
   requiredProp: any,
   // This prop is a string
   // @ts-ignore
