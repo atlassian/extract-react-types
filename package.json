@@ -17,8 +17,8 @@
     "validate": "yarn lint && yarn test && yarn flow",
     "build": "preconstruct build",
     "clean": "yarn delete:modules && yarn delete:dist",
-    "delete:dist": "bolt ws exec --parallel -- rm -rf dist",
-    "delete:modules": "bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules"
+    "delete:dist": "yarn ws exec --parallel -- rm -rf dist",
+    "delete:modules": "yarn ws exec --parallel -- rm -rf node_modules && rm -rf node_modules"
   },
   "workspaces": [
     "packages/*"
