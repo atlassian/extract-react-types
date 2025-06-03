@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TypeScript: Direct type assignment 1`] = `
+exports[`TypeScript Converters TypeScript: Direct type assignment 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -28,7 +28,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: FC 1`] = `
+exports[`TypeScript Converters TypeScript: FC 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -56,7 +56,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: FC with empty type argument 1`] = `
+exports[`TypeScript Converters TypeScript: FC with empty type argument 1`] = `
 Object {
   "kind": "any",
   "name": Object {
@@ -67,7 +67,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: FC with inline type argument 1`] = `
+exports[`TypeScript Converters TypeScript: FC with inline type argument 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -91,7 +91,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: React.ComponentType 1`] = `
+exports[`TypeScript Converters TypeScript: React.ComponentType 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -123,7 +123,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: React.FC 1`] = `
+exports[`TypeScript Converters TypeScript: React.FC 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -151,7 +151,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: React.FC with empty type argument 1`] = `
+exports[`TypeScript Converters TypeScript: React.FC with empty type argument 1`] = `
 Object {
   "kind": "any",
   "name": Object {
@@ -162,7 +162,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: React.FC with inline type argument 1`] = `
+exports[`TypeScript Converters TypeScript: React.FC with inline type argument 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -186,7 +186,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: Should handle importing other ts files 1`] = `
+exports[`TypeScript Converters TypeScript: Should handle importing other ts files 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -224,7 +224,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: Types fallback to raw source when an unsupported type us used (interface) 1`] = `
+exports[`TypeScript Converters TypeScript: Types fallback to raw source when an unsupported type us used (interface) 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -260,7 +260,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: Types fallback to raw source when an unsupported type us used (type) 1`] = `
+exports[`TypeScript Converters TypeScript: Types fallback to raw source when an unsupported type us used (type) 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -296,7 +296,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: does not conflict with ambiguously named type properties  1`] = `
+exports[`TypeScript Converters TypeScript: does not conflict with ambiguously named type properties  1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -349,7 +349,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: follow export default export 1`] = `
+exports[`TypeScript Converters TypeScript: follow export default export 1`] = `
 Object {
   "kind": "generic",
   "value": Object {
@@ -372,9 +372,9 @@ Object {
 }
 `;
 
-exports[`TypeScript: follow export named default export 1`] = `undefined`;
+exports[`TypeScript Converters TypeScript: follow export named default export 1`] = `undefined`;
 
-exports[`TypeScript: forwardRef typed via function args 1`] = `
+exports[`TypeScript Converters TypeScript: forwardRef typed via function args 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -402,7 +402,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: forwardRef typed via generic types 1`] = `
+exports[`TypeScript Converters TypeScript: forwardRef typed via generic types 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -430,7 +430,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: generic + type expression 1`] = `
+exports[`TypeScript Converters TypeScript: generic + type expression 1`] = `
 Object {
   "key": Object {
     "kind": "any",
@@ -460,7 +460,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: indexed imported type 1`] = `
+exports[`TypeScript Converters TypeScript: indexed imported type 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -488,7 +488,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: indexed type 1`] = `
+exports[`TypeScript Converters TypeScript: indexed type 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -512,7 +512,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: memo typed via generic types 1`] = `
+exports[`TypeScript Converters TypeScript: memo typed via generic types 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -540,7 +540,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: memo wrapping forwardRef, both typed via generic types 1`] = `
+exports[`TypeScript Converters TypeScript: memo wrapping forwardRef, both typed via generic types 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -568,7 +568,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: memo wrapping forwardRef, with inferred types 1`] = `
+exports[`TypeScript Converters TypeScript: memo wrapping forwardRef, with inferred types 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -596,7 +596,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts any 1`] = `
+exports[`TypeScript Converters TypeScript: ts any 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -620,7 +620,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts array 1`] = `
+exports[`TypeScript Converters TypeScript: ts array 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -659,7 +659,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts array prop 1`] = `
+exports[`TypeScript Converters TypeScript: ts array prop 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -734,7 +734,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts as expression 1`] = `
+exports[`TypeScript Converters TypeScript: ts as expression 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -780,7 +780,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts boolean 1`] = `
+exports[`TypeScript Converters TypeScript: ts boolean 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -804,7 +804,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts call signature declaration 1`] = `
+exports[`TypeScript Converters TypeScript: ts call signature declaration 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -844,7 +844,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts decorators 1`] = `
+exports[`TypeScript Converters TypeScript: ts decorators 1`] = `
 Object {
   "kind": "object",
   "members": Array [],
@@ -856,7 +856,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts different React components 1`] = `
+exports[`TypeScript Converters TypeScript: ts different React components 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -880,7 +880,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts enum 1`] = `
+exports[`TypeScript Converters TypeScript: ts enum 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -922,7 +922,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts export all 1`] = `
+exports[`TypeScript Converters TypeScript: ts export all 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -960,7 +960,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts function 1`] = `
+exports[`TypeScript Converters TypeScript: ts function 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1008,7 +1008,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts interface 1`] = `
+exports[`TypeScript Converters TypeScript: ts interface 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1047,7 +1047,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts interface extend 1`] = `
+exports[`TypeScript Converters TypeScript: ts interface extend 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1101,7 +1101,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts literals 1`] = `
+exports[`TypeScript Converters TypeScript: ts literals 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1135,7 +1135,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts method signature 1`] = `
+exports[`TypeScript Converters TypeScript: ts method signature 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1176,7 +1176,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts nested prop 1`] = `
+exports[`TypeScript Converters TypeScript: ts nested prop 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1208,9 +1208,9 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts no react component 1`] = `undefined`;
+exports[`TypeScript Converters TypeScript: ts no react component 1`] = `undefined`;
 
-exports[`TypeScript: ts object 1`] = `
+exports[`TypeScript Converters TypeScript: ts object 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1269,7 +1269,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts optional 1`] = `
+exports[`TypeScript Converters TypeScript: ts optional 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1293,7 +1293,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts parenthesized type 1`] = `
+exports[`TypeScript Converters TypeScript: ts parenthesized type 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1334,7 +1334,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts recursive type 1`] = `
+exports[`TypeScript Converters TypeScript: ts recursive type 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1394,7 +1394,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts string 1`] = `
+exports[`TypeScript Converters TypeScript: ts string 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1418,7 +1418,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts tuple 1`] = `
+exports[`TypeScript Converters TypeScript: ts tuple 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1450,7 +1450,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts type alias 1`] = `
+exports[`TypeScript Converters TypeScript: ts type alias 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1478,7 +1478,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts type alias declaration - 1 1`] = `
+exports[`TypeScript Converters TypeScript: ts type alias declaration - 1 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1520,7 +1520,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts type alias declaration - 2 1`] = `
+exports[`TypeScript Converters TypeScript: ts type alias declaration - 2 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1593,7 +1593,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts union 1`] = `
+exports[`TypeScript Converters TypeScript: ts union 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1625,7 +1625,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: ts void 1`] = `
+exports[`TypeScript Converters TypeScript: ts void 1`] = `
 Object {
   "kind": "object",
   "members": Array [
@@ -1649,7 +1649,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: type comments 1`] = `
+exports[`TypeScript Converters TypeScript: type comments 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1684,7 +1684,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: type query for class component 1`] = `
+exports[`TypeScript Converters TypeScript: type query for class component 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1813,7 +1813,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: type query for functional component 1`] = `
+exports[`TypeScript Converters TypeScript: type query for functional component 1`] = `
 Object {
   "kind": "generic",
   "name": Object {
@@ -1845,7 +1845,7 @@ Object {
 }
 `;
 
-exports[`TypeScript: unknown prop 1`] = `
+exports[`TypeScript Converters TypeScript: unknown prop 1`] = `
 Object {
   "kind": "generic",
   "name": Object {

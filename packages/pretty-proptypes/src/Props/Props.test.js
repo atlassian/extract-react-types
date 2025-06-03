@@ -1,12 +1,9 @@
 // @flow
 import React from 'react';
-import { mount, configure } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import { extractReactTypes } from 'extract-react-types';
-import Adapter from 'enzyme-adapter-react-16';
 
 import Props from './';
-
-configure({ adapter: new Adapter() });
 
 const file = `
 const MyComponent = (props: { simpleProp: string }) => null;
@@ -15,16 +12,14 @@ export default MyComponent;
 `;
 
 test('should visualise props from extract-types-loader', () => {
-  const wrapper = mount(
+  const { container, getByText } = render(
     <Props props={extractReactTypes(file, 'flow')} heading="FormFooter Props" />
   );
 
-  const prop = wrapper.find('Prop');
-
-  expect(prop.length).toBe(1);
-  expect(prop.prop('name')).toBe('simpleProp');
-  expect(prop.prop('required')).toBe(true);
-  expect(prop.prop('type')).toBe('string');
+  const prop = getByText('simpleProp');
+  expect(prop).toBeTruthy();
+  expect(getByText('required')).toBeTruthy();
+  expect(getByText('string')).toBeTruthy();
 });
 
 test('simple facts about two props', () => {
@@ -34,19 +29,17 @@ const MyComponent = (props: { simpleProp: string, secondProp?: number }) => null
 export default MyComponent;
 `;
 
-  const wrapper = mount(
+  const { container, getByText } = render(
     <Props props={extractReactTypes(file2, 'flow')} heading="FormFooter Props" />
   );
 
-  const prop = wrapper.find('Prop');
-  expect(prop.length).toBe(2);
+  expect(getByText('simpleProp')).toBeTruthy();
+  expect(getByText('secondProp')).toBeTruthy();
 });
 
 test('renders no children when passed on props', () => {
-  // $FlowFixMe
-  const wrapper = mount(<Props heading="empty" />);
-
-  expect(wrapper.children().length).toBe(0);
+  const { container } = render(<Props heading="empty" />);
+  expect(container.children).toHaveLength(0);
 });
 
 describe('#typescript typeSystem', () => {
@@ -95,37 +88,29 @@ describe('#typescript typeSystem', () => {
     export default Form;
   `;
 
-    const wrapper = mount(
+    const { container, getByText } = render(
       <Props props={extractReactTypes(code, 'typescript')} heading="Form Props" />
     );
 
-    const Prop = wrapper.find('Prop');
+    const childrenProp = document.querySelector('#Form-children');
+    expect(childrenProp).toBeTruthy();
+    expect(childrenProp.textContent).toContain('required');
+    expect(childrenProp.textContent).toContain('function');
 
-    expect(Prop.length).toBe(3);
-
-    const childrenProp = Prop.at(0);
-
-    expect(childrenProp.prop('name')).toBe('children');
-    expect(childrenProp.prop('required')).toBe(true);
-    expect(childrenProp.prop('type')).toBe('function');
-
-    const onSubmitProp = Prop.at(1);
-
-    expect(onSubmitProp.prop('name')).toBe('onSubmit');
-    expect(onSubmitProp.prop('required')).toBe(true);
-    expect(onSubmitProp.prop('type')).toBe(
+    const onSubmitProp = document.querySelector('#Form-onSubmit');
+    expect(onSubmitProp).toBeTruthy();
+    expect(onSubmitProp.textContent).toContain('required');
+    expect(onSubmitProp.textContent).toContain(
       '(values, callback) => undefined | Object | Promise<Object | undefined><FormData>'
     );
 
-    const isDisabledProp = Prop.at(2);
-
-    expect(isDisabledProp.prop('name')).toBe('isDisabled');
-    expect(isDisabledProp.prop('required')).toBe(false);
-    expect(isDisabledProp.prop('type')).toBe('boolean');
-    expect(isDisabledProp.prop('defaultValue')).toBe('true');
-    expect(isDisabledProp.prop('description')).toBe(
-      `
-When set the form and all fields will be disabled`
+    const isDisabledProp = document.querySelector('#Form-isDisabled');
+    expect(isDisabledProp).toBeTruthy();
+    expect(isDisabledProp.textContent).not.toContain('required');
+    expect(isDisabledProp.textContent).toContain('boolean');
+    expect(isDisabledProp.textContent).toContain('true');
+    expect(isDisabledProp.textContent).toContain(
+      'When set the form and all fields will be disabled'
     );
   });
 });

@@ -1284,7 +1284,6 @@ export default function convert(path, context) {
 }
 
 export function convertComponentExports(componentExports, context) {
-  // eslint-disable-next-line array-callback-return
   return componentExports.map(({ path, name }) => {
     if (
       path.isFunctionExpression() ||

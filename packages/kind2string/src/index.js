@@ -2,10 +2,8 @@
 
 // We explicitly want to be able to have mode in these functions,
 // even in instances where we don't use it.
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 
-/* eslint-disable no-undef */
+/* eslint-disable no-console */
 
 /*::
 import * as K from 'extract-react-types'

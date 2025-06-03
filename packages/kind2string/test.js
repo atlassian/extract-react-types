@@ -172,14 +172,12 @@ describe('kind 2 string tests', () => {
     });
     describe('templateLiteral', () => {
       it('should resolve to same string', () => {
-        /* eslint-disable-next-line no-template-curly-in-string */
         let str = '`abc${a}de`';
         let reId = getSingleDefault(str);
         let final = convert(reId);
         expect(final).toBe(str);
       });
       it('should resolve excaped characters', () => {
-        /* eslint-disable-next-line no-template-curly-in-string */
         let str = '`abc${a}de\n`';
         let reId = getSingleDefault(str);
         let final = convert(reId);
@@ -335,7 +333,6 @@ describe('kind 2 string tests', () => {
       expect(converted).toBe('react.Component');
     });
 
-    // eslint-disable-next-line jest/no-disabled-tests
     it.skip('Resolves down to a string representation for namespaced external imports', () => {
       let file = `
         import { Component } from 'react';
@@ -348,7 +345,8 @@ describe('kind 2 string tests', () => {
     });
   });
   describe('typecastExpression', () => {
-    let file = `
+    it('should convert a typecast expression to a string', () => {
+      let file = `
     type Props = { bar: string }
 
     class Component extends React.Component<Props> {
@@ -357,9 +355,10 @@ describe('kind 2 string tests', () => {
       }
     }
     `;
-    let res = extractReactTypes(file, 'flow').component.value.members[0].default;
-    let converted = convert(res);
-    expect(converted).toBe('ascii');
+      let res = extractReactTypes(file, 'flow').component.value.members[0].default;
+      let converted = convert(res);
+      expect(converted).toBe('ascii');
+    });
   });
   describe('logicalExpression', () => {
     it('should work', () => {

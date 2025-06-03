@@ -11,7 +11,7 @@ export type TypeParamsDeclaration = {
   kind: 'typeParamsDeclaration',
   params: Array<AnyTypeKind>
 };
-// eslint-disable-next-line no-undef
+
 export type Id = { kind: 'id', name: string, type?: ?$Diff<AnyKind, Id>, referenceIdName?: string };
 export type TemplateLiteral = {
   kind: 'templateLiteral',

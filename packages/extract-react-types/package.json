@@ -39,9 +39,9 @@
     "strip-indent": "^2.0.0"
   },
   "devDependencies": {
-    "babel-jest": "^26.0.0",
+    "babel-jest": "^27.0.0",
     "flow-bin": "^0.98.0",
-    "jest": "^26.0.0",
+    "jest": "^27.0.0",
     "prettier": "^1.13.7"
   }
 }

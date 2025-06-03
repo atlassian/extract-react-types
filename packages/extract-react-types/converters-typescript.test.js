@@ -680,43 +680,45 @@ const TESTS = [
   }
 ];
 
-cases(
-  'TypeScript:',
-  testCase => {
-    const code = stripIndent(testCase.code);
-    // Pass in file name so we can resolve imports to files in __fixtures__
-    const result = extractReactTypes(code, testCase.typeSystem, __filename);
-    expect(result.component).toMatchSnapshot();
-  },
-  TESTS
-);
+describe('TypeScript Converters', () => {
+  cases(
+    'TypeScript:',
+    testCase => {
+      const code = stripIndent(testCase.code);
+      // Pass in file name so we can resolve imports to files in __fixtures__
+      const result = extractReactTypes(code, testCase.typeSystem, __filename);
+      expect(result.component).toMatchSnapshot();
+    },
+    TESTS
+  );
 
-test('Typescript interface quoted property name is converted properly', () => {
-  const name = 'quoted';
-  const code = stripIndent(`
+  test('Typescript interface quoted property name is converted properly', () => {
+    const name = 'quoted';
+    const code = stripIndent(`
     interface Props {
       /* Type comment for ${name} */
       '${name}': string;
     }
 
     class Component extends React.Component<Props> {}`);
-  const typeSystem = 'typescript';
-  const result = extractReactTypes(code, typeSystem, __filename);
+    const typeSystem = 'typescript';
+    const result = extractReactTypes(code, typeSystem, __filename);
 
-  expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
-});
+    expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
+  });
 
-test('Typescript type quoted property name is converted properly', () => {
-  const name = 'quoted';
-  const code = stripIndent(`
+  test('Typescript type quoted property name is converted properly', () => {
+    const name = 'quoted';
+    const code = stripIndent(`
     type Props = {
       /* Type comment for ${name} */
       '${name}': string;
     }
 
     class Component extends React.Component<Props> {}`);
-  const typeSystem = 'typescript';
-  const result = extractReactTypes(code, typeSystem, __filename);
+    const typeSystem = 'typescript';
+    const result = extractReactTypes(code, typeSystem, __filename);
 
-  expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
+    expect(result).toHaveProperty(['component', 'value', 'members', 0, 'key', 'name'], name);
+  });
 });

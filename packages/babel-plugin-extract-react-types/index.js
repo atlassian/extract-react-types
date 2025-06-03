@@ -40,7 +40,6 @@ module.exports = babel => {
               }
             }
           );
-          /* eslint-disable no-empty */
         } catch (e) {}
       }
     }

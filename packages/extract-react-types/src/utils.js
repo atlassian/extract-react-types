@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export function hasTypeAnnotation(path, left, right) {
   if (!path.isVariableDeclarator() || !path.node.id.typeAnnotation) {
     return false;
