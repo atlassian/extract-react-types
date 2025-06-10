@@ -14,7 +14,7 @@
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.4.4",
+    "@babel/runtime": "^7.26.10",
     "@emotion/core": "^10.0.14",
     "kind2string": "^0.8.1",
     "react-markings": "^1.2.0"
