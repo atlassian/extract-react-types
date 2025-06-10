@@ -33,6 +33,9 @@
   "transform": {
     "^.+\\.jsx?$": "babel-jest"
   },
+  "resolutions": {
+    "@babel/traverse": "7.23.2"
+  },
   "dependencies": {
     "@aparna036/babel-explode-module": "^2.0.1",
     "@babel/core": "^7.4.4",
