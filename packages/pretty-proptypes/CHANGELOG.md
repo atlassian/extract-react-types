@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.7.1
+
+### Patch Changes
+
+- c128476: Resolves various vulns
+
 ## 1.7.0
 
 ### Minor Changes
