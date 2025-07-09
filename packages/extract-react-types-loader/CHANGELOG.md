@@ -1,19 +1,5 @@
 # extract-react-types-loader
 
-## 1.0.2
-
-### Patch Changes
-
-- 62ca2f7: Rollback to latest published version of extract-react-types
-
-## 1.0.1
-
-### Patch Changes
-
-- 92cd096: Forced patch bump
-- Updated dependencies [92cd096]
-  - extract-react-types@0.30.5
-
 ## 1.0.0
 
 ### Major Changes

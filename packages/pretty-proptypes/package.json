@@ -1,6 +1,6 @@
 {
   "name": "pretty-proptypes",
-  "version": "1.7.4",
+  "version": "1.7.1",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",
   "main": "dist/pretty-proptypes.cjs.js",
@@ -23,7 +23,7 @@
     "dist"
   ],
   "devDependencies": {
-    "extract-react-types": "^0.30.3",
+    "extract-react-types": "^0.30.0",
     "jsdom": "^26.1.0",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",

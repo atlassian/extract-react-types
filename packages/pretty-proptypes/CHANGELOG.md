@@ -1,27 +1,5 @@
 # pretty-proptypes
 
-## 1.7.4
-
-### Patch Changes
-
-- 472931c: decrement kind2string version as it's not published yet
-
-## 1.7.3
-
-### Patch Changes
-
-- 62ca2f7: Rollback to latest published version of extract-react-types
-- Updated dependencies [62ca2f7]
-  - kind2string@0.8.3
-
-## 1.7.2
-
-### Patch Changes
-
-- 92cd096: Forced patch bump
-- Updated dependencies [92cd096]
-  - kind2string@0.8.2
-
 ## 1.7.1
 
 ### Patch Changes

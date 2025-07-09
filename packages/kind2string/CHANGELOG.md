@@ -1,17 +1,5 @@
 # pretty-proptypes
 
-## 0.8.3
-
-### Patch Changes
-
-- 62ca2f7: Rollback to latest published version of extract-react-types
-
-## 0.8.2
-
-### Patch Changes
-
-- 92cd096: Forced patch bump
-
 ## 0.8.1
 
 ### Patch Changes
