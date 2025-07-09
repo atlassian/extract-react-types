@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@emotion/core": "^10.0.14",
-    "kind2string": "^0.8.1",
+    "kind2string": "^0.8.3",
     "react-markings": "^1.2.0"
   },
   "files": [
