@@ -12,7 +12,7 @@
   ],
   "devDependencies": {
     "babel-jest": "^27.0.0",
-    "extract-react-types": "^0.30.5"
+    "extract-react-types": "^0.30.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4"
