@@ -1,5 +1,13 @@
 # pretty-proptypes
 
+## 1.7.2
+
+### Patch Changes
+
+- 92cd096: Forced patch bump
+- Updated dependencies [92cd096]
+  - kind2string@0.8.2
+
 ## 1.7.1
 
 ### Patch Changes
