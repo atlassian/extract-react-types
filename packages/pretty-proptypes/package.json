@@ -23,7 +23,7 @@
     "dist"
   ],
   "devDependencies": {
-    "extract-react-types": "^0.30.3",
+    "extract-react-types": "^0.30.5",
     "jsdom": "^26.1.0",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
