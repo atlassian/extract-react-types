@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.5
+
+### Patch Changes
+
+- 92cd096: Forced patch bump
+
 ## 0.30.4
 
 ### Patch Changes
