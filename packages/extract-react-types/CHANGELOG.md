@@ -1,5 +1,11 @@
 # extract-react-types
 
+## 0.30.4
+
+### Patch Changes
+
+- 6d8c966: Adds null check for the rare scenarios where the containing object is not available when accessing .name for IndexedType
+
 ## 0.30.3
 
 ### Patch Changes
