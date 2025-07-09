@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 1.7.4
+
+### Patch Changes
+
+- 472931c: decrement kind2string version as it's not published yet
+
 ## 1.7.3
 
 ### Patch Changes
