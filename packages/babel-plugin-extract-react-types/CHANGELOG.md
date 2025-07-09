@@ -1,13 +1,5 @@
 # babel-plugin-extract-react-types
 
-## 0.2.1
-
-### Patch Changes
-
-- 92cd096: Forced patch bump
-- Updated dependencies [92cd096]
-  - extract-react-types@0.30.5
-
 ## 0.2.0
 
 ### Minor Changes
