@@ -1,5 +1,11 @@
 # pretty-proptypes
 
+## 0.8.2
+
+### Patch Changes
+
+- 92cd096: Forced patch bump
+
 ## 0.8.1
 
 ### Patch Changes
