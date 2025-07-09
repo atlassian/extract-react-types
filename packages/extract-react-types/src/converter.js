@@ -500,7 +500,7 @@ converters.TSIndexedAccessType = (path, context) => {
 
   if (type.kind === 'generic') {
     if (type.value.members) {
-      const member = type.value.members.find(scopedMember => scopedMember.key.name === indexKey);
+      const member = type.value.members.find(scopedMember => scopedMember.key?.name === indexKey);
       if (member) {
         return member.value;
       }
@@ -512,7 +512,7 @@ converters.TSIndexedAccessType = (path, context) => {
       kind: 'generic',
       value: {
         kind: type.value.kind,
-        name: `${name.name || name}['${indexKey}']`
+        name: `${name?.name || name}['${indexKey}']`
       }
     };
   }
