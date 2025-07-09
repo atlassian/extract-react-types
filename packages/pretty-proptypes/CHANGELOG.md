@@ -1,5 +1,13 @@
 # pretty-proptypes
 
+## 1.7.3
+
+### Patch Changes
+
+- 62ca2f7: Rollback to latest published version of extract-react-types
+- Updated dependencies [62ca2f7]
+  - kind2string@0.8.3
+
 ## 1.7.2
 
 ### Patch Changes
