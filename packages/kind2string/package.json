@@ -15,6 +15,6 @@
     "extract-react-types": "^0.30.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.4"
+    "@babel/runtime": "^7.26.10"
   }
 }
