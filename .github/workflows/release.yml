@@ -24,11 +24,16 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
+      - name: Get Artifact Publish Token
+        id: publish-token
+        uses: atlassian-labs/artifact-publish-token@v1.0.1
+        with:
+          output-modes: npm
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          # this expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

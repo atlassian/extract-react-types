@@ -1,6 +1,6 @@
 // @flow
 const path = require('path');
-const { extractReactTypes } = require('extract-react-types');
+const { extractReactTypes } = require('@atlaskit/extract-react-types');
 
 module.exports = function extractReactTypesLoader(content /* : string */) {
   const filename = this.resource;

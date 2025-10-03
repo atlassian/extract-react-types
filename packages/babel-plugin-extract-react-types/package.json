@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-extract-react-types",
+  "name": "@atlaskit/babel-plugin-extract-react-types",
   "version": "0.2.0",
   "main": "index.js",
   "license": "MIT",
@@ -17,7 +17,7 @@
   ],
   "author": "Mitchell Hamilton",
   "dependencies": {
-    "extract-react-types": "^0.30.0"
+    "@atlaskit/extract-react-types": "^0.30.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -25,5 +25,8 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-syntax-typescript": "^7.2.0",
     "jest-in-case": "^1.0.2"
+  },
+  "publishConfig": {
+		"registry": "https://packages.atlassian.com/api/npm/npm-public/"
   }
 }

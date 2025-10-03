@@ -1,5 +1,5 @@
 // @flow
-import { extractReactTypes } from 'extract-react-types';
+import { extractReactTypes } from '@atlaskit/extract-react-types';
 import convert, { converters } from './src';
 
 const assembleERTAST = (propTypes, defaultProps, type = 'flow') => {

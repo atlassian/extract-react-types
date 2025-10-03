@@ -1,10 +1,10 @@
 {
-  "name": "pretty-proptypes",
+  "name": "@atlaskit/pretty-proptypes",
   "version": "1.7.1",
   "description": "prettily render prop types from react components",
   "repository": "atlassian/extract-react-types",
-  "main": "dist/pretty-proptypes.cjs.js",
-  "module": "dist/pretty-proptypes.esm.js",
+  "main": "dist/atlaskit-pretty-proptypes.cjs.js",
+  "module": "dist/atlaskit-pretty-proptypes.esm.js",
   "keywords": [
     "extract-react-types",
     "react",
@@ -16,14 +16,14 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@emotion/core": "^10.0.14",
-    "kind2string": "^0.8.1",
+    "@atlaskit/kind2string": "^0.8.1",
     "react-markings": "^1.2.0"
   },
   "files": [
     "dist"
   ],
   "devDependencies": {
-    "extract-react-types": "^0.30.0",
+    "@atlaskit/extract-react-types": "^0.30.0",
     "jsdom": "^26.1.0",
     "react": "^16.3.1",
     "react-addons-test-utils": "^15.6.2",
@@ -31,5 +31,8 @@
   },
   "peerDependencies": {
     "react": ">=16"
+  },
+  "publishConfig": {
+    "registry": "https://packages.atlassian.com/api/npm/npm-public/"
   }
 }
