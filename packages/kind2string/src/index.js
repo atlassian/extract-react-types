@@ -6,7 +6,7 @@
 /* eslint-disable no-console */
 
 /*::
-import * as K from 'extract-react-types'
+import * as K from '@atlaskit/extract-react-types'
 */
 
 import { resolveToLast, resolveFromGeneric, reduceToObj } from './utils';

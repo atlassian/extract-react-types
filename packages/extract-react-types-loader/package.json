@@ -1,5 +1,5 @@
 {
-  "name": "extract-react-types-loader",
+  "name": "@atlaskit/extract-react-types-loader",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "atlassian/extract-react-types",
@@ -14,6 +14,9 @@
     "documentation"
   ],
   "dependencies": {
-    "extract-react-types": "^0.30.0"
+    "@atlaskit/extract-react-types": "^0.30.0"
+  },
+  "publishConfig": {
+		"registry": "https://packages.atlassian.com/api/npm/npm-public/"
   }
 }

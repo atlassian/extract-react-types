@@ -2,7 +2,7 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { extractReactTypes } from 'extract-react-types';
+import { extractReactTypes } from '@atlaskit/extract-react-types';
 import LayoutRenderer from './index';
 
 const assembleComponent = (propTypes, defaultProps, type = 'typescript') => {

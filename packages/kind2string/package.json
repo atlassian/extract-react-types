@@ -1,8 +1,8 @@
 {
-  "name": "kind2string",
+  "name": "@atlaskit/kind2string",
   "version": "0.8.1",
-  "main": "dist/kind2string.cjs.js",
-  "module": "dist/kind2string.esm.js",
+  "main": "dist/atlaskit-kind2string.cjs.js",
+  "module": "dist/atlaskit-kind2string.esm.js",
   "license": "MIT",
   "author": "Atlassian",
   "repository": "atlassian/extract-react-types",
@@ -12,9 +12,12 @@
   ],
   "devDependencies": {
     "babel-jest": "^27.0.0",
-    "extract-react-types": "^0.30.0"
+    "@atlaskit/extract-react-types": "^0.30.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4"
+  },
+  "publishConfig": {
+    "registry": "https://packages.atlassian.com/api/npm/npm-public/"
   }
 }

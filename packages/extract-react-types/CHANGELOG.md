@@ -177,8 +177,8 @@
   -import extractReactTypes from 'extract-react-types';
   +import { extractReactTypes } from 'extract-react-types';
   // or in cjs
-  -const extractReactTypes = require('extract-react-types');
-  +const { extractReactTypes } = require('extract-react-types');
+  -const extractReactTypes = require('@atlaskit/extract-react-types');
+  +const { extractReactTypes } = require('@atlaskit/extract-react-types');
   ```
 
 ### Patch Changes

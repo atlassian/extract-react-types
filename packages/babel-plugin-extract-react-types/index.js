@@ -1,4 +1,4 @@
-const { findExportedComponents } = require('extract-react-types');
+const { findExportedComponents } = require('@atlaskit/extract-react-types');
 
 module.exports = babel => {
   let t = babel.types;

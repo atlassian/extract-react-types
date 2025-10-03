@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-param-reassign */
 import React, { type ComponentType } from 'react';
-import convert, { getKind, reduceToObj } from 'kind2string';
+import convert, { getKind, reduceToObj } from '@atlaskit/kind2string';
 import allComponents from './components';
 
 const IGNORE_COMMENTS_STARTING_WITH = ['eslint-disable', '@ts-'];

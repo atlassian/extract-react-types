@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { extractReactTypes } from 'extract-react-types';
+import { extractReactTypes } from '@atlaskit/extract-react-types';
 
 import Props from './';
 

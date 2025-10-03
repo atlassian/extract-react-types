@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from '@testing-library/react';
-import { extractReactTypes } from 'extract-react-types';
+import { extractReactTypes } from '@atlaskit/extract-react-types';
 import components from '../components';
 import prettyConvert from './converters';
 

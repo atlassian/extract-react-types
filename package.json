@@ -10,7 +10,7 @@
     "test:watch": "jest --watch",
     "changeset": "changeset",
     "apply-changesets": "changeset version",
-    "release": "yarn build && changeset publish",
+    "release": "yarn build && changeset publish --use-npmrc=./.npmrc-public",
     "postinstall": "preconstruct dev",
     "lint": "yarn eslint \"./**/*.js\"",
     "lint:fix": "prettier --write packages/**/*.js",
